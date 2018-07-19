@@ -141,7 +141,6 @@ rule GenerateEvents {
                     switch (r.form) {
                         case 'assessment':
                             schedule = Utils.getSchedule('assessment-follow-up');
-                            console.log(r.fields.follow_up_count);
                             var followUpCount = (r && r.fields && r.fields.follow_up_count) ? parseInt(r.fields.follow_up_count, 10) : 0;
                             if ( schedule
                                 && r && r.fields
@@ -170,7 +169,6 @@ rule GenerateEvents {
                         case 'assessment_follow_up':
                             var reportedDate = new Date(r.reported_date);
                             schedule = Utils.getSchedule('assessment-follow-up');
-                            console.log(r.fields.follow_up_count);
                             var followUpCount = (r && r.fields && r.fields.follow_up_count) ? parseInt(r.fields.follow_up_count, 10) : 1;
 
                             if ( schedule

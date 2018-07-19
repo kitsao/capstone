@@ -19,7 +19,7 @@
 	        {
 	            "id": "assessment-follow-up-1",
 	            "days": 1,
-	            "start": 0,
+	            "start": 1,
 	            "end": 0,
 	            "icon": "follow-up",
 	            "title": [{
