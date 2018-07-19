@@ -1,0 +1,553 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>Public Health Events</h:title>
+    <model>
+      <instance>
+        <public_health_events delimiter="#" id="public_health_events" prefix="J1!public_health_events!" version="2017-10-12 00:00:00">
+          <inputs>
+            <meta>
+              <location>
+                <lat/>
+                <long/>
+                <error/>
+                <message/>
+              </location>
+            </meta>
+            <source>user</source>
+            <source_id/>
+            <contact>
+              <_id/>
+              <name/>
+              <village/>
+              <ward/>
+              <contact>
+                <name/>
+                <phone/>
+              </contact>
+            </contact>
+          </inputs>
+          <place_id/>
+          <place_name/>
+          <chp_name/>
+          <chp_phone/>
+          <village_name/>
+          <ward_name/>
+          <debug/>
+          <contamination_alert/>
+          <environmental_hazard_alert/>
+          <animal_diseases_alert/>
+          <unexptected_deaths_alert/>
+          <unusual_disease_patterns_alert/>
+          <clustered_cases_alert/>
+          <collapsing_buildings_alert/>
+          <internal_displacement_alert/>
+          <landslides_alert/>
+          <earthquakes_alert/>
+          <floods_alert/>
+          <fires_alert/>
+          <bombs_alert/>
+          <gun_shots_alert/>
+          <riots_alert/>
+          <other_alert/>
+          <group_phe>
+            <n_hint/>
+            <phe_topic/>
+            <contamination/>
+            <contamination_details/>
+            <environmental_hazard/>
+            <environmental_hazard_details/>
+            <animal_diseases/>
+            <animal_diseases_details/>
+            <unexpected_deaths/>
+            <unusual_disease_patterns/>
+            <clustered_cases/>
+            <collapsing_buildings/>
+            <internal_displacement/>
+            <landslides/>
+            <earthquakes/>
+            <floods/>
+            <fires/>
+            <bombs/>
+            <gun_shots/>
+            <riots/>
+            <other/>
+            <location/>
+            <date_of_event/>
+          </group_phe>
+          <group_summary>
+            <submit/>
+            <r_summary/>
+            <r_chp_info/>
+            <r_contamination/>
+            <r_contamination_sick_death/>
+            <r_contamination_contamination/>
+            <r_contamination_methanon/>
+            <r_contamination_details/>
+            <r_environmental_hazard/>
+            <r_environmental_hazard_chemical/>
+            <r_environmental_hazard_deails/>
+            <r_animal_diseases/>
+            <r_animal_diseases_sick_domesticated_animals/>
+            <r_animal_diseases_dead_domesticated_animals/>
+            <r_animal_diseases_animals_aborting/>
+            <r_animal_diseases_dead_wild_animals/>
+            <r_animal_diseases_sick_wild_animals/>
+            <r_animal_diseases_other/>
+            <r_unexpected_deaths/>
+            <r_unusual_disease_patterns/>
+            <r_clustered_cases/>
+            <r_collapsing_buildings/>
+            <r_internal_displacements/>
+            <r_landslides/>
+            <r_earthquakes/>
+            <r_floods/>
+            <r_fires/>
+            <r_bombs/>
+            <r_gun_shots/>
+            <r_riots/>
+            <r_other/>
+            <r_other_details/>
+            <r_location/>
+          </group_summary>
+          <meta>
+            <instanceID/>
+          </meta>
+        </public_health_events>
+      </instance>
+      <instance id="contact-summary"/>
+      <bind nodeset="/public_health_events/inputs" relevant="./source = 'user'"/>
+      <bind nodeset="/public_health_events/inputs/source" type="string"/>
+      <bind nodeset="/public_health_events/inputs/source_id" type="string"/>
+      <bind nodeset="/public_health_events/inputs/contact/_id" type="db:health_center"/>
+      <bind nodeset="/public_health_events/inputs/contact/name" type="string"/>
+      <bind nodeset="/public_health_events/inputs/contact/village" type="string"/>
+      <bind nodeset="/public_health_events/inputs/contact/ward" type="string"/>
+      <bind nodeset="/public_health_events/inputs/contact/contact/name" type="string"/>
+      <bind nodeset="/public_health_events/inputs/contact/contact/phone" type="string"/>
+      <bind calculate="../inputs/contact/_id" nodeset="/public_health_events/place_id" type="string"/>
+      <bind calculate="../inputs/contact/name" nodeset="/public_health_events/place_name" type="string"/>
+      <bind calculate="../inputs/contact/contact/name" nodeset="/public_health_events/chp_name" type="string"/>
+      <bind calculate="../inputs/contact/contact/phone" nodeset="/public_health_events/chp_phone" type="string"/>
+      <bind calculate="../inputs/contact/village" nodeset="/public_health_events/village_name" type="string"/>
+      <bind calculate="../inputs/comtact/ward" nodeset="/public_health_events/ward_name" type="string"/>
+      <bind nodeset="/public_health_events/debug" readonly="true()" relevant="false()" type="string"/>
+      <bind calculate="if(selected( /public_health_events/group_phe/phe_topic , 'contaminated_food') and count-selected( /public_health_events/group_phe/contamination ) &gt;= 0, 'Contaminated food products or water', '')" nodeset="/public_health_events/contamination_alert" type="string"/>
+      <bind calculate="if(selected( /public_health_events/group_phe/phe_topic , 'environmental_hazard') and count-selected( /public_health_events/group_phe/environmental_hazard ) &gt;=0, 'Environmental hazards including chemical and radio-nuclear events','')" nodeset="/public_health_events/environmental_hazard_alert" type="string"/>
+      <bind calculate="if(selected( /public_health_events/group_phe/phe_topic , 'animal_diseases') and count-selected( /public_health_events/group_phe/animal_diseases ) &gt;=0, 'Events related to diseases and deaths in animals','')" nodeset="/public_health_events/animal_diseases_alert" type="string"/>
+      <bind calculate="if(selected( /public_health_events/group_phe/phe_topic , 'unexpected_deaths') and count-selected( /public_health_events/group_phe/unexpected_deaths ) &gt;=0, 'Unexpected deaths as recognized by key informants','')" nodeset="/public_health_events/unexptected_deaths_alert" type="string"/>
+      <bind calculate="if(selected( /public_health_events/group_phe/phe_topic , 'unusual_disease_patterns') and count-selected( /public_health_events/group_phe/unusual_disease_patterns ) &gt;=0, 'Unusual disease patterns','')" nodeset="/public_health_events/unusual_disease_patterns_alert" type="string"/>
+      <bind calculate="if(selected( /public_health_events/group_phe/phe_topic , 'clustered_cases') and count-selected( /public_health_events/group_phe/clustered_cases ) &gt;=0, 'Clustered cases','')" nodeset="/public_health_events/clustered_cases_alert" type="string"/>
+      <bind calculate="if(selected( /public_health_events/group_phe/phe_topic , 'collapsing_buildings') and count-selected( /public_health_events/group_phe/collapsing_buildings ) &gt;=0, 'Collapsing buildings','')" nodeset="/public_health_events/collapsing_buildings_alert" type="string"/>
+      <bind calculate="if(selected( /public_health_events/group_phe/phe_topic , 'internal_displacement') and count-selected( /public_health_events/group_phe/internal_displacement ) &gt;=0, 'Internal displacements of people','')" nodeset="/public_health_events/internal_displacement_alert" type="string"/>
+      <bind calculate="if(selected( /public_health_events/group_phe/phe_topic , 'landslides') and count-selected( /public_health_events/group_phe/landslides ) &gt;=0, 'Landslides','')" nodeset="/public_health_events/landslides_alert" type="string"/>
+      <bind calculate="if(selected( /public_health_events/group_phe/phe_topic , 'earthquakes') and count-selected( /public_health_events/group_phe/earthquakes ) &gt;=0, 'Earthquakes','')" nodeset="/public_health_events/earthquakes_alert" type="string"/>
+      <bind calculate="if(selected( /public_health_events/group_phe/phe_topic , 'floods') and count-selected( /public_health_events/group_phe/floods ) &gt;=0, 'Floods','')" nodeset="/public_health_events/floods_alert" type="string"/>
+      <bind calculate="if(selected( /public_health_events/group_phe/phe_topic , 'fires') and count-selected( /public_health_events/group_phe/fires ) &gt;=0, 'Fire accidents','')" nodeset="/public_health_events/fires_alert" type="string"/>
+      <bind calculate="if(selected( /public_health_events/group_phe/phe_topic , 'bombs') and count-selected( /public_health_events/group_phe/bombs ) &gt;=0, 'Bomb/grenade blasts','')" nodeset="/public_health_events/bombs_alert" type="string"/>
+      <bind calculate="if(selected( /public_health_events/group_phe/phe_topic , 'gun_shots') and count-selected( /public_health_events/group_phe/gun_shots ) &gt;=0, 'Gun shots','')" nodeset="/public_health_events/gun_shots_alert" type="string"/>
+      <bind calculate="if(selected( /public_health_events/group_phe/phe_topic , 'riots') and count-selected( /public_health_events/group_phe/riots ) &gt;=0, 'Riots/Clashes','')" nodeset="/public_health_events/riots_alert" type="string"/>
+      <bind calculate="if(selected( /public_health_events/group_phe/phe_topic , 'other') and count-selected( /public_health_events/group_phe/other ) &gt;=0, 'Other PHE event','')" nodeset="/public_health_events/other_alert" type="string"/>
+      <bind nodeset="/public_health_events/group_phe/n_hint" readonly="true()" type="string"/>
+      <bind nodeset="/public_health_events/group_phe/phe_topic" required="true()" type="select"/>
+      <bind nodeset="/public_health_events/group_phe/contamination" relevant="selected( /public_health_events/group_phe/phe_topic , 'contaminated_food')" required="true()" type="select"/>
+      <bind nodeset="/public_health_events/group_phe/contamination_details" relevant="count-selected( /public_health_events/group_phe/contamination ) &gt; 0" required="true()" type="string"/>
+      <bind nodeset="/public_health_events/group_phe/environmental_hazard" relevant="selected( /public_health_events/group_phe/phe_topic , 'environmental_hazard')" required="true()" type="select"/>
+      <bind nodeset="/public_health_events/group_phe/environmental_hazard_details" relevant="count-selected( /public_health_events/group_phe/environmental_hazard ) &gt; 0" required="true()" type="string"/>
+      <bind nodeset="/public_health_events/group_phe/animal_diseases" relevant="selected( /public_health_events/group_phe/phe_topic , 'animal_diseases')" required="true()" type="select"/>
+      <bind nodeset="/public_health_events/group_phe/animal_diseases_details" relevant="count-selected( /public_health_events/group_phe/animal_diseases ) &gt; 0" required="true()" type="string"/>
+      <bind nodeset="/public_health_events/group_phe/unexpected_deaths" relevant="selected( /public_health_events/group_phe/phe_topic , 'unexpected_deaths')" required="true()" type="string"/>
+      <bind nodeset="/public_health_events/group_phe/unusual_disease_patterns" relevant="selected( /public_health_events/group_phe/phe_topic , 'unusual_disease_patterns')" required="true()" type="string"/>
+      <bind nodeset="/public_health_events/group_phe/clustered_cases" relevant="selected( /public_health_events/group_phe/phe_topic , 'clustered_cases')" required="true()" type="string"/>
+      <bind nodeset="/public_health_events/group_phe/collapsing_buildings" relevant="selected( /public_health_events/group_phe/phe_topic , 'collapsing_buildings')" required="true()" type="string"/>
+      <bind nodeset="/public_health_events/group_phe/internal_displacement" relevant="selected( /public_health_events/group_phe/phe_topic , 'internal_displacement')" required="true()" type="string"/>
+      <bind nodeset="/public_health_events/group_phe/landslides" relevant="selected( /public_health_events/group_phe/phe_topic , 'landslides')" required="true()" type="string"/>
+      <bind nodeset="/public_health_events/group_phe/earthquakes" relevant="selected( /public_health_events/group_phe/phe_topic ,'earthquakes')" required="true()" type="string"/>
+      <bind nodeset="/public_health_events/group_phe/floods" relevant="selected( /public_health_events/group_phe/phe_topic ,'floods')" required="true()" type="string"/>
+      <bind nodeset="/public_health_events/group_phe/fires" relevant="selected( /public_health_events/group_phe/phe_topic ,'fires')" required="true()" type="string"/>
+      <bind nodeset="/public_health_events/group_phe/bombs" relevant="selected( /public_health_events/group_phe/phe_topic ,'bombs')" required="true()" type="string"/>
+      <bind nodeset="/public_health_events/group_phe/gun_shots" relevant="selected( /public_health_events/group_phe/phe_topic ,'gun_shots')" required="true()" type="string"/>
+      <bind nodeset="/public_health_events/group_phe/riots" relevant="selected( /public_health_events/group_phe/phe_topic ,'riots')" required="true()" type="string"/>
+      <bind nodeset="/public_health_events/group_phe/other" relevant="selected( /public_health_events/group_phe/phe_topic ,'other')" required="true()" type="string"/>
+      <bind nodeset="/public_health_events/group_phe/location" required="true()" type="string"/>
+      <bind constraint="date(.) &lt;= now()" jr:constraintMsg="This date cannot be in the future" nodeset="/public_health_events/group_phe/date_of_event" required="true()" type="date"/>
+      <bind nodeset="/public_health_events/group_summary/submit" readonly="true()" type="string"/>
+      <bind nodeset="/public_health_events/group_summary/r_summary" readonly="true()" type="string"/>
+      <bind nodeset="/public_health_events/group_summary/r_chp_info" readonly="true()" type="string"/>
+      <bind nodeset="/public_health_events/group_summary/r_contamination" readonly="true()" relevant="selected( /public_health_events/group_phe/phe_topic , 'contaminated_food')" type="string"/>
+      <bind nodeset="/public_health_events/group_summary/r_contamination_sick_death" readonly="true()" relevant="selected( /public_health_events/group_phe/contamination , 'sick_death')" type="string"/>
+      <bind nodeset="/public_health_events/group_summary/r_contamination_contamination" readonly="true()" relevant="selected( /public_health_events/group_phe/contamination , 'contamination')" type="string"/>
+      <bind nodeset="/public_health_events/group_summary/r_contamination_methanon" readonly="true()" relevant="selected( /public_health_events/group_phe/contamination , 'methanol_poisoning')" type="string"/>
+      <bind nodeset="/public_health_events/group_summary/r_contamination_details" readonly="true()" relevant="count-selected( /public_health_events/group_phe/contamination ) &gt; 0" type="string"/>
+      <bind nodeset="/public_health_events/group_summary/r_environmental_hazard" readonly="true()" relevant="selected( /public_health_events/group_phe/phe_topic , 'environmental_hazard')" type="string"/>
+      <bind nodeset="/public_health_events/group_summary/r_environmental_hazard_chemical" readonly="true()" relevant="selected( /public_health_events/group_phe/environmental_hazard ,'chemical_dumping')" type="string"/>
+      <bind nodeset="/public_health_events/group_summary/r_environmental_hazard_deails" readonly="true()" relevant="count-selected( /public_health_events/group_phe/environmental_hazard ) &gt; 0" type="string"/>
+      <bind nodeset="/public_health_events/group_summary/r_animal_diseases" readonly="true()" relevant="selected( /public_health_events/group_phe/phe_topic , 'animal_diseases')" type="string"/>
+      <bind nodeset="/public_health_events/group_summary/r_animal_diseases_sick_domesticated_animals" readonly="true()" relevant="selected( /public_health_events/group_phe/animal_diseases , 'sick_domesticated_animals')" type="string"/>
+      <bind nodeset="/public_health_events/group_summary/r_animal_diseases_dead_domesticated_animals" readonly="true()" relevant="selected( /public_health_events/group_phe/animal_diseases , 'dead_domesticated_animals')" type="string"/>
+      <bind nodeset="/public_health_events/group_summary/r_animal_diseases_animals_aborting" readonly="true()" relevant="selected( /public_health_events/group_phe/animal_diseases , 'animals_aborting')" type="string"/>
+      <bind nodeset="/public_health_events/group_summary/r_animal_diseases_dead_wild_animals" readonly="true()" relevant="selected( /public_health_events/group_phe/animal_diseases , 'dead_wild_animals')" type="string"/>
+      <bind nodeset="/public_health_events/group_summary/r_animal_diseases_sick_wild_animals" readonly="true()" relevant="selected( /public_health_events/group_phe/animal_diseases , 'sick_wild_animals')" type="string"/>
+      <bind nodeset="/public_health_events/group_summary/r_animal_diseases_other" readonly="true()" relevant="count-selected( /public_health_events/group_phe/animal_diseases ) &gt; 0" type="string"/>
+      <bind nodeset="/public_health_events/group_summary/r_unexpected_deaths" readonly="true()" relevant="selected( /public_health_events/group_phe/phe_topic , 'unexpected_deaths')" type="string"/>
+      <bind nodeset="/public_health_events/group_summary/r_unusual_disease_patterns" readonly="true()" relevant="selected( /public_health_events/group_phe/phe_topic , 'unusual_disease_patterns')" type="string"/>
+      <bind nodeset="/public_health_events/group_summary/r_clustered_cases" readonly="true()" relevant="selected( /public_health_events/group_phe/phe_topic , 'clustered_cases')" type="string"/>
+      <bind nodeset="/public_health_events/group_summary/r_collapsing_buildings" readonly="true()" relevant="selected( /public_health_events/group_phe/phe_topic , 'collapsing_buildings')" type="string"/>
+      <bind nodeset="/public_health_events/group_summary/r_internal_displacements" readonly="true()" relevant="selected( /public_health_events/group_phe/phe_topic , 'internal_displacement')" type="string"/>
+      <bind nodeset="/public_health_events/group_summary/r_landslides" readonly="true()" relevant="selected( /public_health_events/group_phe/phe_topic , 'landslides')" type="string"/>
+      <bind nodeset="/public_health_events/group_summary/r_earthquakes" readonly="true()" relevant="selected( /public_health_events/group_phe/phe_topic ,'earthquakes')" type="string"/>
+      <bind nodeset="/public_health_events/group_summary/r_floods" readonly="true()" relevant="selected( /public_health_events/group_phe/phe_topic ,'floods')" type="string"/>
+      <bind nodeset="/public_health_events/group_summary/r_fires" readonly="true()" relevant="selected( /public_health_events/group_phe/phe_topic ,'fires')" type="string"/>
+      <bind nodeset="/public_health_events/group_summary/r_bombs" readonly="true()" relevant="selected( /public_health_events/group_phe/phe_topic ,'bombs')" type="string"/>
+      <bind nodeset="/public_health_events/group_summary/r_gun_shots" readonly="true()" relevant="selected( /public_health_events/group_phe/phe_topic ,'gun_shots')" type="string"/>
+      <bind nodeset="/public_health_events/group_summary/r_riots" readonly="true()" relevant="selected( /public_health_events/group_phe/phe_topic ,'riots')" type="string"/>
+      <bind nodeset="/public_health_events/group_summary/r_other" readonly="true()" relevant="selected( /public_health_events/group_phe/phe_topic ,'other')" type="string"/>
+      <bind nodeset="/public_health_events/group_summary/r_other_details" readonly="true()" relevant="selected( /public_health_events/group_phe/phe_topic ,'other')" type="string"/>
+      <bind nodeset="/public_health_events/group_summary/r_location" readonly="true()" type="string"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/public_health_events/meta/instanceID" readonly="true()" type="string"/>
+    </model>
+  </h:head>
+  <h:body class="pages">
+    <group appearance="field-list" ref="/public_health_events/inputs">
+      <label>CHV Area</label>
+      <input appearance="hidden" ref="/public_health_events/inputs/source">
+        <label>Source</label>
+      </input>
+      <input appearance="hidden" ref="/public_health_events/inputs/source_id">
+        <label>Source ID</label>
+      </input>
+      <group ref="/public_health_events/inputs/contact">
+        <input appearance="db-object bind-id-only" ref="/public_health_events/inputs/contact/_id">
+          <label>What is the CHV's area?</label>
+          <hint>Select the family from the list</hint>
+        </input>
+        <input appearance="hidden" ref="/public_health_events/inputs/contact/name">
+          <label>Name</label>
+        </input>
+        <input appearance="hidden" ref="/public_health_events/inputs/contact/village">
+          <label>Village</label>
+        </input>
+        <input appearance="hidden" ref="/public_health_events/inputs/contact/ward">
+          <label>Ward</label>
+        </input>
+        <group ref="/public_health_events/inputs/contact/contact">
+          <input appearance="hidden" ref="/public_health_events/inputs/contact/contact/name">
+            <label>CHV Name</label>
+          </input>
+          <input appearance="hidden" ref="/public_health_events/inputs/contact/contact/phone">
+            <label>CHV Phone</label>
+          </input>
+        </group>
+      </group>
+    </group>
+    <input ref="/public_health_events/debug">
+      <label><output value=" /public_health_events/place_id "/>
+<output value=" /public_health_events/place_name "/>
+<output value=" /public_health_events/chp_name "/></label>
+    </input>
+    <group appearance="field-list" ref="/public_health_events/group_phe">
+      <label>Public Health Events</label>
+      <input ref="/public_health_events/group_phe/n_hint">
+        <label>_Select the Public Health Event you are reporting_</label>
+      </input>
+      <select ref="/public_health_events/group_phe/phe_topic">
+        <label>Select the Public Health Event you are reporting.</label>
+        <item>
+          <label>Environmental hazards including chemical and radio-nuclear events</label>
+          <value>environmental_hazard</value>
+        </item>
+        <item>
+          <label>Events related to diseases and deaths in animals</label>
+          <value>animal_diseases</value>
+        </item>
+        <item>
+          <label>Contaminated food products or water</label>
+          <value>contaminated_food</value>
+        </item>
+        <item>
+          <label>Clustered cases of a disease or syndromes</label>
+          <value>clustered_cases</value>
+        </item>
+        <item>
+          <label>Unexpected deaths as recognized by key informants</label>
+          <value>unexpected_deaths</value>
+        </item>
+        <item>
+          <label>Unusual disease patterns</label>
+          <value>unusual_disease_patterns</value>
+        </item>
+        <item>
+          <label>Collapsing Buildings</label>
+          <value>collapsing_buildings</value>
+        </item>
+        <item>
+          <label>Internal Displacements of people</label>
+          <value>internal_displacement</value>
+        </item>
+        <item>
+          <label>Landslides</label>
+          <value>landslides</value>
+        </item>
+        <item>
+          <label>Earthquakes</label>
+          <value>earthquakes</value>
+        </item>
+        <item>
+          <label>Floods</label>
+          <value>floods</value>
+        </item>
+        <item>
+          <label>Fire accidents</label>
+          <value>fires</value>
+        </item>
+        <item>
+          <label>Bomb/Grenade blasts</label>
+          <value>bombs</value>
+        </item>
+        <item>
+          <label>Gun shots</label>
+          <value>gun_shots</value>
+        </item>
+        <item>
+          <label>Riots/Clashes</label>
+          <value>riots</value>
+        </item>
+        <item>
+          <label>Others</label>
+          <value>other</value>
+        </item>
+      </select>
+      <select ref="/public_health_events/group_phe/contamination">
+        <label>Contaminated food products or water</label>
+        <hint>Select all that apply</hint>
+        <item>
+          <label>People falling sick or die after exposure to food or water</label>
+          <value>sick_death</value>
+        </item>
+        <item>
+          <label>Discoloured/mouldy foods or water contaminated by hazardous materials</label>
+          <value>contamination</value>
+        </item>
+        <item>
+          <label>Methanol poisoning</label>
+          <value>methanol_poisoning</value>
+        </item>
+        <item>
+          <label>Other</label>
+          <value>other</value>
+        </item>
+      </select>
+      <input appearance="multiline" ref="/public_health_events/group_phe/contamination_details">
+        <label>Please Specify:</label>
+      </input>
+      <select ref="/public_health_events/group_phe/environmental_hazard">
+        <label>Environmental hazards including chemical and radio-nuclear events</label>
+        <hint>Select all that apply</hint>
+        <item>
+          <label>Chemical dumping or other radioactive materials in the environment</label>
+          <value>chemical_dumping</value>
+        </item>
+        <item>
+          <label>Other</label>
+          <value>other</value>
+        </item>
+      </select>
+      <input appearance="multiline" ref="/public_health_events/group_phe/environmental_hazard_details">
+        <label>Please Specify:</label>
+      </input>
+      <select ref="/public_health_events/group_phe/animal_diseases">
+        <label>Events related to diseases and deaths in animals</label>
+        <item>
+          <label>Many very sick domesticated animals or birds</label>
+          <value>sick_domesticated_animals</value>
+        </item>
+        <item>
+          <label>Massive death of domestic animals or birds</label>
+          <value>dead_domesticated_animals</value>
+        </item>
+        <item>
+          <label>Massive abortions of domesticated animals</label>
+          <value>animals_aborting</value>
+        </item>
+        <item>
+          <label>Massive death of wild animals or birds</label>
+          <value>dead_wild_animals</value>
+        </item>
+        <item>
+          <label>Many sick wild animals or birds</label>
+          <value>sick_wild_animals</value>
+        </item>
+        <item>
+          <label>Other</label>
+          <value>other</value>
+        </item>
+      </select>
+      <input appearance="multiline" ref="/public_health_events/group_phe/animal_diseases_details">
+        <label>Please Specify:</label>
+      </input>
+      <input appearance="multiline" ref="/public_health_events/group_phe/unexpected_deaths">
+        <label>Unexpected deaths as recognized by key informants</label>
+        <hint>Describe briefly</hint>
+      </input>
+      <input appearance="multiline" ref="/public_health_events/group_phe/unusual_disease_patterns">
+        <label>Unusual disease patterns</label>
+        <hint>Describe briefly</hint>
+      </input>
+      <input appearance="multiline" ref="/public_health_events/group_phe/clustered_cases">
+        <label>Clustered cases of a disease or syndromes</label>
+        <hint>Describe briefly</hint>
+      </input>
+      <input appearance="multiline" ref="/public_health_events/group_phe/collapsing_buildings">
+        <label>Collapsing Buildings</label>
+        <hint>Describe briefly</hint>
+      </input>
+      <input appearance="multiline" ref="/public_health_events/group_phe/internal_displacement">
+        <label>Internal Displacements of people</label>
+        <hint>Describe briefly</hint>
+      </input>
+      <input appearance="multiline" ref="/public_health_events/group_phe/landslides">
+        <label>Landslides</label>
+        <hint>Describe briefly</hint>
+      </input>
+      <input appearance="multiline" ref="/public_health_events/group_phe/earthquakes">
+        <label>Earthquakes</label>
+        <hint>Describe briefly</hint>
+      </input>
+      <input appearance="multiline" ref="/public_health_events/group_phe/floods">
+        <label>Floods</label>
+        <hint>Describe briefly</hint>
+      </input>
+      <input appearance="multiline" ref="/public_health_events/group_phe/fires">
+        <label>Fire accidents</label>
+        <hint>Describe briefly</hint>
+      </input>
+      <input appearance="multiline" ref="/public_health_events/group_phe/bombs">
+        <label>Bomb/grenade blasts</label>
+        <hint>Describe briefly</hint>
+      </input>
+      <input appearance="multiline" ref="/public_health_events/group_phe/gun_shots">
+        <label>Gun shots</label>
+        <hint>Describe briefly</hint>
+      </input>
+      <input appearance="multiline" ref="/public_health_events/group_phe/riots">
+        <label>Riots/Clashes</label>
+        <hint>Describe briefly</hint>
+      </input>
+      <input appearance="multiline" ref="/public_health_events/group_phe/other">
+        <label>Other</label>
+        <hint>Describe briefly</hint>
+      </input>
+      <input appearance="multiline" ref="/public_health_events/group_phe/location">
+        <label>What is the location of the event?</label>
+        <hint>Write the name of something that can help us locate the place very fast: e.g a landmark</hint>
+      </input>
+      <input ref="/public_health_events/group_phe/date_of_event">
+        <label>When did the event occur?</label>
+        <hint>Write the time and date when it occurred</hint>
+      </input>
+    </group>
+    <group appearance="field-list summary" ref="/public_health_events/group_summary">
+      <input ref="/public_health_events/group_summary/submit">
+        <label>&lt;h4 style="text-align:center;"&gt;Be sure you Submit to complete this action.&lt;/h4&gt;</label>
+      </input>
+      <input appearance="h1 yellow" ref="/public_health_events/group_summary/r_summary">
+        <label>Summary for &lt;I class="fa fa-user"&gt;&lt;/i&gt;</label>
+      </input>
+      <input ref="/public_health_events/group_summary/r_chp_info">
+        <label>&lt;h4 style=&quot;text-align:center;&quot;&gt;<output value=" /public_health_events/chp_name "/>&lt;/h4&gt;&lt;br/&gt;
+&lt;h5 style=&quot;text-align:center;&quot;&gt;Village: <output value=" /public_health_events/village_name "/>&lt;/h5&gt;
+&lt;h5 style=&quot;text-align:center;&quot;&gt;Ward: <output value=" /public_health_events/ward_name "/>&lt;/h5&gt;</label>
+      </input>
+      <input appearance="h3 blue" ref="/public_health_events/group_summary/r_contamination">
+        <label>Contaminated food products or water</label>
+      </input>
+      <input appearance="li" ref="/public_health_events/group_summary/r_contamination_sick_death">
+        <label>People falling sick or die after exposure to food or water</label>
+      </input>
+      <input appearance="li" ref="/public_health_events/group_summary/r_contamination_contamination">
+        <label>Discoloured/mouldy foods or water contaminated by hazardous materials</label>
+      </input>
+      <input appearance="li" ref="/public_health_events/group_summary/r_contamination_methanon">
+        <label>Methanol poisoning</label>
+      </input>
+      <input appearance="li" ref="/public_health_events/group_summary/r_contamination_details">
+        <label><output value=" /public_health_events/group_phe/contamination_details "/></label>
+      </input>
+      <input appearance="h3 blue" ref="/public_health_events/group_summary/r_environmental_hazard">
+        <label>Environmental hazards including chemical and radio-nuclear events</label>
+      </input>
+      <input appearance="li" ref="/public_health_events/group_summary/r_environmental_hazard_chemical">
+        <label>Chemical dumping or other radioactive materials in the environment</label>
+      </input>
+      <input appearance="li" ref="/public_health_events/group_summary/r_environmental_hazard_deails">
+        <label><output value=" /public_health_events/group_phe/environmental_hazard_details "/></label>
+      </input>
+      <input appearance="h3 blue" ref="/public_health_events/group_summary/r_animal_diseases">
+        <label>Events related to diseases and deaths in animals</label>
+      </input>
+      <input appearance="li" ref="/public_health_events/group_summary/r_animal_diseases_sick_domesticated_animals">
+        <label>Many very sick domesticated animals or birds</label>
+      </input>
+      <input appearance="li" ref="/public_health_events/group_summary/r_animal_diseases_dead_domesticated_animals">
+        <label>Massive death of domestic animals or birds</label>
+      </input>
+      <input appearance="li" ref="/public_health_events/group_summary/r_animal_diseases_animals_aborting">
+        <label>Massive abortions of domesticated animals</label>
+      </input>
+      <input appearance="li" ref="/public_health_events/group_summary/r_animal_diseases_dead_wild_animals">
+        <label>Massive death of wild animals or birds</label>
+      </input>
+      <input appearance="li" ref="/public_health_events/group_summary/r_animal_diseases_sick_wild_animals">
+        <label>Many sick wild animals or birds</label>
+      </input>
+      <input appearance="li" ref="/public_health_events/group_summary/r_animal_diseases_other">
+        <label><output value=" /public_health_events/group_phe/animal_diseases_details "/></label>
+      </input>
+      <input appearance="h3 blue" ref="/public_health_events/group_summary/r_unexpected_deaths">
+        <label>Unexpected deaths as recognized by key informants</label>
+      </input>
+      <input appearance="h3 blue" ref="/public_health_events/group_summary/r_unusual_disease_patterns">
+        <label>Unusual disease patterns</label>
+      </input>
+      <input appearance="h3 blue" ref="/public_health_events/group_summary/r_clustered_cases">
+        <label>Clustered cases of a disease or syndromes</label>
+      </input>
+      <input appearance="h3 blue" ref="/public_health_events/group_summary/r_collapsing_buildings">
+        <label>Collapsing Buildings</label>
+      </input>
+      <input appearance="h3 blue" ref="/public_health_events/group_summary/r_internal_displacements">
+        <label>Internal Displacements of people</label>
+      </input>
+      <input appearance="h3 blue" ref="/public_health_events/group_summary/r_landslides">
+        <label>Landslides</label>
+      </input>
+      <input appearance="h3 blue" ref="/public_health_events/group_summary/r_earthquakes">
+        <label>Earthquakes</label>
+      </input>
+      <input appearance="h3 blue" ref="/public_health_events/group_summary/r_floods">
+        <label>Floods</label>
+      </input>
+      <input appearance="h3 blue" ref="/public_health_events/group_summary/r_fires">
+        <label>Fire accidents</label>
+      </input>
+      <input appearance="h3 blue" ref="/public_health_events/group_summary/r_bombs">
+        <label>Bomb/grenade blasts</label>
+      </input>
+      <input appearance="h3 blue" ref="/public_health_events/group_summary/r_gun_shots">
+        <label>Gun shots</label>
+      </input>
+      <input appearance="h3 blue" ref="/public_health_events/group_summary/r_riots">
+        <label>Riots/Clashes</label>
+      </input>
+      <input appearance="h3 blue" ref="/public_health_events/group_summary/r_other">
+        <label>Other</label>
+      </input>
+      <input appearance="li" ref="/public_health_events/group_summary/r_other_details">
+        <label><output value=" /public_health_events/group_phe/other "/></label>
+      </input>
+      <input ref="/public_health_events/group_summary/r_location">
+        <label>This event occurred at: <output value=" /public_health_events/group_phe/location "/> on **<output value=" /public_health_events/group_phe/date_of_event "/>**</label>
+      </input>
+    </group>
+  </h:body>
+</h:html>

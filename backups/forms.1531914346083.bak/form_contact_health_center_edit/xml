@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>Edit CHV Area</h:title>
+    <model>
+      <instance>
+        <data delimiter="#" id="health_center-edit" prefix="J1!health_center-edit!" version="2017-09-15 08:55:29">
+          <health_center>
+            <name/>
+            <contact/>
+            <parent/>
+            <supervisor/>
+            <geolocation/>
+          </health_center>
+          <meta>
+            <instanceID/>
+          </meta>
+        </data>
+      </instance>
+      <bind nodeset="/data/health_center/name" required="true()" type="string"/>
+      <bind nodeset="/data/health_center/contact" type="db:person"/>
+      <bind nodeset="/data/health_center/parent" type="db:district_hospital"/>
+      <bind nodeset="/data/health_center/supervisor" type="db:person"/>
+      <bind calculate="concat(../../inputs/meta/location/lat, concat(' ', ../../inputs/meta/location/long))" nodeset="/data/health_center/geolocation" type="string"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/data/meta/instanceID" readonly="true()" type="string"/>
+    </model>
+  </h:head>
+  <h:body>
+    <group ref="/data/health_center">
+      <label>Edit CHV Area</label>
+      <input ref="/data/health_center/name">
+        <label>Area Name</label>
+      </input>
+      <input appearance="bind-id-only db-object" ref="/data/health_center/contact">
+        <label>CHV</label>
+        <hint>Select the CHV for this CHV Area</hint>
+      </input>
+      <input appearance="bind-id-only db-object" ref="/data/health_center/parent">
+        <label>CHA Area</label>
+        <hint>Select the CHA Area for this CHV Area</hint>
+      </input>
+      <input appearance="bind-id-only db-object" ref="/data/health_center/supervisor">
+        <label>Who is the supervisor for this CHV?</label>
+        <hint>Select the supervisor from the list</hint>
+      </input>
+    </group>
+  </h:body>
+</h:html>

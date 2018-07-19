@@ -1,0 +1,7 @@
+{
+	"icon": "survey",
+	"context": {
+		"person": true,
+		"place": false
+	}
+}

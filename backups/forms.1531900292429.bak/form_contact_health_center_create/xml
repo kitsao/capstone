@@ -1,0 +1,229 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>Add CHP Area</h:title>
+    <model>
+      <instance>
+        <data delimiter="#" id="contact:health_center:create" prefix="J1!contact:health_center:create!" version="2018-01-24">
+          <inputs>
+            <meta>
+              <location>
+                <lat/>
+                <long/>
+                <error/>
+                <message/>
+              </location>
+            </meta>
+            <user>
+              <contact_id/>
+              <facility_id/>
+              <name/>
+            </user>
+            <contact>
+              <_id/>
+            </contact>
+          </inputs>
+          <health_center>
+            <parent/>
+            <name/>
+            <geolocation/>
+            <contact/>
+            <survey>
+              <improved_cook_stove/>
+              <solar_light/>
+              <water_filter/>
+            </survey>
+          </health_center>
+          <supervisor/>
+          <contact>
+            <debug_note/>
+            <parent>PARENT</parent>
+            <type>person</type>
+            <name/>
+            <notes/>
+            <sex/>
+            <date_of_birth_method/>
+            <date_of_birth/>
+            <phone/>
+            <alternate_phone/>
+            <external_id/>
+          </contact>
+          <init>
+            <contact_name/>
+            <contact_notes/>
+            <phone1/>
+            <phone2/>
+            <g_sex/>
+            <contact_dob_method>approx</contact_dob_method>
+            <dob_calendar/>
+            <age/>
+            <dob_raw/>
+            <contact_dob_iso/>
+          </init>
+          <meta>
+            <instanceID/>
+          </meta>
+        </data>
+      </instance>
+      <bind nodeset="/data/inputs/user" relevant="false()"/>
+      <bind nodeset="/data/inputs/user/contact_id" type="string"/>
+      <bind nodeset="/data/inputs/user/facility_id" type="string"/>
+      <bind nodeset="/data/inputs/user/name" type="string"/>
+      <bind nodeset="/data/inputs/contact/_id" type="db:district_hospital"/>
+      <bind nodeset="/data/supervisor" type="db:person"/>
+      <bind nodeset="/data/contact/debug_note" readonly="true()" relevant="false()" type="string"/>
+      <bind nodeset="/data/contact/parent" type="string"/>
+      <bind calculate="." nodeset="/data/contact/type" type="string"/>
+      <bind calculate=" /data/init/contact_name " nodeset="/data/contact/name" required="true()" type="string"/>
+      <bind calculate=" /data/init/contact_notes " nodeset="/data/contact/notes" type="string"/>
+      <bind calculate=" /data/init/g_sex " nodeset="/data/contact/sex" type="string"/>
+      <bind calculate=" /data/init/contact_dob_method " nodeset="/data/contact/date_of_birth_method" type="string"/>
+      <bind calculate=" /data/init/contact_dob_iso " nodeset="/data/contact/date_of_birth" type="string"/>
+      <bind calculate=" /data/init/phone1 " nodeset="/data/contact/phone" type="string"/>
+      <bind calculate=" /data/init/phone2 " nodeset="/data/contact/alternate_phone" type="string"/>
+      <bind nodeset="/data/contact/external_id" type="string"/>
+      <bind nodeset="/data/init/contact_name" required="true()" type="string"/>
+      <bind nodeset="/data/init/contact_notes" type="string"/>
+      <bind constraint="regex(.,'^\+254\s?(\d{3}\s?){3}|^07\d{2}\s?(\d{3}\s?){2}')" jr:constraintMsg="Please make sure the number is not already in use by another person and is in the format +254 7XX XXX XXX or 07XX XXX XXX." nodeset="/data/init/phone1" type="tel"/>
+      <bind constraint="regex(.,'^\+254\s?(\d{3}\s?){3}|^07\d{2}\s?(\d{3}\s?){2}')" jr:constraintMsg="Please make sure the number is not already in use by another person and is in the format +254 7XX XXX XXX or 07XX XXX XXX." nodeset="/data/init/phone2" type="tel"/>
+      <bind nodeset="/data/init/g_sex" required="true()" type="select1"/>
+      <bind nodeset="/data/init/contact_dob_method" required="true()" type="select1"/>
+      <bind constraint=".&lt;today()" jr:constraintMsg="Date must be before today" nodeset="/data/init/dob_calendar" relevant="selected(../contact_dob_method,'calendar')" required="true()" type="date"/>
+      <bind constraint=". &gt; 0 and . &lt; 120" jr:constraintMsg="Age must be between 0 and 120" nodeset="/data/init/age" relevant="selected(../contact_dob_method,'approx')" required="true()" type="int"/>
+      <bind calculate="if(selected( ../contact_dob_method,'calendar'), 
+../dob_calendar,
+format-date-time( decimal-date-time( today() ) - (365.25 * ../age) , &quot;%Y-%m-%d&quot;) )" nodeset="/data/init/dob_raw" type="string"/>
+      <bind calculate="format-date-time(../dob_raw,&quot;%Y-%m-%d&quot;)" nodeset="/data/init/contact_dob_iso" type="string"/>
+      <bind calculate="../../inputs/contact/_id" nodeset="/data/health_center/parent" type="string"/>
+      <bind calculate="concat(../../contact/name, ' Area')" nodeset="/data/health_center/name" type="string"/>
+      <bind calculate="concat(../../inputs/meta/location/lat, concat(' ', ../../inputs/meta/location/long))" nodeset="/data/health_center/geolocation" type="string"/>
+      <bind calculate="&quot;NEW&quot;" nodeset="/data/health_center/contact" type="string"/>
+      <bind nodeset="/data/health_center/survey" relevant="false()"/>
+      <bind nodeset="/data/health_center/survey/improved_cook_stove" type="select1"/>
+      <bind nodeset="/data/health_center/survey/solar_light" type="select1"/>
+      <bind nodeset="/data/health_center/survey/water_filter" type="select1"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/data/meta/instanceID" readonly="true()" type="string"/>
+    </model>
+  </h:head>
+  <h:body>
+    <group ref="/data/inputs">
+      <group ref="/data/inputs/user">
+        <input ref="/data/inputs/user/contact_id">
+          <label>Contact ID of the logged in user</label>
+        </input>
+        <input ref="/data/inputs/user/facility_id">
+          <label>Facility ID for the parent user</label>
+        </input>
+        <input ref="/data/inputs/user/name">
+          <label>Name of the logged in user</label>
+        </input>
+      </group>
+      <group ref="/data/inputs/contact">
+        <input appearance="db-object bind-id-only" ref="/data/inputs/contact/_id">
+          <label>In what branch will this CHP be?</label>
+          <hint>Select the branch from the list</hint>
+        </input>
+      </group>
+    </group>
+    <input appearance="db-object bind-id-only" ref="/data/supervisor">
+      <label>Who is the supervisor for this CHP?</label>
+      <hint>Select the supervisor from the list</hint>
+    </input>
+    <group appearance="field-list" ref="/data/init">
+      <label>CHP Information</label>
+      <input ref="/data/init/contact_name">
+        <label>Names</label>
+      </input>
+      <input ref="/data/init/contact_notes">
+        <label>Notes (optional)</label>
+      </input>
+      <input appearance="numbers" ref="/data/init/phone1">
+        <label>Primary Mobile Number</label>
+        <hint>Use one of the following formats: +254 7XX XXX XXX or 07XX XXX XXX</hint>
+      </input>
+      <input appearance="numbers" ref="/data/init/phone2">
+        <label>Secondary Mobile Number</label>
+        <hint>Use one of the following formats: +254 7XX XXX XXX or 07XX XXX XXX</hint>
+      </input>
+      <select1 appearance="horizontal" ref="/data/init/g_sex">
+        <label>Gender</label>
+        <item>
+          <label>Female</label>
+          <value>female</value>
+        </item>
+        <item>
+          <label>Male</label>
+          <value>male</value>
+        </item>
+      </select1>
+      <select1 appearance="horizontal hidden" ref="/data/init/contact_dob_method">
+        <label>Method to select date of birth</label>
+        <item>
+          <label>With calendar (preferred)</label>
+          <value>calendar</value>
+        </item>
+        <item>
+          <label>With current age</label>
+          <value>approx</value>
+        </item>
+      </select1>
+      <input ref="/data/init/dob_calendar">
+        <label>Date of Birth</label>
+      </input>
+      <input ref="/data/init/age">
+        <label>Age</label>
+      </input>
+      <group appearance="field-list" ref="/data/contact">
+        <input ref="/data/contact/debug_note">
+          <label>DEBUG
+  Branch ID: <output value=" /data/inputs/contact/_id "/>
+  User's facility ID: <output value=" /data/inputs/user/facility_id "/></label></input>
+        <input appearance="hidden" ref="/data/contact/parent">
+          <label>Parent</label>
+          <hint>mandatory</hint>
+        </input>
+        <input appearance="hidden" ref="/data/contact/external_id">
+          <label>ID</label>
+        </input>
+        </group>
+      </group>
+    <group ref="/data/health_center">
+      <group appearance="field-list" ref="/data/health_center/survey">
+        <label>Example of extra questions abour CHP Area</label>
+        <select1 appearance="horizontal" ref="/data/health_center/survey/improved_cook_stove">
+          <label>Does the family own an improved cook stove?</label>
+          <item>
+            <label>Yes</label>
+            <value>true</value>
+          </item>
+          <item>
+            <label>No</label>
+            <value>false</value>
+          </item>
+        </select1>
+        <select1 appearance="horizontal" ref="/data/health_center/survey/solar_light">
+          <label>Does the family own a solar light?</label>
+          <item>
+            <label>Yes</label>
+            <value>true</value>
+          </item>
+          <item>
+            <label>No</label>
+            <value>false</value>
+          </item>
+        </select1>
+        <select1 appearance="horizontal" ref="/data/health_center/survey/water_filter">
+          <label>Does the family own a water filter?</label>
+          <item>
+            <label>Yes</label>
+            <value>true</value>
+          </item>
+          <item>
+            <label>No</label>
+            <value>false</value>
+          </item>
+        </select1>
+      </group>
+    </group>
+  </h:body>
+</h:html>

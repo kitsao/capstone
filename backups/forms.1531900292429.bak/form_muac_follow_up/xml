@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>MUAC Assessment Follow Up</h:title>
+    <model>
+      <instance>
+        <muac_follow_up delimiter="#" id="muac_follow_up" prefix="J1!muac_follow_up!" version="2018-02-14">
+          <inputs>
+            <meta>
+              <location>
+                <lat/>
+                <long/>
+                <error/>
+                <message/>
+              </location>
+            </meta>
+            <source>user</source>
+            <source_id/>
+            <t_follow_up_count>1</t_follow_up_count>
+            <contact>
+              <_id/>
+              <name/>
+              <date_of_birth>0</date_of_birth>
+            </contact>
+          </inputs>
+          <patient_id/>
+          <patient_name/>
+          <patient_age_in_years>0</patient_age_in_years>
+          <patient_age_in_months>0</patient_age_in_months>
+          <patient_age_in_days/>
+          <patient_age_display/>
+          <follow_up>
+            <went_to_hf/>
+            <n_hf_advice/>
+            <n_healthy_start/>
+            <healthy_start/>
+            <no_satchets/>
+            <healthy_start_interested/>
+          </follow_up>
+          <meta>
+            <instanceID/>
+          </meta>
+        </muac_follow_up>
+      </instance>
+      <instance id="contact-summary"/>
+      <bind nodeset="/muac_follow_up/inputs" relevant="./source = 'user'"/>
+      <bind nodeset="/muac_follow_up/inputs/source" type="string"/>
+      <bind nodeset="/muac_follow_up/inputs/source_id" type="string"/>
+      <bind nodeset="/muac_follow_up/inputs/t_follow_up_count" type="string"/>
+      <bind constraint=" /muac_follow_up/patient_age_in_months  &gt;= 4 and  /muac_follow_up/patient_age_in_years  &lt;= 5" jr:constraintMsg="Patient must be between 4 months and 5 years" nodeset="/muac_follow_up/inputs/contact/_id" required="true()" type="db:person"/>
+      <bind nodeset="/muac_follow_up/inputs/contact/name" type="string"/>
+      <bind nodeset="/muac_follow_up/inputs/contact/date_of_birth" type="string"/>
+      <bind calculate="../inputs/contact/_id" nodeset="/muac_follow_up/patient_id" required="true()" type="string"/>
+      <bind calculate="../inputs/contact/name" nodeset="/muac_follow_up/patient_name" type="string"/>
+      <bind calculate="floor( difference-in-months( date( /muac_follow_up/inputs/contact/date_of_birth ), today() ) div 12 )" nodeset="/muac_follow_up/patient_age_in_years" type="string"/>
+      <bind calculate="difference-in-months(date( /muac_follow_up/inputs/contact/date_of_birth ), today() )" nodeset="/muac_follow_up/patient_age_in_months" type="string"/>
+      <bind calculate="floor( decimal-date-time(today()) - decimal-date-time(date( /muac_follow_up/inputs/contact/date_of_birth )) )" nodeset="/muac_follow_up/patient_age_in_days" type="string"/>
+      <bind calculate="concat(
+ concat( /muac_follow_up/patient_age_in_years , if( /muac_follow_up/patient_age_in_years =1,' year and ',' years and ')),
+ concat( /muac_follow_up/patient_age_in_months  mod 12, if(( /muac_follow_up/patient_age_in_months  mod 12)=1,' month old',' months old'))
+)" nodeset="/muac_follow_up/patient_age_display" type="string"/>
+      <bind nodeset="/muac_follow_up/follow_up/went_to_hf" required="true()" type="select1"/>
+      <bind nodeset="/muac_follow_up/follow_up/n_hf_advice" readonly="true()" relevant=" /muac_follow_up/follow_up/went_to_hf  = 'no'" type="string"/>
+      <bind nodeset="/muac_follow_up/follow_up/n_healthy_start" readonly="true()" type="string"/>
+      <bind nodeset="/muac_follow_up/follow_up/healthy_start" type="select1"/>
+      <bind nodeset="/muac_follow_up/follow_up/no_satchets" relevant=" /muac_follow_up/follow_up/healthy_start  = 'yes'" required="true()" type="select1"/>
+      <bind nodeset="/muac_follow_up/follow_up/healthy_start_interested" relevant=" /muac_follow_up/follow_up/healthy_start  = 'no'" required="true()" type="select1"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/muac_follow_up/meta/instanceID" readonly="true()" type="string"/>
+    </model>
+  </h:head>
+  <h:body class="pages">
+    <group appearance="field-list" ref="/muac_follow_up/inputs">
+      <label>Patient</label>
+      <input appearance="hidden" ref="/muac_follow_up/inputs/source">
+        <label>Source</label>
+      </input>
+      <input appearance="hidden" ref="/muac_follow_up/inputs/source_id">
+        <label>Source ID</label>
+      </input>
+      <input appearance="hidden" ref="/muac_follow_up/inputs/t_follow_up_count">
+        <label>Follow Up Count</label>
+      </input>
+      <group ref="/muac_follow_up/inputs/contact">
+        <input appearance="db-object" ref="/muac_follow_up/inputs/contact/_id">
+          <label>What is the patient's name?</label>
+        </input>
+        <input appearance="hidden" ref="/muac_follow_up/inputs/contact/name">
+          <label>Name</label>
+        </input>
+        <input appearance="hidden" ref="/muac_follow_up/inputs/contact/date_of_birth">
+          <label>Date of Birth</label>
+        </input>
+      </group>
+    </group>
+    <group appearance="field-list" ref="/muac_follow_up/follow_up">
+      <label>MUAC Assessment follow up</label>
+      <select1 ref="/muac_follow_up/follow_up/went_to_hf">
+        <label>Did <output value=" /muac_follow_up/patient_name "/> go the health facility?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <input ref="/muac_follow_up/follow_up/n_hf_advice">
+        <label>**Remind the caregiver of the importance of receiving treatment at the health facility and encourage her to take the child.**</label>
+      </input>
+      <input ref="/muac_follow_up/follow_up/n_healthy_start">
+        <label>_Ask the mother about Healthy Start._</label>
+      </input>
+      <select1 ref="/muac_follow_up/follow_up/healthy_start">
+        <label>Have you fed the child with Healthy Start?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <select1 ref="/muac_follow_up/follow_up/no_satchets">
+        <label>How many satchets have you given the child this month?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <select1 ref="/muac_follow_up/follow_up/healthy_start_interested">
+        <label>Would you like to buy some Healthy Start?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+    </group>
+  </h:body>
+</h:html>

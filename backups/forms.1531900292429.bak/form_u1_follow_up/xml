@@ -1,0 +1,552 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>U1 Child Follow Up</h:title>
+    <model>
+      <instance>
+        <u1_follow_up delimiter="#" id="u1_follow_up" prefix="J1!u1_follow_up!" version="2018-01-30 00:00:00">
+          <inputs>
+            <meta>
+              <location>
+                <lat/>
+                <long/>
+                <error/>
+                <message/>
+              </location>
+            </meta>
+            <source>user</source>
+            <source_id/>
+            <t_follow_up_count>1</t_follow_up_count>
+            <contact>
+              <_id/>
+              <name/>
+              <date_of_birth>0</date_of_birth>
+              <mother_hiv_status>unknown</mother_hiv_status>
+            </contact>
+          </inputs>
+          <patient_id/>
+          <patient_name/>
+          <patient_age_in_years>0</patient_age_in_years>
+          <patient_age_in_months>0</patient_age_in_months>
+          <patient_age_in_days/>
+          <patient_age_display/>
+          <incomplete_vaccination/>
+          <needs_immunization_follow_up/>
+          <needs_muac_follow_up/>
+          <group_follow_up>
+            <g_received_vaccines/>
+            <n_not_received_vaccines/>
+            <g_immunization_updated/>
+            <given_vaccines_3mo/>
+            <given_vaccines_6mo/>
+            <given_vaccines_9mo/>
+            <given_vaccines_18mo/>
+            <n_completed_immunization_3mo/>
+            <n_completed_immunization_6mo_9mo/>
+            <n_incomplete_immunization/>
+            <n_given_other_foods/>
+            <n_breast_feeding/>
+            <n_muac/>
+            <muac_score/>
+            <n_moderate_malnutrition_referral/>
+            <n_acute_malnutrition_referral/>
+            <still_breastfeeding/>
+            <breastfed_in_last_24h/>
+            <food_child_ate_last_24h/>
+            <n_feeding_3mo_6mo/>
+            <n_feeding_12mo/>
+          </group_follow_up>
+          <group_summary>
+            <submit/>
+            <r_summary/>
+            <r_patient_info/>
+            <r_referral/>
+            <referral_immunisation/>
+            <r_referral_mam/>
+            <r_referral_sam/>
+            <r_healthy_tips/>
+            <r_healthy_tips_h/>
+            <r_healthy_tips1/>
+            <r_healthy_tips2/>
+          </group_summary>
+          <meta>
+            <instanceID/>
+          </meta>
+        </u1_follow_up>
+      </instance>
+      <instance id="contact-summary"/>
+      <bind nodeset="/u1_follow_up/inputs" relevant="./source = 'user'"/>
+      <bind nodeset="/u1_follow_up/inputs/source" type="string"/>
+      <bind nodeset="/u1_follow_up/inputs/source_id" type="string"/>
+      <bind nodeset="/u1_follow_up/inputs/t_follow_up_count" type="string"/>
+      <bind nodeset="/u1_follow_up/inputs/contact/_id" required="true()" type="db:person"/>
+      <bind nodeset="/u1_follow_up/inputs/contact/name" type="string"/>
+      <bind nodeset="/u1_follow_up/inputs/contact/date_of_birth" type="string"/>
+      <bind nodeset="/u1_follow_up/inputs/contact/mother_hiv_status" type="string"/>
+      <bind calculate="../inputs/contact/_id" nodeset="/u1_follow_up/patient_id" required="true()" type="string"/>
+      <bind calculate="../inputs/contact/name" nodeset="/u1_follow_up/patient_name" type="string"/>
+      <bind calculate="floor( difference-in-months( date( /u1_follow_up/inputs/contact/date_of_birth ), today() ) div 12 )" nodeset="/u1_follow_up/patient_age_in_years" type="string"/>
+      <bind calculate="difference-in-months(date( /u1_follow_up/inputs/contact/date_of_birth ), today() )" nodeset="/u1_follow_up/patient_age_in_months" type="string"/>
+      <bind calculate="floor( decimal-date-time(today()) - decimal-date-time(date( /u1_follow_up/inputs/contact/date_of_birth )) )" nodeset="/u1_follow_up/patient_age_in_days" type="string"/>
+      <bind calculate="concat(
+ concat( /u1_follow_up/patient_age_in_years , if( /u1_follow_up/patient_age_in_years =1,' year and ',' years and ')),
+ concat( /u1_follow_up/patient_age_in_months  mod 12, if(( /u1_follow_up/patient_age_in_months  mod 12)=1,' month old',' months old'))
+)" nodeset="/u1_follow_up/patient_age_display" type="string"/>
+      <bind calculate="if( /u1_follow_up/group_follow_up/g_received_vaccines  = 'yes' and (
+ (count-selected( /u1_follow_up/group_follow_up/given_vaccines_3mo ) &lt; 8 and  /u1_follow_up/inputs/t_follow_up_count  = 1) or 
+ (count-selected( /u1_follow_up/group_follow_up/given_vaccines_6mo ) &lt; 9 and  /u1_follow_up/inputs/t_follow_up_count  = 2) or
+ (count-selected( /u1_follow_up/group_follow_up/given_vaccines_9mo ) &lt; 13 and  /u1_follow_up/inputs/t_follow_up_count  = 3) 
+), 'true','false')" nodeset="/u1_follow_up/incomplete_vaccination" type="string"/>
+      <bind calculate="if( /u1_follow_up/group_follow_up/g_received_vaccines  = 'no' or  /u1_follow_up/incomplete_vaccination  = 'true', 'true','false')" nodeset="/u1_follow_up/needs_immunization_follow_up" type="string"/>
+      <bind calculate="if( /u1_follow_up/group_follow_up/muac_score  = 'yellow' or  /u1_follow_up/group_follow_up/muac_score  = 'red', 'true','false')" nodeset="/u1_follow_up/needs_muac_follow_up" type="string"/>
+      <bind nodeset="/u1_follow_up/group_follow_up/g_received_vaccines" relevant=" /u1_follow_up/inputs/t_follow_up_count  &lt; 4 or  /u1_follow_up/inputs/t_follow_up_count  = 5" required="true()" type="select1"/>
+      <bind nodeset="/u1_follow_up/group_follow_up/n_not_received_vaccines" readonly="true()" relevant=" /u1_follow_up/group_follow_up/g_received_vaccines  = 'no'" type="string"/>
+      <bind nodeset="/u1_follow_up/group_follow_up/g_immunization_updated" relevant=" /u1_follow_up/group_follow_up/g_received_vaccines  = 'yes'" required="true()" type="select1"/>
+      <bind nodeset="/u1_follow_up/group_follow_up/given_vaccines_3mo" relevant=" /u1_follow_up/group_follow_up/g_immunization_updated  != '' and  /u1_follow_up/inputs/t_follow_up_count  = 1" required="true()" type="select"/>
+      <bind nodeset="/u1_follow_up/group_follow_up/given_vaccines_6mo" relevant=" /u1_follow_up/group_follow_up/g_immunization_updated  != '' and  /u1_follow_up/inputs/t_follow_up_count  = 2" required="true()" type="select"/>
+      <bind nodeset="/u1_follow_up/group_follow_up/given_vaccines_9mo" relevant=" /u1_follow_up/group_follow_up/g_immunization_updated  != '' and  /u1_follow_up/inputs/t_follow_up_count  = 3" required="true()" type="select"/>
+      <bind nodeset="/u1_follow_up/group_follow_up/given_vaccines_18mo" relevant=" /u1_follow_up/group_follow_up/g_immunization_updated  != '' and  /u1_follow_up/inputs/t_follow_up_count  = 5" required="true()" type="select"/>
+      <bind nodeset="/u1_follow_up/group_follow_up/n_completed_immunization_3mo" readonly="true()" relevant="count-selected( /u1_follow_up/group_follow_up/given_vaccines_3mo ) = 8" type="string"/>
+      <bind nodeset="/u1_follow_up/group_follow_up/n_completed_immunization_6mo_9mo" readonly="true()" relevant="count-selected( /u1_follow_up/group_follow_up/given_vaccines_6mo ) = 9 or count-selected( /u1_follow_up/group_follow_up/given_vaccines_9mo ) = 13" type="string"/>
+      <bind nodeset="/u1_follow_up/group_follow_up/n_incomplete_immunization" readonly="true()" relevant=" /u1_follow_up/incomplete_vaccination  = 'true'" type="string"/>
+      <bind nodeset="/u1_follow_up/group_follow_up/n_given_other_foods" relevant=" /u1_follow_up/inputs/t_follow_up_count  = 1" type="select1"/>
+      <bind nodeset="/u1_follow_up/group_follow_up/n_breast_feeding" readonly="true()" relevant=" /u1_follow_up/inputs/t_follow_up_count  = 1" type="string"/>
+      <bind nodeset="/u1_follow_up/group_follow_up/n_muac" readonly="true()" relevant=" /u1_follow_up/inputs/t_follow_up_count  = 2 or  /u1_follow_up/inputs/t_follow_up_count  = 3 or  /u1_follow_up/inputs/t_follow_up_count  = 4" type="string"/>
+      <bind nodeset="/u1_follow_up/group_follow_up/muac_score" relevant=" /u1_follow_up/inputs/t_follow_up_count  &lt;= 5" required="true()" type="select1"/>
+      <bind nodeset="/u1_follow_up/group_follow_up/n_moderate_malnutrition_referral" readonly="true()" relevant=" /u1_follow_up/group_follow_up/muac_score  = 'yellow'" type="string"/>
+      <bind nodeset="/u1_follow_up/group_follow_up/n_acute_malnutrition_referral" readonly="true()" relevant=" /u1_follow_up/group_follow_up/muac_score  = 'red'" type="string"/>
+      <bind nodeset="/u1_follow_up/group_follow_up/still_breastfeeding" relevant=" /u1_follow_up/inputs/t_follow_up_count  &lt;= 5" required="true()" type="select1"/>
+      <bind nodeset="/u1_follow_up/group_follow_up/breastfed_in_last_24h" relevant=" /u1_follow_up/group_follow_up/still_breastfeeding  = 'yes'" required="true()" type="select1"/>
+      <bind nodeset="/u1_follow_up/group_follow_up/food_child_ate_last_24h" relevant=" /u1_follow_up/inputs/t_follow_up_count  &lt;= 5" required="true()" type="select"/>
+      <bind nodeset="/u1_follow_up/group_follow_up/n_feeding_3mo_6mo" readonly="true()" relevant=" /u1_follow_up/inputs/t_follow_up_count  = 2 or  /u1_follow_up/inputs/t_follow_up_count  = 3" type="string"/>
+      <bind nodeset="/u1_follow_up/group_follow_up/n_feeding_12mo" readonly="true()" relevant=" /u1_follow_up/inputs/t_follow_up_count  = 4 or  /u1_follow_up/inputs/t_follow_up_count  = 5" type="string"/>
+      <bind nodeset="/u1_follow_up/group_summary/submit" readonly="true()" type="string"/>
+      <bind nodeset="/u1_follow_up/group_summary/r_summary" readonly="true()" type="string"/>
+      <bind nodeset="/u1_follow_up/group_summary/r_patient_info" readonly="true()" type="string"/>
+      <bind nodeset="/u1_follow_up/group_summary/r_referral" readonly="true()" relevant=" /u1_follow_up/group_follow_up/g_received_vaccines  = 'no' or  /u1_follow_up/incomplete_vaccination  = 'true' or  /u1_follow_up/group_follow_up/muac_score  = 'yellow' or  /u1_follow_up/group_follow_up/muac_score  = 'red'" type="string"/>
+      <bind nodeset="/u1_follow_up/group_summary/referral_immunisation" readonly="true()" relevant=" /u1_follow_up/group_follow_up/g_received_vaccines  = 'no' or  /u1_follow_up/incomplete_vaccination  = 'true'" type="string"/>
+      <bind nodeset="/u1_follow_up/group_summary/r_referral_mam" readonly="true()" relevant=" /u1_follow_up/group_follow_up/muac_score  = 'yellow'" type="string"/>
+      <bind nodeset="/u1_follow_up/group_summary/r_referral_sam" readonly="true()" relevant=" /u1_follow_up/group_follow_up/muac_score  = 'red'" type="string"/>
+      <bind nodeset="/u1_follow_up/group_summary/r_healthy_tips" readonly="true()" type="string"/>
+      <bind nodeset="/u1_follow_up/group_summary/r_healthy_tips_h" readonly="true()" type="string"/>
+      <bind nodeset="/u1_follow_up/group_summary/r_healthy_tips1" readonly="true()" type="string"/>
+      <bind nodeset="/u1_follow_up/group_summary/r_healthy_tips2" readonly="true()" type="string"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/u1_follow_up/meta/instanceID" readonly="true()" type="string"/>
+    </model>
+  </h:head>
+  <h:body class="pages">
+    <group appearance="field-list" ref="/u1_follow_up/inputs">
+      <label>Patient</label>
+      <input appearance="hidden" ref="/u1_follow_up/inputs/source">
+        <label>Source</label>
+      </input>
+      <input appearance="hidden" ref="/u1_follow_up/inputs/source_id">
+        <label>Source ID</label>
+      </input>
+      <input appearance="hidden" ref="/u1_follow_up/inputs/t_follow_up_count">
+        <label>Follow Up Count</label>
+      </input>
+      <group ref="/u1_follow_up/inputs/contact">
+        <input appearance="db-object" ref="/u1_follow_up/inputs/contact/_id">
+          <label>What is the patient's name?</label>
+        </input>
+        <input appearance="hidden" ref="/u1_follow_up/inputs/contact/name">
+          <label>Name</label>
+        </input>
+        <input appearance="hidden" ref="/u1_follow_up/inputs/contact/date_of_birth">
+          <label>Date of Birth</label>
+        </input>
+        <input appearance="hidden" ref="/u1_follow_up/inputs/contact/mother_hiv_status">
+          <label>Mother HIV Status</label>
+        </input>
+      </group>
+    </group>
+    <group appearance="field-list" ref="/u1_follow_up/group_follow_up">
+      <label>U1 Child Follow Up</label>
+      <select1 ref="/u1_follow_up/group_follow_up/g_received_vaccines">
+        <label>Has the child received any vaccines?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <input ref="/u1_follow_up/group_follow_up/n_not_received_vaccines">
+        <label>**Message to caregiver:**
+Explain to the caregiver the importance of immunisation and **REFER** the child to the nearest Health Center where the child can be immunised.</label>
+      </input>
+      <select1 ref="/u1_follow_up/group_follow_up/g_immunization_updated">
+        <label>Is the child's immunisation status completed?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <select ref="/u1_follow_up/group_follow_up/given_vaccines_3mo">
+        <label>Check child health card and tick all that are complete. If health card not available, ask the caregiver to recall what immunisations are complete, if any</label>
+        <item>
+          <label>BCG</label>
+          <value>bcg</value>
+        </item>
+        <item>
+          <label>Polio 0</label>
+          <value>polio0</value>
+        </item>
+        <item>
+          <label>Polio 1</label>
+          <value>polio1</value>
+        </item>
+        <item>
+          <label>DPT-HepB-Hib1</label>
+          <value>dpt1</value>
+        </item>
+        <item>
+          <label>Polio 2</label>
+          <value>polio2</value>
+        </item>
+        <item>
+          <label>DPT-HepB-Hib2</label>
+          <value>dpt2</value>
+        </item>
+        <item>
+          <label>Rota 1</label>
+          <value>rota1</value>
+        </item>
+        <item>
+          <label>Rota 2</label>
+          <value>rota2</value>
+        </item>
+      </select>
+      <select ref="/u1_follow_up/group_follow_up/given_vaccines_6mo">
+        <label>Check child health card and tick all that are complete. If health card not available, ask the caregiver to recall what immunisations are complete, if any</label>
+        <item>
+          <label>BCG</label>
+          <value>bcg</value>
+        </item>
+        <item>
+          <label>Polio 0</label>
+          <value>polio0</value>
+        </item>
+        <item>
+          <label>Polio 1</label>
+          <value>polio1</value>
+        </item>
+        <item>
+          <label>DPT-HepB-Hib1</label>
+          <value>dpt1</value>
+        </item>
+        <item>
+          <label>Polio 2</label>
+          <value>polio2</value>
+        </item>
+        <item>
+          <label>DPT-HepB-Hib2</label>
+          <value>dpt2</value>
+        </item>
+        <item>
+          <label>Polio 3</label>
+          <value>polio3</value>
+        </item>
+        <item>
+          <label>DPT-HepB-Hib3</label>
+          <value>dpt3</value>
+        </item>
+        <item>
+          <label>IPV</label>
+          <value>ipv</value>
+        </item>
+      </select>
+      <select ref="/u1_follow_up/group_follow_up/given_vaccines_9mo">
+        <label>Check child health card and tick all that are complete. If health card not available, ask the caregiver to recall what immunisations are complete, if any</label>
+        <item>
+          <label>BCG</label>
+          <value>bcg</value>
+        </item>
+        <item>
+          <label>Polio 0</label>
+          <value>polio0</value>
+        </item>
+        <item>
+          <label>Polio 1</label>
+          <value>polio1</value>
+        </item>
+        <item>
+          <label>DPT-HepB-Hib1</label>
+          <value>dpt1</value>
+        </item>
+        <item>
+          <label>Polio 2</label>
+          <value>polio2</value>
+        </item>
+        <item>
+          <label>DPT-HepB-Hib2</label>
+          <value>dpt2</value>
+        </item>
+        <item>
+          <label>Polio 3</label>
+          <value>polio3</value>
+        </item>
+        <item>
+          <label>DPT-HepB-Hib3</label>
+          <value>dpt3</value>
+        </item>
+        <item>
+          <label>Measles and Rubella</label>
+          <value>measles_rubella</value>
+        </item>
+        <item>
+          <label>Rota 1</label>
+          <value>rota1</value>
+        </item>
+        <item>
+          <label>Rota 2</label>
+          <value>rota2</value>
+        </item>
+        <item>
+          <label>Rota 3</label>
+          <value>rota3</value>
+        </item>
+        <item>
+          <label>IPV</label>
+          <value>ipv</value>
+        </item>
+        <item>
+          <label>IPV</label>
+          <value>ipv</value>
+        </item>
+      </select>
+      <select ref="/u1_follow_up/group_follow_up/given_vaccines_18mo">
+        <label>Check child health card and tick all that are complete. If health card not available, ask the caregiver to recall what immunisations are complete, if any</label>
+        <item>
+          <label>BCG</label>
+          <value>bcg</value>
+        </item>
+        <item>
+          <label>Polio 0</label>
+          <value>polio0</value>
+        </item>
+        <item>
+          <label>Polio 1</label>
+          <value>polio1</value>
+        </item>
+        <item>
+          <label>Polio 2</label>
+          <value>polio2</value>
+        </item>
+        <item>
+          <label>Polio 3</label>
+          <value>polio3</value>
+        </item>
+        <item>
+          <label>DPT-HepB-Hib1</label>
+          <value>dpt1</value>
+        </item>
+        <item>
+          <label>PCV1</label>
+          <value>pcv1</value>
+        </item>
+        <item>
+          <label>Rota 1</label>
+          <value>rota1</value>
+        </item>
+        <item>
+          <label>DPT-HepB-Hib2</label>
+          <value>dpt2</value>
+        </item>
+        <item>
+          <label>PCV2</label>
+          <value>pcv2</value>
+        </item>
+        <item>
+          <label>Rota 2</label>
+          <value>rota2</value>
+        </item>
+        <item>
+          <label>DPT-HepB-Hib3</label>
+          <value>dpt3</value>
+        </item>
+        <item>
+          <label>PCV3</label>
+          <value>pcv3</value>
+        </item>
+        <item>
+          <label>Rota 3</label>
+          <value>rota3</value>
+        </item>
+        <item>
+          <label>Measles and Rubella 1</label>
+          <value>measles_rubella1</value>
+        </item>
+        <item>
+          <label>Measles and Rubella 2</label>
+          <value>measles_rubella2</value>
+        </item>
+        <item>
+          <label>Vitamin A</label>
+          <value>vitamina</value>
+        </item>
+        <item>
+          <label>Deworming</label>
+          <value>deworming</value>
+        </item>
+      </select>
+      <input ref="/u1_follow_up/group_follow_up/n_completed_immunization_3mo">
+        <label>Thank the caregiver for ensuring that their child's immunisation 
+status is completed. Encourage the caregiver to ensure that the 
+child receives Vitamin A every 6 months until the child is 5 years old. 
+Remind caregiver that the next round of immunisations should take place 
+when the child is 14 weeks.</label>
+      </input>
+      <input ref="/u1_follow_up/group_follow_up/n_completed_immunization_6mo_9mo">
+        <label>Thank the caregiver for ensuring that their child's immunisation
+status is completed. Encourage the caregiver to ensure that the
+child receives Vitamin A every 6 months until the child is 5 years old.</label>
+      </input>
+      <input ref="/u1_follow_up/group_follow_up/n_incomplete_immunization">
+        <label>Remind the caregiver which vaccines the child has not received, their importance and when the child should have received them. 
+**REFER** the child to the nearest Health Center where the child can be immunised.</label>
+      </input>
+      <select1 ref="/u1_follow_up/group_follow_up/n_given_other_foods">
+        <label>Has the child received anything to drink or eat other than breast milk or prescribed medicines in the last 3 days</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <input ref="/u1_follow_up/group_follow_up/n_breast_feeding">
+        <label>**Message to caregiver**: Breast milk is the best food for your baby. Mother's milk contains all the liquid and food a child needs for the first six months. Give no other food or liquid until 6 months. Frequently breastfeed your baby to produce more breast milk. Be sure to empty one breast before switching to the other. Breastfeeding is Best feeding!</label>
+      </input>
+      <input ref="/u1_follow_up/group_follow_up/n_muac">
+        <label>*Assess child for malnutrition using Mid Upper Arm Circumference (MUAC) assessment.*</label>
+      </input>
+      <select1 ref="/u1_follow_up/group_follow_up/muac_score">
+        <label>What is the child's MUAC score? (in colours )</label>
+        <item>
+          <label>Green</label>
+          <value>green</value>
+        </item>
+        <item>
+          <label>Yellow</label>
+          <value>yellow</value>
+        </item>
+        <item>
+          <label>Red</label>
+          <value>red</value>
+        </item>
+      </select1>
+      <input ref="/u1_follow_up/group_follow_up/n_moderate_malnutrition_referral">
+        <label>**REFER TO HEALTH FACILITY FOR TREATMENT**: Child has Moderate Acute Malnutrition (MAM). Follow up within 24 hours, 1 week and 1 month after visit.</label>
+      </input>
+      <input ref="/u1_follow_up/group_follow_up/n_acute_malnutrition_referral">
+        <label>**REFER TO HEALTH FACILITY FOR TREATMENT**: Child has Severe Acute Malnutrition (SAM). Follow up within 24 hours, 1 week and 1 month after visit</label>
+      </input>
+      <select1 ref="/u1_follow_up/group_follow_up/still_breastfeeding">
+        <label>Is the mother still breastfeeding?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <select1 ref="/u1_follow_up/group_follow_up/breastfed_in_last_24h">
+        <label>Has she breastfed her child in the last 24 hours?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <select ref="/u1_follow_up/group_follow_up/food_child_ate_last_24h">
+        <label>What did the child eat and drink in the last 24 hours?
+(Tick all that apply as mentioned by caretaker)</label>
+        <item>
+          <label>Breast Milk</label>
+          <value>breast_milk</value>
+        </item>
+        <item>
+          <label>Milk (powdered milk, fresh milk)</label>
+          <value>milk</value>
+        </item>
+        <item>
+          <label>Eggs</label>
+          <value>eggs</value>
+        </item>
+        <item>
+          <label>Meat (beef, pork, goat, lamb, chicken, duck) or Fish</label>
+          <value>meat</value>
+        </item>
+      </select>
+      <input ref="/u1_follow_up/group_follow_up/n_feeding_3mo_6mo">
+        <label>**Messages to caregiver:**
+&lt;ul&gt;
+ &lt;li&gt;After 6 months, breastmilk is not enough. Introduce food. &lt;/li&gt;
+ &lt;li&gt;Give your child a variety of foods. Children need to eat foods like milk, eggs, fish, meat to grow big and strong. &lt;/li&gt;
+ &lt;li&gt;Offer thick porridge and mushy foods. Mix healthy start with milk.&lt;/li&gt;
+ &lt;li&gt;Give at least 3 spoons of food 3 times a day.&lt;/li&gt;
+ &lt;li&gt;Continue breastfeeding. Your baby still needs breast milk to grow well and fight disease&lt;/li&gt;
+&lt;/ul&gt;</label>
+      </input>
+      <input ref="/u1_follow_up/group_follow_up/n_feeding_12mo">
+        <label>**Messages to caregiver:**
+&lt;ul&gt;
+ &lt;li&gt;Continue breastfeeding. (only if still breastfeeding)&lt;/li&gt;
+ &lt;li&gt;Give your child a variety of foods. Children need to eat foods like milk, eggs, fish, meat to grow big and strong. &lt;/li&gt;
+ &lt;li&gt;Feed your baby a full handful "olubatu" of food 5 times a day. &lt;/li&gt;
+ &lt;li&gt; Offer cold snacks like a banana, avocado, cooked sweet potato. &lt;/li&gt;
+&lt;/ul&gt;</label>
+      </input>
+    </group>
+    <group appearance="field-list summary" ref="/u1_follow_up/group_summary">
+      <input ref="/u1_follow_up/group_summary/submit">
+        <label>&lt;h4 style="text-align:center;"&gt;Be sure you Submit to complete this action.&lt;/h4&gt;</label>
+      </input>
+      <input appearance="h1 yellow" ref="/u1_follow_up/group_summary/r_summary">
+        <label>Visit Summary&lt;I class="fa fa-user"&gt;&lt;/i&gt;</label>
+      </input>
+      <input ref="/u1_follow_up/group_summary/r_patient_info">
+        <label>&lt;h4 style=&quot;text-align:center;&quot;&gt;<output value=" /u1_follow_up/patient_name "/>&lt;/h4&gt;&lt;h5 style=&quot;text-align:center;&quot;&gt;<output value=" /u1_follow_up/patient_age_display "/> &lt;/h5&gt;</label>
+      </input>
+      <input appearance="h1 red" ref="/u1_follow_up/group_summary/r_referral">
+        <label>Refer to a health facility&lt;i class="fa fa-warning"&gt;&lt;/i&gt;</label>
+      </input>
+      <input appearance="li" ref="/u1_follow_up/group_summary/referral_immunisation">
+        <label>Refer the child to a health facility for immunisation.</label>
+      </input>
+      <input appearance="li" ref="/u1_follow_up/group_summary/r_referral_mam">
+        <label>Child has Moderate Acute Malnutrition (MAM)</label>
+      </input>
+      <input appearance="li" ref="/u1_follow_up/group_summary/r_referral_sam">
+        <label>Child has Severe Acute Malnutrition (SAM)</label>
+      </input>
+      <input appearance="h1 blue" ref="/u1_follow_up/group_summary/r_healthy_tips">
+        <label>Healthy Tips&lt;i class="fa fa-heart"&gt;&lt;/i&gt;</label>
+      </input>
+      <input ref="/u1_follow_up/group_summary/r_healthy_tips_h">
+        <label>&lt;b&gt;Immunization&lt;/b&gt;</label>
+      </input>
+      <input appearance="li" ref="/u1_follow_up/group_summary/r_healthy_tips1">
+        <label>Immunization protects against several dangerous diseases. A child who is not immunized is more likely to become sick, permanently disabled or undernourished, and could possibly die.</label>
+      </input>
+      <input ref="/u1_follow_up/group_summary/r_healthy_tips2">
+        <label>All children need to be immunized with:&lt;ol style="margin-left:1em; list-style: decimal inside;"&gt;&lt;li&gt;At birth to 2 weeks - BCG, Oral Polio 0&lt;/li&gt;&lt;li&gt;6 weeks - OPV1, Pentavalent, pneumococcal vaccines&lt;/li&gt;&lt;li&gt;10 weeks - OPV2, Pentavalent, pneumococcal vaccines&lt;/li&gt;&lt;li&gt;14 weeks - OPV3, Pentavalent, pneumococcal vaccines&lt;/li&gt;&lt;li&gt;9 months -measles rubella, yellow fever vaccines&lt;/li&gt;&lt;li&gt;18 months - measles rubella vaccine&lt;/li&gt;&lt;/ol&gt;</label>
+      </input>
+    </group>
+  </h:body>
+</h:html>

@@ -1,0 +1,674 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>Symptom Report</h:title>
+    <model>
+      <instance>
+        <symptom_report delimiter="#" id="symptom_report" prefix="J1!symptom_report!" version="2017-01-12 00:00:00">
+          <inputs>
+            <meta>
+              <location>
+                <lat/>
+                <long/>
+                <error/>
+                <message/>
+              </location>
+            </meta>
+            <source>user</source>
+            <source_id/>
+            <contact>
+              <_id/>
+              <name/>
+              <date_of_birth/>
+              <sex/>
+            </contact>
+          </inputs>
+          <patient_age_in_years>0</patient_age_in_years>
+          <patient_age_in_months>0</patient_age_in_months>
+          <patient_age_in_days/>
+          <patient_age_display/>
+          <patient_id/>
+          <patient_name/>
+          <patient_gender/>
+          <household_name/>
+          <household_phone/>
+          <chw_name/>
+          <chw_phone/>
+          <geolocation/>
+          <referral_follow_up/>
+          <syndrome_newborn_disease/>
+          <syndrome_fever/>
+          <syndrome_fever_rash/>
+          <syndrome_fever_fits/>
+          <syndrome_fever_drowsy/>
+          <syndrome_fever_bleeding/>
+          <syndrome_fever_painful_swelling/>
+          <syndrome_yellowness_of_eyes_skin/>
+          <syndrome_skin_worm/>
+          <syndrome_animal_bite/>
+          <syndrome_watery_diarrhoea/>
+          <syndrome_chest_illness/>
+          <syndrome_weakness/>
+          <syndrome_aefi/>
+          <is_referral/>
+          <group_cough>
+            <cough/>
+            <difficulty_breathing/>
+          </group_cough>
+          <group_fever>
+            <fever/>
+            <n_thermometer/>
+            <temperature/>
+            <drowsy/>
+            <fits/>
+            <rash/>
+            <bleeding/>
+            <painful_swelling/>
+          </group_fever>
+          <group_diarrhoea>
+            <diarrhoea/>
+            <diarrhoea_episodes/>
+            <diarrhoea_blood/>
+          </group_diarrhoea>
+          <group_worm>
+            <worm_emerging/>
+          </group_worm>
+          <group_weakness>
+            <weakness/>
+            <injury_related/>
+          </group_weakness>
+          <group_animal_bite>
+            <animal_bite/>
+          </group_animal_bite>
+          <group_feeding>
+            <unable_to_feed/>
+            <normal_at_birth/>
+            <body_stiffness/>
+          </group_feeding>
+          <group_reaction_to_vaccine>
+            <reaction_to_vaccine/>
+          </group_reaction_to_vaccine>
+          <group_yellowness>
+            <skin_yellowness/>
+            <yellowness_duration/>
+          </group_yellowness>
+          <group_summary>
+            <submit/>
+            <r_summary/>
+            <r_patient_info/>
+            <r_symptom/>
+            <r_cough/>
+            <r_difficulty_breathing/>
+            <r_fever/>
+            <r_drowsy/>
+            <r_fits/>
+            <r_rash/>
+            <r_bleeding/>
+            <r_painful_swelling/>
+            <r_diarrhoea/>
+            <r_watery_dearrhoea/>
+            <r_bloody_diarroea/>
+            <r_worm/>
+            <r_weakness/>
+            <r_injury_related/>
+            <r_animal_bite/>
+            <r_feeding/>
+            <r_newborn_normal/>
+            <r_newborn_stiffness/>
+            <r_vaccine_reaction/>
+            <r_yellowness/>
+            <r_no_symptoms/>
+            <r_referral/>
+            <r_syndrome_newborn_disease/>
+            <r_syndrome_fever_rash/>
+            <r_syndrome_fever/>
+            <r_syndrome_yellowness_of_eyes_skin/>
+            <r_syndrome_skin_worm/>
+            <r_syndrome_animal_bite/>
+            <r_syndrome_watery_diarrhoea/>
+            <r_syndrome_chest_illness/>
+            <r_syndrome_weakness/>
+            <r_syndrome_aefi/>
+            <r_follow_up/>
+            <r_follow_up_info/>
+            <r_url/>
+          </group_summary>
+          <meta>
+            <instanceID/>
+          </meta>
+        </symptom_report>
+      </instance>
+      <instance id="contact-summary"/>
+      <bind nodeset="/symptom_report/inputs" relevant="./source = 'user'"/>
+      <bind nodeset="/symptom_report/inputs/source" type="string"/>
+      <bind nodeset="/symptom_report/inputs/source_id" type="string"/>
+      <bind constraint=" /symptom_report/patient_age_in_months  &lt; 2" jr:constraintMsg="Patient must be either under 2 months in age" nodeset="/symptom_report/inputs/contact/_id" required="true()" type="db:person"/>
+      <bind nodeset="/symptom_report/inputs/contact/name" type="string"/>
+      <bind nodeset="/symptom_report/inputs/contact/date_of_birth" type="string"/>
+      <bind nodeset="/symptom_report/inputs/contact/sex" type="string"/>
+      <bind calculate="floor( difference-in-months( date( /symptom_report/inputs/contact/date_of_birth ), today() ) div 12 )" nodeset="/symptom_report/patient_age_in_years" type="string"/>
+      <bind calculate="difference-in-months(date( /symptom_report/inputs/contact/date_of_birth ), today() )" nodeset="/symptom_report/patient_age_in_months" type="string"/>
+      <bind calculate="floor( decimal-date-time(today()) - decimal-date-time(date( /symptom_report/inputs/contact/date_of_birth )) )" nodeset="/symptom_report/patient_age_in_days" type="string"/>
+      <bind calculate="concat(
+ concat( /symptom_report/patient_age_in_years , if( /symptom_report/patient_age_in_years =1,' year and ',' years and ')),
+ concat( /symptom_report/patient_age_in_months  mod 12, if(( /symptom_report/patient_age_in_months  mod 12)=1,' month old',' months old'))
+)" nodeset="/symptom_report/patient_age_display" type="string"/>
+      <bind calculate="../inputs/contact/_id" nodeset="/symptom_report/patient_id" required="true()" type="string"/>
+      <bind calculate="../inputs/contact/name" nodeset="/symptom_report/patient_name" type="string"/>
+      <bind calculate="../inputs/contact/sex" nodeset="/symptom_report/patient_gender" type="string"/>
+      <bind calculate="instance('contact-summary')/context/parent0/contact/name" nodeset="/symptom_report/household_name" type="string"/>
+      <bind calculate="instance('contact-summary')/context/parent0/contact/phone" nodeset="/symptom_report/household_phone" type="string"/>
+      <bind calculate="instance('contact-summary')/context/parent1/contact/name" nodeset="/symptom_report/chw_name" type="string"/>
+      <bind calculate="instance('contact-summary')/context/parent1/contact/phone" nodeset="/symptom_report/chw_phone" type="string"/>
+      <bind calculate="concat(../../inputs/meta/location/lat, concat(' ', ../../inputs/meta/location/long))" nodeset="/symptom_report/geolocation" type="string"/>
+      <bind calculate=" /symptom_report/is_referral " nodeset="/symptom_report/referral_follow_up" type="string"/>
+      <bind calculate="if( /symptom_report/patient_age_in_days  &lt; 29 and  /symptom_report/group_feeding/unable_to_feed  and ( /symptom_report/group_feeding/normal_at_birth  = 'yes' or  /symptom_report/group_feeding/body_stiffness  = 'yes'), 'Newborn disease','')" nodeset="/symptom_report/syndrome_newborn_disease" type="string"/>
+      <bind calculate="if( /symptom_report/syndrome_fever_fits  != '' or 
+ /symptom_report/syndrome_fever_drowsy  != '' or 
+ /symptom_report/syndrome_fever_bleeding  != '' or 
+ /symptom_report/syndrome_fever_painful_swelling  != '', 'Body hotness (Fever)','')" nodeset="/symptom_report/syndrome_fever" type="string"/>
+      <bind calculate="if( /symptom_report/group_fever/fever  = 'yes' and  /symptom_report/group_fever/rash  = 'yes', 'Body hotness (Fever) with rash', '')" nodeset="/symptom_report/syndrome_fever_rash" type="string"/>
+      <bind calculate="if( /symptom_report/group_fever/fever  = 'yes' and  /symptom_report/group_fever/fits  = 'yes', 'Body hotness (Fever) with fits', '')" nodeset="/symptom_report/syndrome_fever_fits" type="string"/>
+      <bind calculate="if( /symptom_report/group_fever/fever  = 'yes' and  /symptom_report/group_fever/drowsy  = 'yes', 'Body hotness (Fever) with drowsiness', '')" nodeset="/symptom_report/syndrome_fever_drowsy" type="string"/>
+      <bind calculate="if( /symptom_report/group_fever/fever  = 'yes' and  /symptom_report/group_fever/bleeding  = 'yes', 'Body hotness (Fever) with bleeding', '')" nodeset="/symptom_report/syndrome_fever_bleeding" type="string"/>
+      <bind calculate="if( /symptom_report/group_fever/fever  = 'yes' and  /symptom_report/group_fever/painful_swelling  = 'yes', 'Body hotness (Fever) with painful groin swelling', '')" nodeset="/symptom_report/syndrome_fever_painful_swelling" type="string"/>
+      <bind calculate="if( /symptom_report/group_yellowness/skin_yellowness  = 'yes' and  /symptom_report/group_yellowness/yellowness_duration  &lt;2, 'Sudden yellowness of eyes or skin', '')" nodeset="/symptom_report/syndrome_yellowness_of_eyes_skin" type="string"/>
+      <bind calculate="if( /symptom_report/group_worm/worm_emerging  = 'yes', 'Skin worm', '')" nodeset="/symptom_report/syndrome_skin_worm" type="string"/>
+      <bind calculate="if( /symptom_report/group_animal_bite/animal_bite  = 'yes', 'Animal bite', '')" nodeset="/symptom_report/syndrome_animal_bite" type="string"/>
+      <bind calculate="if( /symptom_report/group_diarrhoea/diarrhoea  = 'yes' and ( /symptom_report/group_diarrhoea/diarrhoea_episodes  &gt;= 3 or  /symptom_report/group_diarrhoea/diarrhoea_blood  = 'yes'), 'Lots of watery diarrhoea', '')" nodeset="/symptom_report/syndrome_watery_diarrhoea" type="string"/>
+      <bind calculate="if( /symptom_report/group_cough/cough  = 'yes' and  /symptom_report/group_cough/difficulty_breathing  = 'yes', 'Severe chest illness', '')" nodeset="/symptom_report/syndrome_chest_illness" type="string"/>
+      <bind calculate="if( /symptom_report/group_weakness/weakness  = 'yes' and  /symptom_report/group_weakness/injury_related  = 'no', 'Sudden weakness or loss of movement of arms or legs','')" nodeset="/symptom_report/syndrome_weakness" type="string"/>
+      <bind calculate="if( /symptom_report/group_reaction_to_vaccine/reaction_to_vaccine  = 'yes', 'AEFI','')" nodeset="/symptom_report/syndrome_aefi" type="string"/>
+      <bind calculate=" /symptom_report/syndrome_newborn_disease  != '' or 
+ /symptom_report/syndrome_fever_rash  != '' or 
+ /symptom_report/syndrome_fever  != '' or 
+ /symptom_report/syndrome_yellowness_of_eyes_skin  != '' or 
+ /symptom_report/syndrome_skin_worm  != '' or 
+ /symptom_report/syndrome_animal_bite  != '' or 
+ /symptom_report/syndrome_watery_diarrhoea  != '' or 
+ /symptom_report/syndrome_chest_illness  != '' or 
+ /symptom_report/syndrome_weakness  != ''" nodeset="/symptom_report/is_referral" type="string"/>
+      <bind nodeset="/symptom_report/group_cough/cough" required="true()" type="select1"/>
+      <bind nodeset="/symptom_report/group_cough/difficulty_breathing" relevant=" /symptom_report/group_cough/cough  = 'yes'" required="true()" type="select1"/>
+      <bind nodeset="/symptom_report/group_fever/fever" required="true()" type="select1"/>
+      <bind nodeset="/symptom_report/group_fever/n_thermometer" readonly="true()" relevant=" /symptom_report/group_fever/fever  = 'yes'" type="string"/>
+      <bind nodeset="/symptom_report/group_fever/temperature" relevant=" /symptom_report/group_fever/fever  = 'yes'" required="true()" type="decimal"/>
+      <bind nodeset="/symptom_report/group_fever/drowsy" relevant=" /symptom_report/group_fever/fever  = 'yes'" required="true()" type="select1"/>
+      <bind nodeset="/symptom_report/group_fever/fits" relevant=" /symptom_report/group_fever/fever  = 'yes'" required="false()" type="select1"/>
+      <bind nodeset="/symptom_report/group_fever/rash" relevant=" /symptom_report/group_fever/fever  = 'yes'" required="true()" type="select1"/>
+      <bind nodeset="/symptom_report/group_fever/bleeding" relevant=" /symptom_report/group_fever/fever  = 'yes'" required="true()" type="select1"/>
+      <bind nodeset="/symptom_report/group_fever/painful_swelling" relevant=" /symptom_report/group_fever/fever  = 'yes'" required="true()" type="select1"/>
+      <bind nodeset="/symptom_report/group_diarrhoea/diarrhoea" required="true()" type="select1"/>
+      <bind nodeset="/symptom_report/group_diarrhoea/diarrhoea_episodes" relevant=" /symptom_report/group_diarrhoea/diarrhoea  = 'yes'" required="true()" type="select1"/>
+      <bind nodeset="/symptom_report/group_diarrhoea/diarrhoea_blood" relevant=" /symptom_report/group_diarrhoea/diarrhoea  = 'yes'" required="true()" type="select1"/>
+      <bind nodeset="/symptom_report/group_worm/worm_emerging" required="true()" type="select1"/>
+      <bind nodeset="/symptom_report/group_weakness" relevant=" /symptom_report/patient_age_in_years  &lt; 15"/>
+      <bind nodeset="/symptom_report/group_weakness/weakness" required="true()" type="select1"/>
+      <bind nodeset="/symptom_report/group_weakness/injury_related" relevant=" /symptom_report/group_weakness/weakness  = 'yes'" required="true()" type="select1"/>
+      <bind nodeset="/symptom_report/group_animal_bite/animal_bite" required="true()" type="select1"/>
+      <bind nodeset="/symptom_report/group_feeding" relevant=" /symptom_report/patient_age_in_months  &lt; 1"/>
+      <bind nodeset="/symptom_report/group_feeding/unable_to_feed" required="true()" type="select1"/>
+      <bind nodeset="/symptom_report/group_feeding/normal_at_birth" relevant=" /symptom_report/group_feeding/unable_to_feed  = 'yes'" required="true()" type="select1"/>
+      <bind nodeset="/symptom_report/group_feeding/body_stiffness" relevant=" /symptom_report/group_feeding/unable_to_feed  = 'yes'" required="true()" type="select1"/>
+      <bind nodeset="/symptom_report/group_reaction_to_vaccine/reaction_to_vaccine" required="true()" type="select1"/>
+      <bind nodeset="/symptom_report/group_yellowness/skin_yellowness" required="true()" type="select1"/>
+      <bind nodeset="/symptom_report/group_yellowness/yellowness_duration" relevant=" /symptom_report/group_yellowness/skin_yellowness  = 'yes'" required="true()" type="select1"/>
+      <bind nodeset="/symptom_report/group_summary/submit" readonly="true()" type="string"/>
+      <bind nodeset="/symptom_report/group_summary/r_summary" readonly="true()" type="string"/>
+      <bind nodeset="/symptom_report/group_summary/r_patient_info" readonly="true()" type="string"/>
+      <bind nodeset="/symptom_report/group_summary/r_symptom" readonly="true()" type="string"/>
+      <bind nodeset="/symptom_report/group_summary/r_cough" readonly="true()" relevant=" /symptom_report/group_cough/cough  = 'yes'" type="string"/>
+      <bind nodeset="/symptom_report/group_summary/r_difficulty_breathing" readonly="true()" relevant=" /symptom_report/group_cough/difficulty_breathing  = 'yes'" type="string"/>
+      <bind nodeset="/symptom_report/group_summary/r_fever" readonly="true()" relevant=" /symptom_report/group_fever/fever  = 'yes'" type="string"/>
+      <bind nodeset="/symptom_report/group_summary/r_drowsy" readonly="true()" relevant=" /symptom_report/group_fever/drowsy  = 'yes'" type="string"/>
+      <bind nodeset="/symptom_report/group_summary/r_fits" readonly="true()" relevant=" /symptom_report/group_fever/fits  = 'yes'" type="string"/>
+      <bind nodeset="/symptom_report/group_summary/r_rash" readonly="true()" relevant=" /symptom_report/group_fever/rash  = 'yes'" type="string"/>
+      <bind nodeset="/symptom_report/group_summary/r_bleeding" readonly="true()" relevant=" /symptom_report/group_fever/bleeding  = 'yes'" type="string"/>
+      <bind nodeset="/symptom_report/group_summary/r_painful_swelling" readonly="true()" relevant=" /symptom_report/group_fever/painful_swelling  = 'yes'" type="string"/>
+      <bind nodeset="/symptom_report/group_summary/r_diarrhoea" readonly="true()" relevant=" /symptom_report/group_diarrhoea/diarrhoea  = 'yes'" type="string"/>
+      <bind nodeset="/symptom_report/group_summary/r_watery_dearrhoea" readonly="true()" relevant=" /symptom_report/group_diarrhoea/diarrhoea_episodes  != ''" type="string"/>
+      <bind nodeset="/symptom_report/group_summary/r_bloody_diarroea" readonly="true()" relevant=" /symptom_report/group_diarrhoea/diarrhoea_blood  = 'yes'" type="string"/>
+      <bind nodeset="/symptom_report/group_summary/r_worm" readonly="true()" relevant=" /symptom_report/group_worm/worm_emerging  = 'yes'" type="string"/>
+      <bind nodeset="/symptom_report/group_summary/r_weakness" readonly="true()" relevant=" /symptom_report/group_weakness/weakness  = 'yes'" type="string"/>
+      <bind nodeset="/symptom_report/group_summary/r_injury_related" readonly="true()" relevant=" /symptom_report/group_weakness/injury_related  = 'no'" type="string"/>
+      <bind nodeset="/symptom_report/group_summary/r_animal_bite" readonly="true()" relevant=" /symptom_report/group_animal_bite/animal_bite  = 'yes'" type="string"/>
+      <bind nodeset="/symptom_report/group_summary/r_feeding" readonly="true()" relevant=" /symptom_report/group_feeding/unable_to_feed  = 'yes'" type="string"/>
+      <bind nodeset="/symptom_report/group_summary/r_newborn_normal" readonly="true()" relevant=" /symptom_report/group_feeding/normal_at_birth  = 'no'" type="string"/>
+      <bind nodeset="/symptom_report/group_summary/r_newborn_stiffness" readonly="true()" relevant=" /symptom_report/group_feeding/body_stiffness  = 'yes'" type="string"/>
+      <bind nodeset="/symptom_report/group_summary/r_vaccine_reaction" readonly="true()" relevant=" /symptom_report/group_reaction_to_vaccine/reaction_to_vaccine  = 'yes'" type="string"/>
+      <bind nodeset="/symptom_report/group_summary/r_yellowness" readonly="true()" relevant=" /symptom_report/group_yellowness/skin_yellowness  = 'yes'" type="string"/>
+      <bind nodeset="/symptom_report/group_summary/r_no_symptoms" readonly="true()" relevant=" /symptom_report/group_cough/cough  = 'no' and 
+ /symptom_report/group_fever/fever  = 'no' and 
+ /symptom_report/group_diarrhoea/diarrhoea  = 'no' and 
+ /symptom_report/group_worm/worm_emerging  = 'no' and 
+ /symptom_report/group_weakness/weakness  = 'no' and 
+ /symptom_report/group_animal_bite/animal_bite  = 'no' and 
+ /symptom_report/group_feeding/unable_to_feed  = 'no' and 
+ /symptom_report/group_reaction_to_vaccine/reaction_to_vaccine  = 'no' and 
+ /symptom_report/group_yellowness/skin_yellowness  = 'no'" type="string"/>
+      <bind nodeset="/symptom_report/group_summary/r_referral" readonly="true()" relevant=" /symptom_report/is_referral  = 'true'" type="string"/>
+      <bind nodeset="/symptom_report/group_summary/r_syndrome_newborn_disease" readonly="true()" relevant=" /symptom_report/syndrome_newborn_disease  != ''" type="string"/>
+      <bind nodeset="/symptom_report/group_summary/r_syndrome_fever_rash" readonly="true()" relevant=" /symptom_report/syndrome_fever_rash  != ''" type="string"/>
+      <bind nodeset="/symptom_report/group_summary/r_syndrome_fever" readonly="true()" relevant=" /symptom_report/syndrome_fever  != ''" type="string"/>
+      <bind nodeset="/symptom_report/group_summary/r_syndrome_yellowness_of_eyes_skin" readonly="true()" relevant=" /symptom_report/syndrome_yellowness_of_eyes_skin  != ''" type="string"/>
+      <bind nodeset="/symptom_report/group_summary/r_syndrome_skin_worm" readonly="true()" relevant=" /symptom_report/syndrome_skin_worm  != ''" type="string"/>
+      <bind nodeset="/symptom_report/group_summary/r_syndrome_animal_bite" readonly="true()" relevant=" /symptom_report/syndrome_animal_bite  != ''" type="string"/>
+      <bind nodeset="/symptom_report/group_summary/r_syndrome_watery_diarrhoea" readonly="true()" relevant=" /symptom_report/syndrome_watery_diarrhoea  != ''" type="string"/>
+      <bind nodeset="/symptom_report/group_summary/r_syndrome_chest_illness" readonly="true()" relevant=" /symptom_report/syndrome_chest_illness  != ''" type="string"/>
+      <bind nodeset="/symptom_report/group_summary/r_syndrome_weakness" readonly="true()" relevant=" /symptom_report/syndrome_weakness  != ''" type="string"/>
+      <bind nodeset="/symptom_report/group_summary/r_syndrome_aefi" readonly="true()" relevant=" /symptom_report/syndrome_aefi  != ''" type="string"/>
+      <bind nodeset="/symptom_report/group_summary/r_follow_up" readonly="true()" relevant=" /symptom_report/is_referral  = 'true'" type="string"/>
+      <bind nodeset="/symptom_report/group_summary/r_follow_up_info" readonly="true()" relevant=" /symptom_report/is_referral  = 'true'" type="string"/>
+      <bind nodeset="/symptom_report/group_summary/r_url" readonly="true()" relevant=" /symptom_report/is_referral  = 'true'" type="string"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/symptom_report/meta/instanceID" readonly="true()" type="string"/>
+    </model>
+  </h:head>
+  <h:body class="pages">
+    <group appearance="field-list" ref="/symptom_report/inputs">
+      <label>Patient</label>
+      <input appearance="hidden" ref="/symptom_report/inputs/source">
+        <label>Source</label>
+      </input>
+      <input appearance="hidden" ref="/symptom_report/inputs/source_id">
+        <label>Source ID</label>
+      </input>
+      <group ref="/symptom_report/inputs/contact">
+        <input appearance="db-object" ref="/symptom_report/inputs/contact/_id">
+          <label>What is the patient's name?</label>
+          <hint>Select a person from list</hint>
+        </input>
+        <input appearance="hidden" ref="/symptom_report/inputs/contact/name">
+          <label>Name</label>
+        </input>
+        <input appearance="hidden" ref="/symptom_report/inputs/contact/date_of_birth">
+          <label>Date of Birth</label>
+        </input>
+        <input appearance="hidden" ref="/symptom_report/inputs/contact/sex">
+          <label>Sex</label>
+        </input>
+      </group>
+    </group>
+    <group appearance="field-list" ref="/symptom_report/group_cough">
+      <select1 appearance="horizontal" ref="/symptom_report/group_cough/cough">
+        <label>Does <output value=" /symptom_report/patient_name "/> have a cough?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <select1 ref="/symptom_report/group_cough/difficulty_breathing">
+        <label>Difficulty breathing?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/symptom_report/group_fever">
+      <label>Fever</label>
+      <select1 appearance="horizontal" ref="/symptom_report/group_fever/fever">
+        <label>Does the patient have a fever ?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <input ref="/symptom_report/group_fever/n_thermometer">
+        <label>_Use your thermometer to take the patient's temperature_</label>
+      </input>
+      <input ref="/symptom_report/group_fever/temperature">
+        <label>What is the Patient's temperature?</label>
+      </input>
+      <select1 appearance="horizontal" ref="/symptom_report/group_fever/drowsy">
+        <label>Does <output value=" /symptom_report/patient_name "/> look drowsy (sleepy) or confused?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <select1 appearance="horizontal" ref="/symptom_report/group_fever/fits">
+        <label>Does <output value=" /symptom_report/patient_name "/> have fits?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <select1 appearance="horizontal" ref="/symptom_report/group_fever/rash">
+        <label>Does <output value=" /symptom_report/patient_name "/> have skin rash?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <select1 appearance="horizontal" ref="/symptom_report/group_fever/bleeding">
+        <label>Does <output value=" /symptom_report/patient_name "/> have bleeding from nose, mouth, skin, other sites?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <select1 appearance="horizontal" ref="/symptom_report/group_fever/painful_swelling">
+        <label>Does <output value=" /symptom_report/patient_name "/> have painful groin swelling?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/symptom_report/group_diarrhoea">
+      <label>Diarrhoea</label>
+      <select1 appearance="horizontal" ref="/symptom_report/group_diarrhoea/diarrhoea">
+        <label>Does <output value=" /symptom_report/patient_name "/> have diarrhoea ?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <select1 appearance="horizontal" ref="/symptom_report/group_diarrhoea/diarrhoea_episodes">
+        <label>How many episodes of watery diarrhoea stool has <output value=" /symptom_report/patient_name "/> had in the last 24hrs?</label>
+        <item>
+          <label>Less than 3</label>
+          <value>2</value>
+        </item>
+        <item>
+          <label>3 or More</label>
+          <value>3</value>
+        </item>
+      </select1>
+      <select1 appearance="horizontal" ref="/symptom_report/group_diarrhoea/diarrhoea_blood">
+        <label>Is there blood in the diarrhoea?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/symptom_report/group_worm">
+      <label>Worm</label>
+      <select1 appearance="horizontal" ref="/symptom_report/group_worm/worm_emerging">
+        <label>Is there a worm emerging?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/symptom_report/group_weakness">
+      <label>Weakness of legs or arms</label>
+      <select1 appearance="horizontal" ref="/symptom_report/group_weakness/weakness">
+        <label>Does <output value=" /symptom_report/patient_name "/> have a sudden loss of movement of one or both arms or legs?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <select1 appearance="horizontal" ref="/symptom_report/group_weakness/injury_related">
+        <label>Is the weakness due to an injury?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/symptom_report/group_animal_bite">
+      <label>Animal bite</label>
+      <select1 appearance="horizontal" ref="/symptom_report/group_animal_bite/animal_bite">
+        <label>Does <output value=" /symptom_report/patient_name "/> have an animal bite?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/symptom_report/group_feeding">
+      <label>Unable to feed</label>
+      <select1 appearance="horizontal" ref="/symptom_report/group_feeding/unable_to_feed">
+        <label>Is <output value=" /symptom_report/patient_name "/> unable to feed ?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <select1 appearance="horizontal" ref="/symptom_report/group_feeding/normal_at_birth">
+        <label>Was the newborn normal at birth?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <select1 appearance="horizontal" ref="/symptom_report/group_feeding/body_stiffness">
+        <label>Does the newborn have body stiffness?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/symptom_report/group_reaction_to_vaccine">
+      <label>Reaction to vaccine</label>
+      <select1 appearance="horizontal" ref="/symptom_report/group_reaction_to_vaccine/reaction_to_vaccine">
+        <label>Did <output value=" /symptom_report/patient_name "/> fall sick after immunization?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/symptom_report/group_yellowness">
+      <label>Yellowness of eyes or skin</label>
+      <select1 appearance="horizontal" ref="/symptom_report/group_yellowness/skin_yellowness">
+        <label>Did <output value=" /symptom_report/patient_name "/> experience sudden yellowness of eyes or skin?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <select1 appearance="horizontal" ref="/symptom_report/group_yellowness/yellowness_duration">
+        <label>How long has the yellowness of eyes or skin lasted?</label>
+        <item>
+          <label>Less than 2 weeks</label>
+          <value>1</value>
+        </item>
+        <item>
+          <label>2 or more weeks</label>
+          <value>2</value>
+        </item>
+      </select1>
+    </group>
+    <group appearance="field-list summary" ref="/symptom_report/group_summary">
+      <input ref="/symptom_report/group_summary/submit">
+        <label>&lt;h4 style="text-align:center;"&gt;Be sure you Submit to complete this action.&lt;/h4&gt;</label>
+      </input>
+      <input appearance="h1 yellow" ref="/symptom_report/group_summary/r_summary">
+        <label>Patient Summary&lt;I class="fa fa-user"&gt;&lt;/i&gt;</label>
+      </input>
+      <input ref="/symptom_report/group_summary/r_patient_info">
+        <label>&lt;h4 style=&quot;text-align:center;&quot;&gt;<output value=" /symptom_report/patient_name "/>&lt;/h4&gt;&lt;h5 style=&quot;text-align:center;&quot;&gt;<output value=" /symptom_report/patient_age_display "/> &lt;/h5&gt; &lt;h5 style=&quot;text-align:center;&quot;&gt;<output value=" /symptom_report/patient_gender "/> &lt;/h5&gt;</label>
+      </input>
+      <input appearance="h2 yellow" ref="/symptom_report/group_summary/r_symptom">
+        <label>Signs &amp; Symptoms</label>
+      </input>
+      <input appearance="h2 blue" ref="/symptom_report/group_summary/r_cough">
+        <label>Cough</label>
+      </input>
+      <input appearance="li" ref="/symptom_report/group_summary/r_difficulty_breathing">
+        <label>Difficulty breathing</label>
+      </input>
+      <input appearance="h2 blue" ref="/symptom_report/group_summary/r_fever">
+        <label>Fever</label>
+      </input>
+      <input appearance="li" ref="/symptom_report/group_summary/r_drowsy">
+        <label>Drowsy</label>
+      </input>
+      <input appearance="li" ref="/symptom_report/group_summary/r_fits">
+        <label>Fits</label>
+      </input>
+      <input appearance="li" ref="/symptom_report/group_summary/r_rash">
+        <label>Rash</label>
+      </input>
+      <input appearance="li" ref="/symptom_report/group_summary/r_bleeding">
+        <label>Bleeding from nose, mouth and other sites</label>
+      </input>
+      <input appearance="li" ref="/symptom_report/group_summary/r_painful_swelling">
+        <label>Painful groin swelling</label>
+      </input>
+      <input appearance="h2 blue" ref="/symptom_report/group_summary/r_diarrhoea">
+        <label>Diarrhoea</label>
+      </input>
+      <input appearance="li" ref="/symptom_report/group_summary/r_watery_dearrhoea">
+        <label><output value=" /symptom_report/group_diarrhoea/diarrhoea_episodes "/> episodes of watery diarrhoea in the last 24H</label>
+      </input>
+      <input appearance="li" ref="/symptom_report/group_summary/r_bloody_diarroea">
+        <label>Blood in the diarrhoea</label>
+      </input>
+      <input appearance="h2 blue" ref="/symptom_report/group_summary/r_worm">
+        <label>Worm emerging from the skin</label>
+      </input>
+      <input appearance="h2 blue" ref="/symptom_report/group_summary/r_weakness">
+        <label>Sudden loss of movement of one or both arms or legs</label>
+      </input>
+      <input appearance="li" ref="/symptom_report/group_summary/r_injury_related">
+        <label>Weakness is not due to injury</label>
+      </input>
+      <input appearance="h2 blue" ref="/symptom_report/group_summary/r_animal_bite">
+        <label>Animal bite</label>
+      </input>
+      <input appearance="h2 blue" ref="/symptom_report/group_summary/r_feeding">
+        <label>Unable to suck or feed</label>
+      </input>
+      <input appearance="li" ref="/symptom_report/group_summary/r_newborn_normal">
+        <label>Newborn not normal at birth</label>
+      </input>
+      <input appearance="li" ref="/symptom_report/group_summary/r_newborn_stiffness">
+        <label>Newborn has body stiffness</label>
+      </input>
+      <input appearance="h2 blue" ref="/symptom_report/group_summary/r_vaccine_reaction">
+        <label>Child falling sick after immunization</label>
+      </input>
+      <input appearance="h2 blue" ref="/symptom_report/group_summary/r_yellowness">
+        <label>Sudden yellowness of eyes or skin</label>
+      </input>
+      <input appearance="li" ref="/symptom_report/group_summary/r_no_symptoms">
+        <label>No symptoms reported</label>
+      </input>
+      <input appearance="h1 red" ref="/symptom_report/group_summary/r_referral">
+        <label>Refer to a health facility for the following syndromes&lt;i class="fa fa-warning"&gt;&lt;/i&gt;</label>
+      </input>
+      <input appearance="li" ref="/symptom_report/group_summary/r_syndrome_newborn_disease">
+        <label>Newborn Disease</label>
+      </input>
+      <input appearance="li" ref="/symptom_report/group_summary/r_syndrome_fever_rash">
+        <label>Body Hotness and Rash</label>
+      </input>
+      <input appearance="li" ref="/symptom_report/group_summary/r_syndrome_fever">
+        <label>Body Hotness (Fever)</label>
+      </input>
+      <input appearance="li" ref="/symptom_report/group_summary/r_syndrome_yellowness_of_eyes_skin">
+        <label>Sudden Yellowness of eyes or skin</label>
+      </input>
+      <input appearance="li" ref="/symptom_report/group_summary/r_syndrome_skin_worm">
+        <label>Skin Worm</label>
+      </input>
+      <input appearance="li" ref="/symptom_report/group_summary/r_syndrome_animal_bite">
+        <label>Animal bite</label>
+      </input>
+      <input appearance="li" ref="/symptom_report/group_summary/r_syndrome_watery_diarrhoea">
+        <label>Lots of watery diarrhoea</label>
+      </input>
+      <input appearance="li" ref="/symptom_report/group_summary/r_syndrome_chest_illness">
+        <label>Severe Chest Illness</label>
+      </input>
+      <input appearance="li" ref="/symptom_report/group_summary/r_syndrome_weakness">
+        <label>Sudden weakness or loss of movement of arms or legs</label>
+      </input>
+      <input appearance="li" ref="/symptom_report/group_summary/r_syndrome_aefi">
+        <label>AEFI</label>
+      </input>
+      <input appearance="h1 green" ref="/symptom_report/group_summary/r_follow_up">
+        <label>Follow up &lt;i class="fa fa-info-circle"&gt;&lt;/i&gt;</label>
+      </input>
+      <input ref="/symptom_report/group_summary/r_follow_up_info">
+        <label>Follow up in one day to ensure <output value=" /symptom_report/patient_name "/> went to the health facility</label>
+      </input>
+      <input ref="/symptom_report/group_summary/r_url">
+        <label>Download &lt;a href="https://drive.google.com/open?id=1KFR1brhyurNkBfqicntrdTHmbEw4c00w"&gt;CBDS Lay Case Definitions&lt;/a&gt;</label>
+      </input>
+    </group>
+  </h:body>
+</h:html>

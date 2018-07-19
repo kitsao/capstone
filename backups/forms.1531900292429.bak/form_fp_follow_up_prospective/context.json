@@ -1,0 +1,5 @@
+{
+  "person": false,
+  "place": false,
+  "expression": "contact.type === 'person' && (summary.is_in_emnch_pilot || user.is_in_emnch_pilot)"
+}

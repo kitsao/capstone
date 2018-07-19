@@ -1,0 +1,160 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>Pregnancy Referral Follow-Up</h:title>
+    <model>
+      <instance>
+        <pregnancy_referral_follow_up delimiter="#" id="pregnancy_referral_follow_up" prefix="J1!pregnancy_referral_follow_up!" version="2016-04-06">
+          <inputs>
+            <meta>
+              <location>
+                <lat/>
+                <long/>
+                <error/>
+                <message/>
+              </location>
+            </meta>
+            <source>user</source>
+            <source_id/>
+            <t_lmp_date/>
+            <t_follow_up_count/>
+            <contact>
+              <_id/>
+              <name/>
+              <date_of_birth>0</date_of_birth>
+              <sex/>
+              <phone/>
+            </contact>
+          </inputs>
+          <patient_age_in_years/>
+          <patient_contact_phone/>
+          <patient_id/>
+          <patient_name/>
+          <lmp_date/>
+          <follow_up_count/>
+          <follow_up_method/>
+          <patient_health_facility_visit/>
+          <referral_follow_up_needed/>
+          <days_since_lmp/>
+          <weeks_since_lmp/>
+          <edd/>
+          <p_note/>
+          <group_followup_options>
+            <g_follow_up_method/>
+            <call_button/>
+          </group_followup_options>
+          <group_referral_followup>
+            <g_patient_health_facility_visit/>
+            <g_no_facility_visit/>
+          </group_referral_followup>
+          <meta>
+            <instanceID/>
+          </meta>
+        </pregnancy_referral_follow_up>
+      </instance>
+      <instance id="contact-summary"/>
+      <bind nodeset="/pregnancy_referral_follow_up/inputs" relevant="./source = 'user'"/>
+      <bind nodeset="/pregnancy_referral_follow_up/inputs/source" type="string"/>
+      <bind nodeset="/pregnancy_referral_follow_up/inputs/source_id" type="string"/>
+      <bind nodeset="/pregnancy_referral_follow_up/inputs/t_lmp_date" type="string"/>
+      <bind nodeset="/pregnancy_referral_follow_up/inputs/t_follow_up_count" type="string"/>
+      <bind constraint=" /pregnancy_referral_follow_up/inputs/contact/sex  != 'male' and  /pregnancy_referral_follow_up/patient_age_in_years  &gt; 9.9 and  /pregnancy_referral_follow_up/patient_age_in_years  &lt; 50" jr:constraintMsg="Patient must female and between 15 and 49 years old" nodeset="/pregnancy_referral_follow_up/inputs/contact/_id" type="db:person"/>
+      <bind nodeset="/pregnancy_referral_follow_up/inputs/contact/name" type="string"/>
+      <bind nodeset="/pregnancy_referral_follow_up/inputs/contact/date_of_birth" type="string"/>
+      <bind nodeset="/pregnancy_referral_follow_up/inputs/contact/sex" type="string"/>
+      <bind nodeset="/pregnancy_referral_follow_up/inputs/contact/phone" type="string"/>
+      <bind calculate="floor( difference-in-months(  /pregnancy_referral_follow_up/inputs/contact/date_of_birth , today() ) div 12 )" nodeset="/pregnancy_referral_follow_up/patient_age_in_years" type="string"/>
+      <bind calculate="coalesce(/pregnancy_referral_follow_up/inputs/contact/phone,instance('contact-summary')/context/parent0/contact/phone)" nodeset="/pregnancy_referral_follow_up/patient_contact_phone" type="string"/>
+      <bind calculate="../inputs/contact/_id" nodeset="/pregnancy_referral_follow_up/patient_id" required="true()" type="string"/>
+      <bind calculate="../inputs/contact/name" nodeset="/pregnancy_referral_follow_up/patient_name" type="string"/>
+      <bind calculate=" /pregnancy_referral_follow_up/inputs/t_lmp_date " nodeset="/pregnancy_referral_follow_up/lmp_date" type="string"/>
+      <bind calculate=" /pregnancy_referral_follow_up/inputs/t_follow_up_count " nodeset="/pregnancy_referral_follow_up/follow_up_count" type="string"/>
+      <bind calculate=" /pregnancy_referral_follow_up/group_followup_options/g_follow_up_method " nodeset="/pregnancy_referral_follow_up/follow_up_method" type="string"/>
+      <bind calculate=" /pregnancy_referral_follow_up/group_referral_followup/g_patient_health_facility_visit " nodeset="/pregnancy_referral_follow_up/patient_health_facility_visit" type="string"/>
+      <bind calculate="if ( /pregnancy_referral_follow_up/patient_health_facility_visit ='no', 'true', 'false')" nodeset="/pregnancy_referral_follow_up/referral_follow_up_needed" type="string"/>
+      <bind calculate="round(decimal-date-time(today()) - decimal-date-time( /pregnancy_referral_follow_up/inputs/t_lmp_date ), 2)" nodeset="/pregnancy_referral_follow_up/days_since_lmp" type="string"/>
+      <bind calculate="round( /pregnancy_referral_follow_up/days_since_lmp  div 7, 2)" nodeset="/pregnancy_referral_follow_up/weeks_since_lmp" type="string"/>
+      <bind calculate="format-date-time(date-time(decimal-date-time( /pregnancy_referral_follow_up/inputs/t_lmp_date )+280),&quot;%b %e, %Y&quot;)" nodeset="/pregnancy_referral_follow_up/edd" type="string"/>
+      <bind nodeset="/pregnancy_referral_follow_up/p_note" readonly="true()" relevant="false()" type="string"/>
+      <bind nodeset="/pregnancy_referral_follow_up/group_followup_options/g_follow_up_method" required="true()" type="select1"/>
+      <bind nodeset="/pregnancy_referral_follow_up/group_followup_options/call_button" readonly="true()" relevant=" /pregnancy_referral_follow_up/follow_up_method ='phone' and  /pregnancy_referral_follow_up/patient_contact_phone !=''" type="string"/>
+      <bind nodeset="/pregnancy_referral_follow_up/group_referral_followup/g_patient_health_facility_visit" required="true()" type="select1"/>
+      <bind nodeset="/pregnancy_referral_follow_up/group_referral_followup/g_no_facility_visit" readonly="true()" relevant=" /pregnancy_referral_follow_up/patient_health_facility_visit ='no'" type="string"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/pregnancy_referral_follow_up/meta/instanceID" readonly="true()" type="string"/>
+    </model>
+  </h:head>
+  <h:body class="pages">
+    <group appearance="field-list" ref="/pregnancy_referral_follow_up/inputs">
+      <label>Patient</label>
+      <input appearance="hidden" ref="/pregnancy_referral_follow_up/inputs/source">
+        <label>Source</label>
+      </input>
+      <input appearance="hidden" ref="/pregnancy_referral_follow_up/inputs/source_id">
+        <label>Source ID</label>
+      </input>
+      <input appearance="hidden" ref="/pregnancy_referral_follow_up/inputs/t_lmp_date">
+        <label>LMP Date</label>
+      </input>
+      <input appearance="hidden" ref="/pregnancy_referral_follow_up/inputs/t_follow_up_count">
+        <label>Follow up count</label>
+      </input>
+      <group ref="/pregnancy_referral_follow_up/inputs/contact">
+        <input appearance="db-object" ref="/pregnancy_referral_follow_up/inputs/contact/_id">
+          <label>What is the patient's name?</label>
+          <hint>Select a person from list</hint>
+        </input>
+        <input appearance="hidden" ref="/pregnancy_referral_follow_up/inputs/contact/name">
+          <label>Name</label>
+        </input>
+        <input appearance="hidden" ref="/pregnancy_referral_follow_up/inputs/contact/date_of_birth">
+          <label>Date of Birth</label>
+        </input>
+        <input appearance="hidden" ref="/pregnancy_referral_follow_up/inputs/contact/sex">
+          <label>Sex</label>
+        </input>
+        <input appearance="hidden" ref="/pregnancy_referral_follow_up/inputs/contact/phone">
+          <label>Person Phone</label>
+        </input>
+      </group>
+    </group>
+    <input ref="/pregnancy_referral_follow_up/p_note">
+      <label>ID: <output value=" /pregnancy_referral_follow_up/patient_id "/>
+Name: <output value=" /pregnancy_referral_follow_up/patient_name "/>
+LMP: <output value=" /pregnancy_referral_follow_up/inputs/t_lmp_date "/>
+ - in days: <output value=" /pregnancy_referral_follow_up/days_since_lmp "/>
+ - in weeks: <output value=" /pregnancy_referral_follow_up/weeks_since_lmp "/></label></input>
+    <group appearance="field-list" ref="/pregnancy_referral_follow_up/group_followup_options">
+      <label>Follow up options</label>
+      <select1 ref="/pregnancy_referral_follow_up/group_followup_options/g_follow_up_method">
+        <label>How are you following up?</label>
+        <item>
+          <label>In Person</label>
+          <value>in_person</value>
+        </item>
+        <item>
+          <label>By Phone</label>
+          <value>phone</value>
+        </item>
+      </select1>
+      <input ref="/pregnancy_referral_follow_up/group_followup_options/call_button">
+        <label>&lt;b&gt;Call:&lt;/b&gt; <output value=" /pregnancy_referral_follow_up/patient_contact_phone "/></label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/pregnancy_referral_follow_up/group_referral_followup">
+      <select1 ref="/pregnancy_referral_follow_up/group_referral_followup/g_patient_health_facility_visit">
+        <label>Did the patient go to a health facility?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <input ref="/pregnancy_referral_follow_up/group_referral_followup/g_no_facility_visit">
+        <label>&lt;b&gt;Encourage and support the patient to go to a health facility immediately.&lt;/b&gt;</label>
+      </input>
+    </group>
+  </h:body>
+</h:html>

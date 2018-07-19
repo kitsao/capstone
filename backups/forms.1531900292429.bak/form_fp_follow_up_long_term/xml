@@ -1,0 +1,320 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>FP Follow Up (Long Term)</h:title>
+    <model>
+      <instance>
+        <fp_follow_up_long_term delimiter="#" id="fp_follow_up_long_term" prefix="J1!fp_follow_up_long_term!" version="2018-02-06">
+          <inputs>
+            <meta>
+              <location>
+                <lat/>
+                <long/>
+                <error/>
+                <message/>
+              </location>
+            </meta>
+            <source>user</source>
+            <source_id/>
+            <contact>
+              <_id/>
+              <name/>
+              <date_of_birth/>
+              <sex/>
+              <parent>
+                <contact>
+                  <phone/>
+                </contact>
+              </parent>
+            </contact>
+          </inputs>
+          <patient_age_in_years/>
+          <patient_age_in_months/>
+          <patient_age_in_days/>
+          <patient_age_display/>
+          <patient_id/>
+          <patient_name/>
+          <get_pregnant/>
+          <cant_pay_now/>
+          <wasnt_available/>
+          <spouse_not_happy/>
+          <no_reason/>
+          <fp_method_administered/>
+          <is_referral_case/>
+          <newly_on_injection/>
+          <group_fp>
+            <went_to_health_facility/>
+            <reason_not_hf/>
+            <n_reason_not_hf_1/>
+            <n_reason_not_hf_2/>
+            <n_reason_not_hf_3/>
+            <received_long_term/>
+            <long_term_method/>
+            <reason_not/>
+            <n_reason_not_1/>
+            <n_reason_not_2/>
+            <n_reason_not_3/>
+            <last_insertion_injection_date/>
+            <has_side_effects/>
+            <n_has_side_effects/>
+            <side_effects/>
+            <n_refer_side_effects/>
+            <n_side_effects_assure/>
+          </group_fp>
+          <meta>
+            <instanceID/>
+          </meta>
+        </fp_follow_up_long_term>
+      </instance>
+      <instance id="contact-summary"/>
+      <bind nodeset="/fp_follow_up_long_term/inputs" relevant="./source = 'user'"/>
+      <bind nodeset="/fp_follow_up_long_term/inputs/source" type="string"/>
+      <bind nodeset="/fp_follow_up_long_term/inputs/source_id" type="string"/>
+      <bind nodeset="/fp_follow_up_long_term/inputs/contact/_id" required="true()" type="db:person"/>
+      <bind nodeset="/fp_follow_up_long_term/inputs/contact/name" type="string"/>
+      <bind nodeset="/fp_follow_up_long_term/inputs/contact/date_of_birth" type="string"/>
+      <bind nodeset="/fp_follow_up_long_term/inputs/contact/sex" type="string"/>
+      <bind nodeset="/fp_follow_up_long_term/inputs/contact/parent/contact/phone" type="string"/>
+      <bind calculate="floor( difference-in-months( date( /fp_follow_up_long_term/inputs/contact/date_of_birth ), today() ) div 12 )" nodeset="/fp_follow_up_long_term/patient_age_in_years" readonly="0" type="string"/>
+      <bind calculate="difference-in-months(date( /fp_follow_up_long_term/inputs/contact/date_of_birth ), today() )" nodeset="/fp_follow_up_long_term/patient_age_in_months" readonly="0" type="string"/>
+      <bind calculate="floor( decimal-date-time(today()) - decimal-date-time(date( /fp_follow_up_long_term/inputs/contact/date_of_birth )) )" nodeset="/fp_follow_up_long_term/patient_age_in_days" type="string"/>
+      <bind calculate="concat(
+ concat( /fp_follow_up_long_term/patient_age_in_years , if( /fp_follow_up_long_term/patient_age_in_years =1,' year and ',' years and ')),
+ concat( /fp_follow_up_long_term/patient_age_in_months  mod 12, if(( /fp_follow_up_long_term/patient_age_in_months  mod 12)=1,' month old',' months old'))
+)" nodeset="/fp_follow_up_long_term/patient_age_display" type="string"/>
+      <bind calculate="../inputs/contact/_id" nodeset="/fp_follow_up_long_term/patient_id" type="string"/>
+      <bind calculate="../inputs/contact/name" nodeset="/fp_follow_up_long_term/patient_name" type="string"/>
+      <bind calculate="if(selected( /fp_follow_up_long_term/group_fp/reason_not ,'get_pregnant') or selected( /fp_follow_up_long_term/group_fp/reason_not_hf ,'get_pregnant'),'true','false')" nodeset="/fp_follow_up_long_term/get_pregnant" type="string"/>
+      <bind calculate="if(selected( /fp_follow_up_long_term/group_fp/reason_not ,'not_afford') or selected( /fp_follow_up_long_term/group_fp/reason_not_hf ,'not_afford'),'true','false')" nodeset="/fp_follow_up_long_term/cant_pay_now" type="string"/>
+      <bind calculate="if(selected( /fp_follow_up_long_term/group_fp/reason_not ,'wasnt_available'),'true','false')" nodeset="/fp_follow_up_long_term/wasnt_available" type="string"/>
+      <bind calculate="if(selected( /fp_follow_up_long_term/group_fp/reason_not ,'spouse_not_happy') or selected( /fp_follow_up_long_term/group_fp/reason_not_hf ,'spouse_not_happy'),'true','false')" nodeset="/fp_follow_up_long_term/spouse_not_happy" type="string"/>
+      <bind calculate="if(selected( /fp_follow_up_long_term/group_fp/reason_not ,'no_reason') or selected( /fp_follow_up_long_term/group_fp/reason_not_hf ,'no_reason'),'true','false')" nodeset="/fp_follow_up_long_term/no_reason" type="string"/>
+      <bind calculate="jr:choice-name( /fp_follow_up_long_term/group_fp/long_term_method , ' /fp_follow_up_long_term/group_fp/long_term_method ')" nodeset="/fp_follow_up_long_term/fp_method_administered" type="string"/>
+      <bind calculate="if(selected( /fp_follow_up_long_term/group_fp/side_effects , 'vaginal_bleeding') or selected( /fp_follow_up_long_term/group_fp/side_effects , 'mood_changes') or selected( /fp_follow_up_long_term/group_fp/side_effects , 'heart_palpitations'),'true','false')" nodeset="/fp_follow_up_long_term/is_referral_case" type="string"/>
+      <bind calculate="if(selected(../group_fp/new_fp_method,'dmpa_im'),'true','fasle')" nodeset="/fp_follow_up_long_term/newly_on_injection" type="string"/>
+      <bind nodeset="/fp_follow_up_long_term/group_fp/went_to_health_facility" required="true()" type="select1"/>
+      <bind nodeset="/fp_follow_up_long_term/group_fp/reason_not_hf" relevant=" /fp_follow_up_long_term/group_fp/went_to_health_facility  = 'no'" required="true()" type="select1"/>
+      <bind nodeset="/fp_follow_up_long_term/group_fp/n_reason_not_hf_1" readonly="true()" relevant="selected( /fp_follow_up_long_term/group_fp/reason_not_hf ,'get_pregnant')" type="string"/>
+      <bind nodeset="/fp_follow_up_long_term/group_fp/n_reason_not_hf_2" readonly="true()" relevant="selected( /fp_follow_up_long_term/group_fp/reason_not_hf ,'not_afford')" type="string"/>
+      <bind nodeset="/fp_follow_up_long_term/group_fp/n_reason_not_hf_3" readonly="true()" relevant="selected( /fp_follow_up_long_term/group_fp/reason_not_hf , 'spouse_not_happy') or 
+selected( /fp_follow_up_long_term/group_fp/reason_not_hf , 'no_reason')" type="string"/>
+      <bind nodeset="/fp_follow_up_long_term/group_fp/received_long_term" relevant=" /fp_follow_up_long_term/group_fp/went_to_health_facility  = 'yes'" required="true()" type="select1"/>
+      <bind nodeset="/fp_follow_up_long_term/group_fp/long_term_method" relevant=" /fp_follow_up_long_term/group_fp/received_long_term  = 'yes'" required="true()" type="select1"/>
+      <bind nodeset="/fp_follow_up_long_term/group_fp/reason_not" relevant=" /fp_follow_up_long_term/group_fp/received_long_term  = 'no'" required="true()" type="select1"/>
+      <bind nodeset="/fp_follow_up_long_term/group_fp/n_reason_not_1" readonly="true()" relevant="selected( /fp_follow_up_long_term/group_fp/reason_not ,'get_pregnant')" type="string"/>
+      <bind nodeset="/fp_follow_up_long_term/group_fp/n_reason_not_2" readonly="true()" relevant="selected( /fp_follow_up_long_term/group_fp/reason_not ,'not_afford') or selected( /fp_follow_up_long_term/group_fp/reason_not ,'wasnt_available')" type="string"/>
+      <bind nodeset="/fp_follow_up_long_term/group_fp/n_reason_not_3" readonly="true()" relevant="selected( /fp_follow_up_long_term/group_fp/reason_not , 'spouse_not_happy') or 
+selected( /fp_follow_up_long_term/group_fp/reason_not , 'no_reason')" type="string"/>
+      <bind constraint=". &lt;= today()" jr:constraintMsg="The last refill date cannot be in the future" nodeset="/fp_follow_up_long_term/group_fp/last_insertion_injection_date" relevant=" /fp_follow_up_long_term/group_fp/received_long_term  = 'yes' and (selected( /fp_follow_up_long_term/group_fp/long_term_method , 'iud') or selected( /fp_follow_up_long_term/group_fp/long_term_method , 'implant'))" required="true()" type="date"/>
+      <bind nodeset="/fp_follow_up_long_term/group_fp/has_side_effects" relevant=" /fp_follow_up_long_term/group_fp/received_long_term  = 'yes'" required="true()" type="select1"/>
+      <bind nodeset="/fp_follow_up_long_term/group_fp/n_has_side_effects" readonly="true()" relevant=" /fp_follow_up_long_term/group_fp/has_side_effects ='no'" type="string"/>
+      <bind nodeset="/fp_follow_up_long_term/group_fp/side_effects" relevant=" /fp_follow_up_long_term/group_fp/has_side_effects ='yes'" required="true()" type="select"/>
+      <bind nodeset="/fp_follow_up_long_term/group_fp/n_refer_side_effects" readonly="true()" relevant=" /fp_follow_up_long_term/is_referral_case  = 'true'" type="string"/>
+      <bind nodeset="/fp_follow_up_long_term/group_fp/n_side_effects_assure" readonly="true()" relevant="count-selected( /fp_follow_up_long_term/group_fp/side_effects ) &gt; 0 and  /fp_follow_up_long_term/is_referral_case  = 'false'" type="string"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/fp_follow_up_long_term/meta/instanceID" readonly="true()" type="string"/>
+    </model>
+  </h:head>
+  <h:body class="pages">
+    <group appearance="field-list" ref="/fp_follow_up_long_term/inputs">
+      <label>Patient</label>
+      <input appearance="hidden" ref="/fp_follow_up_long_term/inputs/source">
+        <label>Source</label>
+      </input>
+      <input appearance="hidden" ref="/fp_follow_up_long_term/inputs/source_id">
+        <label>Source ID</label>
+      </input>
+      <group ref="/fp_follow_up_long_term/inputs/contact">
+        <input appearance="db-object" ref="/fp_follow_up_long_term/inputs/contact/_id">
+          <label>What is the Patient's name?</label>
+          <hint>Select a person from list</hint>
+        </input>
+        <input appearance="hidden" ref="/fp_follow_up_long_term/inputs/contact/name">
+          <label>Name</label>
+        </input>
+        <input appearance="hidden" ref="/fp_follow_up_long_term/inputs/contact/date_of_birth">
+          <label>Date of Birth</label>
+        </input>
+        <input appearance="hidden" ref="/fp_follow_up_long_term/inputs/contact/sex">
+          <label>Sex</label>
+        </input>
+        <group appearance="hidden" ref="/fp_follow_up_long_term/inputs/contact/parent">
+          <group ref="/fp_follow_up_long_term/inputs/contact/parent/contact">
+            <input appearance="hidden" ref="/fp_follow_up_long_term/inputs/contact/parent/contact/phone">
+              <label>Parent Phone</label>
+            </input>
+          </group>
+        </group>
+      </group>
+    </group>
+    <group appearance="field-list" ref="/fp_follow_up_long_term/group_fp">
+      <label>FP Follow Up (Referral)</label>
+      <select1 ref="/fp_follow_up_long_term/group_fp/went_to_health_facility">
+        <label>Did you go to the health facility?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <select1 ref="/fp_follow_up_long_term/group_fp/reason_not_hf">
+        <label>Why not?</label>
+        <item>
+          <label>I want to get pregnant</label>
+          <value>get_pregnant</value>
+        </item>
+        <item>
+          <label>I can't pay now</label>
+          <value>not_afford</value>
+        </item>
+        <item>
+          <label>My spouse is not happy with it</label>
+          <value>spouse_not_happy</value>
+        </item>
+        <item>
+          <label>No clear reason</label>
+          <value>no_reason</value>
+        </item>
+      </select1>
+      <input ref="/fp_follow_up_long_term/group_fp/n_reason_not_hf_1">
+        <label>**Thank client for their time and ask them to contact you if they need any information on FP or a FP service.**</label>
+      </input>
+      <input ref="/fp_follow_up_long_term/group_fp/n_reason_not_hf_2">
+        <label>**Thank client for their time and follow up in 7 days.**</label>
+      </input>
+      <input ref="/fp_follow_up_long_term/group_fp/n_reason_not_hf_3">
+        <label>**Health Education session (CHV uses flip book) - Remind the client about relevant modern FP and the alternative available methods from LG as well as from health facilities.**</label>
+      </input>
+      <select1 ref="/fp_follow_up_long_term/group_fp/received_long_term">
+        <label>Did you receive the long term method?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <select1 ref="/fp_follow_up_long_term/group_fp/long_term_method">
+        <label>Which method?</label>
+        <item>
+          <label>IUD</label>
+          <value>iud</value>
+        </item>
+        <item>
+          <label>Implant</label>
+          <value>implant</value>
+        </item>
+        <item>
+          <label>Tubal Ligation (TL)</label>
+          <value>tl</value>
+        </item>
+        <item>
+          <label>Emergency Pill (ECP)</label>
+          <value>ecp</value>
+        </item>
+      </select1>
+      <select1 ref="/fp_follow_up_long_term/group_fp/reason_not">
+        <label>Why not?</label>
+        <item>
+          <label>I want to get pregnant</label>
+          <value>get_pregnant</value>
+        </item>
+        <item>
+          <label>I can't pay now</label>
+          <value>not_afford</value>
+        </item>
+        <item>
+          <label>It was not available at the facility</label>
+          <value>wasnt_available</value>
+        </item>
+        <item>
+          <label>My spouse is not happy with it</label>
+          <value>spouse_not_happy</value>
+        </item>
+        <item>
+          <label>No clear reason</label>
+          <value>no_reason</value>
+        </item>
+      </select1>
+      <input ref="/fp_follow_up_long_term/group_fp/n_reason_not_1">
+        <label>**Thank client for their time and ask them to contact you if they need any information on FP or a FP service.**</label>
+      </input>
+      <input ref="/fp_follow_up_long_term/group_fp/n_reason_not_2">
+        <label>**Thank client for their time and follow up in 7 days.**</label>
+      </input>
+      <input ref="/fp_follow_up_long_term/group_fp/n_reason_not_3">
+        <label>**Health Education session (CHV uses flip book) - Remind the client about relevant modern FP and the alternative available methods from LG as well as from health facilities.**</label>
+      </input>
+      <input appearance="calendar" ref="/fp_follow_up_long_term/group_fp/last_insertion_injection_date">
+        <label>What was the date of the insertion?</label>
+      </input>
+      <select1 ref="/fp_follow_up_long_term/group_fp/has_side_effects">
+        <label>Are you having any side effects from the new FP method?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <input ref="/fp_follow_up_long_term/group_fp/n_has_side_effects">
+        <label>**Thank client for their time and ask them to contact you if they need any information on FP or a FP service.**</label>
+      </input>
+      <select ref="/fp_follow_up_long_term/group_fp/side_effects">
+        <label>What are the side effects ?</label>
+        <item>
+          <label>Prolonged or heavy vaginal bleeding</label>
+          <value>vaginal_bleeding</value>
+        </item>
+        <item>
+          <label>Severe mood changes</label>
+          <value>mood_changes</value>
+        </item>
+        <item>
+          <label>Heart palpitations</label>
+          <value>heart_palpitations</value>
+        </item>
+        <item>
+          <label>Headache, dizziness</label>
+          <value>headache</value>
+        </item>
+        <item>
+          <label>Amenorrhea (no bleeding)</label>
+          <value>amenorrhea</value>
+        </item>
+        <item>
+          <label>Nausea</label>
+          <value>nausea</value>
+        </item>
+        <item>
+          <label>Irregular bleeding, or spotting</label>
+          <value>spotting</value>
+        </item>
+        <item>
+          <label>Weight gain</label>
+          <value>weight_gain</value>
+        </item>
+        <item>
+          <label>Changes in mood and sex drive</label>
+          <value>libido_change</value>
+        </item>
+        <item>
+          <label>Abdominal bloating and discomfort</label>
+          <value>bloating</value>
+        </item>
+      </select>
+      <input ref="/fp_follow_up_long_term/group_fp/n_refer_side_effects">
+        <label>&lt;p style='color:red; font-weight:bold;'&gt;Refer client to the nearest health facility for assessment.&lt;/p&gt;</label>
+      </input>
+      <input ref="/fp_follow_up_long_term/group_fp/n_side_effects_assure">
+        <label>&lt;p style='font-weight:bold'&gt;Assure client changes are expected and counsel on side effects. Ask the client to contact you in case of any other concerns.&lt;/p&gt;</label>
+      </input>
+    </group>
+  </h:body>
+</h:html>

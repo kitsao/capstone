@@ -1,0 +1,5 @@
+{
+  "person": false,
+  "place": false,
+  "expression": "contact.type === 'person'  && !summary.deceased && (!contact.date_of_birth || ageInYears(contact) < 12)"
+}

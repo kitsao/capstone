@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>IT Support</h:title>
+    <model>
+      <instance>
+        <it_support delimiter="#" id="it_support" prefix="J1!it_support!" version="2016-05-16 00:00:00">
+          <inputs>
+            <meta>
+              <location>
+                <lat/>
+                <long/>
+                <error/>
+                <message/>
+              </location>
+            </meta>
+            <source>user</source>
+            <source_id/>
+            <contact>
+              <_id/>
+              <name/>
+              <contact>
+                <name/>
+              </contact>
+            </contact>
+          </inputs>
+          <place_id/>
+          <place_name/>
+          <group_it_support>
+            <support_type/>
+            <acknowledge_notify_it/>
+            <acknowledge_resolved/>
+            <support_remarks/>
+          </group_it_support>
+          <meta>
+            <instanceID/>
+          </meta>
+        </it_support>
+      </instance>
+      <instance id="contact-summary"/>
+      <bind nodeset="/it_support/inputs" relevant="./source = 'user'"/>
+      <bind nodeset="/it_support/inputs/source" type="string"/>
+      <bind nodeset="/it_support/inputs/source_id" type="string"/>
+      <bind nodeset="/it_support/inputs/contact/_id" type="db:health_center"/>
+      <bind nodeset="/it_support/inputs/contact/name" type="string"/>
+      <bind nodeset="/it_support/inputs/contact/contact/name" type="string"/>
+      <bind calculate="../inputs/contact/_id" nodeset="/it_support/place_id" type="string"/>
+      <bind calculate="../inputs/contact/name" nodeset="/it_support/place_name" type="string"/>
+      <bind nodeset="/it_support/group_it_support/support_type" required="true()" type="select1"/>
+      <bind nodeset="/it_support/group_it_support/acknowledge_notify_it" type="string"/>
+      <bind nodeset="/it_support/group_it_support/acknowledge_resolved" type="string"/>
+      <bind nodeset="/it_support/group_it_support/support_remarks" required="true()" type="string"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/it_support/meta/instanceID" readonly="true()" type="string"/>
+    </model>
+  </h:head>
+  <h:body class="pages">
+    <group appearance="field-list" ref="/it_support/inputs">
+      <label>CHV Area</label>
+      <input appearance="hidden" ref="/it_support/inputs/source">
+        <label>Source</label>
+      </input>
+      <input appearance="hidden" ref="/it_support/inputs/source_id">
+        <label>Source ID</label>
+      </input>
+      <group ref="/it_support/inputs/contact">
+        <input appearance="db-object" ref="/it_support/inputs/contact/_id">
+          <label>What is the CHv's area?</label>
+          <hint>Select the family from the list</hint>
+        </input>
+        <input appearance="hidden" ref="/it_support/inputs/contact/name">
+          <label>Name</label>
+        </input>
+        <group ref="/it_support/inputs/contact/contact">
+          <input appearance="hidden" ref="/it_support/inputs/contact/contact/name">
+            <label>CHV Name</label>
+          </input>
+        </group>
+      </group>
+    </group>
+    <group appearance="field-list" ref="/it_support/group_it_support">
+      <label>IT Support</label>
+      <select1 appearance="minimal" ref="/it_support/group_it_support/support_type">
+        <label>Support Type</label>
+        <item>
+          <label>Sync Issue</label>
+          <value>1</value>
+        </item>
+        <item>
+          <label>Network Issue</label>
+          <value>2</value>
+        </item>
+        <item>
+          <label>Hardware Malfunction</label>
+          <value>3</value>
+        </item>
+        <item>
+          <label>Other</label>
+          <value>4</value>
+        </item>
+      </select1>
+      <trigger ref="/it_support/group_it_support/acknowledge_notify_it">
+        <label>Notify IT</label>
+      </trigger>
+      <trigger ref="/it_support/group_it_support/acknowledge_resolved">
+        <label>Resolved on the spot</label>
+      </trigger>
+      <input ref="/it_support/group_it_support/support_remarks">
+        <label>Support Remarks</label>
+      </input>
+    </group>
+  </h:body>
+</h:html>

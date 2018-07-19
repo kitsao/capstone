@@ -1,0 +1,223 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>Assessment Follow Up</h:title>
+    <model>
+      <instance>
+        <assessment_follow_up delimiter="#" id="assessment_follow_up" prefix="J1!assessment_follow_up!" version="2018-07-18 14:06:59">
+          <inputs>
+            <meta>
+              <location>
+                <lat/>
+                <long/>
+                <error/>
+                <message/>
+              </location>
+            </meta>
+            <source/>
+            <source_id/>
+            <t_follow_up_type/>
+            <t_follow_up_count/>
+            <contact>
+              <_id/>
+              <name/>
+              <patient_id/>
+              <date_of_birth>0</date_of_birth>
+              <sex/>
+              <parent>
+                <parent>
+                  <contact>
+                    <chw_name/>
+                    <phone/>
+                  </contact>
+                </parent>
+              </parent>
+            </contact>
+          </inputs>
+          <source/>
+          <source_id/>
+          <patient_uuid/>
+          <patient_id/>
+          <patient_name/>
+          <patient_age_in_years>0</patient_age_in_years>
+          <patient_age_in_months>0</patient_age_in_months>
+          <patient_age_in_days/>
+          <patient_age_display/>
+          <referral_follow_up_needed/>
+          <follow_up_count/>
+          <improved/>
+          <better/>
+          <patient_health_facility_visit/>
+          <group_improved>
+            <patient_improved/>
+            <n_patient_improved_yes/>
+            <n_patient_improved_no/>
+          </group_improved>
+          <referral_followup>
+            <visited_health_facility/>
+            <n_not_visit_health_facility/>
+          </referral_followup>
+          <group_better>
+            <patient_better/>
+            <n_better_yes/>
+            <n_better_no/>
+          </group_better>
+          <group_summary>
+            <r_summary/>
+            <r_patient_details/>
+            <r_improving/>
+            <r_not_improving/>
+          </group_summary>
+          <meta>
+            <instanceID/>
+          </meta>
+        </assessment_follow_up>
+      </instance>
+      <instance id="contact-summary"/>
+      <bind nodeset="/assessment_follow_up/inputs" relevant="./source = 'user'"/>
+      <bind nodeset="/assessment_follow_up/inputs/source" type="string"/>
+      <bind nodeset="/assessment_follow_up/inputs/source_id" type="string"/>
+      <bind nodeset="/assessment_follow_up/inputs/t_follow_up_type" type="string"/>
+      <bind nodeset="/assessment_follow_up/inputs/t_follow_up_count" type="string"/>
+      <bind nodeset="/assessment_follow_up/inputs/contact/_id" type="db:person"/>
+      <bind nodeset="/assessment_follow_up/inputs/contact/name" type="string"/>
+      <bind nodeset="/assessment_follow_up/inputs/contact/patient_id" type="string"/>
+      <bind nodeset="/assessment_follow_up/inputs/contact/date_of_birth" type="string"/>
+      <bind nodeset="/assessment_follow_up/inputs/contact/sex" type="string"/>
+      <bind nodeset="/assessment_follow_up/inputs/contact/parent/parent/contact/chw_name" type="string"/>
+      <bind nodeset="/assessment_follow_up/inputs/contact/parent/parent/contact/phone" type="string"/>
+      <bind calculate="../inputs/source" nodeset="/assessment_follow_up/source" type="string"/>
+      <bind calculate="../inputs/source_id" nodeset="/assessment_follow_up/source_id" type="string"/>
+      <bind calculate="../inputs/contact/_id" nodeset="/assessment_follow_up/patient_uuid" type="string"/>
+      <bind calculate="../inputs/contact/_id" nodeset="/assessment_follow_up/patient_id" required="true()" type="string"/>
+      <bind calculate="../inputs/contact/name" nodeset="/assessment_follow_up/patient_name" type="string"/>
+      <bind calculate="floor( difference-in-months( date( /assessment_follow_up/inputs/contact/date_of_birth ), today() ) div 12 )" nodeset="/assessment_follow_up/patient_age_in_years" type="string"/>
+      <bind calculate="difference-in-months(date( /assessment_follow_up/inputs/contact/date_of_birth ), today() )" nodeset="/assessment_follow_up/patient_age_in_months" type="string"/>
+      <bind calculate="floor( decimal-date-time(today()) - decimal-date-time(date( /assessment_follow_up/inputs/contact/date_of_birth )) )" nodeset="/assessment_follow_up/patient_age_in_days" type="string"/>
+      <bind calculate="concat(
+ concat( /assessment_follow_up/patient_age_in_years , if( /assessment_follow_up/patient_age_in_years =1,' year and ',' years and ')),
+ concat( /assessment_follow_up/patient_age_in_months  mod 12, if(( /assessment_follow_up/patient_age_in_months  mod 12)=1,' month old',' months old'))
+)" nodeset="/assessment_follow_up/patient_age_display" type="string"/>
+      <bind calculate="if ( /assessment_follow_up/group_better/patient_better ='no' or  /assessment_follow_up/group_improved/patient_improved ='no', 'true', 'false')" nodeset="/assessment_follow_up/referral_follow_up_needed" type="string"/>
+      <bind calculate=" /assessment_follow_up/inputs/t_follow_up_count " nodeset="/assessment_follow_up/follow_up_count" type="string"/>
+      <bind calculate=" /assessment_follow_up/group_improved/patient_improved " nodeset="/assessment_follow_up/improved" type="string"/>
+      <bind calculate=" /assessment_follow_up/group_better/patient_better " nodeset="/assessment_follow_up/better" type="string"/>
+      <bind calculate=" /assessment_follow_up/referral_followup/visited_health_facility " nodeset="/assessment_follow_up/patient_health_facility_visit" type="string"/>
+      <bind nodeset="/assessment_follow_up/group_improved" relevant=" /assessment_follow_up/follow_up_count =1"/>
+      <bind nodeset="/assessment_follow_up/group_improved/patient_improved" required="true()" type="select1"/>
+      <bind nodeset="/assessment_follow_up/group_improved/n_patient_improved_yes" readonly="true()" relevant=" /assessment_follow_up/group_improved/patient_improved ='yes'" type="string"/>
+      <bind nodeset="/assessment_follow_up/group_improved/n_patient_improved_no" readonly="true()" relevant=" /assessment_follow_up/group_improved/patient_improved ='no'" type="string"/>
+      <bind nodeset="/assessment_follow_up/referral_followup" relevant=" /assessment_follow_up/follow_up_count !=1 and  /assessment_follow_up/group_improved/patient_improved ='no'"/>
+      <bind nodeset="/assessment_follow_up/referral_followup/visited_health_facility" required="true()" type="select1"/>
+      <bind nodeset="/assessment_follow_up/referral_followup/n_not_visit_health_facility" readonly="true()" relevant=" /assessment_follow_up/referral_followup/visited_health_facility ='no'" type="string"/>
+      <bind nodeset="/assessment_follow_up/group_better" relevant=" /assessment_follow_up/referral_followup/visited_health_facility ='yes'"/>
+      <bind nodeset="/assessment_follow_up/group_better/patient_better" required="true()" type="select1"/>
+      <bind nodeset="/assessment_follow_up/group_better/n_better_yes" readonly="true()" relevant=" /assessment_follow_up/group_better/patient_better ='yes'" type="string"/>
+      <bind nodeset="/assessment_follow_up/group_better/n_better_no" readonly="true()" relevant=" /assessment_follow_up/group_better/patient_better ='no'" type="string"/>
+      <bind nodeset="/assessment_follow_up/group_summary/r_summary" readonly="true()" type="string"/>
+      <bind nodeset="/assessment_follow_up/group_summary/r_patient_details" readonly="true()" type="string"/>
+      <bind nodeset="/assessment_follow_up/group_summary/r_improving" readonly="true()" relevant=" /assessment_follow_up/group_better/patient_better ='yes' or  /assessment_follow_up/group_improved/patient_improved ='yes'" type="string"/>
+      <bind nodeset="/assessment_follow_up/group_summary/r_not_improving" readonly="true()" relevant=" /assessment_follow_up/group_better/patient_better ='no' or  /assessment_follow_up/group_improved/patient_improved ='no'" type="string"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/assessment_follow_up/meta/instanceID" readonly="true()" type="string"/>
+    </model>
+  </h:head>
+  <h:body class="pages">
+    <group ref="/assessment_follow_up/inputs">
+      <label>Inputs</label>
+      <input appearance="hidden" ref="/assessment_follow_up/inputs/t_follow_up_type">
+        <label>Follow up type</label>
+      </input>
+      <input appearance="hidden" ref="/assessment_follow_up/inputs/t_follow_up_count">
+        <label>Follow up count</label>
+      </input>
+      <group ref="/assessment_follow_up/inputs/contact">
+        <label>Contact</label>
+        <input appearance="db-object" ref="/assessment_follow_up/inputs/contact/_id">
+          <label>What is the patient's name?</label>
+        </input>
+        <group ref="/assessment_follow_up/inputs/contact/parent">
+          <label>Parent</label>
+          <group ref="/assessment_follow_up/inputs/contact/parent/parent">
+            <label>Parent</label>
+            <group ref="/assessment_follow_up/inputs/contact/parent/parent/contact">
+              <label>Contact</label>
+            </group>
+          </group>
+        </group>
+      </group>
+    </group>
+    <group appearance="field-list" ref="/assessment_follow_up/group_improved">
+      <select1 appearance="horizontal" ref="/assessment_follow_up/group_improved/patient_improved">
+        <label>Is the patient getting better?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <input ref="/assessment_follow_up/group_improved/n_patient_improved_yes">
+        <label>Check whether the caregiver is giving the medicine correctly.
+
+Advise the caregiver to continue giving the child the medicine as recommended and provide other necessary care.</label>
+      </input>
+      <input ref="/assessment_follow_up/group_improved/n_patient_improved_no">
+        <label>&lt;b style="color:red"&gt;Refer the child to a health facility.&lt;/b&gt; 
+
+If the child has developed a new problem, manage them according to the sick child guide.</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/assessment_follow_up/referral_followup">
+      <select1 appearance="horizontal" ref="/assessment_follow_up/referral_followup/visited_health_facility">
+        <label>Did the patient go to a health facility?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <input ref="/assessment_follow_up/referral_followup/n_not_visit_health_facility">
+        <label>&lt;b&gt;Encourage and support the caregiver to take the child to a health facility immediately.&lt;/b&gt;</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/assessment_follow_up/group_better">
+      <select1 appearance="horizontal" ref="/assessment_follow_up/group_better/patient_better">
+        <label>Is the patient getting better?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <input ref="/assessment_follow_up/group_better/n_better_yes">
+        <label>Advise the caregiver to continue to follow medical advice and give the child the complete dosage of medicine recommended.</label>
+      </input>
+      <input ref="/assessment_follow_up/group_better/n_better_no">
+        <label>&lt;b&gt;Advise the caregiver to take the child back to a health facility immediately to be assessed again.&lt;/b&gt;</label>
+      </input>
+    </group>
+    <group appearance="field-list summary" ref="/assessment_follow_up/group_summary">
+      <label>Assessment Summary</label>
+      <input appearance="h1 yellow" ref="/assessment_follow_up/group_summary/r_summary">
+        <label>Patient Details&lt;I class="fa fa-user"&gt;&lt;/i&gt;</label>
+      </input>
+      <input ref="/assessment_follow_up/group_summary/r_patient_details">
+        <label>&lt;h4 style=&quot;text-align:center;&quot;&gt;<output value=" /assessment_follow_up/patient_name "/>&lt;/h4&gt; &lt;h5 style=&quot;text-align:center;&quot;&gt;<output value=" /assessment_follow_up/patient_age_display "/>&lt;/h5&gt;</label>
+      </input>
+      <input appearance="h1 green" ref="/assessment_follow_up/group_summary/r_improving">
+        <label>Thanks for your time. If I can help you with anything else please call me.</label>
+      </input>
+      <input appearance="h1 red" ref="/assessment_follow_up/group_summary/r_not_improving">
+        <label>Refer to health facility</label>
+      </input>
+    </group>
+  </h:body>
+</h:html>

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>Edit District</h:title>
+    <model>
+      <instance>
+        <data delimiter="#" id="contact:district_hospital:edit" prefix="J1!contact:district_hospital:edit!" version="2018-01-24">
+          <district_hospital>
+            <name/>
+            <contact/>
+            <notes/>
+            <geolocation/>
+          </district_hospital>
+          <meta>
+            <instanceID/>
+          </meta>
+        </data>
+      </instance>
+      <bind nodeset="/data/district_hospital/name" required="true()" type="string"/>
+      <bind nodeset="/data/district_hospital/contact" type="db:person"/>
+      <bind nodeset="/data/district_hospital/notes" type="string"/>
+      <bind calculate="concat(../../inputs/meta/location/lat, concat(' ', ../../inputs/meta/location/long))" nodeset="/data/district_hospital/geolocation" type="string"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/data/meta/instanceID" readonly="true()" type="string"/>
+    </model>
+  </h:head>
+  <h:body>
+    <group ref="/data/district_hospital">
+      <label>Edit Branch</label>
+      <input ref="/data/district_hospital/name">
+        <label>Branch Name</label>
+      </input>
+      <input appearance="db-object bind-id-only" ref="/data/district_hospital/contact">
+        <label>Primary Contact:</label>
+      </input>
+      <input ref="/data/district_hospital/notes">
+        <label>Branch Notes:</label>
+      </input>
+    </group>
+  </h:body>
+</h:html>

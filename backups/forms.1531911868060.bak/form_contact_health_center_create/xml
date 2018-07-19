@@ -1,0 +1,166 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>New CHV Area</h:title>
+    <model>
+      <instance>
+        <data delimiter="#" id="health_center" prefix="J1!health_center!" version="2017-09-15 08:45:47">
+          <inputs>
+            <meta>
+              <location>
+                <lat/>
+                <long/>
+                <error/>
+                <message/>
+              </location>
+            </meta>
+            <user>
+              <facility_id/>
+            </user>
+            <contact>
+              <_id/>
+            </contact>
+          </inputs>
+          <health_center>
+            <parent/>
+            <name/>
+            <geolocation/>
+            <contact/>
+          </health_center>
+          <supervisor/>
+          <contact>
+            <debug_note/>
+            <parent>PARENT</parent>
+            <name/>
+            <community_unit/>
+            <sex/>
+            <date_of_birth_method/>
+            <date_of_birth/>
+            <phone/>
+            <alternate_phone/>
+          </contact>
+          <ephemeral_phone>
+            <phone1/>
+            <phone2/>
+          </ephemeral_phone>
+          <ephemeral_dob>
+            <g_sex/>
+            <contact_dob_method>approx</contact_dob_method>
+            <dob_calendar/>
+            <age/>
+            <dob_raw/>
+            <contact_dob_iso/>
+          </ephemeral_dob>
+          <meta>
+            <instanceID/>
+          </meta>
+        </data>
+      </instance>
+      <bind nodeset="/data/inputs/user" relevant="0"/>
+      <bind nodeset="/data/inputs/user/facility_id" type="string"/>
+      <bind nodeset="/data/inputs/contact/_id" type="db:district_hospital"/>
+      <bind nodeset="/data/supervisor" type="db:person"/>
+      <bind nodeset="/data/contact/debug_note" readonly="true()" relevant="0" type="string"/>
+      <bind nodeset="/data/contact/parent" type="string"/>
+      <bind nodeset="/data/contact/name" required="true()" type="string"/>
+      <bind nodeset="/data/contact/community_unit" type="string"/>
+      <bind calculate=" /data/ephemeral_dob/g_sex " nodeset="/data/contact/sex" type="string"/>
+      <bind calculate=" /data/ephemeral_dob/contact_dob_method " nodeset="/data/contact/date_of_birth_method" type="string"/>
+      <bind calculate=" /data/ephemeral_dob/contact_dob_iso " nodeset="/data/contact/date_of_birth" type="string"/>
+      <bind calculate=" /data/ephemeral_phone/phone1 " nodeset="/data/contact/phone" type="string"/>
+      <bind calculate=" /data/ephemeral_phone/phone2 " nodeset="/data/contact/alternate_phone" type="string"/>
+      <bind constraint="regex(.,'^\+254\s?(\d{3}\s?){3}|^07\d{2}\s?(\d{3}\s?){2}')" jr:constraintMsg="Please make sure the number is not already in use by another person and is in the format +254 7XX XXX XXX or 07XX XXX XXX." nodeset="/data/ephemeral_phone/phone1" required="true()" type="tel"/>
+      <bind constraint="regex(.,'^\+254\s?(\d{3}\s?){3}|^07\d{2}\s?(\d{3}\s?){2}')" jr:constraintMsg="Please make sure the number is not already in use by another person and is in the format +254 7XX XXX XXX or 07XX XXX XXX." nodeset="/data/ephemeral_phone/phone2" type="tel"/>
+      <bind nodeset="/data/ephemeral_dob/g_sex" required="true()" type="select1"/>
+      <bind nodeset="/data/ephemeral_dob/contact_dob_method" required="true()" type="select1"/>
+      <bind constraint=".&lt;today()" jr:constraintMsg="Date must be before today" nodeset="/data/ephemeral_dob/dob_calendar" relevant="selected(../contact_dob_method,'calendar')" required="true()" type="date"/>
+      <bind constraint=". &gt; 0 and . &lt; 120" jr:constraintMsg="Age must be between 0 and 120" nodeset="/data/ephemeral_dob/age" relevant="selected(../contact_dob_method,'approx')" required="true()" type="int"/>
+      <bind calculate="if(selected( ../contact_dob_method,'calendar'), 
+../dob_calendar,
+format-date-time( decimal-date-time( today() ) - (365.25 * ../age) , &quot;%Y-%m-%d&quot;) )" nodeset="/data/ephemeral_dob/dob_raw" type="string"/>
+      <bind calculate="format-date-time(../dob_raw,&quot;%Y-%m-%d&quot;)" nodeset="/data/ephemeral_dob/contact_dob_iso" type="string"/>
+      <bind calculate="../../inputs/contact/_id" nodeset="/data/health_center/parent" type="string"/>
+      <bind calculate="concat(concat(../../contact/name, ' Area - '), ../../contact/community_unit)" nodeset="/data/health_center/name" type="string"/>
+      <bind calculate="concat(../../inputs/meta/location/lat, concat(' ', ../../inputs/meta/location/long))" nodeset="/data/health_center/geolocation" type="string"/>
+      <bind calculate="&quot;NEW&quot;" nodeset="/data/health_center/contact" type="string"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/data/meta/instanceID" readonly="true()" type="string"/>
+    </model>
+  </h:head>
+  <h:body>
+    <group ref="/data/inputs">
+      <group ref="/data/inputs/user">
+        <input ref="/data/inputs/user/facility_id">
+          <label>Facility ID for the parent user</label>
+        </input>
+      </group>
+      <group ref="/data/inputs/contact">
+        <input appearance="db-object bind-id-only" ref="/data/inputs/contact/_id">
+          <label>In what CHA Area will this CHV be?</label>
+          <hint>Select the CHA Area from the list</hint>
+        </input>
+      </group>
+    </group>
+    <input appearance="db-object bind-id-only" ref="/data/supervisor">
+      <label>Who is the supervisor for this CHV?</label>
+      <hint>Select the supervisor from the list</hint>
+    </input>
+    <group appearance="field-list" ref="/data/contact">
+      <label>CHV Information</label>
+      <input ref="/data/contact/debug_note">
+        <label>DEBUG
+Branch ID: <output value=" /data/inputs/contact/_id "/>
+User's facility ID: <output value=" /data/inputs/user/facility_id "/></label></input>
+      <input appearance="hidden" ref="/data/contact/parent">
+        <label>Parent</label>
+        <hint>mandatory</hint>
+      </input>
+      <input ref="/data/contact/name">
+        <label>Names</label>
+      </input>
+      <input ref="/data/contact/community_unit">
+        <label>Community Unit</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/data/ephemeral_phone">
+      <input appearance="numbers" ref="/data/ephemeral_phone/phone1">
+        <label>Primary Mobile Number</label>
+        <hint>Use one of the following formats: +254 7XX XXX XXX or 07XX XXX XXX</hint>
+      </input>
+      <input appearance="numbers" ref="/data/ephemeral_phone/phone2">
+        <label>Secondary Mobile Number</label>
+        <hint>Use one of the following formats: +254 7XX XXX XXX or 07XX XXX XXX</hint>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/data/ephemeral_dob">
+      <select1 appearance="horizontal" ref="/data/ephemeral_dob/g_sex">
+        <label>Gender</label>
+        <item>
+          <label>Female</label>
+          <value>female</value>
+        </item>
+        <item>
+          <label>Male</label>
+          <value>male</value>
+        </item>
+      </select1>
+      <select1 appearance="horizontal hidden" ref="/data/ephemeral_dob/contact_dob_method">
+        <label>Method to select date of birth</label>
+        <item>
+          <label>With calendar (preferred)</label>
+          <value>calendar</value>
+        </item>
+        <item>
+          <label>With current age</label>
+          <value>approx</value>
+        </item>
+      </select1>
+      <input ref="/data/ephemeral_dob/dob_calendar">
+        <label>Date of Birth</label>
+      </input>
+      <input ref="/data/ephemeral_dob/age">
+        <label>Age</label>
+      </input>
+    </group>
+    <group ref="/data/health_center"/>
+  </h:body>
+</h:html>

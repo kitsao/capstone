@@ -1,0 +1,5 @@
+{
+  "person": true,
+  "place": false,
+  "expression": "!contact || (contact.type === 'person' && !summary.deceased && summary.pregnant === true && (!contact.sex || contact.sex === 'female') && (!contact.date_of_birth || (ageInYears(contact) >= 10 && ageInYears(contact) < 50)))"
+}

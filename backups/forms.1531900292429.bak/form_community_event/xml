@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>Community Event</h:title>
+    <model>
+      <instance>
+        <community_event delimiter="#" id="community_event" prefix="J1!community_event!" version="2016-06-20 00:00:00">
+          <inputs>
+            <meta>
+              <location>
+                <lat/>
+                <long/>
+                <error/>
+                <message/>
+              </location>
+            </meta>
+            <source/>
+            <source_id/>
+          </inputs>
+          <community_event_info>
+            <event_date/>
+            <no_of_attendees/>
+            <subject/>
+            <subject_other/>
+            <notes/>
+          </community_event_info>
+          <meta>
+            <instanceID/>
+          </meta>
+        </community_event>
+      </instance>
+      <instance id="contact-summary"/>
+      <bind nodeset="/community_event/inputs" relevant="./source = 'user'"/>
+      <bind nodeset="/community_event/inputs/source" type="string"/>
+      <bind nodeset="/community_event/inputs/source_id" type="string"/>
+      <bind constraint=". &lt; today()" jr:constraintMsg="Date of event cannot be later than today." nodeset="/community_event/community_event_info/event_date" required="true()" type="date"/>
+      <bind constraint=". &gt; 0" jr:constraintMsg="Number of attendees must be greater than 0." nodeset="/community_event/community_event_info/no_of_attendees" required="true()" type="int"/>
+      <bind nodeset="/community_event/community_event_info/subject" required="true()" type="select1"/>
+      <bind nodeset="/community_event/community_event_info/subject_other" relevant="selected( /community_event/community_event_info/subject ,'other')" required="true()" type="string"/>
+      <bind nodeset="/community_event/community_event_info/notes" type="string"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/community_event/meta/instanceID" readonly="true()" type="string"/>
+    </model>
+  </h:head>
+  <h:body class="pages">
+    <group appearance="field-list" ref="/community_event/inputs">
+      <label>CHV Area</label>
+      <input appearance="hidden" ref="/community_event/inputs/source">
+        <label>Source</label>
+      </input>
+      <input appearance="hidden" ref="/community_event/inputs/source_id">
+        <label>Source ID</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/community_event/community_event_info">
+      <label>Community Event</label>
+      <input ref="/community_event/community_event_info/event_date">
+        <label>Date of Community Event</label>
+      </input>
+      <input ref="/community_event/community_event_info/no_of_attendees">
+        <label>Estimated Number of Attendees</label>
+      </input>
+      <select1 ref="/community_event/community_event_info/subject">
+        <label>Subject Covered</label>
+        <item>
+          <label>Malaria</label>
+          <value>malaria</value>
+        </item>
+        <item>
+          <label>Water diseases</label>
+          <value>water_diseases</value>
+        </item>
+        <item>
+          <label>Pregnancy care</label>
+          <value>pregnancy</value>
+        </item>
+        <item>
+          <label>Newborn care</label>
+          <value>newborn</value>
+        </item>
+        <item>
+          <label>Nutrition</label>
+          <value>nutrition</value>
+        </item>
+        <item>
+          <label>Pneumonia</label>
+          <value>pneumonia</value>
+        </item>
+        <item>
+          <label>Other</label>
+          <value>other</value>
+        </item>
+      </select1>
+      <input ref="/community_event/community_event_info/subject_other">
+        <label>Specify other:</label>
+      </input>
+      <input ref="/community_event/community_event_info/notes">
+        <label>Notes</label>
+      </input>
+    </group>
+  </h:body>
+</h:html>

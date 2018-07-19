@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>Immunization Follow Up</h:title>
+    <model>
+      <instance>
+        <immunization_follow_up delimiter="#" id="immunization_follow_up" prefix="J1!immunization_follow_up!" version="2018-02-14">
+          <inputs>
+            <meta>
+              <location>
+                <lat/>
+                <long/>
+                <error/>
+                <message/>
+              </location>
+            </meta>
+            <source>user</source>
+            <source_id/>
+            <contact>
+              <_id/>
+              <name/>
+              <date_of_birth>0</date_of_birth>
+            </contact>
+          </inputs>
+          <patient_contact_phone/>
+          <patient_id/>
+          <patient_name/>
+          <patient_age_in_years>0</patient_age_in_years>
+          <patient_age_in_months>0</patient_age_in_months>
+          <patient_age_in_days/>
+          <patient_age_display/>
+          <immunisation_up_to_date/>
+          <immunisation_follow_up>
+            <received_at_facility/>
+            <n_reminder_to_go_to_facility/>
+            <up_to_date/>
+          </immunisation_follow_up>
+          <meta>
+            <instanceID/>
+          </meta>
+        </immunization_follow_up>
+      </instance>
+      <instance id="contact-summary"/>
+      <bind nodeset="/immunization_follow_up/inputs" relevant="./source = 'user'"/>
+      <bind nodeset="/immunization_follow_up/inputs/source" type="string"/>
+      <bind nodeset="/immunization_follow_up/inputs/source_id" type="string"/>
+      <bind constraint=" /immunization_follow_up/patient_age_in_months  &gt;= 4 and  /immunization_follow_up/patient_age_in_years  &lt;= 5" jr:constraintMsg="Patient must be between 4 months and 5 years" nodeset="/immunization_follow_up/inputs/contact/_id" required="true()" type="db:person"/>
+      <bind nodeset="/immunization_follow_up/inputs/contact/name" type="string"/>
+      <bind nodeset="/immunization_follow_up/inputs/contact/date_of_birth" type="string"/>
+      <bind calculate="../inputs/contact/parent/contact/phone" nodeset="/immunization_follow_up/patient_contact_phone" type="string"/>
+      <bind calculate="../inputs/contact/_id" nodeset="/immunization_follow_up/patient_id" required="true()" type="string"/>
+      <bind calculate="../inputs/contact/name" nodeset="/immunization_follow_up/patient_name" type="string"/>
+      <bind calculate="floor( difference-in-months( date( /immunization_follow_up/inputs/contact/date_of_birth ), today() ) div 12 )" nodeset="/immunization_follow_up/patient_age_in_years" type="string"/>
+      <bind calculate="difference-in-months(date( /immunization_follow_up/inputs/contact/date_of_birth ), today() )" nodeset="/immunization_follow_up/patient_age_in_months" type="string"/>
+      <bind calculate="floor( decimal-date-time(today()) - decimal-date-time(date( /immunization_follow_up/inputs/contact/date_of_birth )) )" nodeset="/immunization_follow_up/patient_age_in_days" type="string"/>
+      <bind calculate="concat(
+ concat( /immunization_follow_up/patient_age_in_years , if( /immunization_follow_up/patient_age_in_years =1,' year and ',' years and ')),
+ concat( /immunization_follow_up/patient_age_in_months  mod 12, if(( /immunization_follow_up/patient_age_in_months  mod 12)=1,' month old',' months old'))
+)" nodeset="/immunization_follow_up/patient_age_display" type="string"/>
+      <bind calculate=" /immunization_follow_up/immunisation_follow_up/up_to_date " nodeset="/immunization_follow_up/immunisation_up_to_date" type="string"/>
+      <bind nodeset="/immunization_follow_up/immunisation_follow_up/received_at_facility" required="true()" type="select1"/>
+      <bind nodeset="/immunization_follow_up/immunisation_follow_up/n_reminder_to_go_to_facility" readonly="true()" relevant=" /immunization_follow_up/immunisation_follow_up/received_at_facility  = 'no'" type="string"/>
+      <bind nodeset="/immunization_follow_up/immunisation_follow_up/up_to_date" relevant=" /immunization_follow_up/immunisation_follow_up/received_at_facility  = 'yes'" type="select1"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/immunization_follow_up/meta/instanceID" readonly="true()" type="string"/>
+    </model>
+  </h:head>
+  <h:body class="pages">
+    <group appearance="field-list" ref="/immunization_follow_up/inputs">
+      <label>Patient</label>
+      <input appearance="hidden" ref="/immunization_follow_up/inputs/source">
+        <label>Source</label>
+      </input>
+      <input appearance="hidden" ref="/immunization_follow_up/inputs/source_id">
+        <label>Source ID</label>
+      </input>
+      <group ref="/immunization_follow_up/inputs/contact">
+        <input appearance="db-object" ref="/immunization_follow_up/inputs/contact/_id">
+          <label>What is the patient's name?</label>
+        </input>
+        <input appearance="hidden" ref="/immunization_follow_up/inputs/contact/name">
+          <label>Name</label>
+        </input>
+        <input appearance="hidden" ref="/immunization_follow_up/inputs/contact/date_of_birth">
+          <label>Date of Birth</label>
+        </input>
+      </group>
+    </group>
+    <group appearance="field-list" ref="/immunization_follow_up/immunisation_follow_up">
+      <label>Immunisation Follow up</label>
+      <select1 ref="/immunization_follow_up/immunisation_follow_up/received_at_facility">
+        <label>Did the child receive any vaccines at the health facility</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <input ref="/immunization_follow_up/immunisation_follow_up/n_reminder_to_go_to_facility">
+        <label>Remind the caregiver of the importance of taking the child to be immunized at the health facility and encourage her to take the child.</label>
+      </input>
+      <select1 ref="/immunization_follow_up/immunisation_follow_up/up_to_date">
+        <label>Is the child's immunization up to date?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+    </group>
+  </h:body>
+</h:html>

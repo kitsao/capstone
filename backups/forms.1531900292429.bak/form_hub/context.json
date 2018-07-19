@@ -1,0 +1,5 @@
+{
+  "person": false,
+  "place": true,
+  "expression": "(!contact || contact.type === 'health_center') && user.parent.type === 'district_hospital'"
+}

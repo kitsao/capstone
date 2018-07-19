@@ -1,0 +1,652 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>Pregnancy Visit</h:title>
+    <model>
+      <instance>
+        <pregnancy_visit delimiter="#" id="pregnancy_visit" prefix="J1!pregnancy_visit!" version="2016-04-06">
+          <inputs>
+            <meta>
+              <location>
+                <lat/>
+                <long/>
+                <error/>
+                <message/>
+              </location>
+            </meta>
+            <source>user</source>
+            <source_id/>
+            <t_lmp_date/>
+            <user>
+              <is_in_emnch_pilot/>
+            </user>
+            <contact>
+              <_id/>
+              <name/>
+              <date_of_birth>0</date_of_birth>
+              <sex/>
+              <phone/>
+            </contact>
+          </inputs>
+          <patient_age_in_years/>
+          <patient_contact_phone/>
+          <patient_id/>
+          <patient_name/>
+          <can_access_emnch/>
+          <lmp_date/>
+          <follow_up_method/>
+          <delivery_plan_discussed/>
+          <danger_signs/>
+          <referral_follow_up_needed/>
+          <days_since_lmp/>
+          <weeks_since_lmp/>
+          <edd/>
+          <edd_8601/>
+          <new_lmp/>
+          <discontinue_follow_up/>
+          <edd_updated/>
+          <weeks_since_first_trimester/>
+          <p_note/>
+          <group_followup_options>
+            <g_follow_up_method/>
+            <call_button/>
+          </group_followup_options>
+          <update_pregnancy>
+            <continue_follow_up/>
+            <why_not_pregnant/>
+            <submit_delivery_report/>
+            <change_edd/>
+            <new_edd/>
+          </update_pregnancy>
+          <group_danger_signs>
+            <g_danger_signs/>
+          </group_danger_signs>
+          <group_anc_review>
+            <g_gone_for_anc/>
+            <anc_visit/>
+            <n_verify_anc/>
+            <n_encourage_anc/>
+            <last_anc_visit_date/>
+          </group_anc_review>
+          <group_malaria>
+            <g_taken_malaria_prophylaxis/>
+            <n_prophylaxis_review/>
+            <malaria_prophylaxis_dose/>
+            <malaria_prophylaxis_dose_date/>
+            <n_prophylaxis_advice/>
+            <tt_immunizied/>
+            <n_confirm_anc/>
+            <which_tt_dose/>
+            <tt_dose_date/>
+            <hiv_test_done/>
+            <n_confirm_hiv_test/>
+            <spouse_hiv_test/>
+            <has_birth_plan/>
+          </group_malaria>
+          <group_review>
+            <submit/>
+            <r_summary/>
+            <r_pregnancy_details/>
+            <r_delivery_date/>
+            <r_referral/>
+            <r_referral_note/>
+            <r_danger_sign1/>
+            <r_danger_sign2/>
+            <r_danger_sign3/>
+            <r_danger_sign4/>
+            <r_danger_sign5/>
+            <r_danger_sign6/>
+            <r_danger_sign7/>
+            <r_danger_sign8/>
+            <r_danger_sign9/>
+            <r_reminders/>
+            <r_reminder_trim1/>
+            <r_reminder_trim2/>
+            <r_reminder_trim3/>
+            <r_followup_instructions/>
+            <r_followup/>
+            <r_followup_note/>
+            <r_no_more_follow_ups/>
+          </group_review>
+          <group_delivery_plan>
+            <no_delivery_plan_discussed/>
+            <delivery_plan/>
+            <g_delivery_plan_discussed/>
+          </group_delivery_plan>
+          <group_healthy_newborn_practices>
+            <healthy_newborn_practices/>
+            <submit/>
+          </group_healthy_newborn_practices>
+          <meta>
+            <instanceID/>
+          </meta>
+        </pregnancy_visit>
+      </instance>
+      <instance id="contact-summary"/>
+      <bind nodeset="/pregnancy_visit/inputs" relevant="./source = 'user'"/>
+      <bind nodeset="/pregnancy_visit/inputs/source" type="string"/>
+      <bind nodeset="/pregnancy_visit/inputs/source_id" type="string"/>
+      <bind nodeset="/pregnancy_visit/inputs/t_lmp_date" type="string"/>
+      <bind nodeset="/pregnancy_visit/inputs/user/is_in_emnch_pilot" type="string"/>
+      <bind constraint=" /pregnancy_visit/inputs/contact/sex  != 'male' and  /pregnancy_visit/patient_age_in_years  &gt; 9.9 and  /pregnancy_visit/patient_age_in_years  &lt; 50" jr:constraintMsg="Patient must female and between 15 and 49 years old" nodeset="/pregnancy_visit/inputs/contact/_id" type="db:person"/>
+      <bind nodeset="/pregnancy_visit/inputs/contact/name" type="string"/>
+      <bind nodeset="/pregnancy_visit/inputs/contact/date_of_birth" type="string"/>
+      <bind nodeset="/pregnancy_visit/inputs/contact/sex" type="string"/>
+      <bind nodeset="/pregnancy_visit/inputs/contact/phone" type="string"/>
+      <bind calculate="floor( difference-in-months(  /pregnancy_visit/inputs/contact/date_of_birth , today() ) div 12 )" nodeset="/pregnancy_visit/patient_age_in_years" type="string"/>
+      <bind calculate="coalesce(/postnatal_care/inputs/contact/phone, instance('contact-summary')/context/parent0/contact/phone)" nodeset="/pregnancy_visit/patient_contact_phone" type="string"/>
+      <bind calculate="../inputs/contact/_id" nodeset="/pregnancy_visit/patient_id" required="true()" type="string"/>
+      <bind calculate="../inputs/contact/name" nodeset="/pregnancy_visit/patient_name" type="string"/>
+      <bind calculate="if(instance('contact-summary')/context/is_in_emnch_pilot = 'true' or ../inputs/user/is_in_emnch_pilot = 'true', 'true', 'false')" nodeset="/pregnancy_visit/can_access_emnch" type="string"/>
+      <bind calculate=" /pregnancy_visit/inputs/t_lmp_date " nodeset="/pregnancy_visit/lmp_date" type="string"/>
+      <bind calculate=" /pregnancy_visit/group_followup_options/g_follow_up_method " nodeset="/pregnancy_visit/follow_up_method" type="string"/>
+      <bind calculate=" /pregnancy_visit/group_delivery_plan/g_delivery_plan_discussed " nodeset="/pregnancy_visit/delivery_plan_discussed" type="string"/>
+      <bind calculate=" /pregnancy_visit/group_danger_signs/g_danger_signs " nodeset="/pregnancy_visit/danger_signs" type="string"/>
+      <bind calculate="if (count-selected( /pregnancy_visit/danger_signs ) &gt; 0, 'true', 'false')" nodeset="/pregnancy_visit/referral_follow_up_needed" type="string"/>
+      <bind calculate="round(decimal-date-time(today()) - decimal-date-time( /pregnancy_visit/inputs/t_lmp_date ), 2)" nodeset="/pregnancy_visit/days_since_lmp" type="string"/>
+      <bind calculate="round( /pregnancy_visit/days_since_lmp  div 7, 2)" nodeset="/pregnancy_visit/weeks_since_lmp" type="string"/>
+      <bind calculate="format-date-time(date-time(decimal-date-time( /pregnancy_visit/inputs/t_lmp_date )+280),&quot;%b %e, %Y&quot;)" nodeset="/pregnancy_visit/edd" type="string"/>
+      <bind calculate="format-date-time(date-time(decimal-date-time( /pregnancy_visit/update_pregnancy/new_edd )),&quot;%Y-%m-%dT00:00:00.000Z&quot;)" nodeset="/pregnancy_visit/edd_8601" type="string"/>
+      <bind calculate="format-date-time(date-time(decimal-date-time( /pregnancy_visit/update_pregnancy/new_edd )-280),&quot;%b %e, %Y&quot;)" nodeset="/pregnancy_visit/new_lmp" type="string"/>
+      <bind calculate="if( /pregnancy_visit/update_pregnancy/continue_follow_up  = 'no', 'true','false')" nodeset="/pregnancy_visit/discontinue_follow_up" type="string"/>
+      <bind calculate="if( /pregnancy_visit/update_pregnancy/change_edd  = 'yes','true','false')" nodeset="/pregnancy_visit/edd_updated" type="string"/>
+      <bind calculate="floor(round(((decimal-date-time(today()) - decimal-date-time( /pregnancy_visit/inputs/t_lmp_date )) div 7), 2) - 12)" nodeset="/pregnancy_visit/weeks_since_first_trimester" type="string"/>
+      <bind nodeset="/pregnancy_visit/p_note" readonly="true()" relevant="false()" type="string"/>
+      <bind nodeset="/pregnancy_visit/group_followup_options/g_follow_up_method" required="true()" type="select1"/>
+      <bind nodeset="/pregnancy_visit/group_followup_options/call_button" readonly="true()" relevant=" /pregnancy_visit/follow_up_method ='phone' and  /pregnancy_visit/patient_contact_phone  != ''" type="string"/>
+      <bind nodeset="/pregnancy_visit/update_pregnancy/continue_follow_up" required="true()" type="select1"/>
+      <bind nodeset="/pregnancy_visit/update_pregnancy/why_not_pregnant" relevant=" /pregnancy_visit/update_pregnancy/continue_follow_up  = 'no'" required="true()" type="select1"/>
+      <bind nodeset="/pregnancy_visit/update_pregnancy/submit_delivery_report" readonly="true()" relevant=" /pregnancy_visit/update_pregnancy/why_not_pregnant  = 'delivery'" type="string"/>
+      <bind nodeset="/pregnancy_visit/update_pregnancy/change_edd" relevant=" /pregnancy_visit/update_pregnancy/continue_follow_up  = 'yes'" required="true()" type="select1"/>
+      <bind constraint=".&gt;today() and ((decimal-date-time(.)-294) &lt;= decimal-date-time(today()))" nodeset="/pregnancy_visit/update_pregnancy/new_edd" relevant=" /pregnancy_visit/update_pregnancy/change_edd  = 'yes'" required="true()" type="date"/>
+      <bind nodeset="/pregnancy_visit/group_danger_signs" relevant=" /pregnancy_visit/update_pregnancy/continue_follow_up  = 'yes'"/>
+      <bind nodeset="/pregnancy_visit/group_danger_signs/g_danger_signs" type="select"/>
+      <bind nodeset="/pregnancy_visit/group_anc_review" relevant=" /pregnancy_visit/can_access_emnch  = 'true' and  /pregnancy_visit/update_pregnancy/continue_follow_up  = 'yes'"/>
+      <bind nodeset="/pregnancy_visit/group_anc_review/g_gone_for_anc" relevant="( /pregnancy_visit/weeks_since_lmp  mod 12) = 0" required="true()" type="select1"/>
+      <bind constraint=". &gt; 0 and . &lt;= 5" jr:constraintMsg="ANC type should be between 1 and 5 inclusive." nodeset="/pregnancy_visit/group_anc_review/anc_visit" relevant=" /pregnancy_visit/group_anc_review/g_gone_for_anc  = 'yes'" required="true()" type="select1"/>
+      <bind nodeset="/pregnancy_visit/group_anc_review/n_verify_anc" readonly="true()" relevant=" /pregnancy_visit/group_anc_review/g_gone_for_anc  = 'yes'" type="string"/>
+      <bind nodeset="/pregnancy_visit/group_anc_review/n_encourage_anc" readonly="true()" relevant=" /pregnancy_visit/group_anc_review/g_gone_for_anc  = 'no'" type="string"/>
+      <bind constraint=". &lt; today()" jr:constraintMsg="The last ANC visit date cannot be in the future" nodeset="/pregnancy_visit/group_anc_review/last_anc_visit_date" relevant=" /pregnancy_visit/group_anc_review/g_gone_for_anc  = 'yes'" type="date"/>
+      <bind nodeset="/pregnancy_visit/group_malaria" relevant=" /pregnancy_visit/can_access_emnch  = 'true' and  /pregnancy_visit/update_pregnancy/continue_follow_up  = 'yes' and ( /pregnancy_visit/weeks_since_first_trimester  mod 6) = 0"/>
+      <bind nodeset="/pregnancy_visit/group_malaria/g_taken_malaria_prophylaxis" required="true()" type="select1"/>
+      <bind nodeset="/pregnancy_visit/group_malaria/n_prophylaxis_review" readonly="true()" relevant=" /pregnancy_visit/group_malaria/g_taken_malaria_prophylaxis  = 'yes'" type="string"/>
+      <bind nodeset="/pregnancy_visit/group_malaria/malaria_prophylaxis_dose" relevant=" /pregnancy_visit/group_malaria/g_taken_malaria_prophylaxis  = 'yes'" required="true()" type="select1"/>
+      <bind constraint=". &lt;= today()" jr:constraintMsg="Date of last dose administered cannot be in the future." nodeset="/pregnancy_visit/group_malaria/malaria_prophylaxis_dose_date" relevant=" /pregnancy_visit/group_malaria/g_taken_malaria_prophylaxis  = 'yes'" required="true()" type="date"/>
+      <bind nodeset="/pregnancy_visit/group_malaria/n_prophylaxis_advice" readonly="true()" type="string"/>
+      <bind nodeset="/pregnancy_visit/group_malaria/tt_immunizied" required="true()" type="select1"/>
+      <bind nodeset="/pregnancy_visit/group_malaria/n_confirm_anc" readonly="true()" relevant=" /pregnancy_visit/group_malaria/tt_immunizied  = 'yes'" type="string"/>
+      <bind nodeset="/pregnancy_visit/group_malaria/which_tt_dose" relevant=" /pregnancy_visit/group_malaria/tt_immunizied  = 'yes'" required="true()" type="select1"/>
+      <bind constraint=". &lt;= today()" jr:constraintMsg="Date of last dose administered cannot be in the future." nodeset="/pregnancy_visit/group_malaria/tt_dose_date" relevant=" /pregnancy_visit/group_malaria/tt_immunizied  = 'yes'" required="true()" type="date"/>
+      <bind nodeset="/pregnancy_visit/group_malaria/hiv_test_done" required="true()" type="select1"/>
+      <bind nodeset="/pregnancy_visit/group_malaria/n_confirm_hiv_test" readonly="true()" relevant=" /pregnancy_visit/group_malaria/hiv_test_done  = 'yes'" type="string"/>
+      <bind nodeset="/pregnancy_visit/group_malaria/spouse_hiv_test" required="true()" type="select1"/>
+      <bind nodeset="/pregnancy_visit/group_malaria/has_birth_plan" required="true()" type="select1"/>
+      <bind nodeset="/pregnancy_visit/group_review/submit" readonly="true()" type="string"/>
+      <bind nodeset="/pregnancy_visit/group_review/r_summary" readonly="true()" type="string"/>
+      <bind nodeset="/pregnancy_visit/group_review/r_pregnancy_details" readonly="true()" type="string"/>
+      <bind nodeset="/pregnancy_visit/group_review/r_delivery_date" readonly="true()" relevant=" /pregnancy_visit/edd  != '' and  /pregnancy_visit/update_pregnancy/continue_follow_up  = 'yes'" type="string"/>
+      <bind nodeset="/pregnancy_visit/group_review/r_referral" readonly="true()" relevant=" /pregnancy_visit/group_danger_signs/g_danger_signs  != ''" type="string"/>
+      <bind nodeset="/pregnancy_visit/group_review/r_referral_note" readonly="true()" relevant=" /pregnancy_visit/group_danger_signs/g_danger_signs  != ''" type="string"/>
+      <bind nodeset="/pregnancy_visit/group_review/r_danger_sign1" readonly="true()" relevant="selected( /pregnancy_visit/group_danger_signs/g_danger_signs , 'd1')" type="string"/>
+      <bind nodeset="/pregnancy_visit/group_review/r_danger_sign2" readonly="true()" relevant="selected( /pregnancy_visit/group_danger_signs/g_danger_signs , 'd2')" type="string"/>
+      <bind nodeset="/pregnancy_visit/group_review/r_danger_sign3" readonly="true()" relevant="selected( /pregnancy_visit/group_danger_signs/g_danger_signs , 'd3')" type="string"/>
+      <bind nodeset="/pregnancy_visit/group_review/r_danger_sign4" readonly="true()" relevant="selected( /pregnancy_visit/group_danger_signs/g_danger_signs , 'd4')" type="string"/>
+      <bind nodeset="/pregnancy_visit/group_review/r_danger_sign5" readonly="true()" relevant="selected( /pregnancy_visit/group_danger_signs/g_danger_signs , 'd5')" type="string"/>
+      <bind nodeset="/pregnancy_visit/group_review/r_danger_sign6" readonly="true()" relevant="selected( /pregnancy_visit/group_danger_signs/g_danger_signs , 'd6')" type="string"/>
+      <bind nodeset="/pregnancy_visit/group_review/r_danger_sign7" readonly="true()" relevant="selected( /pregnancy_visit/group_danger_signs/g_danger_signs , 'd7')" type="string"/>
+      <bind nodeset="/pregnancy_visit/group_review/r_danger_sign8" readonly="true()" relevant="selected( /pregnancy_visit/group_danger_signs/g_danger_signs , 'd8')" type="string"/>
+      <bind nodeset="/pregnancy_visit/group_review/r_danger_sign9" readonly="true()" relevant="selected( /pregnancy_visit/group_danger_signs/g_danger_signs , 'd9')" type="string"/>
+      <bind nodeset="/pregnancy_visit/group_review/r_reminders" readonly="true()" relevant=" /pregnancy_visit/weeks_since_lmp  &gt; 0 and  /pregnancy_visit/update_pregnancy/continue_follow_up  = 'yes'" type="string"/>
+      <bind nodeset="/pregnancy_visit/group_review/r_reminder_trim1" readonly="true()" relevant="( /pregnancy_visit/weeks_since_lmp  &lt;= 12) and ( /pregnancy_visit/weeks_since_lmp  &gt; 0) and  /pregnancy_visit/update_pregnancy/continue_follow_up  = 'yes'" type="string"/>
+      <bind nodeset="/pregnancy_visit/group_review/r_reminder_trim2" readonly="true()" relevant="( /pregnancy_visit/weeks_since_lmp  &lt;= 27) and ( /pregnancy_visit/weeks_since_lmp  &gt; 12) and  /pregnancy_visit/update_pregnancy/continue_follow_up  = 'yes'" type="string"/>
+      <bind nodeset="/pregnancy_visit/group_review/r_reminder_trim3" readonly="true()" relevant=" /pregnancy_visit/weeks_since_lmp  &gt; 27 and  /pregnancy_visit/update_pregnancy/continue_follow_up  = 'yes'" type="string"/>
+      <bind calculate="if ( /pregnancy_visit/group_danger_signs/g_danger_signs  != '',
+ 'Follow up in 1 day to ensure that patient goes to a health facility',
+ 'Tasks will appear when follow up is needed'
+)" nodeset="/pregnancy_visit/group_review/r_followup_instructions" type="string"/>
+      <bind nodeset="/pregnancy_visit/group_review/r_followup" readonly="true()" relevant=" /pregnancy_visit/group_review/r_followup_instructions  != ''" type="string"/>
+      <bind nodeset="/pregnancy_visit/group_review/r_followup_note" readonly="true()" relevant=" /pregnancy_visit/group_review/r_followup_instructions  != '' and  /pregnancy_visit/update_pregnancy/continue_follow_up  = 'yes'" type="string"/>
+      <bind nodeset="/pregnancy_visit/group_review/r_no_more_follow_ups" readonly="true()" relevant=" /pregnancy_visit/update_pregnancy/continue_follow_up  = 'no'" type="string"/>
+      <bind nodeset="/pregnancy_visit/group_delivery_plan" relevant=" /pregnancy_visit/weeks_since_lmp  &gt;= 0 and  /pregnancy_visit/weeks_since_lmp  &lt; 38 and  /pregnancy_visit/update_pregnancy/continue_follow_up  = 'yes'"/>
+      <bind nodeset="/pregnancy_visit/group_delivery_plan/no_delivery_plan_discussed" readonly="true()" type="string"/>
+      <bind nodeset="/pregnancy_visit/group_delivery_plan/delivery_plan" readonly="true()" type="string"/>
+      <bind nodeset="/pregnancy_visit/group_delivery_plan/g_delivery_plan_discussed" type="select"/>
+      <bind nodeset="/pregnancy_visit/group_healthy_newborn_practices" relevant=" /pregnancy_visit/weeks_since_lmp  &gt;= 32 and  /pregnancy_visit/weeks_since_lmp  &lt; 38 and  /pregnancy_visit/update_pregnancy/continue_follow_up  = 'yes'"/>
+      <bind nodeset="/pregnancy_visit/group_healthy_newborn_practices/healthy_newborn_practices" readonly="true()" relevant=" /pregnancy_visit/weeks_since_lmp  &gt;= 32 and  /pregnancy_visit/weeks_since_lmp  &lt; 38" type="string"/>
+      <bind nodeset="/pregnancy_visit/group_healthy_newborn_practices/submit" readonly="true()" type="string"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/pregnancy_visit/meta/instanceID" readonly="true()" type="string"/>
+    </model>
+  </h:head>
+  <h:body class="pages">
+    <group appearance="field-list" ref="/pregnancy_visit/inputs">
+      <label>Patient</label>
+      <input appearance="hidden" ref="/pregnancy_visit/inputs/source">
+        <label>Source</label>
+      </input>
+      <input appearance="hidden" ref="/pregnancy_visit/inputs/source_id">
+        <label>Source ID</label>
+      </input>
+      <input appearance="hidden" ref="/pregnancy_visit/inputs/t_lmp_date">
+        <label>LMP Date</label>
+      </input>
+      <group appearance="field-list" ref="/pregnancy_visit/inputs/user">
+        <label>User</label>
+        <input appearance="hidden" ref="/pregnancy_visit/inputs/user/is_in_emnch_pilot">
+          <label>eMNCH Pilot Flag</label>
+        </input>
+      </group>
+      <group ref="/pregnancy_visit/inputs/contact">
+        <input appearance="db-object" ref="/pregnancy_visit/inputs/contact/_id">
+          <label>What is the patient's name?</label>
+          <hint>Select a person from list</hint>
+        </input>
+        <input appearance="hidden" ref="/pregnancy_visit/inputs/contact/name">
+          <label>Name</label>
+        </input>
+        <input appearance="hidden" ref="/pregnancy_visit/inputs/contact/date_of_birth">
+          <label>Date of Birth</label>
+        </input>
+        <input appearance="hidden" ref="/pregnancy_visit/inputs/contact/sex">
+          <label>Sex</label>
+        </input>
+        <input appearance="hidden" ref="/pregnancy_visit/inputs/contact/phone">
+          <label>Person Phone</label>
+        </input>
+      </group>
+    </group>
+    <input ref="/pregnancy_visit/p_note">
+      <label>ID: <output value=" /pregnancy_visit/patient_id "/>
+Name: <output value=" /pregnancy_visit/patient_name "/>
+Date of birth: <output value=" /pregnancy_visit/inputs/contact/date_of_birth "/>
+LMP: <output value=" /pregnancy_visit/inputs/t_lmp_date "/>
+ - in days: <output value=" /pregnancy_visit/days_since_lmp "/>
+ - in weeks: <output value=" /pregnancy_visit/weeks_since_lmp "/></label></input>
+    <group appearance="field-list" ref="/pregnancy_visit/group_followup_options">
+      <label>Follow up options</label>
+      <select1 ref="/pregnancy_visit/group_followup_options/g_follow_up_method">
+        <label>How are you following up?</label>
+        <item>
+          <label>In Person</label>
+          <value>in_person</value>
+        </item>
+        <item>
+          <label>By Phone</label>
+          <value>phone</value>
+        </item>
+      </select1>
+      <input ref="/pregnancy_visit/group_followup_options/call_button">
+        <label>&lt;b&gt;Call:&lt;/b&gt; <output value=" /pregnancy_visit/patient_contact_phone "/></label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/pregnancy_visit/update_pregnancy">
+      <label>Pregnancy Information</label>
+      <select1 ref="/pregnancy_visit/update_pregnancy/continue_follow_up">
+        <label>Is the woman still pregnant?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <select1 ref="/pregnancy_visit/update_pregnancy/why_not_pregnant">
+        <label>Why did the pregnancy end?</label>
+        <item>
+          <label>Woman delivered</label>
+          <value>delivery</value>
+        </item>
+        <item>
+          <label>Woman miscarried</label>
+          <value>miscarriage</value>
+        </item>
+        <item>
+          <label>Woman died</label>
+          <value>maternal_death</value>
+        </item>
+      </select1>
+      <input ref="/pregnancy_visit/update_pregnancy/submit_delivery_report">
+        <label>After completing this form, please do a Newborn Visit to record the delivery details for the mother.</label>
+      </input>
+      <select1 ref="/pregnancy_visit/update_pregnancy/change_edd">
+        <label>Would you like to update the EDD?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <input ref="/pregnancy_visit/update_pregnancy/new_edd">
+        <label>Select the mother's EDD</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/pregnancy_visit/group_danger_signs">
+      <label>Danger Signs</label>
+      <select ref="/pregnancy_visit/group_danger_signs/g_danger_signs">
+        <label>Does the mother have any of the following danger signs?</label>
+        <hint>Select all that apply</hint>
+        <item>
+          <label>Pain, pressure or cramping in abdomen</label>
+          <value>d1</value>
+        </item>
+        <item>
+          <label>Bleeding or fluid leaking from vagina or vaginal discharge with bad odour</label>
+          <value>d2</value>
+        </item>
+        <item>
+          <label>Severe nausea or vomiting</label>
+          <value>d3</value>
+        </item>
+        <item>
+          <label>Fever of 38 degrees or higher</label>
+          <value>d4</value>
+        </item>
+        <item>
+          <label>Severe headache or new, blurry vision problems</label>
+          <value>d5</value>
+        </item>
+        <item>
+          <label>Sudden weight gain or severe swelling of feet, ankles, face, or hands</label>
+          <value>d6</value>
+        </item>
+        <item>
+          <label>Less movement and kicking from the baby</label>
+          <value>d7</value>
+        </item>
+        <item>
+          <label>Blood in the urine or painful, burning urination</label>
+          <value>d8</value>
+        </item>
+        <item>
+          <label>Diarrhea that doesn't go away</label>
+          <value>d9</value>
+        </item>
+      </select>
+    </group>
+    <group appearance="field-list" ref="/pregnancy_visit/group_anc_review">
+      <label>ANC Review</label>
+      <select1 ref="/pregnancy_visit/group_anc_review/g_gone_for_anc">
+        <label>Has the expectant mother gone for her ANC visit at the facility?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <select1 ref="/pregnancy_visit/group_anc_review/anc_visit">
+        <label>Which ANC visit did the mother attend?</label>
+        <item>
+          <label>First ANC</label>
+          <value>1</value>
+        </item>
+        <item>
+          <label>Second ANC</label>
+          <value>2</value>
+        </item>
+        <item>
+          <label>Third ANC</label>
+          <value>3</value>
+        </item>
+        <item>
+          <label>Fourth ANC</label>
+          <value>4</value>
+        </item>
+        <item>
+          <label>Other</label>
+          <value>5</value>
+        </item>
+      </select1>
+      <input ref="/pregnancy_visit/group_anc_review/n_verify_anc">
+        <label>**Check expectant mother's MCH card to see when she last attended her ANC clinic**</label>
+      </input>
+      <input ref="/pregnancy_visit/group_anc_review/n_encourage_anc">
+        <label>**Encourage expectant mother to go for her ANC clinics in order to ensure that she and her baby are healthy and to plan for her delivery.**</label>
+      </input>
+      <input ref="/pregnancy_visit/group_anc_review/last_anc_visit_date">
+        <label>When did she attend the ANC clinic?</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/pregnancy_visit/group_malaria">
+      <label>Malaria, HIV &amp; Immunization Information</label>
+      <select1 ref="/pregnancy_visit/group_malaria/g_taken_malaria_prophylaxis">
+        <label>Has the expectant mother taken malaria prophylaxis?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <input ref="/pregnancy_visit/group_malaria/n_prophylaxis_review">
+        <label>Confirm Malaria doses by checking the mother's ANC card</label>
+      </input>
+      <select1 ref="/pregnancy_visit/group_malaria/malaria_prophylaxis_dose">
+        <label>Which dose has she received?</label>
+        <item>
+          <label>IPT 1</label>
+          <value>1</value>
+        </item>
+        <item>
+          <label>IPT 2</label>
+          <value>2</value>
+        </item>
+        <item>
+          <label>IPT 3</label>
+          <value>3</value>
+        </item>
+        <item>
+          <label>IPT 4</label>
+          <value>4</value>
+        </item>
+        <item>
+          <label>None</label>
+          <value>0</value>
+        </item>
+      </select1>
+      <input ref="/pregnancy_visit/group_malaria/malaria_prophylaxis_dose_date">
+        <label>Date of last dose administered?</label>
+      </input>
+      <input ref="/pregnancy_visit/group_malaria/n_prophylaxis_advice">
+        <label>**Message to client**: 
+Remember, you need to take Fansidar at least 4 times
+during your pregnancy and sleep under a Long-Lasting
+Insecticide-treated Net (LLIN) to prevent malaria. 
+It is smart for you and safe for your baby.
+THIS IS STRICTLY UNDER A DOCTORS SUPERVISION</label>
+      </input>
+      <select1 ref="/pregnancy_visit/group_malaria/tt_immunizied">
+        <label>Has the expectant mother received TT Immunization?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <input ref="/pregnancy_visit/group_malaria/n_confirm_anc">
+        <label>Confirm TT doses by checking the mother's ANC card</label>
+      </input>
+      <select1 ref="/pregnancy_visit/group_malaria/which_tt_dose">
+        <label>Which dose has she received?</label>
+        <item>
+          <label>TT 1</label>
+          <value>1</value>
+        </item>
+        <item>
+          <label>TT 2</label>
+          <value>2</value>
+        </item>
+        <item>
+          <label>TT 3</label>
+          <value>3</value>
+        </item>
+        <item>
+          <label>TT 4</label>
+          <value>4</value>
+        </item>
+        <item>
+          <label>TT 5</label>
+          <value>5</value>
+        </item>
+      </select1>
+      <input ref="/pregnancy_visit/group_malaria/tt_dose_date">
+        <label>Date of last dose administered?</label>
+      </input>
+      <select1 ref="/pregnancy_visit/group_malaria/hiv_test_done">
+        <label>Was HIV testing done?</label>
+        <hint>Please ask this question in PRIVATE</hint>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <input ref="/pregnancy_visit/group_malaria/n_confirm_hiv_test">
+        <label>Confirm HIV testing by checking the mother's ANC card</label>
+      </input>
+      <select1 ref="/pregnancy_visit/group_malaria/spouse_hiv_test">
+        <label>Was the spouse tested for HIV?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <select1 ref="/pregnancy_visit/group_malaria/has_birth_plan">
+        <label>Does the mother have a birth plan?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+    </group>
+    <group appearance="field-list summary" ref="/pregnancy_visit/group_review">
+      <input ref="/pregnancy_visit/group_review/submit">
+        <label>&lt;h4 style="text-align:center;"&gt;Be sure you Submit to complete this action.&lt;/h4&gt;</label>
+      </input>
+      <input appearance="h1 yellow" ref="/pregnancy_visit/group_review/r_summary">
+        <label>Pregnancy Details&lt;i class="fa fa-user"&gt;&lt;/i&gt;</label>
+      </input>
+      <input ref="/pregnancy_visit/group_review/r_pregnancy_details">
+        <label>&lt;h4 style=&quot;text-align:center;&quot;&gt;<output value=" /pregnancy_visit/patient_name "/>&lt;/h4&gt;</label>
+      </input>
+      <input ref="/pregnancy_visit/group_review/r_delivery_date">
+        <label>&lt;h5 style=&quot;text-align:center;&quot;&gt;Estimated delivery date: <output value=" /pregnancy_visit/edd "/>&lt;/h5&gt;</label>
+      </input>
+      <input appearance="h1 red" ref="/pregnancy_visit/group_review/r_referral">
+        <label>Refer to a health facility&lt;i class="fa fa-warning"&gt;&lt;/i&gt;</label>
+      </input>
+      <input ref="/pregnancy_visit/group_review/r_referral_note">
+        <label>&lt;b&gt;Refer to the health facility for danger signs.&lt;/b&gt;</label>
+      </input>
+      <input appearance="li" ref="/pregnancy_visit/group_review/r_danger_sign1">
+        <label>Pain or cramping in abdomen</label>
+      </input>
+      <input appearance="li" ref="/pregnancy_visit/group_review/r_danger_sign2">
+        <label>Bleeding or fluid leaking from vagina or vaginal discharge with bad odour</label>
+      </input>
+      <input appearance="li" ref="/pregnancy_visit/group_review/r_danger_sign3">
+        <label>Severe nausea or vomiting</label>
+      </input>
+      <input appearance="li" ref="/pregnancy_visit/group_review/r_danger_sign4">
+        <label>Fever of 38 degrees or higher</label>
+      </input>
+      <input appearance="li" ref="/pregnancy_visit/group_review/r_danger_sign5">
+        <label>Severe headache or new, blurry vision problems</label>
+      </input>
+      <input appearance="li" ref="/pregnancy_visit/group_review/r_danger_sign6">
+        <label>Sudden weight gain or severe swelling of feet, ankles, face, or hands</label>
+      </input>
+      <input appearance="li" ref="/pregnancy_visit/group_review/r_danger_sign7">
+        <label>Less movement and kicking from the baby</label>
+      </input>
+      <input appearance="li" ref="/pregnancy_visit/group_review/r_danger_sign8">
+        <label>Blood in the urine or painful, burning urination</label>
+      </input>
+      <input appearance="li" ref="/pregnancy_visit/group_review/r_danger_sign9">
+        <label>Diarrhea that doesn't go away</label>
+      </input>
+      <input appearance="h1 blue" ref="/pregnancy_visit/group_review/r_reminders">
+        <label>Healthy Pregnancy Tips&lt;i class="fa fa-heart"&gt;&lt;/i&gt;</label>
+      </input>
+      <input ref="/pregnancy_visit/group_review/r_reminder_trim1">
+        <label>**Living Goods strongly recommends that you deliver your child at a health center**
+
+Remind mother of the **6 STEPS TO A HEALTHY PREGNANCY:**
+
+ &lt;ol style=&quot;margin-left:1em; list-style: decimal inside;&quot;&gt;&lt;li&gt;Attend regular ANC visits&lt;/li&gt;&lt;li&gt;Sleep under a treated net **every** night&lt;/li&gt;&lt;li&gt;<output value=" /pregnancy_visit/patient_name "/> is in her first trimester. Remind her to take supplements:&lt;ul style=&quot;margin-left:1em; list-style: disc inside;&quot;&gt;&lt;li&gt;_Take Iron Folate daily_&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Eat well: Eat more often than usual and eat a variety of foods to give you strength and to help your baby grow&lt;/li&gt;&lt;li&gt;Deliver your child at a health center&lt;/li&gt;&lt;li&gt;Breastfeed the baby **immediately** after birth&lt;/ol&gt;</label>
+      </input>
+      <input ref="/pregnancy_visit/group_review/r_reminder_trim2">
+        <label>**Living Goods strongly recommends that you deliver your child at a health center**
+
+Remind mother of the **6 STEPS TO A HEALTHY PREGNANCY:**
+
+ &lt;ol style=&quot;margin-left:1em; list-style: decimal inside;&quot;&gt;&lt;li&gt;Attend regular ANC visits&lt;/li&gt;&lt;li&gt;Sleep under a treated net **every** night&lt;/li&gt;&lt;li&gt;<output value=" /pregnancy_visit/patient_name "/> is in her second trimester. Remind her to take supplements:&lt;ul style=&quot;margin-left:1em; list-style: disc inside;&quot;&gt;&lt;li&gt;_Take Iron Folate daily_&lt;/li&gt;&lt;li&gt;_Take Deworming/Albendazole once_&lt;/li&gt;&lt;li&gt;_Take Malaria Prophylaxis/Fansidar every month_&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Eat well: Eat more often than usual and eat a variety of foods to give you strength and to help your baby grow&lt;/li&gt;&lt;li&gt;Deliver your child at a health center&lt;/li&gt;&lt;li&gt;Breastfeed the baby **immediately** after birth&lt;/ol&gt;</label>
+      </input>
+      <input ref="/pregnancy_visit/group_review/r_reminder_trim3">
+        <label>**Living Goods strongly recommends that you deliver your child at a health center**
+
+Remind mother of the **6 STEPS TO A HEALTHY PREGNANCY:**
+
+ &lt;ol style=&quot;margin-left:1em; list-style: decimal inside;&quot;&gt;&lt;li&gt;Attend regular ANC visits&lt;/li&gt;&lt;li&gt;Sleep under a treated net **every** night&lt;/li&gt;&lt;li&gt;<output value=" /pregnancy_visit/patient_name "/> is in her third trimester. Remind her to take supplements:&lt;ul style=&quot;margin-left:1em; list-style: disc inside;&quot;&gt;&lt;li&gt;_Take Iron Folate daily_&lt;/li&gt;&lt;li&gt;_Take Deworming/Albendazole once_&lt;/li&gt;&lt;li&gt;_Take Malaria Prophylaxis/Fansidar every month_&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Eat well: Eat more often than usual and eat a variety of foods to give you strength and to help your baby grow&lt;/li&gt;&lt;li&gt;Deliver your child at a health center&lt;/li&gt;&lt;li&gt;Breastfeed the baby **immediately** after birth. Do NOT give baby anything else.&lt;/ol&gt;</label>
+      </input>
+      <input appearance="h1 green" ref="/pregnancy_visit/group_review/r_followup">
+        <label>Follow Up&lt;i class="fa fa-flag"&gt;&lt;/i&gt;</label>
+      </input>
+      <input ref="/pregnancy_visit/group_review/r_followup_note">
+        <label><output value=" /pregnancy_visit/group_review/r_followup_instructions "/></label>
+      </input>
+      <input ref="/pregnancy_visit/group_review/r_no_more_follow_ups">
+        <label>No more follow-ups will appear for this woman.</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/pregnancy_visit/group_delivery_plan">
+      <label>Discuss Delivery Plan</label>
+      <input ref="/pregnancy_visit/group_delivery_plan/no_delivery_plan_discussed">
+        <label>&lt;em style="font-style:italics"&gt;If delivery plan not discussed at previous visit&lt;/em&gt;</label>
+      </input>
+      <input ref="/pregnancy_visit/group_delivery_plan/delivery_plan">
+        <label>**Discussion Talking Points:**
+&lt;ul style="margin-left:1em;list-style:disc inside"&gt;&lt;li&gt;Where do you plan to deliver?&lt;/li&gt;&lt;li&gt;How do you plan to get there?&lt;/li&gt;&lt;li&gt;Who will go with you? etc.&lt;/li&gt;&lt;ul&gt;</label>
+      </input>
+      <select ref="/pregnancy_visit/group_delivery_plan/g_delivery_plan_discussed">
+        <label>Have you discussed delivery plan?</label>
+        <item>
+          <label>Delivery Plan Discussed</label>
+          <value>delivery_plan_discussed</value>
+        </item>
+      </select>
+    </group>
+    <group appearance="field-list" ref="/pregnancy_visit/group_healthy_newborn_practices">
+      <label>Healthy Newborn Care Practices</label>
+      <input ref="/pregnancy_visit/group_healthy_newborn_practices/healthy_newborn_practices">
+        <label>**Remind mother of the best care for a newborn:**
+ &lt;ol style="margin-left:1em; list-style: decimal inside;"&gt;&lt;li&gt;Keep the baby warm&lt;/li&gt;&lt;li&gt;Protect the cord&lt;/li&gt;&lt;li&gt;Breastfeed&lt;/li&gt;&lt;li&gt;Wash your hands before touching the baby&lt;/li&gt;&lt;li&gt;Do not bathe the baby for 24 hours&lt;/li&gt;&lt;/ol&gt;</label>
+      </input>
+      <input ref="/pregnancy_visit/group_healthy_newborn_practices/submit">
+        <label>**Be sure you Submit to complete this action.**</label>
+      </input>
+    </group>
+  </h:body>
+</h:html>

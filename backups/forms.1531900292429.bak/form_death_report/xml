@@ -1,0 +1,230 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>Death Report</h:title>
+    <model>
+      <instance>
+        <death_report delimiter="#" id="death_report" prefix="J1!death_report!" version="2017-01-20 00:00:00">
+          <inputs>
+            <meta>
+              <location>
+                <lat/>
+                <long/>
+                <error/>
+                <message/>
+              </location>
+            </meta>
+            <source>user</source>
+            <source_id/>
+            <contact>
+              <_id/>
+              <name/>
+              <date_of_birth/>
+              <sex/>
+            </contact>
+          </inputs>
+          <patient_age_in_years>0</patient_age_in_years>
+          <patient_age_in_months>0</patient_age_in_months>
+          <patient_age_in_days/>
+          <patient_age_display/>
+          <patient_id/>
+          <patient_name/>
+          <patient_gender/>
+          <symptoms_str/>
+          <death_with_body_hotness_alert/>
+          <death_with_bleeding_alert/>
+          <death_with_other_alert/>
+          <death_maternal_alert/>
+          <death_neonatal_alert/>
+          <date_of_death_display/>
+          <group_death>
+            <date_of_death/>
+            <symptoms/>
+            <other_symptom/>
+            <pregnant_or_after_delivery/>
+          </group_death>
+          <group_diagnosis>
+            <submit/>
+            <r_summary/>
+            <r_patient_info/>
+            <r_patient_date_of_death/>
+            <r_other_details/>
+            <r_symptoms/>
+            <r_newborn_death/>
+            <r_maternal_death/>
+            <r_death_hotness/>
+            <r_death_bleeding/>
+            <r_death_report/>
+            <confirm_reported_death/>
+            <r_exit/>
+          </group_diagnosis>
+          <meta>
+            <instanceID/>
+          </meta>
+        </death_report>
+      </instance>
+      <instance id="contact-summary"/>
+      <bind nodeset="/death_report/inputs" relevant="./source = 'user'"/>
+      <bind nodeset="/death_report/inputs/source" type="string"/>
+      <bind nodeset="/death_report/inputs/source_id" type="string"/>
+      <bind nodeset="/death_report/inputs/contact/_id" required="true()" type="db:person"/>
+      <bind nodeset="/death_report/inputs/contact/name" type="string"/>
+      <bind nodeset="/death_report/inputs/contact/date_of_birth" type="string"/>
+      <bind nodeset="/death_report/inputs/contact/sex" type="string"/>
+      <bind calculate="floor( difference-in-months( date( /death_report/inputs/contact/date_of_birth ), today() ) div 12 )" nodeset="/death_report/patient_age_in_years" type="string"/>
+      <bind calculate="difference-in-months(date( /death_report/inputs/contact/date_of_birth ), today() )" nodeset="/death_report/patient_age_in_months" type="string"/>
+      <bind calculate="floor( decimal-date-time(today()) - decimal-date-time(date( /death_report/inputs/contact/date_of_birth )) )" nodeset="/death_report/patient_age_in_days" type="string"/>
+      <bind calculate="concat(
+ concat( /death_report/patient_age_in_years , if( /death_report/patient_age_in_years =1,' year and ',' years and ')),
+ concat( /death_report/patient_age_in_months  mod 12, if(( /death_report/patient_age_in_months  mod 12)=1,' month old',' months old'))
+)" nodeset="/death_report/patient_age_display" type="string"/>
+      <bind calculate="../inputs/contact/_id" nodeset="/death_report/patient_id" required="true()" type="string"/>
+      <bind calculate="../inputs/contact/name" nodeset="/death_report/patient_name" type="string"/>
+      <bind calculate="../inputs/contact/sex" nodeset="/death_report/patient_gender" type="string"/>
+      <bind calculate="if( count-selected( /death_report/group_death/symptoms ) &gt; 0, 
+ concat(
+ if(selected( /death_report/group_death/symptoms , 'bleeding'), 'Bleeding, ', ''),
+ if(selected( /death_report/group_death/symptoms , 'body_hotness'), 'Body hotness, ', ''),
+ if(selected( /death_report/group_death/symptoms , 'other'), /death_report/group_death/other_symptom  ,' ', ''),
+ ''
+ ),
+ ''
+)" nodeset="/death_report/symptoms_str" type="string"/>
+      <bind calculate="if(selected( /death_report/group_death/symptoms ,'body_hotness'),'Death with body hotness','')" nodeset="/death_report/death_with_body_hotness_alert" type="string"/>
+      <bind calculate="if(selected( /death_report/group_death/symptoms ,'bleeding'), 'Death with bleeding.','')" nodeset="/death_report/death_with_bleeding_alert" type="string"/>
+      <bind calculate="if( /death_report/group_death/other_symptom  != '', concat('Death with ',  /death_report/group_death/other_symptom ), '')" nodeset="/death_report/death_with_other_alert" type="string"/>
+      <bind calculate="if( /death_report/group_death/pregnant_or_after_delivery  = 'yes', 'Suspected Maternal death.','')" nodeset="/death_report/death_maternal_alert" type="string"/>
+      <bind calculate="if( /death_report/patient_age_in_days  &lt; 29, 'Suspected Neonatal death', '')" nodeset="/death_report/death_neonatal_alert" type="string"/>
+      <bind calculate="format-date( /death_report/group_death/date_of_death ,&quot;%b %e, %Y&quot;)" nodeset="/death_report/date_of_death_display" type="string"/>
+      <bind constraint=". &lt; today() and . &gt;= date( /death_report/inputs/contact/date_of_birth )" jr:constraintMsg="Date of reported death cannot be in the future or before the date of birth" nodeset="/death_report/group_death/date_of_death" required="true()" type="date"/>
+      <bind nodeset="/death_report/group_death/symptoms" required="false()" type="select"/>
+      <bind nodeset="/death_report/group_death/other_symptom" relevant="selected( /death_report/group_death/symptoms , 'other')" required="true()" type="string"/>
+      <bind nodeset="/death_report/group_death/pregnant_or_after_delivery" relevant=" /death_report/patient_gender  != 'male' and  /death_report/patient_age_in_years  &gt;=10 and  /death_report/patient_age_in_years  &lt; 50" required="true()" type="select1"/>
+      <bind nodeset="/death_report/group_diagnosis/submit" readonly="true()" type="string"/>
+      <bind nodeset="/death_report/group_diagnosis/r_summary" readonly="true()" type="string"/>
+      <bind nodeset="/death_report/group_diagnosis/r_patient_info" readonly="true()" type="string"/>
+      <bind nodeset="/death_report/group_diagnosis/r_patient_date_of_death" readonly="true()" type="string"/>
+      <bind nodeset="/death_report/group_diagnosis/r_other_details" readonly="true()" relevant=" /death_report/group_death/pregnant_or_after_delivery  = 'yes'" type="string"/>
+      <bind nodeset="/death_report/group_diagnosis/r_symptoms" readonly="true()" relevant=" /death_report/symptoms_str  != ''" type="string"/>
+      <bind nodeset="/death_report/group_diagnosis/r_newborn_death" readonly="true()" relevant=" /death_report/death_neonatal_alert  != ''" type="string"/>
+      <bind nodeset="/death_report/group_diagnosis/r_maternal_death" readonly="true()" relevant=" /death_report/death_maternal_alert  != ''" type="string"/>
+      <bind nodeset="/death_report/group_diagnosis/r_death_hotness" readonly="true()" relevant=" /death_report/death_with_body_hotness_alert  != ''" type="string"/>
+      <bind nodeset="/death_report/group_diagnosis/r_death_bleeding" readonly="true()" relevant=" /death_report/death_with_bleeding_alert  != ''" type="string"/>
+      <bind nodeset="/death_report/group_diagnosis/r_death_report" readonly="true()" relevant="count-selected( /death_report/group_death/symptoms ) &gt; 0 and  /death_report/death_neonatal_alert  != '' and  /death_report/death_maternal_alert  != '' and  /death_report/death_with_body_hotness_alert  != ''" type="string"/>
+      <bind constraint=". = 'yes'" nodeset="/death_report/group_diagnosis/confirm_reported_death" required="true()" type="select1"/>
+      <bind nodeset="/death_report/group_diagnosis/r_exit" readonly="true()" relevant=" /death_report/group_diagnosis/confirm_reported_death  = 'no'" type="string"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/death_report/meta/instanceID" readonly="true()" type="string"/>
+    </model>
+  </h:head>
+  <h:body class="pages">
+    <group appearance="field-list" ref="/death_report/inputs">
+      <label>Patient</label>
+      <input appearance="hidden" ref="/death_report/inputs/source">
+        <label>Source</label>
+      </input>
+      <input appearance="hidden" ref="/death_report/inputs/source_id">
+        <label>Source ID</label>
+      </input>
+      <group ref="/death_report/inputs/contact">
+        <input appearance="db-object" ref="/death_report/inputs/contact/_id">
+          <label>What is the patient's name?</label>
+          <hint>Select a person from list</hint>
+        </input>
+        <input appearance="hidden" ref="/death_report/inputs/contact/name">
+          <label>Name</label>
+        </input>
+        <input appearance="hidden" ref="/death_report/inputs/contact/date_of_birth">
+          <label>Date of Birth</label>
+        </input>
+        <input appearance="hidden" ref="/death_report/inputs/contact/sex">
+          <label>Sex</label>
+        </input>
+      </group>
+    </group>
+    <group appearance="field-list" ref="/death_report/group_death">
+      <label>Death Report</label>
+      <input appearance="horizontal" ref="/death_report/group_death/date_of_death">
+        <label>Date of reported death</label>
+      </input>
+      <select ref="/death_report/group_death/symptoms">
+        <label>What symptoms did <output value=" /death_report/patient_name "/> has before death ?</label>
+        <hint>Select all that apply</hint>
+        <item>
+          <label>Body hotness</label>
+          <value>body_hotness</value>
+        </item>
+        <item>
+          <label>Bleeding</label>
+          <value>bleeding</value>
+        </item>
+        <item>
+          <label>Other</label>
+          <value>other</value>
+        </item>
+      </select>
+      <input ref="/death_report/group_death/other_symptom">
+        <label>Other</label>
+      </input>
+      <select1 appearance="horizontal" ref="/death_report/group_death/pregnant_or_after_delivery">
+        <label>At the time of death was <output value=" /death_report/patient_name "/> pregnant, or within 42 days (6 wks) since delivery or miscarriage?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+    </group>
+    <group appearance="field-list summary" ref="/death_report/group_diagnosis">
+      <input ref="/death_report/group_diagnosis/submit">
+        <label>&lt;h4 style="text-align:center;"&gt;Be sure you Submit to complete this action.&lt;/h4&gt;</label>
+      </input>
+      <input appearance="h1 yellow" ref="/death_report/group_diagnosis/r_summary">
+        <label>Summary&lt;I class="fa fa-user"&gt;&lt;/i&gt;</label>
+      </input>
+      <input ref="/death_report/group_diagnosis/r_patient_info">
+        <label>&lt;h4 style=&quot;text-align:center;&quot;&gt;<output value=" /death_report/patient_name "/>&lt;/h4&gt;&lt;h5 style=&quot;text-align:center;&quot;&gt;<output value=" /death_report/patient_gender "/> &lt;/h5&gt;</label>
+      </input>
+      <input ref="/death_report/group_diagnosis/r_patient_date_of_death">
+        <label>&lt;h5 style=&quot;text-align:center;&quot;&gt;Date of Death: <output value=" /death_report/group_death/date_of_death "/> &lt;/h5&gt;</label>
+      </input>
+      <input appearance="li" ref="/death_report/group_diagnosis/r_other_details">
+        <label>Pregnant or within 42 days of delivery</label>
+      </input>
+      <input appearance="li" ref="/death_report/group_diagnosis/r_symptoms">
+        <label>**Symptoms:** <output value=" /death_report/symptoms_str "/></label>
+      </input>
+      <input appearance="h2 blue" ref="/death_report/group_diagnosis/r_newborn_death">
+        <label>Newborn Death</label>
+      </input>
+      <input appearance="h2 blue" ref="/death_report/group_diagnosis/r_maternal_death">
+        <label>Maternal Death</label>
+      </input>
+      <input appearance="h2 blue" ref="/death_report/group_diagnosis/r_death_hotness">
+        <label>Death with body hotness or fever</label>
+      </input>
+      <input appearance="h2 blue" ref="/death_report/group_diagnosis/r_death_bleeding">
+        <label>Death with bleeding</label>
+      </input>
+      <input appearance="h2 blue" ref="/death_report/group_diagnosis/r_death_report">
+        <label>Death report</label>
+      </input>
+      <select1 ref="/death_report/group_diagnosis/confirm_reported_death">
+        <label>Confirm Reported Death for <output value=" /death_report/patient_name "/></label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <input appearance="h1 red" ref="/death_report/group_diagnosis/r_exit">
+        <label>Please exit the form without submiting anything&lt;I class="fa fa-warning"&gt;&lt;/i&gt;</label>
+      </input>
+    </group>
+  </h:body>
+</h:html>

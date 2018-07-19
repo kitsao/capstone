@@ -1,0 +1,431 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>Family Survey</h:title>
+    <model>
+      <instance>
+        <family_survey delimiter="#" id="family_survey" prefix="J1!family_survey!" version="2016-04-06">
+          <inputs>
+            <meta>
+              <location>
+                <lat/>
+                <long/>
+                <error/>
+                <message/>
+              </location>
+            </meta>
+            <source>user</source>
+            <source_id/>
+            <contact>
+              <_id/>
+              <name/>
+              <contact>
+                <sex/>
+              </contact>
+            </contact>
+          </inputs>
+          <place_id/>
+          <place_name/>
+          <use_treated_water/>
+          <how_water_treated/>
+          <LLIN/>
+          <latrine/>
+          <hand_washing_facilities/>
+          <p_note/>
+          <access_to>
+            <electricity/>
+            <Q1_NAT/>
+            <Q1_URB/>
+            <television/>
+            <Q2_NAT/>
+            <Q2_URB/>
+            <sofa/>
+            <Q3_NAT/>
+            <Q3_URB/>
+            <cupboard/>
+            <Q4_NAT/>
+            <Q4_URB/>
+            <dvd/>
+            <Q5_NAT/>
+            <Q5_URB/>
+            <radio/>
+            <Q6_NAT/>
+            <Q6_URB/>
+            <table/>
+            <Q7_NAT/>
+            <Q7_URB/>
+            <clock/>
+            <Q8_NAT/>
+            <Q8_URB/>
+          </access_to>
+          <floor/>
+          <Q9_NAT/>
+          <Q9_URB/>
+          <walls/>
+          <Q10_NAT/>
+          <Q10_URB/>
+          <roof/>
+          <Q11_NAT/>
+          <Q11_URB/>
+          <fuel/>
+          <Q12_NAT/>
+          <Q12_URB/>
+          <toilet/>
+          <Q13_NAT/>
+          <Q13_URB/>
+          <education/>
+          <NationalScore/>
+          <UrbanScore/>
+          <NationalQuintile/>
+          <UrbanQuintile/>
+          <b>
+            <g_use_treated_water/>
+            <g_how_water_treated/>
+            <g_LLIN/>
+            <g_latrine/>
+            <g_hand_washing_facilities/>
+          </b>
+          <meta>
+            <instanceID/>
+          </meta>
+        </family_survey>
+      </instance>
+      <instance id="contact-summary"/>
+      <bind nodeset="/family_survey/inputs" relevant="./source = 'user'"/>
+      <bind nodeset="/family_survey/inputs/source" type="string"/>
+      <bind nodeset="/family_survey/inputs/source_id" type="string"/>
+      <bind nodeset="/family_survey/inputs/contact/_id" type="db:clinic"/>
+      <bind nodeset="/family_survey/inputs/contact/name" type="string"/>
+      <bind nodeset="/family_survey/inputs/contact/contact/sex" type="string"/>
+      <bind calculate="../inputs/contact/_id" nodeset="/family_survey/place_id" type="string"/>
+      <bind calculate="../inputs/contact/name" nodeset="/family_survey/place_name" type="string"/>
+      <bind calculate=" /family_survey/b/g_use_treated_water " nodeset="/family_survey/use_treated_water" type="string"/>
+      <bind calculate=" /family_survey/b/g_how_water_treated " nodeset="/family_survey/how_water_treated" type="string"/>
+      <bind calculate=" /family_survey/b/g_LLIN " nodeset="/family_survey/LLIN" type="string"/>
+      <bind calculate=" /family_survey/b/g_latrine " nodeset="/family_survey/latrine" type="string"/>
+      <bind calculate=" /family_survey/b/g_hand_washing_facilities " nodeset="/family_survey/hand_washing_facilities" type="string"/>
+      <bind nodeset="/family_survey/p_note" readonly="true()" relevant="false()" type="string"/>
+      <bind nodeset="/family_survey/access_to/electricity" required="true()" type="select1"/>
+      <bind calculate="if(selected(../electricity,'yes'),'0.144964560610981','-0.0533701726694501')" nodeset="/family_survey/access_to/Q1_NAT" type="string"/>
+      <bind calculate="if(selected(../electricity,'yes'), '0.0907075307805914','-0.107269658753706')" nodeset="/family_survey/access_to/Q1_URB" type="string"/>
+      <bind nodeset="/family_survey/access_to/television" required="true()" type="select1"/>
+      <bind calculate="if(selected(../television,'yes'),'0.141782837403157','-0.0533714591395947')" nodeset="/family_survey/access_to/Q2_NAT" type="string"/>
+      <bind calculate="if(selected(../television,'yes'), '0.106940520311559','-0.0896209591620248')" nodeset="/family_survey/access_to/Q2_URB" type="string"/>
+      <bind nodeset="/family_survey/access_to/sofa" required="true()" type="select1"/>
+      <bind calculate="if(selected(../sofa,'yes'),'0.072035156116937','-0.0683736580799606')" nodeset="/family_survey/access_to/Q3_NAT" type="string"/>
+      <bind calculate="if(selected(../sofa,'yes'), '0.0559449971887815','-0.0822930938935672')" nodeset="/family_survey/access_to/Q3_URB" type="string"/>
+      <bind nodeset="/family_survey/access_to/cupboard" required="true()" type="select1"/>
+      <bind calculate="if(selected(../cupboard,'yes'),'0.0754849513093774','-0.0521806371864731')" nodeset="/family_survey/access_to/Q4_NAT" type="string"/>
+      <bind calculate="if(selected(../cupboard,'yes'), '0.062017628285851','-0.0553376389478401')" nodeset="/family_survey/access_to/Q4_URB" type="string"/>
+      <bind nodeset="/family_survey/access_to/dvd" required="true()" type="select1"/>
+      <bind calculate="if(selected(../dvd,'yes'), '0.181031139065992','-0.0368617606655337')" nodeset="/family_survey/access_to/Q5_NAT" type="string"/>
+      <bind calculate="if(selected(../dvd,'yes'), '0.138024595660765','-0.0641518675484026')" nodeset="/family_survey/access_to/Q5_URB" type="string"/>
+      <bind nodeset="/family_survey/access_to/radio" required="true()" type="select1"/>
+      <bind calculate="if(selected(../radio,'yes'), '0.0417345527352082','-0.0702069695843054')" nodeset="/family_survey/access_to/Q6_NAT" type="string"/>
+      <bind calculate="if(selected(../radio,'yes'), '0.0300001490299918','-0.068634556452831')" nodeset="/family_survey/access_to/Q6_URB" type="string"/>
+      <bind nodeset="/family_survey/access_to/table" required="true()" type="select1"/>
+      <bind calculate="if(selected(../table,'yes'), '0.0288809339151438','-0.11326070652375')" nodeset="/family_survey/access_to/Q7_NAT" type="string"/>
+      <bind calculate="if(selected(../table,'yes'), '0.0178093182254473','-0.103186215851151')" nodeset="/family_survey/access_to/Q7_URB" type="string"/>
+      <bind nodeset="/family_survey/access_to/clock" required="true()" type="select1"/>
+      <bind calculate="if(selected(../clock,'yes'), '0.13635668443512','-0.026993332466275')" nodeset="/family_survey/access_to/Q8_NAT" type="string"/>
+      <bind calculate="if(selected(../clock,'yes'), '0.125649432334107','-0.0379711761354078')" nodeset="/family_survey/access_to/Q8_URB" type="string"/>
+      <bind nodeset="/family_survey/floor" required="true()" type="select1"/>
+      <bind calculate="if(selected(../floor,'cement'), '0.146038166154003',if(selected(../floor,'earth_sand'),'-0.149390352495746','-0.00578713359397724'))" nodeset="/family_survey/Q9_NAT" type="string"/>
+      <bind calculate="if(selected(../floor,'cement'), '0.0721674425112802',if(selected(../floor,'earth_sand'),'-0.220061104840196','-0.0340083837138624'))" nodeset="/family_survey/Q9_URB" type="string"/>
+      <bind nodeset="/family_survey/walls" required="true()" type="select1"/>
+      <bind calculate="if(selected(../walls,'dung_mud_soil'), '-0.0710855989969718', '0.0382237746664313')" nodeset="/family_survey/Q10_NAT" type="string"/>
+      <bind calculate="if(selected(../walls,'dung_mud_soil'), '-0.14053750713378', '0.0299156722821383')" nodeset="/family_survey/Q10_URB" type="string"/>
+      <bind nodeset="/family_survey/roof" required="true()" type="select1"/>
+      <bind calculate="if(selected(../roof,'thatch_grass_ makuti'), '-0.144986765061991', '0.0261801236284079')" nodeset="/family_survey/Q11_NAT" type="string"/>
+      <bind calculate="if(selected(../roof,'thatch_grass_ makuti'), '-0.188705377070715', '0.00993637028606576')" nodeset="/family_survey/Q11_URB" type="string"/>
+      <bind nodeset="/family_survey/fuel" required="true()" type="select1"/>
+      <bind calculate="if(selected(../fuel,'wood'), '-0.0690636078465307',if(selected(../fuel,'lpg_naturalgas'), '0.318667672343591', '0.0844377213206199'))" nodeset="/family_survey/Q12_NAT" type="string"/>
+      <bind calculate="if(selected(../fuel,'wood'), '-0.145808202985975',if(selected(../fuel,'lpg_naturalgas'), '0.230576985618945', '0.0210206426855726'))" nodeset="/family_survey/Q12_URB" type="string"/>
+      <bind nodeset="/family_survey/toilet" required="true()" type="select1"/>
+      <bind calculate="if(selected(../toilet,'nofacility_bush_field'), '-0.149103477678859', '0.0280602435162106')" nodeset="/family_survey/Q13_NAT" type="string"/>
+      <bind calculate="if(selected(../toilet,'nofacility_bush_field'), '-0.226550321449703', '0.00925317740211983')" nodeset="/family_survey/Q13_URB" type="string"/>
+      <bind nodeset="/family_survey/education" type="select1"/>
+      <bind calculate="number( /family_survey/access_to/Q1_NAT )+number( /family_survey/access_to/Q2_NAT )+number( /family_survey/access_to/Q3_NAT )+number( /family_survey/access_to/Q4_NAT )+number( /family_survey/access_to/Q5_NAT )+number( /family_survey/access_to/Q6_NAT )+number( /family_survey/access_to/Q7_NAT )+number( /family_survey/access_to/Q8_NAT )+number( /family_survey/Q9_NAT )+number( /family_survey/Q10_NAT )+number( /family_survey/Q11_NAT )+number( /family_survey/Q12_NAT )+number( /family_survey/Q13_NAT )" nodeset="/family_survey/NationalScore" type="string"/>
+      <bind calculate="number( /family_survey/access_to/Q1_URB )+number( /family_survey/access_to/Q2_URB )+number( /family_survey/access_to/Q3_URB )+number( /family_survey/access_to/Q4_URB )+number( /family_survey/access_to/Q5_URB )+number( /family_survey/access_to/Q6_URB )+number( /family_survey/access_to/Q7_URB )+number( /family_survey/access_to/Q8_URB )+number( /family_survey/Q9_URB )+number( /family_survey/Q10_URB )+number( /family_survey/Q11_URB )+number( /family_survey/Q12_URB )+number( /family_survey/Q13_URB )" nodeset="/family_survey/UrbanScore" type="string"/>
+      <bind calculate="if( /family_survey/NationalScore  &gt;= 0.713786425283, 5, if( /family_survey/NationalScore  &gt;=0.15381299031 and  /family_survey/NationalScore  &lt; 0.713786425283, 4, if( /family_survey/NationalScore  &gt;= -0.175838378282 and  /family_survey/NationalScore  &lt; 0.15381299031, 3, if( /family_survey/NationalScore  &gt;= -0.455834725752 and  /family_survey/NationalScore  &lt; -0.175838378282, 2, 1))))" nodeset="/family_survey/NationalQuintile" type="string"/>
+      <bind calculate="if( /family_survey/UrbanScore  &gt;= 0.709147385222, 5, if( /family_survey/UrbanScore  &gt;= 0.409205389041 and  /family_survey/UrbanScore  &lt; 0.709147385222, 4, if( /family_survey/UrbanScore  &gt;= 0.070507653892 and  /family_survey/UrbanScore  &lt; 0.409205389041, 3, if( /family_survey/UrbanScore  &gt;= -0.344107029788 and  /family_survey/UrbanScore  &lt; 0.070507653892, 2, 1))))" nodeset="/family_survey/UrbanQuintile" type="string"/>
+      <bind nodeset="/family_survey/b/g_use_treated_water" required="true()" type="select1"/>
+      <bind nodeset="/family_survey/b/g_how_water_treated" relevant=" /family_survey/b/g_use_treated_water  = 'yes'" required="true()" type="select1"/>
+      <bind nodeset="/family_survey/b/g_LLIN" required="true()" type="select1"/>
+      <bind nodeset="/family_survey/b/g_latrine" required="true()" type="select1"/>
+      <bind nodeset="/family_survey/b/g_hand_washing_facilities" required="true()" type="select1"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/family_survey/meta/instanceID" readonly="true()" type="string"/>
+    </model>
+  </h:head>
+  <h:body class="pages">
+    <group appearance="field-list" ref="/family_survey/inputs">
+      <label>Family</label>
+      <input appearance="hidden" ref="/family_survey/inputs/source">
+        <label>Source</label>
+      </input>
+      <input appearance="hidden" ref="/family_survey/inputs/source_id">
+        <label>Source ID</label>
+      </input>
+      <group ref="/family_survey/inputs/contact">
+        <input appearance="db-object" ref="/family_survey/inputs/contact/_id">
+          <label>What is the household's name?</label>
+          <hint>Select the family from the list</hint>
+        </input>
+        <input appearance="hidden" ref="/family_survey/inputs/contact/name">
+          <label>Name</label>
+        </input>
+        <group ref="/family_survey/inputs/contact/contact">
+          <input appearance="hidden" ref="/family_survey/inputs/contact/contact/sex">
+            <label>Sex</label>
+          </input>
+        </group>
+      </group>
+    </group>
+    <input ref="/family_survey/p_note">
+      <label>ID: <output value=" /family_survey/place_id "/>
+Name: <output value=" /family_survey/place_name "/></label></input>
+    <group appearance="field-list" ref="/family_survey/access_to">
+      <label>Does your household have:</label>
+      <select1 appearance="horizontal" ref="/family_survey/access_to/electricity">
+        <label>electricity?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <select1 appearance="horizontal" ref="/family_survey/access_to/television">
+        <label>a television?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <select1 appearance="horizontal" ref="/family_survey/access_to/sofa">
+        <label>a sofa?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <select1 appearance="horizontal" ref="/family_survey/access_to/cupboard">
+        <label>a cupboard?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <select1 appearance="horizontal" ref="/family_survey/access_to/dvd">
+        <label>a DVD player?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <select1 appearance="horizontal" ref="/family_survey/access_to/radio">
+        <label>a radio?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <select1 appearance="horizontal" ref="/family_survey/access_to/table">
+        <label>a table?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <select1 appearance="horizontal" ref="/family_survey/access_to/clock">
+        <label>a clock?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+    </group>
+    <select1 ref="/family_survey/floor">
+      <label>What is the main material of the floor of your dwelling?</label>
+      <item>
+        <label>Cement</label>
+        <value>cement</value>
+      </item>
+      <item>
+        <label>Earth, sand</label>
+        <value>earth_sand</value>
+      </item>
+      <item>
+        <label>Other</label>
+        <value>floor_other</value>
+      </item>
+    </select1>
+    <select1 ref="/family_survey/walls">
+      <label>What is the main material of the external walls of your dwelling?</label>
+      <item>
+        <label>Dung/mud/soil</label>
+        <value>dung_mud_sod</value>
+      </item>
+      <item>
+        <label>Other</label>
+        <value>walls_other</value>
+      </item>
+    </select1>
+    <select1 ref="/family_survey/roof">
+      <label>What is the main material of the roof of your dwelling?</label>
+      <item>
+        <label>Thatch/grass/makuti</label>
+        <value>thatch_grass_ makuti</value>
+      </item>
+      <item>
+        <label>Other</label>
+        <value>roof_other</value>
+      </item>
+    </select1>
+    <select1 ref="/family_survey/fuel">
+      <label>What type of fuel does your household mainly use for cooking?</label>
+      <item>
+        <label>Wood</label>
+        <value>wood</value>
+      </item>
+      <item>
+        <label>LPG/Natural gas</label>
+        <value>lpg_naturalgas</value>
+      </item>
+      <item>
+        <label>Other</label>
+        <value>fuel_other</value>
+      </item>
+    </select1>
+    <select1 ref="/family_survey/toilet">
+      <label>What kind of toilet facility do members of your household usually use?</label>
+      <item>
+        <label>No facility/bush/field</label>
+        <value>nofacility_bush_field</value>
+      </item>
+      <item>
+        <label>Other</label>
+        <value>toilet_other</value>
+      </item>
+    </select1>
+    <select1 ref="/family_survey/education">
+      <label>What is the highest school grade that the female head/spouse has completed?</label>
+      <item>
+        <label>No education</label>
+        <value>none</value>
+      </item>
+      <item>
+        <label>Some primary school</label>
+        <value>some_primary</value>
+      </item>
+      <item>
+        <label>Completed primary school</label>
+        <value>primary</value>
+      </item>
+      <item>
+        <label>Some secondary school</label>
+        <value>some_secondary</value>
+      </item>
+      <item>
+        <label>Completed Secondary School</label>
+        <value>secondary</value>
+      </item>
+      <item>
+        <label>Higher than secondary school</label>
+        <value>after_secondary</value>
+      </item>
+    </select1>
+    <group appearance="field-list" ref="/family_survey/b">
+      <label>Survey for <output value=" /family_survey/place_name "/></label>
+      <select1 ref="/family_survey/b/g_use_treated_water">
+        <label>Does the household use water that is treated?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <select1 ref="/family_survey/b/g_how_water_treated">
+        <label>How does the house treat water?</label>
+        <item>
+          <label>Boiling</label>
+          <value>boil</value>
+        </item>
+        <item>
+          <label>Water filter</label>
+          <value>filter</value>
+        </item>
+        <item>
+          <label>Chlorine tablets</label>
+          <value>aqua_tabs</value>
+        </item>
+      </select1>
+      <select1 ref="/family_survey/b/g_LLIN">
+        <label>Did the household members sleep under a LLIN last night?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <select1 appearance="horizontal" ref="/family_survey/b/g_latrine">
+        <label>Does your household have a functional latrine that is in use?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <select1 appearance="horizontal" ref="/family_survey/b/g_hand_washing_facilities">
+        <label>Does the household have hand washing facility such as tippy tap, leaky tin or hand wash basin?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+    </group>
+  </h:body>
+</h:html>

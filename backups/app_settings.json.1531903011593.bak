@@ -1,0 +1,579 @@
+{
+  "locales": null,
+  "locale": "en",
+  "locale_outgoing": "en",
+  "muvuku_webapp_url": "/medic-reporter/_design/medic-reporter/_rewrite/?_embed_mode=2&_locale=en#/generic-anc.json",
+  "date_format": "ddd, MMM Do, YYYY",
+  "reported_date_format": "ddd, MMM Do, YYYY [at] h:mm A",
+  "forms_only_mode": false,
+  "default_responses": {
+    "start_date": "1970-01-01"
+  },
+  "district_admins_access_unallocated_messages": false,
+  "public_access": false,
+  "default_country_code": 254,
+  "gateway_number": "+254754234567",
+  "kujua-reporting": [
+    {
+      "code": "",
+      "reporting_freq": "weekly"
+    }
+  ],
+  "anc_forms": {
+    "registration": "",
+    "registrationLmp": "ANCR",
+    "visit": "ANCV",
+    "delivery": "D",
+    "flag": "F"
+  },
+  "schedule_morning_hours": 6,
+  "schedule_morning_minutes": 0,
+  "schedule_evening_hours": 20,
+  "schedule_evening_minutes": 0,
+  "synthetic_date": "",
+  "contact_display_short": "clinic.name",
+  "permissions": [
+    {
+      "name": "can_export_messages",
+      "roles": [
+        "national_admin",
+        "district_admin",
+        "analytics"
+      ]
+    },
+    {
+      "name": "can_export_forms",
+      "roles": [
+        "national_admin",
+        "district_admin",
+        "analytics"
+      ]
+    },
+    {
+      "name": "can_export_contacts",
+      "roles": [
+        "national_admin",
+        "district_admin"
+      ]
+    },
+    {
+      "name": "can_export_audit",
+      "roles": [
+        "national_admin"
+      ]
+    },
+    {
+      "name": "can_export_feedback",
+      "roles": [
+        "national_admin"
+      ]
+    },
+    {
+      "name": "can_export_server_logs",
+      "roles": [
+        "national_admin"
+      ]
+    },
+    {
+      "name": "can_access_directly",
+      "roles": [
+        "national_admin"
+      ]
+    },
+    {
+      "name": "can_view_analytics",
+      "roles": [
+        "district_admin",
+        "analytics"
+      ]
+    },
+    {
+      "name": "can_view_data_records",
+      "roles": [
+        "national_admin",
+        "district_admin",
+        "analytics",
+        "gateway"
+      ]
+    },
+    {
+      "name": "can_view_unallocated_data_records",
+      "roles": [
+        "national_admin",
+        "district_admin",
+        "gateway"
+      ]
+    },
+    {
+      "name": "can_edit",
+      "roles": [
+        "national_admin",
+        "district_admin",
+        "gateway"
+      ]
+    },
+    {
+      "name": "can_update_messages",
+      "roles": [
+        "national_admin",
+        "district_admin",
+        "gateway"
+      ]
+    },
+    {
+      "name": "can_create_records",
+      "roles": [
+        "national_admin",
+        "district_admin",
+        "gateway"
+      ]
+    },
+    {
+      "name": "can_view_tasks_tab",
+      "roles": [
+        "district_admin"
+      ]
+    },
+    {
+      "name": "can_configure",
+      "roles": [
+        "national_admin"
+      ]
+    },
+    {
+      "name": "can_view_reports_tab",
+      "roles": [
+        "national_admin"
+      ]
+    },
+    {
+      "name": "can_view_analytics_tab",
+      "roles": [
+        "district_admin"
+      ]
+    },
+    {
+      "name": "can_view_contacts_tab",
+      "roles": [
+        "national_admin",
+        "district_admin"
+      ]
+    },
+    {
+      "name": "can_logout",
+      "roles": [
+        "national_admin"
+      ]
+    },
+    {
+      "name": "can_edit_profile",
+      "roles": [
+        "national_admin"
+      ]
+    },
+    {
+      "name": "can_view_users",
+      "roles": []
+    },
+    {
+      "name": "can_update_users",
+      "roles": []
+    },
+    {
+      "name": "can_create_users",
+      "roles": []
+    },
+    {
+      "name": "can_view_tasks",
+      "roles": [
+        "district_admin"
+      ]
+    },
+    {
+      "name": "can_view_messages",
+      "roles": []
+    },
+    {
+      "name": "can_view_messages_tab",
+      "roles": []
+    },
+    {
+      "name": "can_view_reports",
+      "roles": [
+        "national_admin",
+        "district_admin"
+      ]
+    },
+    {
+      "name": "can_view_contacts",
+      "roles": [
+        "national_admin",
+        "district_admin"
+      ]
+    },
+    {
+      "name": "can_delete_reports",
+      "roles": []
+    },
+    {
+      "name": "can_delete_contacts",
+      "roles": []
+    },
+    {
+      "name": "can_delete_messages",
+      "roles": []
+    },
+    {
+      "name": "can_delete_users",
+      "roles": []
+    },
+    {
+      "name": "can_update_people",
+      "roles": [
+        "national_admin"
+      ]
+    },
+    {
+      "name": "can_update_places",
+      "roles": [
+        "national_admin"
+      ]
+    },
+    {
+      "name": "can_create_people",
+      "roles": []
+    },
+    {
+      "name": "can_create_places",
+      "roles": []
+    },
+    {
+      "name": "can_bulk_delete_reports",
+      "roles": []
+    },
+    {
+      "name": "can_access_gateway_api",
+      "roles": [
+        "gateway"
+      ]
+    }
+  ],
+  "setup_complete": true,
+  "care_coordinator": "chw",
+  "anc_registration_lmp": true,
+  "statistics_submission": "none",
+  "outgoing_phone_replace": {
+    "match": "",
+    "replace": ""
+  },
+  "outgoing_phone_filters": [
+    {
+      "match": "",
+      "replace": ""
+    }
+  ],
+  "id_format": "1111",
+  "statistics_submission_number": "",
+  "replication_depth": [
+    {
+      "role": "branch_manager",
+      "depth": 1
+    }
+  ],
+  "alerts": [
+    {
+      "form": "",
+      "condition": "",
+      "message": "",
+      "recipient": ""
+    }
+  ],
+  "reminders": [
+    {
+      "form": "",
+      "text_expression": "",
+      "cron": "",
+      "mute_after_form_for": "",
+      "message": ""
+    }
+  ],
+  "registrations": [
+    {
+      "form": "",
+      "fields": [
+        {
+          "field_name": "",
+          "title": ""
+        }
+      ],
+      "help": "",
+      "events": [
+        {
+          "name": "on_create",
+          "trigger": "assign_schedule",
+          "params": "",
+          "bool_expr": ""
+        }
+      ],
+      "validations": {
+        "join_responses": false,
+        "list": [
+          {
+            "property": "",
+            "rule": "",
+            "message": [
+              {
+                "content": "",
+                "locale": ""
+              },
+              {
+                "locale": "en",
+                "content": null
+              }
+            ]
+          }
+        ]
+      },
+      "messages": [
+        {
+          "message": [
+            {
+              "content": "",
+              "locale": ""
+            },
+            {
+              "locale": "en",
+              "content": null
+            }
+          ],
+          "recipient": ""
+        }
+      ]
+    }
+  ],
+  "patient_reports": [
+    {
+      "form": "",
+      "name": "",
+      "format": "",
+      "silence_type": "",
+      "silence_for": "",
+      "fields": [
+        {
+          "field_name": "",
+          "title": ""
+        }
+      ],
+      "validations": {
+        "join_responses": false,
+        "list": [
+          {
+            "property": "",
+            "rule": "",
+            "message": [
+              {
+                "content": "",
+                "locale": ""
+              },
+              {
+                "locale": "en",
+                "content": null
+              }
+            ]
+          }
+        ]
+      },
+      "messages": [
+        {
+          "message": [
+            {
+              "content": "",
+              "locale": ""
+            },
+            {
+              "locale": "en",
+              "content": null
+            }
+          ],
+          "event_type": "report_accepted",
+          "recipient": ""
+        }
+      ]
+    }
+  ],
+  "schedules": [
+    {
+      "name": "",
+      "summary": "",
+      "description": "",
+      "start_from": "",
+      "messages": [
+        {
+          "message": [
+            {
+              "content": "",
+              "locale": ""
+            },
+            {
+              "locale": "en",
+              "content": null
+            }
+          ],
+          "group": 1,
+          "offset": "",
+          "send_day": "monday",
+          "send_time": "",
+          "recipient": ""
+        }
+      ]
+    }
+  ],
+  "notifications": {
+    "off_form": "OFF",
+    "on_form": "ON",
+    "confirm_deactivation": false,
+    "validations": {
+      "join_responses": false,
+      "list": [
+        {
+          "property": "",
+          "rule": "",
+          "message": [
+            {
+              "content": "",
+              "locale": ""
+            },
+            {
+              "locale": "en",
+              "content": null
+            }
+          ]
+        }
+      ]
+    },
+    "messages": [
+      {
+        "message": [
+          {
+            "content": "",
+            "locale": ""
+          },
+          {
+            "locale": "en",
+            "content": null
+          }
+        ],
+        "event_type": "patient_not_found",
+        "recipient": ""
+      }
+    ]
+  },
+  "tasks": {
+    "rules": "define Target {_id: null,deleted: null,type: null,pass: null,date: null}define Contact {contact: null,reports: null}define Task {_id: null,deleted: null,doc: null,contact: null,icon: null,date: null,title: null,fields: null,resolved: null,priority: null,priorityLabel: null,reports: null,actions: null}rule GenerateEvents {when {c: Contact}then {var today = new Date();var MS_IN_DAY = 24 * 60 * 60 * 1000;var dateInTwoWeeks = Utils.addDate(today, 14);var createTask = function(contact, schedule, report) {return new Task({_id: contact.contact._id + '-' + schedule.id,deleted: (contact.contact ? contact.contact.deleted : false) || (report ? report.deleted : false),doc: contact,contact: contact.contact,icon: schedule.icon,priority: schedule.description ? 'high' : null,priorityLabel: schedule.description ? schedule.description : '',date: null,title: schedule.title,resolved: false,actions: []});};var createPersonTask = function(contact, schedule) {return new Task({_id: contact.contact._id + '-' + schedule.id,deleted: (contact.contact ? contact.contact.deleted : false),doc: contact,contact: contact.contact,icon: schedule.icon,priority: schedule.description ? 'high' : null,priorityLabel: schedule.description ? schedule.description : '',date: null,title: schedule.title,resolved: false,actions: []});};var emitTask = function(task, scheduleEvent) {if (Utils.isTimely(task.date, scheduleEvent)) {emit('task', task);}};var createTargetInstance = function(type, report, pass) {return new Target({_id: report._id + '-' + type,deleted: !!report.deleted,type: type,pass: pass,date: report.reported_date});};var emitTargetInstance = function(instance) {emit('target', instance);};if (c.contact != null) {if (((r.form === 'assessment_follow_up' && r.fields.referral_follow_up_needed == 'true'))&& parseInt(r.fields.patient_age_in_years) < 5) {var pass = Utils.isFormSubmittedInWindow(c.reports, 'assessment_follow_up', r.reported_date, new Date(r.reported_date + MS_IN_DAY));var instance = createTargetInstance('u5-diarrhoea-72hr-followup-48hr', r, pass);emitTargetInstance(instance);}}if (c.contact && c.contact.type === 'person' && c.contact.parent.type === 'clinic') {var contact_dob = new Date(c.contact.date_of_birth);var age_at_registration = Math.round((c.contact.reported_date - contact_dob) / MS_IN_DAY/ 365);if (age_at_registration < 100){var schedule = Utils.getSchedule('assessment');if (schedule){schedule.events.forEach(function(s){var survey = createTask(c, s);survey.date = new Date(Utils.addDate(contact_dob, s.days));survey.resolved = Utils.isFormSubmittedInWindow(c.reports, 'assessment', Utils.addDate(survey.date, s.start * -1).getTime(), Utils.addDate(survey.date, (s.end + 1)).getTime());survey.actions.push({type: 'report',form: 'assessment',label: 'Assessment Report',content: {source: 'task',contact: c.contact,t_follow_up_count: s.id.match(/(\\d+)$/i)[1]}});emitTask(survey, s);});}}}c.reports.forEach(function(r) {let scheduleName = 'DUMMY_NAME';let followupType = 'DUMMY_NAME';let schedule = null;switch(r.form) {case 'assessment_follow_up':var reportedDate = new Date(r.reported_date);followupType = 'refer';scheduleName = 'assessment-follow-up';var followUpCount = r.fields.follow_up_count ? parseInt(r.fields.follow_up_count, 10) : 1;schedule = Utils.getSchedule('assessment-follow-up');if (schedule&& r && r.fields&& r.fields.referral_follow_up_needed != 'false'&& followUpCount <= 3){schedule.events.forEach(function(s) {var dueDate = new Date(Utils.addDate(reportedDate, s.days));var visit = createTask(c, s, r);visit.date = dueDate;visit.resolved = Utils.isFormSubmittedInWindow(c.reports, 'assessment_follow_up', Utils.addDate(dueDate, s.start * -1).getTime(), Utils.addDate(dueDate, (s.end + 1)).getTime(), followUpCount);visit.actions.push({type: 'report',form: 'assessment_follow_up',label: 'Follow up',content: {source: 'task',source_id: r._id,contact: c.contact,t_follow_up_type: followupType,t_follow_up_count: followUpCount + 1}});emitTask(visit, s);});}break;}});emit('_complete', { _id: true });}}",
+    "schedules": [
+      {
+        "name": "assessment",
+        "events": [
+          {
+            "id": "assessment",
+            "days": 0,
+            "start": 0,
+            "end": 3,
+            "icon": "survey",
+            "title": [
+              {
+                "content": "{{contact.name}}'s assessment",
+                "locale": "en"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "assessment-follow-up",
+        "events": [
+          {
+            "id": "assessment-follow-up-1",
+            "days": 1,
+            "start": 1,
+            "end": 3,
+            "icon": "icon-follow-up",
+            "title": [
+              {
+                "content": "{{contact.name}}'s assessment follow up",
+                "locale": "en"
+              }
+            ]
+          },
+          {
+            "id": "assessment-follow-up-2",
+            "days": 1,
+            "start": 1,
+            "end": 3,
+            "icon": "icon-follow-up",
+            "title": [
+              {
+                "content": "{{contact.name}}'s assessment follow up",
+                "locale": "en"
+              }
+            ]
+          },
+          {
+            "id": "assessment-follow-up-3",
+            "days": 1,
+            "start": 1,
+            "end": 3,
+            "icon": "icon-follow-up",
+            "title": [
+              {
+                "content": "{{contact.name}}'s assessment follow up",
+                "locale": "en"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "targets": {
+      "enabled": true,
+      "items": [
+        {
+          "type": "percent",
+          "id": "u5-diarrhoea-72hr-followup-48hr",
+          "icon": "icon-clinic",
+          "goal": 100,
+          "context": "user.parent && user.parent.parent",
+          "name": [
+            {
+              "locale": "en",
+              "content": "% of Under-5 Diarrhoea Cases for more than 72 hours Followed-up within 48 hours"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "forms": {},
+  "transitions": {
+    "multi_report_alerts": true
+  },
+  "_version": "2.9.0-alpha.4523",
+  "translations": null,
+  "contact_summary": "var cards = [];var context = {};var fields = [];if (contact.type === 'person') {fields = [{label: 'contact.age',value: contact.date_of_birth,width: 4,filter: 'age'}, {label: 'Phone Number',value: contact.phone,width: 4,filter: 'phone'}, {label: 'contact.sex',value: contact.sex,translate: true,width: 4}, {label: 'contact.parent',value: lineage,filter: 'lineage'}];} else {if (lineage) {fields.push({label: 'contact.parent',value: lineage,filter: 'lineage'});}}return {fields: fields,cards: cards,context: context};",
+  "multi_report_alerts": [
+    {
+      "name": "CBDS Pilot",
+      "is_report_counted": "function(report, latest_report) {  return (latest_report.contact.parent.parent._id === report.contact.parent.parent._id && latest_report.fields.cbds_contact && latest_report.fields.cbds_contact !== '' && latest_report.fields.suspected_syndromes && latest_report.fields.suspected_syndromes !== ''); }",
+      "num_reports_threshold": 1,
+      "message": "{{contact.name}} has reported {{new_reports.0.fields.suspected_syndromes}} for {{new_reports.0.fields.patient_age_display}} {{new_reports.0.fields.patient_name}} of {{new_reports.0.contact.parent.community_unit}} C.U. Please follow-up and remember to fill the 'response action' form on Medic Mobile.",
+      "recipients": [
+        "+254721685600",
+        "new_report.fields.cbds_contact"
+      ],
+      "time_window_in_days": 1,
+      "forms": [
+        "assessment_endemic"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,177 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>New Branch</h:title>
+    <model>
+      <instance>
+        <data delimiter="#" id="contact:district_hospital:create" prefix="J1!contact:district_hospital:create!" version="2018-01-24">
+          <inputs>
+            <meta>
+              <location>
+                <lat/>
+                <long/>
+                <error/>
+                <message/>
+              </location>
+            </meta>
+            <user>
+              <contact_id/>
+              <facility_id/>
+              <name/>
+            </user>
+            <contact>
+              <district_name/>
+              <place_notes/>
+            </contact>
+          </inputs>
+          <district_hospital>
+            <name/>
+            <geolocation/>
+            <contact/>
+            <notes/>
+          </district_hospital>
+          <contact>
+            <debug_note/>
+            <parent>PARENT</parent>
+            <type>person</type>
+            <name/>
+            <notes/>
+            <sex/>
+            <date_of_birth/>
+            <phone/>
+            <external_id/>
+          </contact>
+          <init>
+            <contact_name/>
+            <phone1/>
+            <g_sex/>
+            <dob_method>approx</dob_method>
+            <dob_calendar/>
+            <age_years/>
+            <age_months>0</age_months>
+            <dob_raw/>
+            <dob_iso/>
+            <contact_notes/>
+          </init>
+          <meta>
+            <instanceID/>
+          </meta>
+        </data>
+      </instance>
+      <bind nodeset="/data/inputs/user/contact_id" type="string"/>
+      <bind nodeset="/data/inputs/user/facility_id" type="string"/>
+      <bind nodeset="/data/inputs/user/name" type="string"/>
+      <bind nodeset="/data/inputs/contact/district_name" required="true()" type="string"/>
+      <bind nodeset="/data/inputs/contact/place_notes" type="string"/>
+      <bind nodeset="/data/contact/debug_note" readonly="true()" relevant="false()" type="string"/>
+      <bind calculate="." nodeset="/data/contact/parent" type="string"/>
+      <bind calculate="." nodeset="/data/contact/type" type="string"/>
+      <bind calculate=" /data/init/contact_name " nodeset="/data/contact/name" required="true()" type="string"/>
+      <bind calculate=" /data/init/contact_notes " nodeset="/data/contact/notes" type="string"/>
+      <bind calculate=" /data/init/g_sex " nodeset="/data/contact/sex" type="string"/>
+      <bind calculate=" /data/init/dob_iso " nodeset="/data/contact/date_of_birth" type="string"/>
+      <bind calculate=" /data/init/phone1 " nodeset="/data/contact/phone" type="string"/>
+      <bind nodeset="/data/contact/external_id" type="string"/>
+      <bind nodeset="/data/init/contact_name" required="true()" type="string"/>
+      <bind constraint="regex(.,'^\+254\s?(\d{3}\s?){3}|^07\d{2}\s?(\d{3}\s?){2}')" jr:constraintMsg="Please make sure the number is not already in use by another person and is in the format +254 7XX XXX XXX or 07XX XXX XXX." nodeset="/data/init/phone1" type="tel"/>
+      <bind nodeset="/data/init/g_sex" required="true()" type="select1"/>
+      <bind nodeset="/data/init/dob_method" type="select1"/>
+      <bind constraint=".&lt;today()" jr:constraintMsg="Date must be before today" nodeset="/data/init/dob_calendar" relevant="selected(../dob_method,'calendar')" type="date"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="Age must be 0 or more" nodeset="/data/init/age_years" relevant="selected(../dob_method,'approx')" type="int"/>
+      <bind constraint=". &gt;= 0 and . &lt;= 11" jr:constraintMsg="Months must between 0 and 11" nodeset="/data/init/age_months" relevant="selected(../dob_method,'approx')" type="int"/>
+      <bind calculate="if(not(selected( ../dob_method,'approx')), 
+../dob_calendar,
+format-date-time( decimal-date-time( today() ) - (365.25 * ../age_years) - (30.5 * ../age_months ) - 5, &quot;%Y-%m-%d&quot; ) )" nodeset="/data/init/dob_raw" type="string"/>
+      <bind calculate="format-date-time(../dob_raw,&quot;%Y-%m-%d&quot;)" nodeset="/data/init/dob_iso" type="string"/>
+      <bind nodeset="/data/init/contact_notes" type="string"/>
+      <bind calculate=" /data/inputs/contact/district_name " nodeset="/data/district_hospital/name" type="string"/>
+      <bind calculate="concat(../../inputs/meta/location/lat, concat(' ', ../../inputs/meta/location/long))" nodeset="/data/district_hospital/geolocation" type="string"/>
+      <bind calculate="&quot;NEW&quot;" nodeset="/data/district_hospital/contact" type="string"/>
+      <bind calculate=" /data/inputs/contact/place_notes " nodeset="/data/district_hospital/notes" type="string"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/data/meta/instanceID" readonly="true()" type="string"/>
+    </model>
+  </h:head>
+  <h:body>
+    <group ref="/data/inputs">
+      <group appearance="hidden" ref="/data/inputs/user">
+        <input ref="/data/inputs/user/contact_id">
+          <label>Contact ID of the logged in user</label>
+        </input>
+        <input ref="/data/inputs/user/facility_id">
+          <label>Facility ID for the parent user</label>
+        </input>
+        <input ref="/data/inputs/user/name">
+          <label>Name of the logged in user</label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/inputs/contact">
+        <label>Branch Information</label>
+        <input ref="/data/inputs/contact/district_name">
+          <label>Branch Name</label>
+        </input>
+        <input ref="/data/inputs/contact/place_notes">
+          <label>Branch Notes</label>
+        </input>
+      </group>
+    </group>
+    <group appearance="field-list" ref="/data/init">
+      <label>Primary Contact</label>
+      <input ref="/data/init/contact_name">
+        <label>Name</label>
+      </input>
+      <input appearance="numbers" ref="/data/init/phone1">
+        <label>Phone Number</label>
+        <hint>Use one of the following formats: +254 7XX XXX XXX or 07XX XXX XXX</hint>
+      </input>
+      <select1 appearance="horizontal" ref="/data/init/g_sex">
+        <label>Gender</label>
+        <item>
+          <label>Female</label>
+          <value>female</value>
+        </item>
+        <item>
+          <label>Male</label>
+          <value>male</value>
+        </item>
+      </select1>
+      <select1 appearance="horizontal" ref="/data/init/dob_method">
+        <label>Method to select date of birth</label>
+        <item>
+          <label>With calendar (preferred)</label>
+          <value>calendar</value>
+        </item>
+        <item>
+          <label>With current age</label>
+          <value>approx</value>
+        </item>
+      </select1>
+      <input ref="/data/init/dob_calendar">
+        <label>Date of Birth</label>
+      </input>
+      <input ref="/data/init/age_years">
+        <label>Age</label>
+        <hint>Age in years</hint>
+      </input>
+      <input ref="/data/init/age_months">
+        <hint>And how many months?</hint>
+      </input>
+      <input ref="/data/init/contact_notes">
+        <label>Contact Notes</label>
+      </input>
+      <group appearance="field-list" ref="/data/contact">
+        <input ref="/data/contact/debug_note">
+          <label>DEBUG
+  User's facility ID: <output value=" /data/inputs/user/facility_id "/></label>
+        </input>
+        <input appearance="hidden" ref="/data/contact/parent">
+          <label>Parent</label>
+          <hint>mandatory</hint>
+        </input>
+        <input appearance="hidden" ref="/data/contact/external_id">
+          <label>ID</label>
+        </input>
+        </group>
+      </group>
+    <group ref="/data/district_hospital"/>
+  </h:body>
+</h:html>

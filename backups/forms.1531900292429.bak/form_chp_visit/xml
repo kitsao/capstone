@@ -1,0 +1,1155 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>CHV Visit</h:title>
+    <model>
+      <instance>
+        <chp_visit delimiter="#" id="chp_visit" prefix="J1!chp_visit!" version="2016-11-30 00:00:00">
+          <inputs>
+            <meta>
+              <location>
+                <lat/>
+                <long/>
+                <error/>
+                <message/>
+              </location>
+            </meta>
+            <source>user</source>
+            <source_id/>
+            <contact>
+              <_id/>
+              <name/>
+              <contact>
+                <name/>
+              </contact>
+            </contact>
+          </inputs>
+          <place_id/>
+          <place_name/>
+          <chp_name/>
+          <debug/>
+          <chp_not_ready_str/>
+          <chp_not_ready_str_tmp/>
+          <chp_not_ready_str_len/>
+          <mrdt_steps_str/>
+          <mrdt_steps_str_tmp/>
+          <mrdt_steps_str_len/>
+          <cough_steps_str/>
+          <cough_steps_str_tmp/>
+          <cough_steps_str_len/>
+          <chp_counselling_str/>
+          <chp_counselling_str_tmp/>
+          <chp_counselling_str_len/>
+          <steps_not_followed_str/>
+          <steps_not_followed_str_tmp/>
+          <steps_not_followed_str_len/>
+          <geolocation/>
+          <group_overall>
+            <group_stock_check>
+              <stock_check/>
+              <preparation_group>
+                <chp_ready/>
+                <chp_not_ready/>
+                <has_flipbook/>
+              </preparation_group>
+              <group_stock>
+                <act/>
+                <ors_zinc/>
+                <ors/>
+                <mrdt/>
+                <amoxicillin/>
+                <quality_of_storage/>
+              </group_stock>
+              <suggestions/>
+            </group_stock_check>
+            <group_sick_child>
+              <sick_child/>
+              <thermometer_used_properly/>
+              <mrdt_done/>
+              <mrdt_steps/>
+              <kid_has_cough/>
+              <cough_steps/>
+              <kid_has_diarrhoea/>
+              <explain_referral_requirements/>
+              <sick_child_observed/>
+              <counselling_properly/>
+              <missed_during_counselling/>
+              <suggestions/>
+            </group_sick_child>
+            <group_pregnancy_registration>
+              <pregnancy_registration/>
+              <encouraging_antenatal_visits/>
+              <counselling_on_nutrition/>
+              <mentioning_about_protection/>
+              <check_adherence_to_treatment/>
+              <check_referral_completion/>
+              <suggestions/>
+            </group_pregnancy_registration>
+            <group_newborn_visit>
+              <newborn_visit/>
+              <counselling_about_newborn_care/>
+              <counselling_about_exclusive_breastfeeding/>
+              <counselling_mother_for_dangersigns/>
+              <wash_hands_before_checking_baby/>
+              <suggestions/>
+            </group_newborn_visit>
+            <group_household_reg>
+              <household_registration/>
+              <reg_meet_and_greet/>
+              <lg_introduction/>
+              <reg_handle_objections/>
+              <phone_captured/>
+              <suggestions/>
+            </group_household_reg>
+            <group_sales>
+              <sales/>
+              <follow_7_steps/>
+              <steps_not_followed/>
+              <products_introduced/>
+              <other_product/>
+              <suggestions/>
+            </group_sales>
+            <general_comments/>
+          </group_overall>
+          <location>
+            <geopoint/>
+          </location>
+          <group_summary>
+            <submit/>
+            <r_summary/>
+            <r_chp_info/>
+            <group_summary_stock_check>
+              <r_preparation_improvement/>
+              <r_imp_chp_ready/>
+              <r_imp_has_flipbook/>
+              <r_preparation_adequate/>
+              <r_stock_improvement/>
+              <r_imp_act/>
+              <r_imp_ors/>
+              <r_imp_ors_zinc/>
+              <r_imp_mrdt/>
+              <r_imp_amoxicillin/>
+              <r_imp_quality_of_storage/>
+              <r_stock_adequate/>
+            </group_summary_stock_check>
+            <group_summary_sick_child>
+              <r_sick_child_improvement/>
+              <r_imp_use_thermometer/>
+              <r_imp_mrdt_done/>
+              <r_imp_cough/>
+              <r_imp_diarrhoea/>
+              <r_imp_explain_referral_requirements/>
+              <r__imp_missed_counselling/>
+              <r_sick_child_adq/>
+            </group_summary_sick_child>
+            <group_summary_pregnancy>
+              <r_imp_pregnancy_registration/>
+              <r_imp_encouraging_antenatal_visits/>
+              <r_imp_counselling_on_nutrition/>
+              <r_imp_mentioning_about_protection/>
+              <r_imp_check_adherence_to_treatment/>
+              <r_imp_check_referral_completion/>
+              <r_adq_pregnancy_registration/>
+            </group_summary_pregnancy>
+            <group_summary_newborn_visit>
+              <r_imp_newborn_visit/>
+              <r_imp_counselling_about_newborn_care/>
+              <r_imp_counselling_about_exclusive_breastfeeding/>
+              <r_imp_wash_hands_before_checking_baby/>
+              <r_imp_counselling_mother_for_dangersigns/>
+              <r_adq_newborn_visit/>
+            </group_summary_newborn_visit>
+            <group_summary_household_reg>
+              <r_imp_household_reg/>
+              <r_imp_reg_meet_and_greet/>
+              <r_imp_lg_intrpduction/>
+              <r_imp_reg_handle_objections/>
+              <r_adq_household_reg/>
+            </group_summary_household_reg>
+            <group_summary_sales>
+              <r_imp_sales/>
+              <r_imp_7_steps/>
+              <r_adq_household_reg/>
+            </group_summary_sales>
+            <group_not_observed>
+              <r_no_info/>
+              <r_stock_check/>
+              <r_sick_child/>
+              <r_pregnancy_registration/>
+              <r_newborn_visit/>
+              <r_household_registration/>
+              <r_sales/>
+            </group_not_observed>
+          </group_summary>
+          <meta>
+            <instanceID/>
+          </meta>
+        </chp_visit>
+      </instance>
+      <instance id="contact-summary"/>
+      <bind nodeset="/chp_visit/inputs" relevant="./source = 'user'"/>
+      <bind nodeset="/chp_visit/inputs/source" type="string"/>
+      <bind nodeset="/chp_visit/inputs/source_id" type="string"/>
+      <bind nodeset="/chp_visit/inputs/contact/_id" type="db:health_center"/>
+      <bind nodeset="/chp_visit/inputs/contact/name" type="string"/>
+      <bind nodeset="/chp_visit/inputs/contact/contact/name" type="string"/>
+      <bind calculate="../inputs/contact/_id" nodeset="/chp_visit/place_id" type="string"/>
+      <bind calculate="../inputs/contact/name" nodeset="/chp_visit/place_name" type="string"/>
+      <bind calculate="../inputs/contact/contact/name" nodeset="/chp_visit/chp_name" type="string"/>
+      <bind nodeset="/chp_visit/debug" readonly="true()" relevant="false()" type="string"/>
+      <bind calculate="substr( /chp_visit/chp_not_ready_str_tmp ,0, /chp_visit/chp_not_ready_str_len )" nodeset="/chp_visit/chp_not_ready_str" type="string"/>
+      <bind calculate="if( count-selected( /chp_visit/group_overall/group_stock_check/preparation_group/chp_not_ready ) &gt; 0, 
+ concat(
+ if(selected( /chp_visit/group_overall/group_stock_check/preparation_group/chp_not_ready , 'uniform'), 'Uniform, ', ''),
+ if(selected( /chp_visit/group_overall/group_stock_check/preparation_group/chp_not_ready , 'products'), 'Products, ', ''),
+ if(selected( /chp_visit/group_overall/group_stock_check/preparation_group/chp_not_ready , 'charged_phone'), 'Charged phone, ', ''),
+ if(selected( /chp_visit/group_overall/group_stock_check/preparation_group/chp_not_ready , 'thermometer'), 'Thermometer, ', ''),
+ ),
+ ''
+)" nodeset="/chp_visit/chp_not_ready_str_tmp" type="string"/>
+      <bind calculate="string-length( /chp_visit/chp_not_ready_str_tmp ) -2" nodeset="/chp_visit/chp_not_ready_str_len" type="string"/>
+      <bind calculate="substr( /chp_visit/mrdt_steps_str_tmp ,0, /chp_visit/mrdt_steps_str_len )" nodeset="/chp_visit/mrdt_steps_str" type="string"/>
+      <bind calculate="if( count-selected( /chp_visit/group_overall/group_sick_child/mrdt_steps ) &gt; 0, 
+ concat(
+ if(selected( /chp_visit/group_overall/group_sick_child/mrdt_steps , 'put_on_gloves'), 'CHV did not put on gloves, ', ''),
+ if(selected( /chp_visit/group_overall/group_sick_child/mrdt_steps , 'put_sharp_in_box'), 'CHV did not put sharp in box, ', ''),
+ if(selected( /chp_visit/group_overall/group_sick_child/mrdt_steps , 'able_to_interpret_results'), 'CHV did not interpret results properly, ', ''),
+ ),
+ ''
+)" nodeset="/chp_visit/mrdt_steps_str_tmp" type="string"/>
+      <bind calculate="string-length( /chp_visit/mrdt_steps_str_tmp )-2" nodeset="/chp_visit/mrdt_steps_str_len" type="string"/>
+      <bind calculate="substr( /chp_visit/cough_steps_str_tmp ,0,  /chp_visit/cough_steps_str_len )" nodeset="/chp_visit/cough_steps_str" type="string"/>
+      <bind calculate="if( count-selected( /chp_visit/group_overall/group_sick_child/cough_steps ) &gt; 0, 
+ concat(
+ if(selected( /chp_visit/group_overall/group_sick_child/cough_steps , 'check_chest_indrawing'), 'CHV did not check chest indrawing properly, ', ''),
+ if(selected( /chp_visit/group_overall/group_sick_child/cough_steps , 'count_breath'), 'CHV did not count breath properly, ', ''),
+ ),
+ ''
+)" nodeset="/chp_visit/cough_steps_str_tmp" type="string"/>
+      <bind calculate="string-length( /chp_visit/cough_steps_str_tmp )-2" nodeset="/chp_visit/cough_steps_str_len" type="string"/>
+      <bind calculate="substr( /chp_visit/chp_counselling_str_tmp ,0, /chp_visit/chp_counselling_str_len )" nodeset="/chp_visit/chp_counselling_str" type="string"/>
+      <bind calculate="if( count-selected( /chp_visit/group_overall/group_sick_child/missed_during_counselling ) &gt; 0, 
+ concat(
+ if(selected( /chp_visit/group_overall/group_sick_child/missed_during_counselling , 'completion_of_treatment'), 'Completion of treatment, ', ''),
+ if(selected( /chp_visit/group_overall/group_sick_child/missed_during_counselling , 'good_feeding'), 'Good feeding, ', ''),
+ if(selected( /chp_visit/group_overall/group_sick_child/missed_during_counselling , 'referral'), 'Referral if no improvement in child condition, ', ''),
+ ),
+ ''
+)" nodeset="/chp_visit/chp_counselling_str_tmp" type="string"/>
+      <bind calculate="string-length( /chp_visit/chp_counselling_str_tmp )-2" nodeset="/chp_visit/chp_counselling_str_len" type="string"/>
+      <bind calculate="substr( /chp_visit/steps_not_followed_str_tmp ,0, /chp_visit/steps_not_followed_str_len )" nodeset="/chp_visit/steps_not_followed_str" type="string"/>
+      <bind calculate="if(count-selected( /chp_visit/group_overall/group_sales/steps_not_followed ) &gt; 0,
+ concat(
+ if(selected( /chp_visit/group_overall/group_sales/steps_not_followed ,'prepare'),'Prepare, ',''),
+ if(selected( /chp_visit/group_overall/group_sales/steps_not_followed ,'meet_and_greet'),'Meet and greet, ','')
+ if(selected( /chp_visit/group_overall/group_sales/steps_not_followed ,'learn_about_customer'),'Learn about customer, ','')
+ if(selected( /chp_visit/group_overall/group_sales/steps_not_followed ,'product_introduction'),'Product introduction, ','')
+ if(selected( /chp_visit/group_overall/group_sales/steps_not_followed ,'handle_objections'),'Handle objections, ','')
+ if(selected( /chp_visit/group_overall/group_sales/steps_not_followed ,'sales_closed'),'Sales closed, ','')
+ if(selected( /chp_visit/group_overall/group_sales/steps_not_followed ,'follow_up'),'Follow up, ','')
+ ),
+'')" nodeset="/chp_visit/steps_not_followed_str_tmp" type="string"/>
+      <bind calculate="string-length( /chp_visit/steps_not_followed_str_tmp ) -2" nodeset="/chp_visit/steps_not_followed_str_len" type="string"/>
+      <bind calculate=" /chp_visit/location/geopoint " nodeset="/chp_visit/geolocation" type="string"/>
+      <bind constraint=" /chp_visit/group_overall/group_stock_check/stock_check  = 'yes'" jr:constraintMsg="You are required to observe this during every visit." nodeset="/chp_visit/group_overall/group_stock_check/stock_check" required="true()" type="select1"/>
+      <bind nodeset="/chp_visit/group_overall/group_stock_check/preparation_group" relevant=" /chp_visit/group_overall/group_stock_check/stock_check  = 'yes'"/>
+      <bind nodeset="/chp_visit/group_overall/group_stock_check/preparation_group/chp_ready" required="true()" type="select1"/>
+      <bind nodeset="/chp_visit/group_overall/group_stock_check/preparation_group/chp_not_ready" relevant=" /chp_visit/group_overall/group_stock_check/preparation_group/chp_ready  = 'no'" required="true()" type="select"/>
+      <bind nodeset="/chp_visit/group_overall/group_stock_check/preparation_group/has_flipbook" required="true()" type="select1"/>
+      <bind nodeset="/chp_visit/group_overall/group_stock_check/group_stock" relevant=" /chp_visit/group_overall/group_stock_check/stock_check  = 'yes'"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="ACT stock level must be greater than or equal to zero" nodeset="/chp_visit/group_overall/group_stock_check/group_stock/act" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="ORS + Zinc stock level must be greater than or equal to zero" nodeset="/chp_visit/group_overall/group_stock_check/group_stock/ors_zinc" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="ORS stock level must be greater than or equal to zero" nodeset="/chp_visit/group_overall/group_stock_check/group_stock/ors" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="MRDT stock level must be greater than or equal to zero" nodeset="/chp_visit/group_overall/group_stock_check/group_stock/mrdt" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="Amoxicillin stock level must be greater than or equal to zero" nodeset="/chp_visit/group_overall/group_stock_check/group_stock/amoxicillin" required="true()" type="int"/>
+      <bind nodeset="/chp_visit/group_overall/group_stock_check/group_stock/quality_of_storage" required="true()" type="select1"/>
+      <bind nodeset="/chp_visit/group_overall/group_stock_check/suggestions" relevant=" /chp_visit/group_overall/group_stock_check/stock_check  = 'yes'" required="false()" type="string"/>
+      <bind nodeset="/chp_visit/group_overall/group_sick_child/sick_child" required="true()" type="select1"/>
+      <bind nodeset="/chp_visit/group_overall/group_sick_child/thermometer_used_properly" relevant=" /chp_visit/group_overall/group_sick_child/sick_child  = 'yes'" required="true()" type="select1"/>
+      <bind nodeset="/chp_visit/group_overall/group_sick_child/mrdt_done" relevant=" /chp_visit/group_overall/group_sick_child/sick_child  = 'yes'" required="true()" type="select1"/>
+      <bind nodeset="/chp_visit/group_overall/group_sick_child/mrdt_steps" relevant=" /chp_visit/group_overall/group_sick_child/mrdt_done  = &quot;no&quot;" required="true()" type="select"/>
+      <bind nodeset="/chp_visit/group_overall/group_sick_child/kid_has_cough" relevant=" /chp_visit/group_overall/group_sick_child/sick_child  = 'yes'" required="true()" type="select1"/>
+      <bind nodeset="/chp_visit/group_overall/group_sick_child/cough_steps" relevant=" /chp_visit/group_overall/group_sick_child/kid_has_cough  = 'no'" required="true()" type="select"/>
+      <bind nodeset="/chp_visit/group_overall/group_sick_child/kid_has_diarrhoea" relevant=" /chp_visit/group_overall/group_sick_child/sick_child  = 'yes'" required="true()" type="select1"/>
+      <bind nodeset="/chp_visit/group_overall/group_sick_child/explain_referral_requirements" relevant=" /chp_visit/group_overall/group_sick_child/sick_child  = 'yes'" required="true()" type="select1"/>
+      <bind nodeset="/chp_visit/group_overall/group_sick_child/sick_child_observed" relevant=" /chp_visit/group_overall/group_sick_child/sick_child  = 'yes'" required="true()" type="select1"/>
+      <bind nodeset="/chp_visit/group_overall/group_sick_child/counselling_properly" relevant=" /chp_visit/group_overall/group_sick_child/sick_child_observed  = 'yes'" required="true()" type="select1"/>
+      <bind nodeset="/chp_visit/group_overall/group_sick_child/missed_during_counselling" relevant=" /chp_visit/group_overall/group_sick_child/counselling_properly  = 'no'" required="true()" type="select"/>
+      <bind nodeset="/chp_visit/group_overall/group_sick_child/suggestions" relevant=" /chp_visit/group_overall/group_sick_child/sick_child  = 'yes'" required="false()" type="string"/>
+      <bind nodeset="/chp_visit/group_overall/group_pregnancy_registration/pregnancy_registration" required="true()" type="select1"/>
+      <bind nodeset="/chp_visit/group_overall/group_pregnancy_registration/encouraging_antenatal_visits" relevant=" /chp_visit/group_overall/group_pregnancy_registration/pregnancy_registration  = 'yes'" required="true()" type="select1"/>
+      <bind nodeset="/chp_visit/group_overall/group_pregnancy_registration/counselling_on_nutrition" relevant=" /chp_visit/group_overall/group_pregnancy_registration/pregnancy_registration  = 'yes'" required="true()" type="select1"/>
+      <bind nodeset="/chp_visit/group_overall/group_pregnancy_registration/mentioning_about_protection" relevant=" /chp_visit/group_overall/group_pregnancy_registration/pregnancy_registration  = 'yes'" required="true()" type="select1"/>
+      <bind nodeset="/chp_visit/group_overall/group_pregnancy_registration/check_adherence_to_treatment" relevant=" /chp_visit/group_overall/group_pregnancy_registration/pregnancy_registration  = 'yes'" required="false()" type="select1"/>
+      <bind nodeset="/chp_visit/group_overall/group_pregnancy_registration/check_referral_completion" relevant=" /chp_visit/group_overall/group_pregnancy_registration/pregnancy_registration  = 'yes'" required="false()" type="select1"/>
+      <bind nodeset="/chp_visit/group_overall/group_pregnancy_registration/suggestions" relevant=" /chp_visit/group_overall/group_pregnancy_registration/pregnancy_registration  = 'yes'" required="false()" type="string"/>
+      <bind nodeset="/chp_visit/group_overall/group_newborn_visit/newborn_visit" required="true()" type="select1"/>
+      <bind nodeset="/chp_visit/group_overall/group_newborn_visit/counselling_about_newborn_care" relevant=" /chp_visit/group_overall/group_newborn_visit/newborn_visit  = 'yes'" required="true()" type="select1"/>
+      <bind nodeset="/chp_visit/group_overall/group_newborn_visit/counselling_about_exclusive_breastfeeding" relevant=" /chp_visit/group_overall/group_newborn_visit/newborn_visit  = 'yes'" required="true()" type="select1"/>
+      <bind nodeset="/chp_visit/group_overall/group_newborn_visit/counselling_mother_for_dangersigns" relevant=" /chp_visit/group_overall/group_newborn_visit/newborn_visit  = 'yes'" required="true()" type="select1"/>
+      <bind nodeset="/chp_visit/group_overall/group_newborn_visit/wash_hands_before_checking_baby" relevant=" /chp_visit/group_overall/group_newborn_visit/newborn_visit  = 'yes'" required="true()" type="select1"/>
+      <bind nodeset="/chp_visit/group_overall/group_newborn_visit/suggestions" relevant=" /chp_visit/group_overall/group_newborn_visit/newborn_visit  = 'yes'" required="false()" type="string"/>
+      <bind nodeset="/chp_visit/group_overall/group_household_reg/household_registration" required="true()" type="select1"/>
+      <bind nodeset="/chp_visit/group_overall/group_household_reg/reg_meet_and_greet" relevant=" /chp_visit/group_overall/group_household_reg/household_registration  = 'yes'" required="true()" type="select1"/>
+      <bind nodeset="/chp_visit/group_overall/group_household_reg/lg_introduction" relevant=" /chp_visit/group_overall/group_household_reg/household_registration  = 'yes'" required="true()" type="select1"/>
+      <bind nodeset="/chp_visit/group_overall/group_household_reg/reg_handle_objections" relevant=" /chp_visit/group_overall/group_household_reg/household_registration  = 'yes'" required="true()" type="select1"/>
+      <bind nodeset="/chp_visit/group_overall/group_household_reg/phone_captured" relevant=" /chp_visit/group_overall/group_household_reg/household_registration  = 'yes'" required="true()" type="select1"/>
+      <bind nodeset="/chp_visit/group_overall/group_household_reg/suggestions" relevant=" /chp_visit/group_overall/group_household_reg/household_registration  = 'yes'" required="false()" type="string"/>
+      <bind nodeset="/chp_visit/group_overall/group_sales/sales" required="true()" type="select1"/>
+      <bind nodeset="/chp_visit/group_overall/group_sales/follow_7_steps" relevant=" /chp_visit/group_overall/group_sales/sales  = 'yes'" required="true()" type="select1"/>
+      <bind nodeset="/chp_visit/group_overall/group_sales/steps_not_followed" relevant=" /chp_visit/group_overall/group_sales/follow_7_steps  = 'no'" required="true()" type="select"/>
+      <bind nodeset="/chp_visit/group_overall/group_sales/products_introduced" relevant=" /chp_visit/group_overall/group_sales/sales  = 'yes'" required="true()" type="select"/>
+      <bind nodeset="/chp_visit/group_overall/group_sales/other_product" relevant="selected( /chp_visit/group_overall/group_sales/products_introduced , 'other')" required="true()" type="string"/>
+      <bind nodeset="/chp_visit/group_overall/group_sales/suggestions" relevant=" /chp_visit/group_overall/group_sales/sales  = 'yes'" required="false()" type="string"/>
+      <bind nodeset="/chp_visit/group_overall/general_comments" relevant=" /chp_visit/group_overall/group_sick_child/sick_child  = 'no' and  /chp_visit/group_overall/group_pregnancy_registration/pregnancy_registration  = 'no' and  /chp_visit/group_overall/group_newborn_visit/newborn_visit  = 'no' and  /chp_visit/group_overall/group_household_reg/household_registration  = 'no' and  /chp_visit/group_overall/group_sales/sales  = 'no'" required="true()" type="string"/>
+      <bind nodeset="/chp_visit/location/geopoint" type="geopoint"/>
+      <bind nodeset="/chp_visit/group_summary/submit" readonly="true()" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/r_summary" readonly="true()" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/r_chp_info" readonly="true()" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_stock_check" relevant=" /chp_visit/group_overall/group_stock_check/stock_check  = &quot;yes&quot;"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_stock_check/r_preparation_improvement" readonly="true()" relevant=" /chp_visit/group_overall/group_stock_check/preparation_group/chp_ready  = 'no' or  /chp_visit/group_overall/group_stock_check/preparation_group/has_flipbook  = 'no'" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_stock_check/r_imp_chp_ready" readonly="true()" relevant=" /chp_visit/group_overall/group_stock_check/preparation_group/chp_ready  = 'no'" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_stock_check/r_imp_has_flipbook" readonly="true()" relevant=" /chp_visit/group_overall/group_stock_check/preparation_group/has_flipbook  = 'no'" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_stock_check/r_preparation_adequate" readonly="true()" relevant=" /chp_visit/group_overall/group_stock_check/preparation_group/chp_ready  = 'yes' and  /chp_visit/group_overall/group_stock_check/preparation_group/has_flipbook  = 'yes'" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_stock_check/r_stock_improvement" readonly="true()" relevant=" /chp_visit/group_overall/group_stock_check/group_stock/act  &lt; 2 or  /chp_visit/group_overall/group_stock_check/group_stock/ors  &lt; 2 or  /chp_visit/group_overall/group_stock_check/group_stock/ors_zinc  &lt; 2 or  /chp_visit/group_overall/group_stock_check/group_stock/mrdt  &lt; 2 or  /chp_visit/group_overall/group_stock_check/group_stock/amoxicillin  &lt; 2 or  /chp_visit/group_overall/group_stock_check/group_stock/quality_of_storage  = 1" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_stock_check/r_imp_act" readonly="true()" relevant=" /chp_visit/group_overall/group_stock_check/group_stock/act  &lt; 2" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_stock_check/r_imp_ors" readonly="true()" relevant=" /chp_visit/group_overall/group_stock_check/group_stock/ors  &lt; 2" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_stock_check/r_imp_ors_zinc" readonly="true()" relevant=" /chp_visit/group_overall/group_stock_check/group_stock/ors_zinc  &lt; 2" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_stock_check/r_imp_mrdt" readonly="true()" relevant=" /chp_visit/group_overall/group_stock_check/group_stock/mrdt  &lt; 2" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_stock_check/r_imp_amoxicillin" readonly="true()" relevant=" /chp_visit/group_overall/group_stock_check/group_stock/amoxicillin  &lt; 2" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_stock_check/r_imp_quality_of_storage" readonly="true()" relevant=" /chp_visit/group_overall/group_stock_check/group_stock/quality_of_storage  = 1" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_stock_check/r_stock_adequate" readonly="true()" relevant=" /chp_visit/group_overall/group_stock_check/group_stock/act  &gt;= 2 and  /chp_visit/group_overall/group_stock_check/group_stock/ors  &gt;=2 and  /chp_visit/group_overall/group_stock_check/group_stock/ors_zinc  &gt;= 2 and  /chp_visit/group_overall/group_stock_check/group_stock/mrdt  &gt;= 2 and  /chp_visit/group_overall/group_stock_check/group_stock/amoxicillin  &gt;= 2 and  /chp_visit/group_overall/group_stock_check/group_stock/quality_of_storage  &gt; 1" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_sick_child" relevant=" /chp_visit/group_overall/group_sick_child/sick_child  = 'yes'"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_sick_child/r_sick_child_improvement" readonly="true()" relevant=" /chp_visit/group_overall/group_sick_child/thermometer_used_properly  = 'no' or  /chp_visit/group_overall/group_sick_child/mrdt_done  = 'no' or  /chp_visit/group_overall/group_sick_child/kid_has_cough  = 'yes' or  /chp_visit/group_overall/group_sick_child/kid_has_diarrhoea  = 'no' or  /chp_visit/group_overall/group_sick_child/counselling_properly  = 'no' or  /chp_visit/group_overall/group_sick_child/explain_referral_requirements  = 'no'" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_sick_child/r_imp_use_thermometer" readonly="true()" relevant=" /chp_visit/group_overall/group_sick_child/thermometer_used_properly  = 'no'" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_sick_child/r_imp_mrdt_done" readonly="true()" relevant=" /chp_visit/group_overall/group_sick_child/mrdt_done  = 'no'" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_sick_child/r_imp_cough" readonly="true()" relevant=" /chp_visit/group_overall/group_sick_child/kid_has_cough  = 'no'" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_sick_child/r_imp_diarrhoea" readonly="true()" relevant=" /chp_visit/group_overall/group_sick_child/kid_has_diarrhoea  = 'no'" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_sick_child/r_imp_explain_referral_requirements" readonly="true()" relevant=" /chp_visit/group_overall/group_sick_child/explain_referral_requirements  = 'no'" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_sick_child/r__imp_missed_counselling" readonly="true()" relevant=" /chp_visit/group_overall/group_sick_child/counselling_properly  = 'no'" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_sick_child/r_sick_child_adq" readonly="true()" relevant=" /chp_visit/group_overall/group_sick_child/thermometer_used_properly  = 'yes' and  /chp_visit/group_overall/group_sick_child/mrdt_done  = 'yes' and  /chp_visit/group_overall/group_sick_child/kid_has_cough  = 'yes' and  /chp_visit/group_overall/group_sick_child/kid_has_diarrhoea  = 'yes' and  /chp_visit/group_overall/group_sick_child/explain_referral_requirements  = 'yes'" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_pregnancy" relevant=" /chp_visit/group_overall/group_pregnancy_registration/pregnancy_registration  = 'yes'"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_pregnancy/r_imp_pregnancy_registration" readonly="true()" relevant=" /chp_visit/group_overall/group_pregnancy_registration/encouraging_antenatal_visits  = 'no' or  /chp_visit/group_overall/group_pregnancy_registration/counselling_on_nutrition  = 'no' or  /chp_visit/group_overall/group_pregnancy_registration/mentioning_about_protection  = 'no' or  /chp_visit/group_overall/group_pregnancy_registration/check_adherence_to_treatment  = 'no' or  /chp_visit/group_overall/group_pregnancy_registration/check_referral_completion  = 'no'" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_pregnancy/r_imp_encouraging_antenatal_visits" readonly="true()" relevant=" /chp_visit/group_overall/group_pregnancy_registration/encouraging_antenatal_visits  = 'no'" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_pregnancy/r_imp_counselling_on_nutrition" readonly="true()" relevant=" /chp_visit/group_overall/group_pregnancy_registration/counselling_on_nutrition  = 'no'" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_pregnancy/r_imp_mentioning_about_protection" readonly="true()" relevant=" /chp_visit/group_overall/group_pregnancy_registration/mentioning_about_protection  = 'no'" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_pregnancy/r_imp_check_adherence_to_treatment" readonly="true()" relevant=" /chp_visit/group_overall/group_pregnancy_registration/check_adherence_to_treatment  = 'no'" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_pregnancy/r_imp_check_referral_completion" readonly="true()" relevant=" /chp_visit/group_overall/group_pregnancy_registration/check_referral_completion  = 'no'" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_pregnancy/r_adq_pregnancy_registration" readonly="true()" relevant=" /chp_visit/group_overall/group_pregnancy_registration/encouraging_antenatal_visits  = 'yes' and  /chp_visit/group_overall/group_pregnancy_registration/counselling_on_nutrition  = 'yes' and  /chp_visit/group_overall/group_pregnancy_registration/mentioning_about_protection  = 'yes' and  /chp_visit/group_overall/group_pregnancy_registration/check_adherence_to_treatment  = 'yes' and  /chp_visit/group_overall/group_pregnancy_registration/check_referral_completion  = 'yes'" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_newborn_visit" relevant=" /chp_visit/group_overall/group_newborn_visit/newborn_visit  = 'yes'"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_newborn_visit/r_imp_newborn_visit" readonly="true()" relevant=" /chp_visit/group_overall/group_pregnancy_registration/encouraging_antenatal_visits  = 'no' or  /chp_visit/group_overall/group_pregnancy_registration/counselling_on_nutrition  = 'no' or  /chp_visit/group_overall/group_pregnancy_registration/mentioning_about_protection  = 'no' or  /chp_visit/group_overall/group_pregnancy_registration/check_adherence_to_treatment  = 'no' or  /chp_visit/group_overall/group_pregnancy_registration/check_referral_completion  = 'no'" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_newborn_visit/r_imp_counselling_about_newborn_care" readonly="true()" relevant=" /chp_visit/group_overall/group_newborn_visit/counselling_about_newborn_care  = 'no'" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_newborn_visit/r_imp_counselling_about_exclusive_breastfeeding" readonly="true()" relevant=" /chp_visit/group_overall/group_newborn_visit/counselling_about_exclusive_breastfeeding  = 'no'" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_newborn_visit/r_imp_wash_hands_before_checking_baby" readonly="true()" relevant=" /chp_visit/group_overall/group_newborn_visit/wash_hands_before_checking_baby  = 'no'" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_newborn_visit/r_imp_counselling_mother_for_dangersigns" readonly="true()" relevant=" /chp_visit/group_overall/group_newborn_visit/counselling_mother_for_dangersigns  = 'no'" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_newborn_visit/r_adq_newborn_visit" readonly="true()" relevant=" /chp_visit/group_overall/group_pregnancy_registration/encouraging_antenatal_visits  = 'yes' and  /chp_visit/group_overall/group_pregnancy_registration/counselling_on_nutrition  = 'yes' and  /chp_visit/group_overall/group_pregnancy_registration/mentioning_about_protection  = 'yes' and  /chp_visit/group_overall/group_pregnancy_registration/check_adherence_to_treatment  = 'yes' and  /chp_visit/group_overall/group_pregnancy_registration/check_referral_completion  = 'yes'" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_household_reg" relevant=" /chp_visit/group_overall/group_household_reg/household_registration  = 'yes'"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_household_reg/r_imp_household_reg" readonly="true()" relevant=" /chp_visit/group_overall/group_household_reg/reg_meet_and_greet  &lt;= 2 or  /chp_visit/group_overall/group_household_reg/lg_introduction  &lt;= 2 or  /chp_visit/group_overall/group_household_reg/reg_handle_objections  &lt;= 2" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_household_reg/r_imp_reg_meet_and_greet" readonly="true()" relevant=" /chp_visit/group_overall/group_household_reg/reg_meet_and_greet  &lt;= 2" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_household_reg/r_imp_lg_intrpduction" readonly="true()" relevant=" /chp_visit/group_overall/group_household_reg/lg_introduction  &lt;= 2" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_household_reg/r_imp_reg_handle_objections" readonly="true()" relevant=" /chp_visit/group_overall/group_household_reg/reg_handle_objections  &lt;= 2" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_household_reg/r_adq_household_reg" readonly="true()" relevant=" /chp_visit/group_overall/group_household_reg/reg_meet_and_greet  &gt; 2 and  /chp_visit/group_overall/group_household_reg/lg_introduction  &gt; 2 and  /chp_visit/group_overall/group_household_reg/reg_handle_objections  &gt; 2" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_sales" relevant=" /chp_visit/group_overall/group_sales/sales  = 'yes'"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_sales/r_imp_sales" readonly="true()" relevant=" /chp_visit/group_overall/group_sales/follow_7_steps  = 'no'" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_sales/r_imp_7_steps" readonly="true()" relevant=" /chp_visit/group_overall/group_sales/follow_7_steps  = 'no'" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_summary_sales/r_adq_household_reg" readonly="true()" relevant=" /chp_visit/group_overall/group_sales/follow_7_steps  = 'yes'" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_not_observed/r_no_info" readonly="true()" relevant=" /chp_visit/group_overall/group_stock_check/stock_check  = 'no' or  /chp_visit/group_overall/group_sick_child/sick_child  = 'no' or  /chp_visit/group_overall/group_pregnancy_registration/pregnancy_registration  = 'no' or  /chp_visit/group_overall/group_newborn_visit/newborn_visit  = 'no' or  /chp_visit/group_overall/group_household_reg/household_registration ='no' or  /chp_visit/group_overall/group_sales/sales  = 'no'" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_not_observed/r_stock_check" readonly="true()" relevant=" /chp_visit/group_overall/group_stock_check/stock_check  = 'no'" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_not_observed/r_sick_child" readonly="true()" relevant=" /chp_visit/group_overall/group_sick_child/sick_child  = 'no'" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_not_observed/r_pregnancy_registration" readonly="true()" relevant=" /chp_visit/group_overall/group_pregnancy_registration/pregnancy_registration  = 'no'" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_not_observed/r_newborn_visit" readonly="true()" relevant=" /chp_visit/group_overall/group_newborn_visit/newborn_visit  = 'no'" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_not_observed/r_household_registration" readonly="true()" relevant=" /chp_visit/group_overall/group_household_reg/household_registration  = 'no'" type="string"/>
+      <bind nodeset="/chp_visit/group_summary/group_not_observed/r_sales" readonly="true()" relevant=" /chp_visit/group_overall/group_sales/sales  = 'no'" type="string"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/chp_visit/meta/instanceID" readonly="true()" type="string"/>
+    </model>
+  </h:head>
+  <h:body class="pages">
+    <group appearance="field-list" ref="/chp_visit/inputs">
+      <label>CHV Area</label>
+      <input appearance="hidden" ref="/chp_visit/inputs/source">
+        <label>Source</label>
+      </input>
+      <input appearance="hidden" ref="/chp_visit/inputs/source_id">
+        <label>Source ID</label>
+      </input>
+      <group ref="/chp_visit/inputs/contact">
+        <input appearance="db-object bind-id-only" ref="/chp_visit/inputs/contact/_id">
+          <label>What is the CHV's area?</label>
+          <hint>Select the family from the list</hint>
+        </input>
+        <input appearance="hidden" ref="/chp_visit/inputs/contact/name">
+          <label>Name</label>
+        </input>
+        <group ref="/chp_visit/inputs/contact/contact">
+          <input appearance="hidden" ref="/chp_visit/inputs/contact/contact/name">
+            <label>CHV Name</label>
+          </input>
+        </group>
+      </group>
+    </group>
+    <input ref="/chp_visit/debug">
+      <label><output value=" /chp_visit/place_id "/>
+<output value=" /chp_visit/place_name "/>
+<output value=" /chp_visit/chp_name "/></label>
+    </input>
+    <group appearance="field-list" ref="/chp_visit/group_overall">
+      <group appearance="field-list" ref="/chp_visit/group_overall/group_stock_check">
+        <label>CHV preparation and stock check</label>
+        <select1 appearance="horizontal" ref="/chp_visit/group_overall/group_stock_check/stock_check">
+          <label>Observed during visit?</label>
+          <item>
+            <label>Yes</label>
+            <value>yes</value>
+          </item>
+          <item>
+            <label>No</label>
+            <value>no</value>
+          </item>
+        </select1>
+        <group appearance="field-list" ref="/chp_visit/group_overall/group_stock_check/preparation_group">
+          <label>Preparation</label>
+          <select1 appearance="horizontal" ref="/chp_visit/group_overall/group_stock_check/preparation_group/chp_ready">
+            <label>Is the CHV ready for the field (uniform, products, charged phone, thermometer)?</label>
+            <item>
+              <label>Yes</label>
+              <value>yes</value>
+            </item>
+            <item>
+              <label>No</label>
+              <value>no</value>
+            </item>
+          </select1>
+          <select appearance="horizontal" ref="/chp_visit/group_overall/group_stock_check/preparation_group/chp_not_ready">
+            <label>Which areas was the CHV not ready?</label>
+            <hint>Tick all that apply.</hint>
+            <item>
+              <label>Uniform</label>
+              <value>uniform</value>
+            </item>
+            <item>
+              <label>Products</label>
+              <value>products</value>
+            </item>
+            <item>
+              <label>Charged phone</label>
+              <value>charged_phone</value>
+            </item>
+            <item>
+              <label>Thermometer</label>
+              <value>thermometer</value>
+            </item>
+          </select>
+          <select1 appearance="horizontal" ref="/chp_visit/group_overall/group_stock_check/preparation_group/has_flipbook">
+            <label>Does the CHV have a Flipbook?</label>
+            <item>
+              <label>Yes</label>
+              <value>yes</value>
+            </item>
+            <item>
+              <label>No</label>
+              <value>no</value>
+            </item>
+          </select1>
+        </group>
+        <group appearance="field-list" ref="/chp_visit/group_overall/group_stock_check/group_stock">
+          <label>Stock/Boxes</label>
+          <input ref="/chp_visit/group_overall/group_stock_check/group_stock/act">
+            <label>ACT</label>
+          </input>
+          <input ref="/chp_visit/group_overall/group_stock_check/group_stock/ors_zinc">
+            <label>2-Copack ORS + ZINC</label>
+          </input>
+          <input ref="/chp_visit/group_overall/group_stock_check/group_stock/ors">
+            <label>ORS</label>
+          </input>
+          <input ref="/chp_visit/group_overall/group_stock_check/group_stock/mrdt">
+            <label>MRDT</label>
+          </input>
+          <input ref="/chp_visit/group_overall/group_stock_check/group_stock/amoxicillin">
+            <label>Amoxicillin</label>
+          </input>
+          <select1 appearance="horizontal" ref="/chp_visit/group_overall/group_stock_check/group_stock/quality_of_storage">
+            <label>Quality of storage</label>
+            <item>
+              <label>Very bad</label>
+              <value>1</value>
+            </item>
+            <item>
+              <label>Average</label>
+              <value>2</value>
+            </item>
+            <item>
+              <label>Excellent</label>
+              <value>3</value>
+            </item>
+          </select1>
+        </group>
+        <input appearance="multiline" ref="/chp_visit/group_overall/group_stock_check/suggestions">
+          <label>Comments</label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/chp_visit/group_overall/group_sick_child">
+        <label>Sick Child/Follow Up</label>
+        <select1 appearance="horizontal" ref="/chp_visit/group_overall/group_sick_child/sick_child">
+          <label>Observed during visit?</label>
+          <item>
+            <label>Yes</label>
+            <value>yes</value>
+          </item>
+          <item>
+            <label>No</label>
+            <value>no</value>
+          </item>
+        </select1>
+        <select1 appearance="horizontal" ref="/chp_visit/group_overall/group_sick_child/thermometer_used_properly">
+          <label>CHV used thermometer?</label>
+          <item>
+            <label>Yes</label>
+            <value>yes</value>
+          </item>
+          <item>
+            <label>No</label>
+            <value>no</value>
+          </item>
+        </select1>
+        <select1 appearance="horizontal" ref="/chp_visit/group_overall/group_sick_child/mrdt_done">
+          <label>If mRDT done, did the CHV follow all the steps (gloves on, sharp in box, results interpreted) ?</label>
+          <item>
+            <label>Yes</label>
+            <value>yes</value>
+          </item>
+          <item>
+            <label>No</label>
+            <value>no</value>
+          </item>
+          <item>
+            <label>Not Applicable</label>
+            <value>not_applicable</value>
+          </item>
+        </select1>
+        <select appearance="horizontal" ref="/chp_visit/group_overall/group_sick_child/mrdt_steps">
+          <label>Which steps did the CHV not follow?</label>
+          <hint>Tick all that apply</hint>
+          <item>
+            <label>CHP did not put on gloves</label>
+            <value>put_on_gloves</value>
+          </item>
+          <item>
+            <label>CHP did not put sharp in box</label>
+            <value>put_sharp_in_box</value>
+          </item>
+          <item>
+            <label>CHP did not interpret results properly</label>
+            <value>able_to_interpret_results</value>
+          </item>
+        </select>
+        <select1 appearance="horizontal" ref="/chp_visit/group_overall/group_sick_child/kid_has_cough">
+          <label>If cough, did the CHV follow all the steps properly (check chest indrawing, counting breath) ?</label>
+          <item>
+            <label>Yes</label>
+            <value>yes</value>
+          </item>
+          <item>
+            <label>No</label>
+            <value>no</value>
+          </item>
+          <item>
+            <label>Not Applicable</label>
+            <value>not_applicable</value>
+          </item>
+        </select1>
+        <select appearance="horizontal" ref="/chp_visit/group_overall/group_sick_child/cough_steps">
+          <label>Which steps did the CHV not follow?</label>
+          <hint>Tick all that apply.</hint>
+          <item>
+            <label>CHP did not check chest indrawing properly</label>
+            <value>check_chest_indrawing</value>
+          </item>
+          <item>
+            <label>CHP did not count breath properly</label>
+            <value>count_breath</value>
+          </item>
+        </select>
+        <select1 appearance="horizontal" ref="/chp_visit/group_overall/group_sick_child/kid_has_diarrhoea">
+          <label>If diarrhoea, is the CHV explaining properly reconstitution of ORS?</label>
+          <item>
+            <label>Yes</label>
+            <value>yes</value>
+          </item>
+          <item>
+            <label>No</label>
+            <value>no</value>
+          </item>
+          <item>
+            <label>Not Applicable</label>
+            <value>not_applicable</value>
+          </item>
+        </select1>
+        <select1 appearance="horizontal" ref="/chp_visit/group_overall/group_sick_child/explain_referral_requirements">
+          <label>If referral, is the CHV explaining what referral requires?</label>
+          <item>
+            <label>Yes</label>
+            <value>yes</value>
+          </item>
+          <item>
+            <label>No</label>
+            <value>no</value>
+          </item>
+          <item>
+            <label>Not Applicable</label>
+            <value>not_applicable</value>
+          </item>
+        </select1>
+        <select1 appearance="horizontal" ref="/chp_visit/group_overall/group_sick_child/sick_child_observed">
+          <label>Sick child follow up observed during visit?</label>
+          <item>
+            <label>Yes</label>
+            <value>yes</value>
+          </item>
+          <item>
+            <label>No</label>
+            <value>no</value>
+          </item>
+        </select1>
+        <select1 appearance="horizontal" ref="/chp_visit/group_overall/group_sick_child/counselling_properly">
+          <label>CHV counselling properly (completion of treatment, good feeding, referral if no improvement in child condition)?</label>
+          <item>
+            <label>Yes</label>
+            <value>yes</value>
+          </item>
+          <item>
+            <label>No</label>
+            <value>no</value>
+          </item>
+        </select1>
+        <select ref="/chp_visit/group_overall/group_sick_child/missed_during_counselling">
+          <label>What did the CHV miss during counselling?</label>
+          <item>
+            <label>Completion of treatment</label>
+            <value>completion_of_treatment</value>
+          </item>
+          <item>
+            <label>Good feeding</label>
+            <value>good_feeding</value>
+          </item>
+          <item>
+            <label>Referral if no improvement in child condition</label>
+            <value>referral</value>
+          </item>
+        </select>
+        <input appearance="multiline" ref="/chp_visit/group_overall/group_sick_child/suggestions">
+          <label>Comments</label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/chp_visit/group_overall/group_pregnancy_registration">
+        <label>Pregnancy Registration / Follow Up</label>
+        <select1 appearance="horizontal" ref="/chp_visit/group_overall/group_pregnancy_registration/pregnancy_registration">
+          <label>Observed during visit?</label>
+          <item>
+            <label>Yes</label>
+            <value>yes</value>
+          </item>
+          <item>
+            <label>No</label>
+            <value>no</value>
+          </item>
+        </select1>
+        <select1 appearance="horizontal" ref="/chp_visit/group_overall/group_pregnancy_registration/encouraging_antenatal_visits">
+          <label>CHV encouraging antenatal visits and/or checking that antenatal visits done?</label>
+          <item>
+            <label>Yes</label>
+            <value>yes</value>
+          </item>
+          <item>
+            <label>No</label>
+            <value>no</value>
+          </item>
+        </select1>
+        <select1 appearance="horizontal" ref="/chp_visit/group_overall/group_pregnancy_registration/counselling_on_nutrition">
+          <label>CHV counselling about nutrition during pregnancy?</label>
+          <item>
+            <label>Yes</label>
+            <value>yes</value>
+          </item>
+          <item>
+            <label>No</label>
+            <value>no</value>
+          </item>
+        </select1>
+        <select1 appearance="horizontal" ref="/chp_visit/group_overall/group_pregnancy_registration/mentioning_about_protection">
+          <label>CHV mentioning about protection (bed nets, fansidar, albendasol and iron folate)?</label>
+          <item>
+            <label>Yes</label>
+            <value>yes</value>
+          </item>
+          <item>
+            <label>No</label>
+            <value>no</value>
+          </item>
+        </select1>
+        <select1 appearance="horizontal" ref="/chp_visit/group_overall/group_pregnancy_registration/check_adherence_to_treatment">
+          <label>If pregnancy follow up, is the CHV checking on the adherence to treatment?</label>
+          <item>
+            <label>Yes</label>
+            <value>yes</value>
+          </item>
+          <item>
+            <label>No</label>
+            <value>no</value>
+          </item>
+        </select1>
+        <select1 appearance="horizontal" ref="/chp_visit/group_overall/group_pregnancy_registration/check_referral_completion">
+          <label>If high risk pregnancy follow up, is CHV checking on completion of the referral?</label>
+          <item>
+            <label>Yes</label>
+            <value>yes</value>
+          </item>
+          <item>
+            <label>No</label>
+            <value>no</value>
+          </item>
+        </select1>
+        <input appearance="multiline" ref="/chp_visit/group_overall/group_pregnancy_registration/suggestions">
+          <label>Comments</label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/chp_visit/group_overall/group_newborn_visit">
+        <label>Newborn Visit</label>
+        <select1 appearance="horizontal" ref="/chp_visit/group_overall/group_newborn_visit/newborn_visit">
+          <label>Observed during visit?</label>
+          <item>
+            <label>Yes</label>
+            <value>yes</value>
+          </item>
+          <item>
+            <label>No</label>
+            <value>no</value>
+          </item>
+        </select1>
+        <select1 appearance="horizontal" ref="/chp_visit/group_overall/group_newborn_visit/counselling_about_newborn_care">
+          <label>CHV counselling about newborn care (warm, cord, danger signs)?</label>
+          <item>
+            <label>Yes</label>
+            <value>yes</value>
+          </item>
+          <item>
+            <label>No</label>
+            <value>no</value>
+          </item>
+        </select1>
+        <select1 appearance="horizontal" ref="/chp_visit/group_overall/group_newborn_visit/counselling_about_exclusive_breastfeeding">
+          <label>CHV counselling about exclusive breast feeding?</label>
+          <item>
+            <label>Yes</label>
+            <value>yes</value>
+          </item>
+          <item>
+            <label>No</label>
+            <value>no</value>
+          </item>
+        </select1>
+        <select1 appearance="horizontal" ref="/chp_visit/group_overall/group_newborn_visit/counselling_mother_for_dangersigns">
+          <label>CHV counselling for baby danger signs?</label>
+          <item>
+            <label>Yes</label>
+            <value>yes</value>
+          </item>
+          <item>
+            <label>No</label>
+            <value>no</value>
+          </item>
+        </select1>
+        <select1 appearance="horizontal" ref="/chp_visit/group_overall/group_newborn_visit/wash_hands_before_checking_baby">
+          <label>CHV washing her hands before checking the baby?</label>
+          <item>
+            <label>Yes</label>
+            <value>yes</value>
+          </item>
+          <item>
+            <label>No</label>
+            <value>no</value>
+          </item>
+          <item>
+            <label>Not Applicable</label>
+            <value>not_applicable</value>
+          </item>
+        </select1>
+        <input appearance="multiline" ref="/chp_visit/group_overall/group_newborn_visit/suggestions">
+          <label>Comments</label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/chp_visit/group_overall/group_household_reg">
+        <label>Household Registration</label>
+        <select1 appearance="horizontal" ref="/chp_visit/group_overall/group_household_reg/household_registration">
+          <label>Observed during visit?</label>
+          <item>
+            <label>Yes</label>
+            <value>yes</value>
+          </item>
+          <item>
+            <label>No</label>
+            <value>no</value>
+          </item>
+        </select1>
+        <select1 appearance="horizontal" ref="/chp_visit/group_overall/group_household_reg/reg_meet_and_greet">
+          <label>Meet and Greet</label>
+          <item>
+            <label>Very Poor</label>
+            <value>1</value>
+          </item>
+          <item>
+            <label>Poor</label>
+            <value>2</value>
+          </item>
+          <item>
+            <label>Fair</label>
+            <value>3</value>
+          </item>
+          <item>
+            <label>Good</label>
+            <value>4</value>
+          </item>
+          <item>
+            <label>Very Good</label>
+            <value>5</value>
+          </item>
+        </select1>
+        <select1 appearance="horizontal" ref="/chp_visit/group_overall/group_household_reg/lg_introduction">
+          <label>LG Introduction</label>
+          <item>
+            <label>Very Poor</label>
+            <value>1</value>
+          </item>
+          <item>
+            <label>Poor</label>
+            <value>2</value>
+          </item>
+          <item>
+            <label>Fair</label>
+            <value>3</value>
+          </item>
+          <item>
+            <label>Good</label>
+            <value>4</value>
+          </item>
+          <item>
+            <label>Very Good</label>
+            <value>5</value>
+          </item>
+        </select1>
+        <select1 appearance="horizontal" ref="/chp_visit/group_overall/group_household_reg/reg_handle_objections">
+          <label>Handle Objections</label>
+          <item>
+            <label>Very Poor</label>
+            <value>1</value>
+          </item>
+          <item>
+            <label>Poor</label>
+            <value>2</value>
+          </item>
+          <item>
+            <label>Fair</label>
+            <value>3</value>
+          </item>
+          <item>
+            <label>Good</label>
+            <value>4</value>
+          </item>
+          <item>
+            <label>Very Good</label>
+            <value>5</value>
+          </item>
+        </select1>
+        <select1 appearance="horizontal" ref="/chp_visit/group_overall/group_household_reg/phone_captured">
+          <label>Caregiver/Head of household phone number captured?</label>
+          <item>
+            <label>Yes</label>
+            <value>yes</value>
+          </item>
+          <item>
+            <label>No</label>
+            <value>no</value>
+          </item>
+        </select1>
+        <input appearance="multiline" ref="/chp_visit/group_overall/group_household_reg/suggestions">
+          <label>Comments</label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/chp_visit/group_overall/group_sales">
+        <label>Sales</label>
+        <select1 appearance="horizontal" ref="/chp_visit/group_overall/group_sales/sales">
+          <label>Observed during visit?</label>
+          <item>
+            <label>Yes</label>
+            <value>yes</value>
+          </item>
+          <item>
+            <label>No</label>
+            <value>no</value>
+          </item>
+        </select1>
+        <select1 appearance="horizontal" ref="/chp_visit/group_overall/group_sales/follow_7_steps">
+          <label>Did the CHV follow 7 steps(Prepare, Meet and Greet, Learn about the customer, Product Introduction, Handle objections, Sales Closed, Follow Up)?</label>
+          <item>
+            <label>Yes</label>
+            <value>yes</value>
+          </item>
+          <item>
+            <label>No</label>
+            <value>no</value>
+          </item>
+        </select1>
+        <select appearance="horizontal" ref="/chp_visit/group_overall/group_sales/steps_not_followed">
+          <label>Tick the steps that were not followed</label>
+          <hint>Tick all that apply</hint>
+          <item>
+            <label>Prepare</label>
+            <value>prepare</value>
+          </item>
+          <item>
+            <label>Meet and greet</label>
+            <value>meet_and_greet</value>
+          </item>
+          <item>
+            <label>Learn about the customer</label>
+            <value>learn_about_customer</value>
+          </item>
+          <item>
+            <label>Product introduction</label>
+            <value>product_introduction</value>
+          </item>
+          <item>
+            <label>Handle objections</label>
+            <value>handle_objections</value>
+          </item>
+          <item>
+            <label>Sales closed</label>
+            <value>sales_closed</value>
+          </item>
+          <item>
+            <label>Follow up</label>
+            <value>follow_up</value>
+          </item>
+        </select>
+        <select appearance="horizontal" ref="/chp_visit/group_overall/group_sales/products_introduced">
+          <label>Which products were introduced?</label>
+          <item>
+            <label>Healthy Start</label>
+            <value>healthy_start</value>
+          </item>
+          <item>
+            <label>Cookstoves</label>
+            <value>cookstoves</value>
+          </item>
+          <item>
+            <label>Solars</label>
+            <value>solars</value>
+          </item>
+          <item>
+            <label>Mama Kit</label>
+            <value>mama_kit</value>
+          </item>
+          <item>
+            <label>So Sure</label>
+            <value>so_sure</value>
+          </item>
+          <item>
+            <label>Others</label>
+            <value>other</value>
+          </item>
+        </select>
+        <input appearance="horizontal" ref="/chp_visit/group_overall/group_sales/other_product">
+          <label>Which other products were introduced?</label>
+        </input>
+        <input appearance="multiline" ref="/chp_visit/group_overall/group_sales/suggestions">
+          <label>Comments</label>
+        </input>
+      </group>
+      <input appearance="multiline" ref="/chp_visit/group_overall/general_comments">
+        <label>General Comments</label>
+      </input>
+    </group>
+    <group ref="/chp_visit/location">
+      <label>GeoLocation</label>
+      <input ref="/chp_visit/location/geopoint">
+        <label>Record GPS Coordinate</label>
+        <hint>type=geopoint</hint>
+      </input>
+    </group>
+    <group appearance="field-list summary" ref="/chp_visit/group_summary">
+      <input ref="/chp_visit/group_summary/submit">
+        <label>&lt;h4 style="text-align:center;"&gt;Be sure you Submit to complete this action.&lt;/h4&gt;</label>
+      </input>
+      <input appearance="h1 yellow" ref="/chp_visit/group_summary/r_summary">
+        <label>Performance Summary for &lt;I class="fa fa-user"&gt;&lt;/i&gt;</label>
+      </input>
+      <input ref="/chp_visit/group_summary/r_chp_info">
+        <label>&lt;h4 style=&quot;text-align:center;&quot;&gt;<output value=" /chp_visit/chp_name "/>&lt;/h4&gt;</label>
+      </input>
+      <group ref="/chp_visit/group_summary/group_summary_stock_check">
+        <label>CHV Stock Check</label>
+        <input appearance="h2 red" ref="/chp_visit/group_summary/group_summary_stock_check/r_preparation_improvement">
+          <label>Preparation: Areas of improvement</label>
+        </input>
+        <input appearance="li" ref="/chp_visit/group_summary/group_summary_stock_check/r_imp_chp_ready">
+          <label>The CHV should be ready in the following areas: <output value=" /chp_visit/chp_not_ready_str "/></label>
+        </input>
+        <input appearance="li" ref="/chp_visit/group_summary/group_summary_stock_check/r_imp_has_flipbook">
+          <label>CHV should have a flip book</label>
+        </input>
+        <input appearance="h2 green" ref="/chp_visit/group_summary/group_summary_stock_check/r_preparation_adequate">
+          <label>Preparation: Adequate performance</label>
+        </input>
+        <input appearance="h2 red" ref="/chp_visit/group_summary/group_summary_stock_check/r_stock_improvement">
+          <label>Stock/Boxes:Areas of improvement</label>
+        </input>
+        <input appearance="li" ref="/chp_visit/group_summary/group_summary_stock_check/r_imp_act">
+          <label>ACT - restock immediately</label>
+        </input>
+        <input appearance="li" ref="/chp_visit/group_summary/group_summary_stock_check/r_imp_ors">
+          <label>ORS - restock immediately</label>
+        </input>
+        <input appearance="li" ref="/chp_visit/group_summary/group_summary_stock_check/r_imp_ors_zinc">
+          <label>ORS + ZINC - restock immediately</label>
+        </input>
+        <input appearance="li" ref="/chp_visit/group_summary/group_summary_stock_check/r_imp_mrdt">
+          <label>mRDT - restock immediately</label>
+        </input>
+        <input appearance="li" ref="/chp_visit/group_summary/group_summary_stock_check/r_imp_amoxicillin">
+          <label>Amoxicillin - restock immediately</label>
+        </input>
+        <input appearance="li" ref="/chp_visit/group_summary/group_summary_stock_check/r_imp_quality_of_storage">
+          <label>Quality of storage - to be improved</label>
+        </input>
+        <input appearance="h2 green" ref="/chp_visit/group_summary/group_summary_stock_check/r_stock_adequate">
+          <label>Stock/Boxes:Adequate performance</label>
+        </input>
+      </group>
+      <group ref="/chp_visit/group_summary/group_summary_sick_child">
+        <label>Sick Child/Follow Up</label>
+        <input appearance="h2 red" ref="/chp_visit/group_summary/group_summary_sick_child/r_sick_child_improvement">
+          <label>Areas of improvement</label>
+        </input>
+        <input appearance="li" ref="/chp_visit/group_summary/group_summary_sick_child/r_imp_use_thermometer">
+          <label>CHV needs to use thermometer</label>
+        </input>
+        <input appearance="li" ref="/chp_visit/group_summary/group_summary_sick_child/r_imp_mrdt_done">
+          <label>CHV needs to follow all the steps when performing an mRDT test: <output value=" /chp_visit/mrdt_steps_str "/></label>
+        </input>
+        <input appearance="li" ref="/chp_visit/group_summary/group_summary_sick_child/r_imp_cough">
+          <label>CHV did not follow all the steps when evaluating cough: <output value=" /chp_visit/cough_steps_str "/></label>
+        </input>
+        <input appearance="li" ref="/chp_visit/group_summary/group_summary_sick_child/r_imp_diarrhoea">
+          <label>CHV needs to explain properly reconstitution of ORS</label>
+        </input>
+        <input appearance="li" ref="/chp_visit/group_summary/group_summary_sick_child/r_imp_explain_referral_requirements">
+          <label>CHV needs to expain what referral requires</label>
+        </input>
+        <input appearance="li" ref="/chp_visit/group_summary/group_summary_sick_child/r__imp_missed_counselling">
+          <label>CHV missed the following during counselling: <output value=" /chp_visit/chp_counselling_str "/></label>
+        </input>
+        <input appearance="h2 green" ref="/chp_visit/group_summary/group_summary_sick_child/r_sick_child_adq">
+          <label>Adequate performance</label>
+        </input>
+      </group>
+      <group ref="/chp_visit/group_summary/group_summary_pregnancy">
+        <label>Pregnancy Registration / Follow Up</label>
+        <input appearance="h2 red" ref="/chp_visit/group_summary/group_summary_pregnancy/r_imp_pregnancy_registration">
+          <label>Areas of improvement</label>
+        </input>
+        <input appearance="li" ref="/chp_visit/group_summary/group_summary_pregnancy/r_imp_encouraging_antenatal_visits">
+          <label>CHV should encourage and/or checking antenatal visits done</label>
+        </input>
+        <input appearance="li" ref="/chp_visit/group_summary/group_summary_pregnancy/r_imp_counselling_on_nutrition">
+          <label>CHV should counsel about nutrition during pregnancy</label>
+        </input>
+        <input appearance="li" ref="/chp_visit/group_summary/group_summary_pregnancy/r_imp_mentioning_about_protection">
+          <label>CHV should mention about protection (bed nets, fansidar, albendasol and iron folate)</label>
+        </input>
+        <input appearance="li" ref="/chp_visit/group_summary/group_summary_pregnancy/r_imp_check_adherence_to_treatment">
+          <label>CHV should check on the adherence to treatment (for pregancy followup)</label>
+        </input>
+        <input appearance="li" ref="/chp_visit/group_summary/group_summary_pregnancy/r_imp_check_referral_completion">
+          <label>CHV should check on completion of the referral (for high rish pregnancy followup)</label>
+        </input>
+        <input appearance="h2 green" ref="/chp_visit/group_summary/group_summary_pregnancy/r_adq_pregnancy_registration">
+          <label>Adequate performance</label>
+        </input>
+      </group>
+      <group ref="/chp_visit/group_summary/group_summary_newborn_visit">
+        <label>Newborn Visit</label>
+        <input appearance="h2 red" ref="/chp_visit/group_summary/group_summary_newborn_visit/r_imp_newborn_visit">
+          <label>Areas of improvement</label>
+        </input>
+        <input appearance="li" ref="/chp_visit/group_summary/group_summary_newborn_visit/r_imp_counselling_about_newborn_care">
+          <label>CHV should counsel about newborn care (warm, cord, danger signs)</label>
+        </input>
+        <input appearance="li" ref="/chp_visit/group_summary/group_summary_newborn_visit/r_imp_counselling_about_exclusive_breastfeeding">
+          <label>CHV should counsel about exclusive breast feeding</label>
+        </input>
+        <input appearance="li" ref="/chp_visit/group_summary/group_summary_newborn_visit/r_imp_wash_hands_before_checking_baby">
+          <label>CHV should wash her hands before checking the baby</label>
+        </input>
+        <input appearance="li" ref="/chp_visit/group_summary/group_summary_newborn_visit/r_imp_counselling_mother_for_dangersigns">
+          <label>CHV should counsel for baby danger signs</label>
+        </input>
+        <input appearance="h2 green" ref="/chp_visit/group_summary/group_summary_newborn_visit/r_adq_newborn_visit">
+          <label>Adequate performance</label>
+        </input>
+      </group>
+      <group ref="/chp_visit/group_summary/group_summary_household_reg">
+        <label>CHV Household Registration</label>
+        <input appearance="h2 red" ref="/chp_visit/group_summary/group_summary_household_reg/r_imp_household_reg">
+          <label>Areas of improvement</label>
+        </input>
+        <input appearance="li" ref="/chp_visit/group_summary/group_summary_household_reg/r_imp_reg_meet_and_greet">
+          <label>Meet and Greet</label>
+        </input>
+        <input appearance="li" ref="/chp_visit/group_summary/group_summary_household_reg/r_imp_lg_intrpduction">
+          <label>LG Introduction</label>
+        </input>
+        <input appearance="li" ref="/chp_visit/group_summary/group_summary_household_reg/r_imp_reg_handle_objections">
+          <label>Handling Objections</label>
+        </input>
+        <input appearance="h2 green" ref="/chp_visit/group_summary/group_summary_household_reg/r_adq_household_reg">
+          <label>Adequate performance</label>
+        </input>
+      </group>
+      <group ref="/chp_visit/group_summary/group_summary_sales">
+        <label>Sales</label>
+        <input appearance="h2 red" ref="/chp_visit/group_summary/group_summary_sales/r_imp_sales">
+          <label>Areas of improvement</label>
+        </input>
+        <input appearance="li" ref="/chp_visit/group_summary/group_summary_sales/r_imp_7_steps">
+          <label>CHV did not follow the 7 steps: <output value=" /chp_visit/steps_not_followed_str "/></label>
+        </input>
+        <input appearance="h2 green" ref="/chp_visit/group_summary/group_summary_sales/r_adq_household_reg">
+          <label>Adequate performance</label>
+        </input>
+      </group>
+      <group ref="/chp_visit/group_summary/group_not_observed">
+        <input appearance="h2 blue" ref="/chp_visit/group_summary/group_not_observed/r_no_info">
+          <label>Areas not observed</label>
+        </input>
+        <input appearance="li" ref="/chp_visit/group_summary/group_not_observed/r_stock_check">
+          <label>CHV Stock Check</label>
+        </input>
+        <input appearance="li" ref="/chp_visit/group_summary/group_not_observed/r_sick_child">
+          <label>CHV Sick Child</label>
+        </input>
+        <input appearance="li" ref="/chp_visit/group_summary/group_not_observed/r_pregnancy_registration">
+          <label>Pregnancy Registration / Follow Up</label>
+        </input>
+        <input appearance="li" ref="/chp_visit/group_summary/group_not_observed/r_newborn_visit">
+          <label>Newborn Visit</label>
+        </input>
+        <input appearance="li" ref="/chp_visit/group_summary/group_not_observed/r_household_registration">
+          <label>CHV Household Registration</label>
+        </input>
+        <input appearance="li" ref="/chp_visit/group_summary/group_not_observed/r_sales">
+          <label>Sales</label>
+        </input>
+      </group>
+    </group>
+  </h:body>
+</h:html>

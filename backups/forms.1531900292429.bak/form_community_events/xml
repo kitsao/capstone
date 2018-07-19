@@ -1,0 +1,228 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>Community Event</h:title>
+    <model>
+      <instance>
+        <community_events delimiter="#" id="community_events" prefix="J1!community_events!" version="2017-03-28 00:00:00">
+          <inputs>
+            <meta>
+              <location>
+                <lat/>
+                <long/>
+                <error/>
+                <message/>
+              </location>
+            </meta>
+            <source>user</source>
+            <source_id/>
+            <contact>
+              <_id/>
+              <name/>
+              <contact>
+                <name/>
+              </contact>
+            </contact>
+          </inputs>
+          <place_id/>
+          <place_name/>
+          <chp_name/>
+          <debug/>
+          <well_organised_str/>
+          <well_organised_str_tmp/>
+          <well_organised_str_len/>
+          <group_community_event>
+            <other_chps/>
+            <other_chp_names/>
+            <well_organised/>
+            <not_well_organised/>
+            <explain_health_topic/>
+            <comments/>
+          </group_community_event>
+          <group_summary>
+            <submit/>
+            <r_summary/>
+            <r_chp_info/>
+            <group_summary_community_event>
+              <r_chps_in_attendance/>
+              <r_preparation_improvement/>
+              <r_imp_other_chps/>
+              <r_imp_well_organised/>
+              <r_imp_explain/>
+              <r_preparation_adequate/>
+            </group_summary_community_event>
+          </group_summary>
+          <meta>
+            <instanceID/>
+          </meta>
+        </community_events>
+      </instance>
+      <instance id="contact-summary"/>
+      <bind nodeset="/community_events/inputs" relevant="./source = 'user'"/>
+      <bind nodeset="/community_events/inputs/source" type="string"/>
+      <bind nodeset="/community_events/inputs/source_id" type="string"/>
+      <bind nodeset="/community_events/inputs/contact/_id" type="db:health_center"/>
+      <bind nodeset="/community_events/inputs/contact/name" type="string"/>
+      <bind nodeset="/community_events/inputs/contact/contact/name" type="string"/>
+      <bind calculate="../inputs/contact/_id" nodeset="/community_events/place_id" type="string"/>
+      <bind calculate="../inputs/contact/name" nodeset="/community_events/place_name" type="string"/>
+      <bind calculate="../inputs/contact/contact/name" nodeset="/community_events/chp_name" type="string"/>
+      <bind nodeset="/community_events/debug" readonly="true()" relevant="false()" type="string"/>
+      <bind calculate="substr( /community_events/well_organised_str_tmp ,0,  /community_events/well_organised_str_len )" nodeset="/community_events/well_organised_str" type="string"/>
+      <bind calculate="if( count-selected( /community_events/group_community_event/not_well_organised ) &gt; 0, 
+concat(
+ if(selected( /community_events/group_community_event/not_well_organised , 'display_ready'), 'Display readiness, ', ''),
+ if(selected( /community_events/group_community_event/not_well_organised , 'good_mobilisation'), 'Good mobilisation, ', ''),
+ if(selected( /community_events/group_community_event/not_well_organised , 'learning_aids'), 'Learning aids, ', ''),
+ if(selected( /community_events/group_community_event/not_well_organised , 'stock_available'), 'Stock availability, ', ''),
+ ),
+ ''
+)" nodeset="/community_events/well_organised_str_tmp" required="true()" type="string"/>
+      <bind calculate="string-length( /community_events/well_organised_str_tmp ) -2" nodeset="/community_events/well_organised_str_len" required="true()" type="string"/>
+      <bind nodeset="/community_events/group_community_event/other_chps" required="true()" type="select1"/>
+      <bind constraint="regex(.,'[a-zA-Z][^,]*')" jr:constraintMsg="Only comma separated values are acceptable." nodeset="/community_events/group_community_event/other_chp_names" relevant=" /community_events/group_community_event/other_chps  = 'yes'" required="true()" type="string"/>
+      <bind nodeset="/community_events/group_community_event/well_organised" required="true()" type="select1"/>
+      <bind nodeset="/community_events/group_community_event/not_well_organised" relevant=" /community_events/group_community_event/well_organised  = 'no'" required="true()" type="select"/>
+      <bind nodeset="/community_events/group_community_event/explain_health_topic" required="true()" type="select1"/>
+      <bind nodeset="/community_events/group_community_event/comments" required="false()" type="string"/>
+      <bind nodeset="/community_events/group_summary/submit" readonly="true()" type="string"/>
+      <bind nodeset="/community_events/group_summary/r_summary" readonly="true()" type="string"/>
+      <bind nodeset="/community_events/group_summary/r_chp_info" readonly="true()" type="string"/>
+      <bind nodeset="/community_events/group_summary/group_summary_community_event/r_chps_in_attendance" readonly="true()" relevant=" /community_events/group_community_event/other_chps  = 'yes' and  /community_events/group_community_event/other_chp_names  != ''" type="string"/>
+      <bind nodeset="/community_events/group_summary/group_summary_community_event/r_preparation_improvement" readonly="true()" relevant=" /community_events/group_community_event/other_chps  = 'no' or  /community_events/group_community_event/well_organised  = 'no' or  /community_events/group_community_event/explain_health_topic  = 'no'" type="string"/>
+      <bind nodeset="/community_events/group_summary/group_summary_community_event/r_imp_other_chps" readonly="true()" relevant=" /community_events/group_community_event/other_chps  = 'no'" type="string"/>
+      <bind nodeset="/community_events/group_summary/group_summary_community_event/r_imp_well_organised" readonly="true()" relevant=" /community_events/group_community_event/well_organised  = 'no'" type="string"/>
+      <bind nodeset="/community_events/group_summary/group_summary_community_event/r_imp_explain" readonly="true()" relevant=" /community_events/group_community_event/explain_health_topic  = 'no'" type="string"/>
+      <bind nodeset="/community_events/group_summary/group_summary_community_event/r_preparation_adequate" readonly="true()" relevant=" /community_events/group_community_event/other_chps  = 'yes' and  /community_events/group_community_event/well_organised  = 'yes' and  /community_events/group_community_event/explain_health_topic  = 'yes'" type="string"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/community_events/meta/instanceID" readonly="true()" type="string"/>
+    </model>
+  </h:head>
+  <h:body class="pages">
+    <group appearance="field-list" ref="/community_events/inputs">
+      <label>CHV Area</label>
+      <input appearance="hidden" ref="/community_events/inputs/source">
+        <label>Source</label>
+      </input>
+      <input appearance="hidden" ref="/community_events/inputs/source_id">
+        <label>Source ID</label>
+      </input>
+      <group ref="/community_events/inputs/contact">
+        <input appearance="db-object bind-id-only" ref="/community_events/inputs/contact/_id">
+          <label>What is the CHV's area?</label>
+          <hint>Select the family from the list</hint>
+        </input>
+        <input appearance="hidden" ref="/community_events/inputs/contact/name">
+          <label>Name</label>
+        </input>
+        <group ref="/community_events/inputs/contact/contact">
+          <input appearance="hidden" ref="/community_events/inputs/contact/contact/name">
+            <label>CHV Name</label>
+          </input>
+        </group>
+      </group>
+    </group>
+    <input ref="/community_events/debug">
+      <label><output value=" /community_events/place_id "/>
+<output value=" /community_events/place_name "/>
+<output value=" /community_events/chp_name "/></label>
+    </input>
+    <group appearance="field-list" ref="/community_events/group_community_event">
+      <label>Community Event</label>
+      <select1 appearance="horizontal" ref="/community_events/group_community_event/other_chps">
+        <label>Were there other CHVs supporting the event?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <input appearance="multiline" ref="/community_events/group_community_event/other_chp_names">
+        <label>CHV Name(s)</label>
+        <hint>Separate the names with commas.</hint>
+      </input>
+      <select1 appearance="horizontal" ref="/community_events/group_community_event/well_organised">
+        <label>Is the CHV well organized(display ready, good mobilization, learning aids, stock available)</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <select appearance="horizontal" ref="/community_events/group_community_event/not_well_organised">
+        <label>Which areas was the CHV not organised?</label>
+        <item>
+          <label>Display readiness</label>
+          <value>display_ready</value>
+        </item>
+        <item>
+          <label>Good mobilisation</label>
+          <value>good_mobilisation</value>
+        </item>
+        <item>
+          <label>Learning aids</label>
+          <value>learning_aids</value>
+        </item>
+        <item>
+          <label>Stock availability</label>
+          <value>stock_available</value>
+        </item>
+      </select>
+      <select1 appearance="horizontal" ref="/community_events/group_community_event/explain_health_topic">
+        <label>CHV explains well health topic?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+        <item>
+          <label>Not Applicable</label>
+          <value>na</value>
+        </item>
+      </select1>
+      <input appearance="multiline" ref="/community_events/group_community_event/comments">
+        <label>Comments</label>
+      </input>
+    </group>
+    <group appearance="field-list summary" ref="/community_events/group_summary">
+      <input ref="/community_events/group_summary/submit">
+        <label>&lt;h4 style="text-align:center;"&gt;Be sure you Submit to complete this action.&lt;/h4&gt;</label>
+      </input>
+      <input appearance="h1 yellow" ref="/community_events/group_summary/r_summary">
+        <label>Performance Summary for &lt;I class="fa fa-user"&gt;&lt;/i&gt;</label>
+      </input>
+      <input ref="/community_events/group_summary/r_chp_info">
+        <label>&lt;h4 style=&quot;text-align:center;&quot;&gt;<output value=" /community_events/chp_name "/>&lt;/h4&gt;</label>
+      </input>
+      <group appearance="field-list summary" ref="/community_events/group_summary/group_summary_community_event">
+        <label>Community Event</label>
+        <input ref="/community_events/group_summary/group_summary_community_event/r_chps_in_attendance">
+          <label>CHVs in attendance: <output value=" /community_events/group_community_event/other_chp_names "/></label>
+        </input>
+        <input appearance="h2 red" ref="/community_events/group_summary/group_summary_community_event/r_preparation_improvement">
+          <label>Areas of improvement</label>
+        </input>
+        <input appearance="li" ref="/community_events/group_summary/group_summary_community_event/r_imp_other_chps">
+          <label>No CHVs supporting the event.</label>
+        </input>
+        <input appearance="li" ref="/community_events/group_summary/group_summary_community_event/r_imp_well_organised">
+          <label>CHV needs to be well organised in: <output value=" /community_events/well_organised_str "/>.</label>
+        </input>
+        <input appearance="li" ref="/community_events/group_summary/group_summary_community_event/r_imp_explain">
+          <label>CHV did not explain the health topic well.</label>
+        </input>
+        <input appearance="h2 green" ref="/community_events/group_summary/group_summary_community_event/r_preparation_adequate">
+          <label>Adequate performance</label>
+        </input>
+      </group>
+    </group>
+  </h:body>
+</h:html>

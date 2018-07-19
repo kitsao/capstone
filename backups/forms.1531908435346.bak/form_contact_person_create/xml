@@ -1,0 +1,182 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>Add Person</h:title>
+    <model>
+      <instance>
+        <data delimiter="#" id="person" prefix="J1!person!" version="2017-09-21 23:41:25">
+          <inputs>
+            <meta>
+              <location>
+                <lat/>
+                <long/>
+                <error/>
+                <message/>
+              </location>
+            </meta>
+            <user>
+              <facility_id/>
+            </user>
+          </inputs>
+          <person>
+            <type>person</type>
+            <parent>PARENT</parent>
+            <name/>
+            <date_of_birth/>
+            <date_of_birth_method/>
+            <person_age_in_years/>
+            <person_age_in_months/>
+            <ephemeral_dob>
+              <dob_calendar/>
+              <age_years/>
+              <age_months>0</age_months>
+              <ephemeral_months/>
+              <ephemeral_years/>
+              <dob_approx/>
+              <dob_raw/>
+              <dob_iso/>
+              <dob_debug/>
+            </ephemeral_dob>
+            <sex/>
+            <relationship_to_primary_caregiver/>
+            <relationship_pc_other/>
+            <primary_phone_number/>
+            <secondary_phone_number/>
+            <is_currently_pregnant/>
+            <geolocation/>
+          </person>
+          <meta>
+            <instanceID/>
+          </meta>
+        </data>
+      </instance>
+      <bind nodeset="/data/inputs" relevant="false()"/>
+      <bind nodeset="/data/inputs/user/facility_id" type="string"/>
+      <bind nodeset="/data/person/type" type="string"/>
+      <bind nodeset="/data/person/parent" type="string"/>
+      <bind nodeset="/data/person/name" required="true()" type="string"/>
+      <bind calculate="../ephemeral_dob/dob_iso" nodeset="/data/person/date_of_birth" type="string"/>
+      <bind calculate="../ephemeral_dob/dob_method" nodeset="/data/person/date_of_birth_method" type="string"/>
+      <bind calculate="floor( difference-in-months(  /data/person/date_of_birth , today() ) div 12 )" nodeset="/data/person/person_age_in_years" type="string"/>
+      <bind calculate="difference-in-months(  /data/person/date_of_birth , today() )" nodeset="/data/person/person_age_in_months" type="string"/>
+      <bind constraint="floor(decimal-date-time(.)) &lt;= floor(decimal-date-time(today()))" jr:constraintMsg="Date must be before today" nodeset="/data/person/ephemeral_dob/dob_calendar" relevant="not(selected(../dob_method,'approx'))" required="true()" type="date"/>
+      <bind constraint=". &gt;= 0 and . &lt;= 130" jr:constraintMsg="Age must be between 0 and 130" nodeset="/data/person/ephemeral_dob/age_years" relevant="selected(../dob_method,'approx')" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0 and . &lt;= 11" jr:constraintMsg="Months must between 0 and 11" nodeset="/data/person/ephemeral_dob/age_months" relevant="selected(../dob_method,'approx')" required="true()" type="int"/>
+      <bind calculate="if(format-date-time(today(),&quot;%m&quot;) - ../age_months &lt; 0, format-date-time(today(),&quot;%m&quot;) - ../age_months + 12, format-date-time(today(),&quot;%m&quot;) - ../age_months)" nodeset="/data/person/ephemeral_dob/ephemeral_months" type="string"/>
+      <bind calculate="if(format-date-time(today(),&quot;%m&quot;) - ../age_months &lt; 0, format-date-time(today(),&quot;%Y&quot;) - ../age_years - 1, format-date-time(today(),&quot;%Y&quot;) -../age_years)" nodeset="/data/person/ephemeral_dob/ephemeral_years" type="string"/>
+      <bind calculate="date(concat(string( /data/person/ephemeral_dob/ephemeral_years ),'-',if( /data/person/ephemeral_dob/ephemeral_months &lt;10, concat('0',string( /data/person/ephemeral_dob/ephemeral_months )),  /data/person/ephemeral_dob/ephemeral_months ),'-',string(format-date-time(today(), &quot;%d&quot;))))" nodeset="/data/person/ephemeral_dob/dob_approx" type="string"/>
+      <bind calculate="if(not(selected( ../dob_method,'approx')), 
+../dob_calendar,
+../dob_approx)" nodeset="/data/person/ephemeral_dob/dob_raw" type="string"/>
+      <bind calculate="format-date-time(../dob_raw,&quot;%Y-%m-%d&quot;)" nodeset="/data/person/ephemeral_dob/dob_iso" type="string"/>
+      <bind nodeset="/data/person/ephemeral_dob/dob_debug" readonly="true()" relevant="false()" type="string"/>
+      <bind nodeset="/data/person/sex" required="true()" type="select1"/>
+      <bind nodeset="/data/person/relationship_to_primary_caregiver" required="true()" type="select1"/>
+      <bind nodeset="/data/person/relationship_pc_other" relevant=" /data/person/relationship_to_primary_caregiver  = 'other'" required="true()" type="string"/>
+      <bind nodeset="/data/person/primary_phone_number" type="string"/>
+      <bind nodeset="/data/person/secondary_phone_number" type="string"/>
+      <bind nodeset="/data/person/is_currently_pregnant" relevant=" /data/person/ephemeral_dob/age_years  &gt;= 8 and  /data/person/ephemeral_dob/age_years  &lt;= 65" required="true()" type="select1"/>
+      <bind calculate="concat(../../inputs/meta/location/lat, concat(' ', ../../inputs/meta/location/long))" nodeset="/data/person/geolocation" type="string"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/data/meta/instanceID" readonly="true()" type="string"/>
+    </model>
+  </h:head>
+  <h:body>
+    <group ref="/data/inputs">
+      <group ref="/data/inputs/user">
+        <input ref="/data/inputs/user/facility_id">
+          <label>Facility ID for the parent user</label>
+        </input>
+      </group>
+    </group>
+    <group ref="/data/person">
+      <input appearance="hidden" ref="/data/person/type">
+        <label>Person Type</label>
+        <hint>mandatory</hint>
+      </input>
+      <input appearance="hidden" ref="/data/person/parent">
+        <label>Parent</label>
+        <hint>mandatory</hint>
+      </input>
+      <input ref="/data/person/name">
+        <label>Names</label>
+      </input>
+      <group ref="/data/person/ephemeral_dob">
+        <input ref="/data/person/ephemeral_dob/dob_calendar">
+          <label>Age</label>
+          <hint>Date of Birth</hint>
+        </input>
+        <input ref="/data/person/ephemeral_dob/age_years">
+          <label>Age</label>
+          <hint>Years</hint>
+        </input>
+        <input ref="/data/person/ephemeral_dob/age_months">
+          <hint>Months</hint>
+        </input>
+        <input ref="/data/person/ephemeral_dob/dob_debug">
+          <label>Months: <output value=" /data/person/ephemeral_dob/ephemeral_months "/>
+Year: <output value=" /data/person/ephemeral_dob/ephemeral_years "/>
+DOB Approx: <output value=" /data/person/ephemeral_dob/dob_approx "/>
+DOB Calendar: <output value=" /data/person/ephemeral_dob/dob_calendar "/>
+DOB ISO: <output value=" /data/person/ephemeral_dob/dob_iso "/></label></input>
+      </group>
+      <select1 appearance="horizontal" ref="/data/person/sex">
+        <label>Gender</label>
+        <item>
+          <label>Female</label>
+          <value>female</value>
+        </item>
+        <item>
+          <label>Male</label>
+          <value>male</value>
+        </item>
+      </select1>
+      <select1 ref="/data/person/relationship_to_primary_caregiver">
+        <label>What is the relationship to the primary caregiver?</label>
+        <item>
+          <label>Spouse</label>
+          <value>spouse</value>
+        </item>
+        <item>
+          <label>Child</label>
+          <value>child</value>
+        </item>
+        <item>
+          <label>Grandchild</label>
+          <value>grandchild</value>
+        </item>
+        <item>
+          <label>Brother</label>
+          <value>brother</value>
+        </item>
+        <item>
+          <label>Sister</label>
+          <value>sister</value>
+        </item>
+        <item>
+          <label>Other</label>
+          <value>other</value>
+        </item>
+      </select1>
+      <input ref="/data/person/relationship_pc_other">
+        <label>Specify other:</label>
+      </input>
+      <input ref="/data/person/primary_phone_number">
+        <label>Primary phone number</label>
+      </input>
+      <input ref="/data/person/secondary_phone_number">
+        <label>Secondary phone number</label>
+      </input>
+      <select1 appearance="horizontal" ref="/data/person/is_currently_pregnant">
+        <label>Is <output value=" /data/person/name "/> currently pregnant?</label>
+        <item>
+          <label>Yes</label>
+          <value>true</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>false</value>
+        </item>
+      </select1>
+    </group>
+  </h:body>
+</h:html>

@@ -1,0 +1,780 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>MoH 505 IDSR</h:title>
+    <model>
+      <instance>
+        <moh_505_idsr delimiter="#" id="moh_505_idsr" prefix="J1!moh_505_idsr!" version="2017-10-18 00:00:00">
+          <inputs>
+            <meta>
+              <location>
+                <lat/>
+                <long/>
+                <error/>
+                <message/>
+              </location>
+            </meta>
+            <source>user</source>
+            <source_id/>
+            <contact>
+              <_id/>
+              <name/>
+            </contact>
+          </inputs>
+          <patient_id/>
+          <patient_name/>
+          <dhis2_dataSet/>
+          <dhis2_org_unit/>
+          <epi_week_start/>
+          <epi_week_end/>
+          <group_facility>
+            <facility/>
+            <g_epi_week_start/>
+            <g_epi_week_end/>
+          </group_facility>
+          <group_aefi>
+            <aefi_u5_cases/>
+            <aefi_u5_deaths/>
+            <aefi_o5_cases/>
+            <aefi_o5_deaths/>
+          </group_aefi>
+          <group_jaundice>
+            <jaundice_u5_cases/>
+            <jaundice_u5_deaths/>
+            <jaundice_o5_cases/>
+            <jaundice_o5_deaths/>
+          </group_jaundice>
+          <group_malnutrition>
+            <malnutrition_u5_cases/>
+            <malnutrition_u5_deaths/>
+            <malnutrition_o5_cases/>
+            <malutrition_o5_deaths/>
+          </group_malnutrition>
+          <group_afp>
+            <afp_u5_cases/>
+            <afp_u5_deaths/>
+            <afp_o5_cases/>
+            <afp_o5_deaths/>
+          </group_afp>
+          <group_anthrax>
+            <anthrax_u5_cases/>
+            <anthrax_u5_deaths/>
+            <anthrax_o5_cases/>
+            <anthrax_o5_deaths/>
+          </group_anthrax>
+          <group_cholera>
+            <cholera_u5_cases/>
+            <cholera_u5_deaths/>
+            <cholera_o5_cases/>
+            <cholera_o5_deaths/>
+          </group_cholera>
+          <group_dengue>
+            <dengue_u5_cases/>
+            <dengue_u5_deaths/>
+            <dengue_o5_cases/>
+            <dengue_o5_deaths/>
+          </group_dengue>
+          <group_dysentry>
+            <dysentry_u5_cases/>
+            <dysentry_u5_deaths/>
+            <dysentry_o5_cases/>
+            <dysentry_o5_deaths/>
+          </group_dysentry>
+          <group_guinea_worm>
+            <guinea_worm_u5_cases/>
+            <guinea_worm_u5_deaths/>
+            <guinea_worm_o5_cases/>
+            <guinea_worm_o5_deaths/>
+          </group_guinea_worm>
+          <group_malaria>
+            <malaria_u5_cases/>
+            <malaria_u5_deaths/>
+            <malaria_o5_cases/>
+            <malaria_o5_deaths/>
+          </group_malaria>
+          <group_measles>
+            <measles_u5_cases/>
+            <measles_u5_deaths/>
+            <measles_o5_cases/>
+            <measles_o5_deaths/>
+          </group_measles>
+          <group_meningitis>
+            <meningitis_u5_cases/>
+            <meningitis_u5_deaths/>
+            <meningitis_o5_cases/>
+            <meningitis_o5_deaths/>
+          </group_meningitis>
+          <group_neonatal_tetenus>
+            <neonatal_tetanus_u5_cases/>
+            <neonatal_tetanus_u5_deaths/>
+          </group_neonatal_tetenus>
+          <group_plague>
+            <plague_u5_cases/>
+            <plague_u5_deaths/>
+            <plague_o5_cases/>
+            <plague_o5_deaths/>
+          </group_plague>
+          <group_rabies>
+            <rabies_u5_cases/>
+            <rabies_u5_deaths/>
+            <rabies_o5_cases/>
+            <rabies_o5_deaths/>
+          </group_rabies>
+          <group_rift_valley_fever>
+            <rift_vallley_fever_u5_cases/>
+            <rift_vallley_fever_u5_deaths/>
+            <rift_vallley_fever_o5_cases/>
+            <rift_vallley_fever_o5_deaths/>
+          </group_rift_valley_fever>
+          <group_sari>
+            <sari_u5_cases/>
+            <sari_u5_deaths/>
+            <sari_o5_cases/>
+            <sari_o5_deaths/>
+          </group_sari>
+          <group_tb>
+            <tb_u5_cases/>
+            <tb_u5_deaths/>
+            <tb_o5_cases/>
+            <tb_o5_deaths/>
+          </group_tb>
+          <group_typhoid>
+            <typhoid_u5_cases/>
+            <typhoid_u5_deaths/>
+            <typhoid_o5_cases/>
+            <typhoid_o5_deaths/>
+          </group_typhoid>
+          <group_vhf>
+            <vhf_u5_cases/>
+            <vhf_u5_deaths/>
+            <vhf_o5_cases/>
+            <vhf_o5_deaths/>
+          </group_vhf>
+          <group_yellow_fever>
+            <yellow_fever_u5_cases/>
+            <yellow_fever_u5_deaths/>
+            <yellow_fever_o5_cases/>
+            <yellow_fever_o5_deaths/>
+          </group_yellow_fever>
+          <group_neonatal_deaths>
+            <neonatal_deaths_u5_deaths/>
+          </group_neonatal_deaths>
+          <group_maternal_deaths>
+            <maternal_deaths_o5_deaths/>
+          </group_maternal_deaths>
+          <group_other>
+            <other_u5_cases/>
+            <other_u5_deaths/>
+            <other_o5_cases/>
+            <other_fever_o5_deaths/>
+          </group_other>
+          <group_lab>
+            <group_malaria_tested>
+              <malaria_tested_u5_cases/>
+              <malaria_tested_o5_cases/>
+            </group_malaria_tested>
+            <group_malaria_posititive>
+              <malaria_positive_u5_cases/>
+              <malaria_positive_o5_cases/>
+            </group_malaria_posititive>
+            <group_shigella_dysentry_tested>
+              <shigella_dysentry_tested_u5_cases/>
+              <shigella_dysentry_tested_o5_cases/>
+            </group_shigella_dysentry_tested>
+            <group_shigella_dysentry_positive>
+              <shigella_dysentry_positive_u5_cases/>
+              <shigella_dysentry_positive_o5_cases/>
+            </group_shigella_dysentry_positive>
+            <group_tuberculosis_tested>
+              <tuberculosis_tested_u5_cases/>
+              <tuberculosis_tested_o5_cases/>
+            </group_tuberculosis_tested>
+            <group_tuberculosis_positive>
+              <tuberculosis_positive_u5_cases/>
+              <tuberculosis_positive_o5_cases/>
+            </group_tuberculosis_positive>
+            <group_typhoid_tested>
+              <typhoid_u5_cases_tested/>
+              <typhoid_o5_cases_tested/>
+            </group_typhoid_tested>
+            <group_typhoid_positive>
+              <typhoid_u5_cases_positive/>
+              <typhoid_o5_cases_positive/>
+            </group_typhoid_positive>
+          </group_lab>
+          <meta>
+            <instanceID/>
+          </meta>
+        </moh_505_idsr>
+      </instance>
+      <instance id="contact-summary"/>
+      <bind nodeset="/moh_505_idsr/inputs" relevant="./source = 'user'"/>
+      <bind nodeset="/moh_505_idsr/inputs/source" type="string"/>
+      <bind nodeset="/moh_505_idsr/inputs/source_id" type="string"/>
+      <bind nodeset="/moh_505_idsr/inputs/contact/_id" required="true()" type="db:person"/>
+      <bind nodeset="/moh_505_idsr/inputs/contact/name" type="string"/>
+      <bind calculate="../inputs/contact/_id" nodeset="/moh_505_idsr/patient_id" type="string"/>
+      <bind calculate="../inputs/contact/name" nodeset="/moh_505_idsr/patient_name" type="string"/>
+      <bind calculate="&quot;zJrL4HQqYmD&quot;" nodeset="/moh_505_idsr/dhis2_dataSet" type="string"/>
+      <bind calculate=" /moh_505_idsr/group_facility/facility " nodeset="/moh_505_idsr/dhis2_org_unit" type="string"/>
+      <bind calculate=" /moh_505_idsr/group_facility/g_epi_week_start " nodeset="/moh_505_idsr/epi_week_start" type="string"/>
+      <bind calculate=" /moh_505_idsr/group_facility/g_epi_week_end " nodeset="/moh_505_idsr/epi_week_end" type="string"/>
+      <bind nodeset="/moh_505_idsr/group_facility/facility" required="true()" type="select1"/>
+      <bind constraint="format-date(date(decimal-date-time(.) + 1),'%a') = 'Mon' and (date(.) &lt;= today())" jr:constraintMsg="EPI Weeks start on Monday and cannot be in the future" nodeset="/moh_505_idsr/group_facility/g_epi_week_start" type="date"/>
+      <bind calculate="date(decimal-date-time( /moh_505_idsr/group_facility/g_epi_week_start ) + 7)" nodeset="/moh_505_idsr/group_facility/g_epi_week_end" type="string"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_aefi/aefi_u5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_aefi/aefi_u5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_aefi/aefi_o5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_aefi/aefi_o5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_jaundice/jaundice_u5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_jaundice/jaundice_u5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_jaundice/jaundice_o5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_jaundice/jaundice_o5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_malnutrition/malnutrition_u5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_malnutrition/malnutrition_u5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_malnutrition/malnutrition_o5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_malnutrition/malutrition_o5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_afp/afp_u5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_afp/afp_u5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_afp/afp_o5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_afp/afp_o5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_anthrax/anthrax_u5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_anthrax/anthrax_u5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_anthrax/anthrax_o5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_anthrax/anthrax_o5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_cholera/cholera_u5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_cholera/cholera_u5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_cholera/cholera_o5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_cholera/cholera_o5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_dengue/dengue_u5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_dengue/dengue_u5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_dengue/dengue_o5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_dengue/dengue_o5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_dysentry/dysentry_u5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_dysentry/dysentry_u5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_dysentry/dysentry_o5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_dysentry/dysentry_o5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_guinea_worm/guinea_worm_u5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_guinea_worm/guinea_worm_u5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_guinea_worm/guinea_worm_o5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_guinea_worm/guinea_worm_o5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_malaria/malaria_u5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_malaria/malaria_u5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_malaria/malaria_o5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_malaria/malaria_o5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_measles/measles_u5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_measles/measles_u5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_measles/measles_o5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_measles/measles_o5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_meningitis/meningitis_u5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_meningitis/meningitis_u5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_meningitis/meningitis_o5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_meningitis/meningitis_o5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_neonatal_tetenus/neonatal_tetanus_u5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_neonatal_tetenus/neonatal_tetanus_u5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_plague/plague_u5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_plague/plague_u5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_plague/plague_o5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_plague/plague_o5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_rabies/rabies_u5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_rabies/rabies_u5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_rabies/rabies_o5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_rabies/rabies_o5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_rift_valley_fever/rift_vallley_fever_u5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_rift_valley_fever/rift_vallley_fever_u5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_rift_valley_fever/rift_vallley_fever_o5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_rift_valley_fever/rift_vallley_fever_o5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_sari/sari_u5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_sari/sari_u5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_sari/sari_o5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_sari/sari_o5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_tb/tb_u5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_tb/tb_u5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_tb/tb_o5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_tb/tb_o5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_typhoid/typhoid_u5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_typhoid/typhoid_u5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_typhoid/typhoid_o5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_typhoid/typhoid_o5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_vhf/vhf_u5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_vhf/vhf_u5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_vhf/vhf_o5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_vhf/vhf_o5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_yellow_fever/yellow_fever_u5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_yellow_fever/yellow_fever_u5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_yellow_fever/yellow_fever_o5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_yellow_fever/yellow_fever_o5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_neonatal_deaths/neonatal_deaths_u5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_maternal_deaths/maternal_deaths_o5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_other/other_u5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_other/other_u5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_other/other_o5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_other/other_fever_o5_deaths" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_lab/group_malaria_tested/malaria_tested_u5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_lab/group_malaria_tested/malaria_tested_o5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_lab/group_malaria_posititive/malaria_positive_u5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_lab/group_malaria_posititive/malaria_positive_o5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_lab/group_shigella_dysentry_tested/shigella_dysentry_tested_u5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_lab/group_shigella_dysentry_tested/shigella_dysentry_tested_o5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_lab/group_shigella_dysentry_positive/shigella_dysentry_positive_u5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_lab/group_shigella_dysentry_positive/shigella_dysentry_positive_o5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_lab/group_tuberculosis_tested/tuberculosis_tested_u5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_lab/group_tuberculosis_tested/tuberculosis_tested_o5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_lab/group_tuberculosis_positive/tuberculosis_positive_u5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_lab/group_tuberculosis_positive/tuberculosis_positive_o5_cases" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_lab/group_typhoid_tested/typhoid_u5_cases_tested" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_lab/group_typhoid_tested/typhoid_o5_cases_tested" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_lab/group_typhoid_positive/typhoid_u5_cases_positive" required="true()" type="int"/>
+      <bind constraint=". &gt;= 0" jr:constraintMsg="This number has to be greater or equal to 0" nodeset="/moh_505_idsr/group_lab/group_typhoid_positive/typhoid_o5_cases_positive" required="true()" type="int"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/moh_505_idsr/meta/instanceID" readonly="true()" type="string"/>
+    </model>
+  </h:head>
+  <h:body class="pages">
+    <group appearance="field-list" ref="/moh_505_idsr/inputs">
+      <label>CHV Area</label>
+      <input appearance="hidden" ref="/moh_505_idsr/inputs/source">
+        <label>Source</label>
+      </input>
+      <input appearance="hidden" ref="/moh_505_idsr/inputs/source_id">
+        <label>Source ID</label>
+      </input>
+      <group ref="/moh_505_idsr/inputs/contact">
+        <input appearance="db-object bind-id-only" ref="/moh_505_idsr/inputs/contact/_id">
+          <label>What is the Supervisor's name ?</label>
+          <hint>Select the family from the list</hint>
+        </input>
+        <input appearance="hidden" ref="/moh_505_idsr/inputs/contact/name">
+          <label>Name</label>
+        </input>
+      </group>
+    </group>
+    <group appearance="field-list" ref="/moh_505_idsr/group_facility">
+      <label>Facility</label>
+      <select1 ref="/moh_505_idsr/group_facility/facility">
+        <label>Which facility are you reporting for?</label>
+        <item>
+          <label>Iyabe District Hospital</label>
+          <value>oCSNlBnL6p2</value>
+        </item>
+        <item>
+          <label>Riotanchi Health Centre</label>
+          <value>ZyVu64QtPyq</value>
+        </item>
+      </select1>
+      <input ref="/moh_505_idsr/group_facility/g_epi_week_start">
+        <label>Start date of the Epi Week you are reporting</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/moh_505_idsr/group_aefi">
+      <label>AEFI</label>
+      <input ref="/moh_505_idsr/group_aefi/aefi_u5_cases">
+        <label>Under 5 years ( &lt; 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_aefi/aefi_u5_deaths">
+        <label>Under 5 years ( &lt; 5 years) Deaths</label>
+      </input>
+      <input ref="/moh_505_idsr/group_aefi/aefi_o5_cases">
+        <label>5 years and above (&gt;= 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_aefi/aefi_o5_deaths">
+        <label>5 years and above (&gt;= 5 years) Deaths</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/moh_505_idsr/group_jaundice">
+      <label>Acute Jaundice</label>
+      <input ref="/moh_505_idsr/group_jaundice/jaundice_u5_cases">
+        <label>Under 5 years ( &lt; 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_jaundice/jaundice_u5_deaths">
+        <label>Under 5 years ( &lt; 5 years) Deaths</label>
+      </input>
+      <input ref="/moh_505_idsr/group_jaundice/jaundice_o5_cases">
+        <label>5 years and above (&gt;= 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_jaundice/jaundice_o5_deaths">
+        <label>5 years and above (&gt;= 5 years) Deaths</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/moh_505_idsr/group_malnutrition">
+      <label>Acute Malnutrition</label>
+      <input ref="/moh_505_idsr/group_malnutrition/malnutrition_u5_cases">
+        <label>Under 5 years ( &lt; 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_malnutrition/malnutrition_u5_deaths">
+        <label>Under 5 years ( &lt; 5 years) Deaths</label>
+      </input>
+      <input ref="/moh_505_idsr/group_malnutrition/malnutrition_o5_cases">
+        <label>5 years and above (&gt;= 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_malnutrition/malutrition_o5_deaths">
+        <label>5 years and above (&gt;= 5 years) Deaths</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/moh_505_idsr/group_afp">
+      <label>AFP</label>
+      <input ref="/moh_505_idsr/group_afp/afp_u5_cases">
+        <label>Under 5 years ( &lt; 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_afp/afp_u5_deaths">
+        <label>Under 5 years ( &lt; 5 years) Deaths</label>
+      </input>
+      <input ref="/moh_505_idsr/group_afp/afp_o5_cases">
+        <label>5 years and above (&gt;= 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_afp/afp_o5_deaths">
+        <label>5 years and above (&gt;= 5 years) Deaths</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/moh_505_idsr/group_anthrax">
+      <label>Anthrax</label>
+      <input ref="/moh_505_idsr/group_anthrax/anthrax_u5_cases">
+        <label>Under 5 years ( &lt; 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_anthrax/anthrax_u5_deaths">
+        <label>Under 5 years ( &lt; 5 years) Deaths</label>
+      </input>
+      <input ref="/moh_505_idsr/group_anthrax/anthrax_o5_cases">
+        <label>5 years and above (&gt;= 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_anthrax/anthrax_o5_deaths">
+        <label>5 years and above (&gt;= 5 years) Deaths</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/moh_505_idsr/group_cholera">
+      <label>Cholera</label>
+      <input ref="/moh_505_idsr/group_cholera/cholera_u5_cases">
+        <label>Under 5 years ( &lt; 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_cholera/cholera_u5_deaths">
+        <label>Under 5 years ( &lt; 5 years) Deaths</label>
+      </input>
+      <input ref="/moh_505_idsr/group_cholera/cholera_o5_cases">
+        <label>5 years and above (&gt;= 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_cholera/cholera_o5_deaths">
+        <label>5 years and above (&gt;= 5 years) Deaths</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/moh_505_idsr/group_dengue">
+      <label>Dengue</label>
+      <input ref="/moh_505_idsr/group_dengue/dengue_u5_cases">
+        <label>Under 5 years ( &lt; 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_dengue/dengue_u5_deaths">
+        <label>Under 5 years ( &lt; 5 years) Deaths</label>
+      </input>
+      <input ref="/moh_505_idsr/group_dengue/dengue_o5_cases">
+        <label>5 years and above (&gt;= 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_dengue/dengue_o5_deaths">
+        <label>5 years and above (&gt;= 5 years) Deaths</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/moh_505_idsr/group_dysentry">
+      <label>Dysentry</label>
+      <input ref="/moh_505_idsr/group_dysentry/dysentry_u5_cases">
+        <label>Under 5 years ( &lt; 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_dysentry/dysentry_u5_deaths">
+        <label>Under 5 years ( &lt; 5 years) Deaths</label>
+      </input>
+      <input ref="/moh_505_idsr/group_dysentry/dysentry_o5_cases">
+        <label>5 years and above (&gt;= 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_dysentry/dysentry_o5_deaths">
+        <label>5 years and above (&gt;= 5 years) Deaths</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/moh_505_idsr/group_guinea_worm">
+      <label>Guinea Worm</label>
+      <input ref="/moh_505_idsr/group_guinea_worm/guinea_worm_u5_cases">
+        <label>Under 5 years ( &lt; 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_guinea_worm/guinea_worm_u5_deaths">
+        <label>Under 5 years ( &lt; 5 years) Deaths</label>
+      </input>
+      <input ref="/moh_505_idsr/group_guinea_worm/guinea_worm_o5_cases">
+        <label>5 years and above (&gt;= 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_guinea_worm/guinea_worm_o5_deaths">
+        <label>5 years and above (&gt;= 5 years) Deaths</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/moh_505_idsr/group_malaria">
+      <label>Malaria</label>
+      <input ref="/moh_505_idsr/group_malaria/malaria_u5_cases">
+        <label>Under 5 years ( &lt; 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_malaria/malaria_u5_deaths">
+        <label>Under 5 years ( &lt; 5 years) Deaths</label>
+      </input>
+      <input ref="/moh_505_idsr/group_malaria/malaria_o5_cases">
+        <label>5 years and above (&gt;= 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_malaria/malaria_o5_deaths">
+        <label>5 years and above (&gt;= 5 years) Deaths</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/moh_505_idsr/group_measles">
+      <label>Measles/Rubella</label>
+      <input ref="/moh_505_idsr/group_measles/measles_u5_cases">
+        <label>Under 5 years ( &lt; 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_measles/measles_u5_deaths">
+        <label>Under 5 years ( &lt; 5 years) Deaths</label>
+      </input>
+      <input ref="/moh_505_idsr/group_measles/measles_o5_cases">
+        <label>5 years and above (&gt;= 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_measles/measles_o5_deaths">
+        <label>5 years and above (&gt;= 5 years) Deaths</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/moh_505_idsr/group_meningitis">
+      <label>Meningococcal Meningitis</label>
+      <input ref="/moh_505_idsr/group_meningitis/meningitis_u5_cases">
+        <label>Under 5 years ( &lt; 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_meningitis/meningitis_u5_deaths">
+        <label>Under 5 years ( &lt; 5 years) Deaths</label>
+      </input>
+      <input ref="/moh_505_idsr/group_meningitis/meningitis_o5_cases">
+        <label>5 years and above (&gt;= 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_meningitis/meningitis_o5_deaths">
+        <label>5 years and above (&gt;= 5 years) Deaths</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/moh_505_idsr/group_neonatal_tetenus">
+      <label>Neonatal Tetanus</label>
+      <input ref="/moh_505_idsr/group_neonatal_tetenus/neonatal_tetanus_u5_cases">
+        <label>Under 5 years ( &lt; 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_neonatal_tetenus/neonatal_tetanus_u5_deaths">
+        <label>Under 5 years ( &lt; 5 years) Deaths</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/moh_505_idsr/group_plague">
+      <label>Plague</label>
+      <input ref="/moh_505_idsr/group_plague/plague_u5_cases">
+        <label>Under 5 years ( &lt; 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_plague/plague_u5_deaths">
+        <label>Under 5 years ( &lt; 5 years) Deaths</label>
+      </input>
+      <input ref="/moh_505_idsr/group_plague/plague_o5_cases">
+        <label>5 years and above (&gt;= 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_plague/plague_o5_deaths">
+        <label>5 years and above (&gt;= 5 years) Deaths</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/moh_505_idsr/group_rabies">
+      <label>Rabies</label>
+      <input ref="/moh_505_idsr/group_rabies/rabies_u5_cases">
+        <label>Under 5 years ( &lt; 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_rabies/rabies_u5_deaths">
+        <label>Under 5 years ( &lt; 5 years) Deaths</label>
+      </input>
+      <input ref="/moh_505_idsr/group_rabies/rabies_o5_cases">
+        <label>5 years and above (&gt;= 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_rabies/rabies_o5_deaths">
+        <label>5 years and above (&gt;= 5 years) Deaths</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/moh_505_idsr/group_rift_valley_fever">
+      <label>Rift Valley Fever</label>
+      <input ref="/moh_505_idsr/group_rift_valley_fever/rift_vallley_fever_u5_cases">
+        <label>Under 5 years ( &lt; 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_rift_valley_fever/rift_vallley_fever_u5_deaths">
+        <label>Under 5 years ( &lt; 5 years) Deaths</label>
+      </input>
+      <input ref="/moh_505_idsr/group_rift_valley_fever/rift_vallley_fever_o5_cases">
+        <label>5 years and above (&gt;= 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_rift_valley_fever/rift_vallley_fever_o5_deaths">
+        <label>5 years and above (&gt;= 5 years) Deaths</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/moh_505_idsr/group_sari">
+      <label>SARI (cluster &gt;= 3 cases)</label>
+      <input ref="/moh_505_idsr/group_sari/sari_u5_cases">
+        <label>Under 5 years ( &lt; 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_sari/sari_u5_deaths">
+        <label>Under 5 years ( &lt; 5 years) Deaths</label>
+      </input>
+      <input ref="/moh_505_idsr/group_sari/sari_o5_cases">
+        <label>5 years and above (&gt;= 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_sari/sari_o5_deaths">
+        <label>5 years and above (&gt;= 5 years) Deaths</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/moh_505_idsr/group_tb">
+      <label>Suspected MDR/XDR TB</label>
+      <input ref="/moh_505_idsr/group_tb/tb_u5_cases">
+        <label>Under 5 years ( &lt; 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_tb/tb_u5_deaths">
+        <label>Under 5 years ( &lt; 5 years) Deaths</label>
+      </input>
+      <input ref="/moh_505_idsr/group_tb/tb_o5_cases">
+        <label>5 years and above (&gt;= 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_tb/tb_o5_deaths">
+        <label>5 years and above (&gt;= 5 years) Deaths</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/moh_505_idsr/group_typhoid">
+      <label>Typhoid</label>
+      <input ref="/moh_505_idsr/group_typhoid/typhoid_u5_cases">
+        <label>Under 5 years ( &lt; 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_typhoid/typhoid_u5_deaths">
+        <label>Under 5 years ( &lt; 5 years) Deaths</label>
+      </input>
+      <input ref="/moh_505_idsr/group_typhoid/typhoid_o5_cases">
+        <label>5 years and above (&gt;= 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_typhoid/typhoid_o5_deaths">
+        <label>5 years and above (&gt;= 5 years) Deaths</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/moh_505_idsr/group_vhf">
+      <label>VHF</label>
+      <input ref="/moh_505_idsr/group_vhf/vhf_u5_cases">
+        <label>Under 5 years ( &lt; 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_vhf/vhf_u5_deaths">
+        <label>Under 5 years ( &lt; 5 years) Deaths</label>
+      </input>
+      <input ref="/moh_505_idsr/group_vhf/vhf_o5_cases">
+        <label>5 years and above (&gt;= 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_vhf/vhf_o5_deaths">
+        <label>5 years and above (&gt;= 5 years) Deaths</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/moh_505_idsr/group_yellow_fever">
+      <label>Yellow Fever</label>
+      <input ref="/moh_505_idsr/group_yellow_fever/yellow_fever_u5_cases">
+        <label>Under 5 years ( &lt; 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_yellow_fever/yellow_fever_u5_deaths">
+        <label>Under 5 years ( &lt; 5 years) Deaths</label>
+      </input>
+      <input ref="/moh_505_idsr/group_yellow_fever/yellow_fever_o5_cases">
+        <label>5 years and above (&gt;= 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_yellow_fever/yellow_fever_o5_deaths">
+        <label>5 years and above (&gt;= 5 years) Deaths</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/moh_505_idsr/group_neonatal_deaths">
+      <label>Neonatal Deaths</label>
+      <input ref="/moh_505_idsr/group_neonatal_deaths/neonatal_deaths_u5_deaths">
+        <label>Under 5 years ( &lt; 5 years) Deaths</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/moh_505_idsr/group_maternal_deaths">
+      <label>Maternal Deaths</label>
+      <input ref="/moh_505_idsr/group_maternal_deaths/maternal_deaths_o5_deaths">
+        <label>5 years and above (&gt;= 5 years) Deaths</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/moh_505_idsr/group_other">
+      <label>Other</label>
+      <input ref="/moh_505_idsr/group_other/other_u5_cases">
+        <label>Under 5 years ( &lt; 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_other/other_u5_deaths">
+        <label>Under 5 years ( &lt; 5 years) Deaths</label>
+      </input>
+      <input ref="/moh_505_idsr/group_other/other_o5_cases">
+        <label>5 years and above (&gt;= 5 years) Cases</label>
+      </input>
+      <input ref="/moh_505_idsr/group_other/other_fever_o5_deaths">
+        <label>5 years and above (&gt;= 5 years) Deaths</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/moh_505_idsr/group_lab">
+      <label>Laboratory</label>
+      <group appearance="field-list" ref="/moh_505_idsr/group_lab/group_malaria_tested">
+        <label>Malaria tested</label>
+        <input ref="/moh_505_idsr/group_lab/group_malaria_tested/malaria_tested_u5_cases">
+          <label>Under 5 years ( &lt; 5 years) Cases</label>
+        </input>
+        <input ref="/moh_505_idsr/group_lab/group_malaria_tested/malaria_tested_o5_cases">
+          <label>5 years and above (&gt;= 5 years) Cases</label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/moh_505_idsr/group_lab/group_malaria_posititive">
+        <label>Malaria positive</label>
+        <input ref="/moh_505_idsr/group_lab/group_malaria_posititive/malaria_positive_u5_cases">
+          <label>Under 5 years ( &lt; 5 years) Cases</label>
+        </input>
+        <input ref="/moh_505_idsr/group_lab/group_malaria_posititive/malaria_positive_o5_cases">
+          <label>5 years and above (&gt;= 5 years) Cases</label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/moh_505_idsr/group_lab/group_shigella_dysentry_tested">
+        <label>Shigella Dystentry tested</label>
+        <input ref="/moh_505_idsr/group_lab/group_shigella_dysentry_tested/shigella_dysentry_tested_u5_cases">
+          <label>Under 5 years ( &lt; 5 years) Cases</label>
+        </input>
+        <input ref="/moh_505_idsr/group_lab/group_shigella_dysentry_tested/shigella_dysentry_tested_o5_cases">
+          <label>5 years and above (&gt;= 5 years) Cases</label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/moh_505_idsr/group_lab/group_shigella_dysentry_positive">
+        <label>Shigella Dystentry positive</label>
+        <input ref="/moh_505_idsr/group_lab/group_shigella_dysentry_positive/shigella_dysentry_positive_u5_cases">
+          <label>Under 5 years ( &lt; 5 years) Cases</label>
+        </input>
+        <input ref="/moh_505_idsr/group_lab/group_shigella_dysentry_positive/shigella_dysentry_positive_o5_cases">
+          <label>5 years and above (&gt;= 5 years) Cases</label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/moh_505_idsr/group_lab/group_tuberculosis_tested">
+        <label>Tuberculosis tested</label>
+        <input ref="/moh_505_idsr/group_lab/group_tuberculosis_tested/tuberculosis_tested_u5_cases">
+          <label>Under 5 years ( &lt; 5 years) Cases</label>
+        </input>
+        <input ref="/moh_505_idsr/group_lab/group_tuberculosis_tested/tuberculosis_tested_o5_cases">
+          <label>5 years and above (&gt;= 5 years) Cases</label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/moh_505_idsr/group_lab/group_tuberculosis_positive">
+        <label>Tuberculosis positive</label>
+        <input ref="/moh_505_idsr/group_lab/group_tuberculosis_positive/tuberculosis_positive_u5_cases">
+          <label>Under 5 years ( &lt; 5 years) Cases</label>
+        </input>
+        <input ref="/moh_505_idsr/group_lab/group_tuberculosis_positive/tuberculosis_positive_o5_cases">
+          <label>5 years and above (&gt;= 5 years) Cases</label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/moh_505_idsr/group_lab/group_typhoid_tested">
+        <label>Typhoid tested</label>
+        <input ref="/moh_505_idsr/group_lab/group_typhoid_tested/typhoid_u5_cases_tested">
+          <label>Under 5 years ( &lt; 5 years) Cases</label>
+        </input>
+        <input ref="/moh_505_idsr/group_lab/group_typhoid_tested/typhoid_o5_cases_tested">
+          <label>5 years and above( &gt;= 5 years) Cases</label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/moh_505_idsr/group_lab/group_typhoid_positive">
+        <label>Typhoid positive</label>
+        <input ref="/moh_505_idsr/group_lab/group_typhoid_positive/typhoid_u5_cases_positive">
+          <label>Under 5 years ( &lt; 5 years) Cases</label>
+        </input>
+        <input ref="/moh_505_idsr/group_lab/group_typhoid_positive/typhoid_o5_cases_positive">
+          <label>5 years and above( &gt;= 5 years) Cases</label>
+        </input>
+      </group>
+    </group>
+  </h:body>
+</h:html>

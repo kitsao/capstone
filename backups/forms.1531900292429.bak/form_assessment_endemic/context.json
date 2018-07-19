@@ -1,0 +1,5 @@
+{
+  "person": true,
+  "place": false,
+  "expression": "(user.parent.parent._id && user.parent.parent._id !== 'fc675f8ba170bc9692b3b706613accb1') && ((!contact && user.parent.type != 'district_hospital') || contact.type === 'person' ) && (contact.type === 'person' && !summary.deceased)"
+}

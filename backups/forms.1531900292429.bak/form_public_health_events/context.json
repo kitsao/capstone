@@ -1,0 +1,5 @@
+{
+  "person": false,
+  "place": true,
+  "expression": "user.parent.parent._id === 'fc675f8ba170bc9692b3b706613a94b9' && (!contact || contact.type === 'health_center') && user.parent.type !== 'district_hospital'"
+}

@@ -1,0 +1,16 @@
+{
+    "enabled": true,
+    "items": [
+    	{
+            "type": "percent",
+            "id": "u5-diarrhoea-72hr-followup-48hr",
+            "icon": "icon-clinic",
+            "goal": 100,
+            "context": "user.parent && user.parent.parent",
+            "name": [{
+                "locale": "en",
+                "content": "% of Under-5 Diarrhoea Cases for more than 72 hours Followed-up within 48 hours"
+            }]
+        }
+    ]
+}
