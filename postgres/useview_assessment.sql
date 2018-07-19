@@ -60,7 +60,7 @@ CREATE MATERIALIZED VIEW IF NOT EXISTS useview_assessment AS
 		INNER JOIN contactview_person_fields AS person ON (form.doc #>> '{fields,patient_id}' = person.uuid)
 	
 	WHERE
-		form.doc ->> 'form' = ANY (VALUES ('assessment_endemic'), ('assessment_non_endemic'))
+		form.doc ->> 'form' = ANY (VALUES ('assessment'))
 );
 
 /* adding the following indexes */ -- see if others are required for LG

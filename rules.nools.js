@@ -96,7 +96,7 @@ rule GenerateEvents {
                     // % of Under-5 Diarrhoea cases experienced for more than 72 hours followed-up within 48 hours
                     if (((r.form === 'assessment' && r.fields.has_symptoms === 'true')
                             || (r.form === 'assessment_follow_up' && r.fields.referral_follow_up_needed === 'true'))
-                        && parseInt(r.fields.patient_age_in_years) < 5) {
+                        && parseInt(r.fields.patient_age_in_years) < 5 && r.fields.has_diarrhoea === 'true') {
                         var pass = Utils.isFormSubmittedInWindow(c.reports, 'assessment_follow_up', r.reported_date, new Date(r.reported_date + (2*MS_IN_DAY)));
                         var instance = createTargetInstance('u5-diarrhoea-72hr-followup-48hr', r, pass);
                         emitTargetInstance(instance);

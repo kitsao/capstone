@@ -5,8 +5,8 @@
             "id": "assessment",
             "days": 0,
             "start": 0,
-            "end": 3,
-            "icon": "survey",
+            "end": 0,
+            "icon": "treatment",
             "title": [{
                 "content": "{{contact.name}}'s assessment",
                 "locale": "en"
@@ -19,9 +19,9 @@
 	        {
 	            "id": "assessment-follow-up-1",
 	            "days": 1,
-	            "start": 1,
-	            "end": 1,
-	            "icon": "icon-follow-up",
+	            "start": 0,
+	            "end": 0,
+	            "icon": "follow-up",
 	            "title": [{
 	                "content": "{{contact.name}}'s assessment follow up",
 	                "locale": "en"
@@ -30,9 +30,9 @@
 	        {
 	            "id": "assessment-follow-up-2",
 	            "days": 2,
-	            "start": 2,
-	            "end": 1,
-	            "icon": "icon-follow-up",
+	            "start": 0,
+	            "end": 0,
+	            "icon": "follow-up",
 	            "title": [{
 	                "content": "{{contact.name}}'s assessment follow up",
 	                "locale": "en"
@@ -41,8 +41,8 @@
 	        {
 	            "id": "assessment-follow-up-3",
 	            "days": 3,
-	            "start": 3,
-	            "end": 1,
+	            "start": 0,
+	            "end": 0,
 	            "icon": "follow-up",
 	            "title": [{
 	                "content": "{{contact.name}}'s assessment follow up",

@@ -26,6 +26,7 @@ SELECT
 	form.doc #>> '{fields,fever,painful_groins}'::text[] AS symptom_painful_groins,
 	form.doc #>> '{fields,yellowness,yellowness_period}'::text[] AS symptom_yellowness,
 	form.doc #>> '{fields,has_symptoms}'::text[] AS has_symptoms,
+	form.doc #>> '{fields,has_diarrhoea}'::text[] AS has_diarrhoea,
 	form.doc #>> '{fields,patient_age_in_days}'::text[] AS patient_age_in_days,
 	form.doc #>> '{fields,patient_age_in_years}'::text[] AS patient_age_in_years,
 	form.doc #>> '{fields,patient_age_in_months}'::text[] AS patient_age_in_months,
