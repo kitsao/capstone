@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <h:head>
-    <h:title>Assessment</h:title>
+    <h:title>Baseline Assessment</h:title>
     <model>
       <instance>
-        <c_assessment delimiter="#" id="c_assessment" prefix="J1!c_assessment!" version="2018-07-20 08:57:23">
+        <c_assessment delimiter="#" id="c_assessment" prefix="J1!c_assessment!" version="2018-07-20 13:08:26">
           <inputs>
             <meta>
               <location>
@@ -52,7 +52,7 @@
             <breathing_difficulty/>
           </cough>
           <diarrhoea>
-            <diarrhea_duration/>
+            <diarrhoea_duration/>
             <watery_stool_episodes/>
             <blood_in_diarrhoea/>
           </diarrhoea>
@@ -128,7 +128,7 @@
       <bind nodeset="/c_assessment/cough/cough_duration" required="true()" type="select1"/>
       <bind nodeset="/c_assessment/cough/breathing_difficulty" required="true()" type="select1"/>
       <bind nodeset="/c_assessment/diarrhoea" relevant="selected( /c_assessment/group_symptoms/patient_symptoms , 'diarrhoea')"/>
-      <bind nodeset="/c_assessment/diarrhoea/diarrhea_duration" required="true()" type="select1"/>
+      <bind nodeset="/c_assessment/diarrhoea/diarrhoea_duration" required="true()" type="select1"/>
       <bind nodeset="/c_assessment/diarrhoea/watery_stool_episodes" required="true()" type="select1"/>
       <bind nodeset="/c_assessment/diarrhoea/blood_in_diarrhoea" required="true()" type="select1"/>
       <bind nodeset="/c_assessment/suck_feed" relevant="selected( /c_assessment/group_symptoms/patient_symptoms , 'unable_to_feed')"/>
@@ -269,7 +269,7 @@
     </group>
     <group appearance="field-list" ref="/c_assessment/diarrhoea">
       <label>Diarrhoea</label>
-      <select1 appearance="horizontal" ref="/c_assessment/diarrhoea/diarrhea_duration">
+      <select1 appearance="horizontal" ref="/c_assessment/diarrhoea/diarrhoea_duration">
         <label>How long has the diarrhoea lasted?</label>
         <item>
           <label>1 day or less</label>

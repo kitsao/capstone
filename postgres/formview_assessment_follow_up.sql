@@ -20,7 +20,7 @@ SELECT
     form.doc #>> '{fields,patient_age_in_days}'::text[] AS patient_age_in_days,
     form.doc #>> '{fields,patient_age_in_years}'::text[] AS patient_age_in_years,
     form.doc #>> '{fields,patient_age_in_months}'::text[] AS patient_age_in_months,
-    form.doc #>> '{fields,form_source_id}'::text[] AS form_source_id,
+    form.doc #>> '{fields,source_id}'::text[] AS source_id,
     form.doc #>> '{fields,group_improved,n_patient_improved_yes}'::text[] AS patient_improved_yes,
     form.doc #>> '{fields,group_improved,n_patient_improved_no}'::text[] AS patient_improved_no,
     form.doc #>> '{fields,group_referral_followup,n_not_visit_health_facility}'::text[] AS no_facility_visit,

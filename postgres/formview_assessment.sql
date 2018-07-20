@@ -12,7 +12,7 @@ SELECT
 	form.doc #>> '{fields,group_symptoms,patient_symptoms}'::text[] AS symptoms,
 	form.doc #>> '{fields,cough,cough_duration}'::text[] AS cough_duration,
 	form.doc #>> '{fields,cough,breathing_difficulty}'::text[] AS symptom_cough,
-	form.doc #>> '{fields,cough,diarrhoea_duration}'::text[] AS diarrhoea_duration,
+	form.doc #>> '{fields,diarrhoea,diarrhoea_duration}'::text[] AS diarrhoea_duration,
 	form.doc #>> '{fields,diarrhoea,watery_stool_episodes}'::text[] AS symptom_watery_stool_episodes,
 	form.doc #>> '{fields,diarrhoea,blood_in_diarrhoea}'::text[] AS symptom_blood_in_diarrhoea,
 	form.doc #>> '{fields,suck_feed,normal_at_birth}'::text[] AS symptom_normal_at_birth,
@@ -31,6 +31,7 @@ SELECT
 	form.doc #>> '{fields,patient_age_in_years}'::text[] AS patient_age_in_years,
 	form.doc #>> '{fields,patient_age_in_months}'::text[] AS patient_age_in_months,
 	form.doc #>> '{fields,patient_age_display}'::text[] AS patient_age_display,
+	form.doc ->> 'reported_date'::text AS reported_date,
 	form.doc ->> '_id'::text AS xmlforms_uuid
 
 FROM 

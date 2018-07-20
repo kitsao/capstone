@@ -36,6 +36,7 @@ CREATE MATERIALIZED VIEW IF NOT EXISTS useview_c_assessment AS
 		END AS patient_age_in_months,
 		
 		form.doc #>> '{fields,group_symptoms,patient_symptoms}' AS patient_symptoms,
+		form.doc #>> '{fields,has_diarrhoea}' AS has_diarrhoea,
 		
 		CASE
 			WHEN form.doc #>> '{fields,cough,cough_duration}' = '' THEN 0::int 

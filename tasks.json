@@ -1,6 +1,6 @@
 [
 	{
-        "name": "assessment",
+        "name": "c-assessment",
         "events": [{
             "id": "assessment",
             "days": 0,
@@ -14,7 +14,7 @@
         }]
     },
 	{
-        "name": "assessment-follow-up",
+        "name": "c-assessment-follow-up",
         "events": [
 	        {
 	            "id": "assessment-follow-up-1",
@@ -23,18 +23,18 @@
 	            "end": 0,
 	            "icon": "follow-up",
 	            "title": [{
-	                "content": "{{contact.name}}'s assessment follow up",
+	                "content": "{{contact.name}}'s Review 1",
 	                "locale": "en"
 	            }]
 	        },
 	        {
 	            "id": "assessment-follow-up-2",
-	            "days": 2,
-	            "start": 0,
+	            "days": 0,
+	            "start": 2,
 	            "end": 0,
 	            "icon": "follow-up",
 	            "title": [{
-	                "content": "{{contact.name}}'s assessment follow up",
+	                "content": "{{contact.name}}'s Review 2",
 	                "locale": "en"
 	            }]
 	        },
@@ -45,7 +45,7 @@
 	            "end": 0,
 	            "icon": "follow-up",
 	            "title": [{
-	                "content": "{{contact.name}}'s assessment follow up",
+	                "content": "{{contact.name}}'s Review 3",
 	                "locale": "en"
 	            }]
 	        }

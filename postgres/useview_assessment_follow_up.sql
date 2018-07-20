@@ -11,7 +11,7 @@ CREATE MATERIALIZED VIEW useview_c_assessment_follow_up AS
 		form.doc #>> '{contact,_id}' AS reported_by,
 		form.doc #>> '{contact,parent,_id}' AS reported_by_parent,
 		to_timestamp((NULLIF(form.doc ->> 'reported_date'::text, ''::text)::bigint / 1000)::double precision) AS reported,
-		COALESCE(form.doc #>> '{fields,form_source_id}','') AS form_source_id,
+		COALESCE(form.doc #>> '{fields,source_id}','') AS source_id,
 		form.doc #>> '{fields,patient_id}' AS patient_id,
 
 		CASE
@@ -53,12 +53,12 @@ CREATE MATERIALIZED VIEW useview_c_assessment_follow_up AS
 )
 ;
 	
-CREATE UNIQUE INDEX IF NOT EXISTS useview_c_assessment_follow_up_source_date_uuid ON useview_c_assessment_follow_up USING btree (form_source_id, reported, uuid);
+CREATE UNIQUE INDEX IF NOT EXISTS useview_c_assessment_follow_up_source_date_uuid ON useview_c_assessment_follow_up USING btree (source_id, reported, uuid);
 
 /* adding the following indexes */
 CREATE INDEX useview_c_assessment_follow_up_reported ON  useview_c_assessment_follow_up USING btree (reported);
 CREATE INDEX useview_c_assessment_follow_up_uuid ON useview_c_assessment_follow_up USING btree (uuid);
-CREATE INDEX useview_c_assessment_follow_up_form_source_id ON useview_c_assessment_follow_up USING btree (form_source_id);
+CREATE INDEX useview_c_assessment_follow_up_source_id ON useview_c_assessment_follow_up USING btree (source_id);
 CREATE INDEX useview_c_assessment_follow_up_reported_by ON  useview_c_assessment_follow_up USING btree (reported_by);
 CREATE INDEX useview_c_assessment_follow_up_reported_by_parent ON  useview_c_assessment_follow_up USING btree (reported_by_parent);
 
