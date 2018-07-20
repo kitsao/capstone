@@ -96,7 +96,7 @@ rule GenerateEvents {
                     // % of Under-5 Diarrhoea cases experienced for more than 72 hours followed-up within 48 hours
                     if (((r.form === 'assessment' && r.fields.has_symptoms === 'true')
                             || (r.form === 'assessment_follow_up' && r.fields.referral_follow_up_needed === 'true'))
-                        && parseInt(r.fields.patient_age_in_years) < 5 && r.fields.has_diarrhoea === 'true') {
+                        && parseInt(r.fields.patient_age_in_years) < 5 && r.fields.has_diarrhoea === 'true' && parseInt(r.diarrhoea.diarrhoea_duration) >= 3) {
                         var pass = Utils.isFormSubmittedInWindow(c.reports, 'assessment_follow_up', r.reported_date, new Date(r.reported_date + (2*MS_IN_DAY)));
                         var instance = createTargetInstance('u5-diarrhoea-72hr-followup-48hr', r, pass);
                         emitTargetInstance(instance);
@@ -139,7 +139,7 @@ rule GenerateEvents {
             c.reports.forEach(
                 function (r) {
                     switch (r.form) {
-                        case 'assessment':
+                        case 'c_assessment':
                             schedule = Utils.getSchedule('assessment-follow-up');
                             var followUpCount = (r && r.fields && r.fields.follow_up_count) ? parseInt(r.fields.follow_up_count, 10) : 0;
                             if ( schedule
@@ -153,7 +153,7 @@ rule GenerateEvents {
                                 visit.resolved = Utils.isFormSubmittedInWindow(c.reports, 'assessment_follow_up', Utils.addDate(visit.date, s.start * -1).getTime(), Utils.addDate(visit.date, (s.end + 1)).getTime(), followUpCount);
                                 visit.actions.push({
                                     type: 'report',
-                                    form: 'assessment_follow_up',
+                                    form: 'c_assessment_follow_up',
                                     label: 'Follow up',
                                     content: {
                                         source: 'task',
@@ -166,7 +166,7 @@ rule GenerateEvents {
                             });
                         }
                         break;
-                        case 'assessment_follow_up':
+                        case 'c_assessment_follow_up':
                             var reportedDate = new Date(r.reported_date);
                             schedule = Utils.getSchedule('assessment-follow-up');
                             var followUpCount = (r && r.fields && r.fields.follow_up_count) ? parseInt(r.fields.follow_up_count, 10) : 1;
@@ -183,7 +183,7 @@ rule GenerateEvents {
                                 visit.resolved = Utils.isFormSubmittedInWindow(c.reports, 'assessment_follow_up', Utils.addDate(visit.date, s.start * -1).getTime(), Utils.addDate(visit.date, (s.end + 1)).getTime(), followUpCount);
                                 visit.actions.push({
                                     type: 'report',
-                                    form: 'assessment_follow_up',
+                                    form: 'c_assessment_follow_up',
                                     label: 'Follow up',
                                     content: {
                                         source: 'task',

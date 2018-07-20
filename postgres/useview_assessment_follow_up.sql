@@ -1,8 +1,8 @@
-VACUUM ANALYZE useview_assessment_follow_up;
-SELECT * FROM useview_assessment_follow_up;
+VACUUM ANALYZE useview_c_assessment_follow_up;
+SELECT * FROM useview_c_assessment_follow_up;
 
-DROP MATERIALIZED VIEW IF EXISTS useview_assessment_follow_up CASCADE;
-CREATE MATERIALIZED VIEW useview_assessment_follow_up AS 
+DROP MATERIALIZED VIEW IF EXISTS useview_c_assessment_follow_up CASCADE;
+CREATE MATERIALIZED VIEW useview_c_assessment_follow_up AS 
 (
 	SELECT
 		form.doc->>'_id' as uuid,
@@ -48,19 +48,19 @@ CREATE MATERIALIZED VIEW useview_assessment_follow_up AS
 		INNER JOIN contactview_person_fields AS person ON (form.doc #>> '{fields,patient_id}' = person.uuid)
 				
 	WHERE
-		form.doc ->> 'form' = 'assessment_follow_up'
+		form.doc ->> 'form' = 'c_assessment_follow_up'
 		
 )
 ;
 	
-CREATE UNIQUE INDEX IF NOT EXISTS useview_assessment_follow_up_source_date_uuid ON useview_assessment_follow_up USING btree (form_source_id, reported, uuid);
+CREATE UNIQUE INDEX IF NOT EXISTS useview_c_assessment_follow_up_source_date_uuid ON useview_c_assessment_follow_up USING btree (form_source_id, reported, uuid);
 
 /* adding the following indexes */
-CREATE INDEX useview_assessment_follow_up_reported ON  useview_assessment_follow_up USING btree (reported);
-CREATE INDEX useview_assessment_follow_up_uuid ON useview_assessment_follow_up USING btree (uuid);
-CREATE INDEX useview_assessment_follow_up_form_source_id ON useview_assessment_follow_up USING btree (form_source_id);
-CREATE INDEX useview_assessment_follow_up_reported_by ON  useview_assessment_follow_up USING btree (reported_by);
-CREATE INDEX useview_assessment_follow_up_reported_by_parent ON  useview_assessment_follow_up USING btree (reported_by_parent);
+CREATE INDEX useview_c_assessment_follow_up_reported ON  useview_c_assessment_follow_up USING btree (reported);
+CREATE INDEX useview_c_assessment_follow_up_uuid ON useview_c_assessment_follow_up USING btree (uuid);
+CREATE INDEX useview_c_assessment_follow_up_form_source_id ON useview_c_assessment_follow_up USING btree (form_source_id);
+CREATE INDEX useview_c_assessment_follow_up_reported_by ON  useview_c_assessment_follow_up USING btree (reported_by);
+CREATE INDEX useview_c_assessment_follow_up_reported_by_parent ON  useview_c_assessment_follow_up USING btree (reported_by_parent);
 
 REASSIGN OWNED BY current_user TO full_access;
-GRANT SELECT ON useview_assessment_follow_up TO klipfolio;
+GRANT SELECT ON useview_c_assessment_follow_up TO klipfolio;

@@ -1,8 +1,8 @@
-VACUUM ANALYZE useview_assessment;
-SELECT * FROM useview_assessment;
-DROP MATERIALIZED VIEW useview_assessment;
+VACUUM ANALYZE useview_c_assessment;
+SELECT * FROM useview_c_assessment;
+DROP MATERIALIZED VIEW useview_c_assessment;
 
-CREATE MATERIALIZED VIEW IF NOT EXISTS useview_assessment AS
+CREATE MATERIALIZED VIEW IF NOT EXISTS useview_c_assessment AS
 (
 	SELECT
 		form.doc ->> '_id' AS uuid,
@@ -60,23 +60,22 @@ CREATE MATERIALIZED VIEW IF NOT EXISTS useview_assessment AS
 		INNER JOIN contactview_person_fields AS person ON (form.doc #>> '{fields,patient_id}' = person.uuid)
 	
 	WHERE
-		form.doc ->> 'form' = ANY (VALUES ('assessment'))
+		form.doc ->> 'form' = ANY (VALUES ('c_assessment'))
 );
 
 /* adding the following indexes */ -- see if others are required for LG
-CREATE UNIQUE INDEX useview_assessment_reported_age_uuid ON useview_assessment USING btree (reported, patient_age_in_years, uuid);
-CREATE INDEX useview_assessment_reported ON  useview_assessment USING btree (reported);
-CREATE INDEX useview_assessment_chw ON  useview_assessment USING btree (chw);
-CREATE INDEX useview_assessment_reported_by ON  useview_assessment USING btree (reported_by);
-CREATE INDEX useview_assessment_reported_by_parent ON  useview_assessment USING btree (reported_by_parent);
-CREATE INDEX useview_assessment_referral_follow_up ON useview_assessment USING btree(referral_follow_up);
-CREATE INDEX useview_assessment_uuid ON useview_assessment USING btree (UUID);
+CREATE UNIQUE INDEX useview_c_assessment_reported_age_uuid ON useview_c_assessment USING btree (reported, patient_age_in_years, uuid);
+CREATE INDEX useview_c_assessment_reported ON  useview_c_assessment USING btree (reported);
+CREATE INDEX useview_c_assessment_chw ON  useview_c_assessment USING btree (chw);
+CREATE INDEX useview_c_assessment_reported_by ON  useview_c_assessment USING btree (reported_by);
+CREATE INDEX useview_c_assessment_reported_by_parent ON  useview_c_assessment USING btree (reported_by_parent);
+CREATE INDEX useview_c_assessment_uuid ON useview_c_assessment USING btree (UUID);
 
 /* permissions, double check on these, to add the others if LG needs them */
 REASSIGN OWNED BY current_user TO full_access;
-ALTER  VIEW useview_assessment OWNER TO full_access;
---GRANT SELECT ON useview_assessment TO lg_access; */ it said this wasn't a valid permission */
-GRANT SELECT ON useview_assessment TO klipfolio;
+ALTER  VIEW useview_c_assessment OWNER TO full_access;
+--GRANT SELECT ON useview_c_assessment TO lg_access; */ it said this wasn't a valid permission */
+GRANT SELECT ON useview_c_assessment TO klipfolio;
 GRANT SELECT ON ALL TABLES IN SCHEMA public TO klipfolio;
---GRANT SELECT ON useview_assessment TO read_only; */ it said this wasn't a valid permission */
+--GRANT SELECT ON useview_c_assessment TO read_only; */ it said this wasn't a valid permission */
 

@@ -1,4 +1,4 @@
-CREATE OR REPLACE VIEW formview_assessment_follow_up AS
+CREATE OR REPLACE VIEW formview_c_assessment_follow_up AS
 SELECT 
 	form.doc #>> '{fields,inputs,meta,location,lat}'::text[] AS "inputs/meta/location/lat",
     form.doc #>> '{fields,inputs,meta,location,long}'::text[] AS "inputs/meta/location/long",
@@ -33,4 +33,4 @@ FROM
     JOIN form_metadata fm ON fm.uuid = (form.doc ->> '_id'::text)
     LEFT JOIN couchdb patient ON (patient.doc ->> '_id'::text) = (form.doc #>> '{fields,patient_id}'::text[])
 WHERE
-	(form.doc ->> 'form'::text) = 'assessment_follow_up'::text;
+	(form.doc ->> 'form'::text) = 'c_assessment_follow_up'::text;

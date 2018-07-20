@@ -1,0 +1,509 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>Assessment</h:title>
+    <model>
+      <instance>
+        <c_assessment delimiter="#" id="c_assessment" prefix="J1!c_assessment!" version="2018-07-20 08:57:23">
+          <inputs>
+            <meta>
+              <location>
+                <lat/>
+                <long/>
+                <error/>
+                <message/>
+              </location>
+            </meta>
+            <source/>
+            <source_id/>
+            <contact>
+              <_id/>
+              <name/>
+              <patient_id/>
+              <date_of_birth>0</date_of_birth>
+              <sex/>
+              <parent>
+                <parent>
+                  <contact>
+                    <chw_name/>
+                    <phone/>
+                  </contact>
+                </parent>
+              </parent>
+            </contact>
+          </inputs>
+          <source/>
+          <source_id/>
+          <patient_age_in_days/>
+          <patient_age_in_months/>
+          <patient_age_in_years/>
+          <patient_age_display/>
+          <patient_uuid/>
+          <patient_id/>
+          <patient_name/>
+          <has_fever/>
+          <has_diarrhoea/>
+          <has_symptoms/>
+          <group_symptoms>
+            <patient_symptoms/>
+          </group_symptoms>
+          <cough>
+            <cough_duration/>
+            <breathing_difficulty/>
+          </cough>
+          <diarrhoea>
+            <diarrhea_duration/>
+            <watery_stool_episodes/>
+            <blood_in_diarrhoea/>
+          </diarrhoea>
+          <suck_feed>
+            <normal_at_birth/>
+            <body_stiffness/>
+          </suck_feed>
+          <fever>
+            <fever_duration/>
+            <temperature/>
+            <drowsy/>
+            <fits/>
+            <skin_rash/>
+            <bleeding/>
+            <painful_groins/>
+          </fever>
+          <yellowness>
+            <yellowness_period/>
+          </yellowness>
+          <group_summary>
+            <r_summary/>
+            <r_patient_details/>
+            <r_summary_efffects/>
+            <r_worm/>
+            <r_bite/>
+            <r_sick/>
+            <r_cough/>
+            <r_watery_diarrhoea/>
+            <r_blood_in_stool/>
+            <r_suck_feed/>
+            <r_drowsy/>
+            <r_fits/>
+            <r_rash/>
+            <r_bleeding/>
+            <r_groins/>
+            <r_yellowness/>
+            <r_refer/>
+          </group_summary>
+          <meta>
+            <instanceID/>
+          </meta>
+        </c_assessment>
+      </instance>
+      <instance id="contact-summary"/>
+      <bind nodeset="/c_assessment/inputs" relevant="./source = 'user'"/>
+      <bind nodeset="/c_assessment/inputs/source" type="string"/>
+      <bind nodeset="/c_assessment/inputs/source_id" type="string"/>
+      <bind nodeset="/c_assessment/inputs/contact/_id" type="db:person"/>
+      <bind nodeset="/c_assessment/inputs/contact/name" type="string"/>
+      <bind nodeset="/c_assessment/inputs/contact/patient_id" type="string"/>
+      <bind nodeset="/c_assessment/inputs/contact/date_of_birth" type="string"/>
+      <bind nodeset="/c_assessment/inputs/contact/sex" type="string"/>
+      <bind nodeset="/c_assessment/inputs/contact/parent/parent/contact/chw_name" type="string"/>
+      <bind nodeset="/c_assessment/inputs/contact/parent/parent/contact/phone" type="string"/>
+      <bind calculate="../inputs/source" nodeset="/c_assessment/source" type="string"/>
+      <bind calculate="../inputs/source_id" nodeset="/c_assessment/source_id" type="string"/>
+      <bind calculate="floor( decimal-date-time(today()) - decimal-date-time(date( /c_assessment/inputs/contact/date_of_birth )) )" nodeset="/c_assessment/patient_age_in_days" type="string"/>
+      <bind calculate="difference-in-months( ../inputs/contact/date_of_birth, today() )" nodeset="/c_assessment/patient_age_in_months" type="string"/>
+      <bind calculate="floor( /c_assessment/patient_age_in_months  div 12 )" nodeset="/c_assessment/patient_age_in_years" type="string"/>
+      <bind calculate="concat(
+ concat( /c_assessment/patient_age_in_years , if( /c_assessment/patient_age_in_years =1,' year and ',' years and ')),
+ concat( /c_assessment/patient_age_in_months  mod 12, if(( /c_assessment/patient_age_in_months  mod 12)=1,' month old',' months old'))
+)" nodeset="/c_assessment/patient_age_display" type="string"/>
+      <bind calculate="../inputs/contact/_id" nodeset="/c_assessment/patient_uuid" type="string"/>
+      <bind calculate="../inputs/contact/_id" nodeset="/c_assessment/patient_id" required="true()" type="string"/>
+      <bind calculate="../inputs/contact/name" nodeset="/c_assessment/patient_name" type="string"/>
+      <bind calculate="if(selected( /c_assessment/group_symptoms/patient_symptoms ,'fever') 'true','false')" nodeset="/c_assessment/has_fever" type="string"/>
+      <bind calculate="if(selected( /c_assessment/group_symptoms/patient_symptoms ,'diarrhoea') 'true','false')" nodeset="/c_assessment/has_diarrhoea" type="string"/>
+      <bind calculate="if(count-selected( /c_assessment/group_symptoms/patient_symptoms ) &gt; 0, 'true','false')" nodeset="/c_assessment/has_symptoms" type="string"/>
+      <bind nodeset="/c_assessment/group_symptoms" relevant=" /c_assessment/patient_age_in_years  &lt; 5"/>
+      <bind nodeset="/c_assessment/group_symptoms/patient_symptoms" required="true()" type="select"/>
+      <bind nodeset="/c_assessment/cough" relevant="selected( /c_assessment/group_symptoms/patient_symptoms , 'cough')"/>
+      <bind nodeset="/c_assessment/cough/cough_duration" required="true()" type="select1"/>
+      <bind nodeset="/c_assessment/cough/breathing_difficulty" required="true()" type="select1"/>
+      <bind nodeset="/c_assessment/diarrhoea" relevant="selected( /c_assessment/group_symptoms/patient_symptoms , 'diarrhoea')"/>
+      <bind nodeset="/c_assessment/diarrhoea/diarrhea_duration" required="true()" type="select1"/>
+      <bind nodeset="/c_assessment/diarrhoea/watery_stool_episodes" required="true()" type="select1"/>
+      <bind nodeset="/c_assessment/diarrhoea/blood_in_diarrhoea" required="true()" type="select1"/>
+      <bind nodeset="/c_assessment/suck_feed" relevant="selected( /c_assessment/group_symptoms/patient_symptoms , 'unable_to_feed')"/>
+      <bind nodeset="/c_assessment/suck_feed/normal_at_birth" required="true()" type="select1"/>
+      <bind nodeset="/c_assessment/suck_feed/body_stiffness" required="true()" type="select1"/>
+      <bind nodeset="/c_assessment/fever" relevant="selected( /c_assessment/group_symptoms/patient_symptoms , 'fever')"/>
+      <bind nodeset="/c_assessment/fever/fever_duration" required="true()" type="select1"/>
+      <bind nodeset="/c_assessment/fever/temperature" required="true()" type="decimal"/>
+      <bind nodeset="/c_assessment/fever/drowsy" required="true()" type="select1"/>
+      <bind nodeset="/c_assessment/fever/fits" required="true()" type="select1"/>
+      <bind nodeset="/c_assessment/fever/skin_rash" required="true()" type="select1"/>
+      <bind nodeset="/c_assessment/fever/bleeding" required="true()" type="select1"/>
+      <bind nodeset="/c_assessment/fever/painful_groins" required="true()" type="select1"/>
+      <bind nodeset="/c_assessment/yellowness" relevant="selected( /c_assessment/group_symptoms/patient_symptoms , 'sudden_yellowness')"/>
+      <bind nodeset="/c_assessment/yellowness/yellowness_period" required="true()" type="select1"/>
+      <bind nodeset="/c_assessment/group_summary/r_summary" readonly="true()" type="string"/>
+      <bind nodeset="/c_assessment/group_summary/r_patient_details" readonly="true()" type="string"/>
+      <bind nodeset="/c_assessment/group_summary/r_summary_efffects" readonly="true()" relevant=" /c_assessment/has_symptoms ='true'" type="string"/>
+      <bind nodeset="/c_assessment/group_summary/r_worm" readonly="true()" relevant="selected( /c_assessment/group_symptoms/patient_symptoms , 'worm_from_skin')" type="string"/>
+      <bind nodeset="/c_assessment/group_summary/r_bite" readonly="true()" relevant="selected( /c_assessment/group_symptoms/patient_symptoms , 'animal_bite')" type="string"/>
+      <bind nodeset="/c_assessment/group_summary/r_sick" readonly="true()" relevant="selected( /c_assessment/group_symptoms/patient_symptoms , 'sick_after_immunization')" type="string"/>
+      <bind nodeset="/c_assessment/group_summary/r_cough" readonly="true()" relevant=" /c_assessment/cough/breathing_difficulty ='yes'" type="string"/>
+      <bind nodeset="/c_assessment/group_summary/r_watery_diarrhoea" readonly="true()" relevant=" /c_assessment/diarrhoea/watery_stool_episodes =3" type="string"/>
+      <bind nodeset="/c_assessment/group_summary/r_blood_in_stool" readonly="true()" relevant=" /c_assessment/diarrhoea/blood_in_diarrhoea ='yes'" type="string"/>
+      <bind nodeset="/c_assessment/group_summary/r_suck_feed" readonly="true()" relevant=" /c_assessment/patient_age_in_days &lt;29 and ( /c_assessment/suck_feed/normal_at_birth ='yes' or  /c_assessment/suck_feed/body_stiffness ='yes')" type="string"/>
+      <bind nodeset="/c_assessment/group_summary/r_drowsy" readonly="true()" relevant=" /c_assessment/has_fever ='true' or  /c_assessment/fever/drowsy ='yes'" type="string"/>
+      <bind nodeset="/c_assessment/group_summary/r_fits" readonly="true()" relevant=" /c_assessment/has_fever ='true' or  /c_assessment/fever/fits ='yes'" type="string"/>
+      <bind nodeset="/c_assessment/group_summary/r_rash" readonly="true()" relevant=" /c_assessment/has_fever ='true' and  /c_assessment/fever/skin_rash ='yes'" type="string"/>
+      <bind nodeset="/c_assessment/group_summary/r_bleeding" readonly="true()" relevant=" /c_assessment/has_fever ='true' or  /c_assessment/fever/bleeding ='yes'" type="string"/>
+      <bind nodeset="/c_assessment/group_summary/r_groins" readonly="true()" relevant=" /c_assessment/has_fever ='true' or  /c_assessment/fever/painful_groins ='yes'" type="string"/>
+      <bind nodeset="/c_assessment/group_summary/r_yellowness" readonly="true()" relevant=" /c_assessment/yellowness/yellowness_period =1" type="string"/>
+      <bind nodeset="/c_assessment/group_summary/r_refer" readonly="true()" relevant=" /c_assessment/has_symptoms ='true'" type="string"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/c_assessment/meta/instanceID" readonly="true()" type="string"/>
+    </model>
+  </h:head>
+  <h:body class="pages">
+    <group ref="/c_assessment/inputs">
+      <label>Inputs</label>
+      <group ref="/c_assessment/inputs/contact">
+        <label>Contact</label>
+        <input appearance="db-object" ref="/c_assessment/inputs/contact/_id">
+          <label>What is the patient's name?</label>
+        </input>
+        <group ref="/c_assessment/inputs/contact/parent">
+          <label>Parent</label>
+          <group ref="/c_assessment/inputs/contact/parent/parent">
+            <label>Parent</label>
+            <group ref="/c_assessment/inputs/contact/parent/parent/contact">
+              <label>Contact</label>
+            </group>
+          </group>
+        </group>
+      </group>
+    </group>
+    <group ref="/c_assessment/group_symptoms">
+      <label>Symptoms</label>
+      <select ref="/c_assessment/group_symptoms/patient_symptoms">
+        <label>Does <output value=" /c_assessment/patient_name "/> have the following symptoms?</label>
+        <hint>Select all that apply</hint>
+        <item>
+          <label>Cough</label>
+          <value>cough</value>
+        </item>
+        <item>
+          <label>Fever</label>
+          <value>fever</value>
+        </item>
+        <item>
+          <label>Diarrhoea</label>
+          <value>diarrhoea</value>
+        </item>
+        <item>
+          <label>Worm emerging from skin</label>
+          <value>worm_from_skin</value>
+        </item>
+        <item>
+          <label>Sudden loss of movement of one or both arms or legs</label>
+          <value>loss_of_limb_movement</value>
+        </item>
+        <item>
+          <label>Animal bite</label>
+          <value>animal_bite</value>
+        </item>
+        <item>
+          <label>Unable to suck or feed</label>
+          <value>unable_to_feed</value>
+        </item>
+        <item>
+          <label>Child falling sick after immunization</label>
+          <value>sick_after_immunization</value>
+        </item>
+        <item>
+          <label>Sudden yellowness of eyes or skin</label>
+          <value>sudden_yellowness</value>
+        </item>
+      </select>
+    </group>
+    <group appearance="field-list" ref="/c_assessment/cough">
+      <label>Cough</label>
+      <select1 appearance="horizontal" ref="/c_assessment/cough/cough_duration">
+        <label>How long has this cough lasted?</label>
+        <item>
+          <label>1 day or less</label>
+          <value>1</value>
+        </item>
+        <item>
+          <label>2 days</label>
+          <value>2</value>
+        </item>
+        <item>
+          <label>3 days</label>
+          <value>3</value>
+        </item>
+        <item>
+          <label>4 days - 1 week</label>
+          <value>7</value>
+        </item>
+        <item>
+          <label>1 - 2 weeks</label>
+          <value>14</value>
+        </item>
+        <item>
+          <label>2 weeks or more</label>
+          <value>21</value>
+        </item>
+      </select1>
+      <select1 appearance="horizontal" ref="/c_assessment/cough/breathing_difficulty">
+        <label>Does <output value=" /c_assessment/patient_name "/> have difficulty in breathing?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/c_assessment/diarrhoea">
+      <label>Diarrhoea</label>
+      <select1 appearance="horizontal" ref="/c_assessment/diarrhoea/diarrhea_duration">
+        <label>How long has the diarrhoea lasted?</label>
+        <item>
+          <label>1 day or less</label>
+          <value>1</value>
+        </item>
+        <item>
+          <label>2 days</label>
+          <value>2</value>
+        </item>
+        <item>
+          <label>3 days</label>
+          <value>3</value>
+        </item>
+        <item>
+          <label>4 days - 1 week</label>
+          <value>7</value>
+        </item>
+        <item>
+          <label>1 - 2 weeks</label>
+          <value>14</value>
+        </item>
+        <item>
+          <label>2 weeks or more</label>
+          <value>21</value>
+        </item>
+      </select1>
+      <select1 appearance="horizontal" ref="/c_assessment/diarrhoea/watery_stool_episodes">
+        <label>How many episodes of watery diarrhoea stool has <output value=" /c_assessment/patient_name "/> had in the last 24hrs?</label>
+        <item>
+          <label>Less than 3</label>
+          <value>2</value>
+        </item>
+        <item>
+          <label>3 or more</label>
+          <value>3</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>0</value>
+        </item>
+      </select1>
+      <select1 appearance="horizontal" ref="/c_assessment/diarrhoea/blood_in_diarrhoea">
+        <label>Is there blood in the diarrhoea?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/c_assessment/suck_feed">
+      <label>Unable to suck or feed</label>
+      <select1 appearance="horizontal" ref="/c_assessment/suck_feed/normal_at_birth">
+        <label>Was the newborn normal at birth?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <select1 appearance="horizontal" ref="/c_assessment/suck_feed/body_stiffness">
+        <label>Does the newborn have body stiffness?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/c_assessment/fever">
+      <label>Fever</label>
+      <select1 appearance="horizontal" ref="/c_assessment/fever/fever_duration">
+        <label>How long has the fever lasted?</label>
+        <item>
+          <label>1 day or less</label>
+          <value>1</value>
+        </item>
+        <item>
+          <label>2 days</label>
+          <value>2</value>
+        </item>
+        <item>
+          <label>3 days</label>
+          <value>3</value>
+        </item>
+        <item>
+          <label>4 days - 1 week</label>
+          <value>7</value>
+        </item>
+        <item>
+          <label>1 - 2 weeks</label>
+          <value>14</value>
+        </item>
+        <item>
+          <label>2 weeks or more</label>
+          <value>21</value>
+        </item>
+      </select1>
+      <input appearance="horizontal" ref="/c_assessment/fever/temperature">
+        <label>What it the Patient's Temperature?</label>
+        <hint>Use your thermometer to take the patient's temperature</hint>
+      </input>
+      <select1 appearance="horizontal" ref="/c_assessment/fever/drowsy">
+        <label>Does <output value=" /c_assessment/patient_name "/> look drowsy(sleepy) or confused?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <select1 appearance="horizontal" ref="/c_assessment/fever/fits">
+        <label>Does <output value=" /c_assessment/patient_name "/> have fits?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <select1 appearance="horizontal" ref="/c_assessment/fever/skin_rash">
+        <label>Does <output value=" /c_assessment/patient_name "/> have skin rash?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <select1 appearance="horizontal" ref="/c_assessment/fever/bleeding">
+        <label>Does <output value=" /c_assessment/patient_name "/> have bleeding from nose, mouth, skin, other sites?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+      <select1 appearance="horizontal" ref="/c_assessment/fever/painful_groins">
+        <label>Does <output value=" /c_assessment/patient_name "/> have painful groins swelling?</label>
+        <item>
+          <label>Yes</label>
+          <value>yes</value>
+        </item>
+        <item>
+          <label>No</label>
+          <value>no</value>
+        </item>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/c_assessment/yellowness">
+      <label>Sudden yellowness of eyes or skin</label>
+      <select1 appearance="horizontal" ref="/c_assessment/yellowness/yellowness_period">
+        <label>How long has the yellowness of eyes or skin lasted?</label>
+        <item>
+          <label>Less than 2 weeks</label>
+          <value>1</value>
+        </item>
+        <item>
+          <label>2 or more weeks</label>
+          <value>2</value>
+        </item>
+      </select1>
+    </group>
+    <group appearance="field-list summary" ref="/c_assessment/group_summary">
+      <label>Assessment Summary</label>
+      <input appearance="h1 yellow" ref="/c_assessment/group_summary/r_summary">
+        <label>Patient Details&lt;I class="fa fa-user"&gt;&lt;/i&gt;</label>
+      </input>
+      <input ref="/c_assessment/group_summary/r_patient_details">
+        <label>&lt;h4 style=&quot;text-align:center;&quot;&gt;<output value=" /c_assessment/patient_name "/>&lt;/h4&gt; &lt;h5 style=&quot;text-align:center;&quot;&gt;<output value=" /c_assessment/patient_age_display "/>&lt;/h5&gt;</label>
+      </input>
+      <input ref="/c_assessment/group_summary/r_summary_efffects">
+        <label>&lt;b&gt;Summary Effects:&lt;/b&gt;</label>
+      </input>
+      <input ref="/c_assessment/group_summary/r_worm">
+        <label>Worm Emerging: Skin Worm</label>
+      </input>
+      <input ref="/c_assessment/group_summary/r_bite">
+        <label>Animal bite</label>
+      </input>
+      <input ref="/c_assessment/group_summary/r_sick">
+        <label>Child falling sick after immunization</label>
+      </input>
+      <input ref="/c_assessment/group_summary/r_cough">
+        <label>Coughing + Difficulty in breathing: Severe Chest Illness</label>
+      </input>
+      <input ref="/c_assessment/group_summary/r_watery_diarrhoea">
+        <label>Diarrhoea + 3 or more: Lots of watery diarrhoea</label>
+      </input>
+      <input ref="/c_assessment/group_summary/r_blood_in_stool">
+        <label>Diarrhoea + blood in stools: Lots of watery diarrhoea</label>
+      </input>
+      <input ref="/c_assessment/group_summary/r_suck_feed">
+        <label>Child &lt;29 days old + unable to feed or suck + or normal at birth + or body stiffness: Newborn disease</label>
+      </input>
+      <input ref="/c_assessment/group_summary/r_drowsy">
+        <label>Fever alone or Fever + drowsy (sleepy) or confused: Hotness of body (Fever)</label>
+      </input>
+      <input ref="/c_assessment/group_summary/r_fits">
+        <label>Fever alone or Fever + fits: Hotness of body (Fever)</label>
+      </input>
+      <input ref="/c_assessment/group_summary/r_rash">
+        <label>Fever + Skin rash: Body hotness and rash</label>
+      </input>
+      <input ref="/c_assessment/group_summary/r_bleeding">
+        <label>Fever alone or Fever + bleeding from the nose, mouth,skin, other sites: Hotness of body (Fever)</label>
+      </input>
+      <input ref="/c_assessment/group_summary/r_groins">
+        <label>Fever alone or Fever + Painful groins swelling: Hotness of body</label>
+      </input>
+      <input ref="/c_assessment/group_summary/r_yellowness">
+        <label>Sudden yellowness + (or without) fever + onset of the sudden yellowness less than 2 weeks</label>
+      </input>
+      <input ref="/c_assessment/group_summary/r_refer">
+        <label>&lt;p style='color:red; font-weight:bold;'&gt;Refer patient to health facility&lt;/p&gt;</label>
+      </input>
+    </group>
+  </h:body>
+</h:html>

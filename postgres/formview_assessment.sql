@@ -1,4 +1,4 @@
-CREATE OR REPLACE VIEW formview_assessment AS
+CREATE OR REPLACE VIEW formview_c_assessment AS
 SELECT 
 	form.doc #>> '{fields,inputs,meta,location,lat}'::text[] AS "inputs/meta/location/lat",
 	form.doc #>> '{fields,inputs,meta,location,long}'::text[] AS "inputs/meta/location/long",
@@ -38,4 +38,4 @@ FROM
 	JOIN form_metadata fm ON fm.uuid = (form.doc ->> '_id'::text)
 
 WHERE
-	(form.doc ->> 'form'::text) = ANY (VALUES ('assessment') );
+	(form.doc ->> 'form'::text) = 'c_assessment';
