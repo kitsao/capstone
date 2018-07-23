@@ -4,7 +4,7 @@
     <h:title>Baseline Assessment</h:title>
     <model>
       <instance>
-        <c_assessment delimiter="#" id="c_assessment" prefix="J1!c_assessment!" version="2018-07-20 13:08:26">
+        <c_assessment delimiter="#" id="c_assessment" prefix="J1!c_assessment!" version="2018-07-23 18:37:00">
           <inputs>
             <meta>
               <location>
@@ -90,6 +90,7 @@
             <r_groins/>
             <r_yellowness/>
             <r_refer/>
+            <r_no_symptoms/>
           </group_summary>
           <meta>
             <instanceID/>
@@ -121,7 +122,7 @@
       <bind calculate="../inputs/contact/name" nodeset="/c_assessment/patient_name" type="string"/>
       <bind calculate="if(selected( /c_assessment/group_symptoms/patient_symptoms ,'fever') 'true','false')" nodeset="/c_assessment/has_fever" type="string"/>
       <bind calculate="if(selected( /c_assessment/group_symptoms/patient_symptoms ,'diarrhoea') 'true','false')" nodeset="/c_assessment/has_diarrhoea" type="string"/>
-      <bind calculate="if(count-selected( /c_assessment/group_symptoms/patient_symptoms ) &gt; 0, 'true','false')" nodeset="/c_assessment/has_symptoms" type="string"/>
+      <bind calculate="if(selected( /c_assessment/group_symptoms/patient_symptoms , 'none') , 'false','true')" nodeset="/c_assessment/has_symptoms" type="string"/>
       <bind nodeset="/c_assessment/group_symptoms" relevant=" /c_assessment/patient_age_in_years  &lt; 5"/>
       <bind nodeset="/c_assessment/group_symptoms/patient_symptoms" required="true()" type="select"/>
       <bind nodeset="/c_assessment/cough" relevant="selected( /c_assessment/group_symptoms/patient_symptoms , 'cough')"/>
@@ -161,6 +162,7 @@
       <bind nodeset="/c_assessment/group_summary/r_groins" readonly="true()" relevant=" /c_assessment/has_fever ='true' or  /c_assessment/fever/painful_groins ='yes'" type="string"/>
       <bind nodeset="/c_assessment/group_summary/r_yellowness" readonly="true()" relevant=" /c_assessment/yellowness/yellowness_period =1" type="string"/>
       <bind nodeset="/c_assessment/group_summary/r_refer" readonly="true()" relevant=" /c_assessment/has_symptoms ='true'" type="string"/>
+      <bind nodeset="/c_assessment/group_summary/r_no_symptoms" readonly="true()" relevant=" /c_assessment/has_symptoms ='false'" type="string"/>
       <bind calculate="concat('uuid:', uuid())" nodeset="/c_assessment/meta/instanceID" readonly="true()" type="string"/>
     </model>
   </h:head>
@@ -223,6 +225,10 @@
         <item>
           <label>Sudden yellowness of eyes or skin</label>
           <value>sudden_yellowness</value>
+        </item>
+        <item>
+          <label>None of the above</label>
+          <value>none</value>
         </item>
       </select>
     </group>
@@ -503,6 +509,9 @@
       </input>
       <input ref="/c_assessment/group_summary/r_refer">
         <label>&lt;p style='color:red; font-weight:bold;'&gt;Refer patient to health facility&lt;/p&gt;</label>
+      </input>
+      <input ref="/c_assessment/group_summary/r_no_symptoms">
+        <label>Patient has no symptoms. Encourage them to keep healthy.</label>
       </input>
     </group>
   </h:body>
